@@ -1,0 +1,193 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Feuerkraft-commit] r392 - trunk/feuerkraft/external/clanlib
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/feuerkraft-commit/2010-May/index.html" >
+   <LINK REL="made" HREF="mailto:feuerkraft-commit%40lists.berlios.de?Subject=Re%3A%20%5BFeuerkraft-commit%5D%20r392%20-%20trunk/feuerkraft/external/clanlib&In-Reply-To=%3C201005121912.o4CJCJQQ030079%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000054.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Feuerkraft-commit] r392 - trunk/feuerkraft/external/clanlib</H1>
+    <B>grumbel at BerliOS</B> 
+    <A HREF="mailto:feuerkraft-commit%40lists.berlios.de?Subject=Re%3A%20%5BFeuerkraft-commit%5D%20r392%20-%20trunk/feuerkraft/external/clanlib&In-Reply-To=%3C201005121912.o4CJCJQQ030079%40sheep.berlios.de%3E"
+       TITLE="[Feuerkraft-commit] r392 - trunk/feuerkraft/external/clanlib">grumbel at mail.berlios.de
+       </A><BR>
+    <I>Wed May 12 21:12:19 CEST 2010</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000054.html">[Feuerkraft-commit] r393 - trunk/feuerkraft/src
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#53">[ date ]</a>
+              <a href="thread.html#53">[ thread ]</a>
+              <a href="subject.html#53">[ subject ]</a>
+              <a href="author.html#53">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: grumbel
+Date: 2010-05-12 21:12:18 +0200 (Wed, 12 May 2010)
+New Revision: 392
+
+Removed:
+   trunk/feuerkraft/external/clanlib/GUI/
+   trunk/feuerkraft/external/clanlib/GUIStyleSilver/
+Modified:
+   trunk/feuerkraft/external/clanlib/SConstruct
+Log:
+Removed unused GUI and GUIStyleSilver libraries
+
+Modified: trunk/feuerkraft/external/clanlib/SConstruct
+===================================================================
+--- trunk/feuerkraft/external/clanlib/SConstruct	2010-05-12 19:03:58 UTC (rev 391)
++++ trunk/feuerkraft/external/clanlib/SConstruct	2010-05-12 19:12:18 UTC (rev 392)
+@@ -262,116 +262,6 @@
+     'GL/GLX/input_device_xinput.h'
+     ])
+ 
+-clanGUI = env.StaticLibrary(
+-    target = 'libclanGUI.a',
+-    source = [
+-    'GUI/frame_generic.cpp',
+-    'GUI/treeview_generic.h',
+-    'GUI/component_manager.cpp',
+-    'GUI/frame.cpp',
+-    'GUI/image_generic.h',
+-    'GUI/button_generic.h',
+-    'GUI/listbox_generic.h',
+-    'GUI/radiogroup.cpp',
+-    'GUI/progressbar_generic.cpp',
+-    'GUI/component_manager_generic.h',
+-    'GUI/radiogroup_generic.h',
+-    'GUI/gui_manager.cpp',
+-    'GUI/component_generic.h',
+-    'GUI/stylemanager.cpp',
+-    'GUI/scrollbar_generic.cpp',
+-    'GUI/inputbox_generic.cpp',
+-    'GUI/inputdialog.cpp',
+-    'GUI/inputdialog_generic.cpp',
+-    'GUI/label.cpp',
+-    'GUI/precomp.h',
+-    'GUI/gui_manager_generic.h',
+-    'GUI/scrollbar_generic.h',
+-    'GUI/listbox.cpp',
+-    'GUI/inputbox.cpp',
+-    'GUI/image_generic.cpp',
+-    'GUI/component_resize_handler.cpp',
+-    'GUI/treenode_generic.cpp',
+-    'GUI/filedialog_generic.cpp',
+-    'GUI/inputbox_generic.h',
+-    'GUI/button.cpp',
+-    'GUI/component_manager_generic.cpp',
+-    'GUI/progressbar.cpp',
+-    'GUI/component.cpp',
+-    'GUI/component_type.cpp',
+-    'GUI/component_type_generic.h',
+-    'GUI/layout.cpp',
+-    'GUI/layout_generic.cpp',
+-    'GUI/layout_generic.h',
+-    'GUI/layout_item.cpp',
+-    'GUI/layout_item.h',
+-    'GUI/gui_manager_generic.cpp',
+-    'GUI/treenode_generic.h',
+-    'GUI/image.cpp',
+-    'GUI/button_generic.cpp',
+-    'GUI/default_component_types.h',
+-    'GUI/checkbox.cpp',
+-    'GUI/component_generic.cpp',
+-    'GUI/radiobutton.cpp',
+-    'GUI/messagebox_generic.cpp',
+-    'GUI/treeitem.cpp',
+-    'GUI/label_generic.cpp',
+-    'GUI/listbox_generic.cpp',
+-    'GUI/setupgui.cpp',
+-    'GUI/progressbar_generic.h',
+-    'GUI/messagebox.cpp',
+-    'GUI/scrollbar.cpp',
+-    'GUI/frame_generic.h',
+-    'GUI/radiogroup_generic.cpp',
+-    'GUI/label_generic.h',
+-    'GUI/component_move_handler.cpp',
+-    'GUI/treenode.cpp',
+-    'GUI/window.cpp',
+-    'GUI/window_generic.cpp',
+-    'GUI/treeview.cpp',
+-    'GUI/filedialog_generic.h',
+-    'GUI/treeitem_generic.cpp',
+-    'GUI/messagebox_generic.h',
+-    'GUI/treeitem_generic.h',
+-    'GUI/treeview_generic.cpp',
+-    'GUI/precomp.cpp',
+-    'GUI/filedialog.cpp',
+-    'GUI/window_generic.h',
+-    'GUI/menu_node_generic.h',
+-    'GUI/menu.cpp',
+-    'GUI/menu_node.cpp',
+-    'GUI/menu_node_generic.cpp',
+-    'GUI/menu_generic.h',
+-    'GUI/menu_generic.cpp',
+-    'GUI/menu_item.cpp',
+-    'GUI/menu_item_generic.cpp',
+-    'GUI/deck.cpp',
+-    'GUI/deck_generic.h',
+-    'GUI/deck_generic.cpp'
+-    ])
+-
+-clanGUIStyleSilver = env.StaticLibrary(
+-    target = 'libclanGUIStyleSilver.a',
+-    source = [
+-    'GUIStyleSilver/button_silver.cpp',
+-    'GUIStyleSilver/label_silver.cpp',
+-    'GUIStyleSilver/scrollbar_silver.cpp',
+-    'GUIStyleSilver/checkbox_silver.cpp',
+-    'GUIStyleSilver/listbox_silver.cpp',
+-    'GUIStyleSilver/stylemanager_silver.cpp',
+-    'GUIStyleSilver/frame_silver.cpp',
+-    'GUIStyleSilver/image_silver.cpp',
+-    'GUIStyleSilver/progressbar_silver.cpp',
+-    'GUIStyleSilver/inputbox_silver.cpp',
+-    'GUIStyleSilver/radiobutton_silver.cpp',
+-    'GUIStyleSilver/window_silver.cpp',
+-    'GUIStyleSilver/menu_silver.cpp',
+-    'GUIStyleSilver/menu_node_silver.cpp',
+-    'GUIStyleSilver/menu_item_silver.cpp',
+-    'GUIStyleSilver/treeitem_silver.cpp',
+-    'GUIStyleSilver/treeview_silver.cpp',
+-    ])
+-
+ clanSignals = env.StaticLibrary(
+     target = 'libclanSignals.a',
+     source = [
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000054.html">[Feuerkraft-commit] r393 - trunk/feuerkraft/src
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#53">[ date ]</a>
+              <a href="thread.html#53">[ thread ]</a>
+              <a href="subject.html#53">[ subject ]</a>
+              <a href="author.html#53">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/feuerkraft-commit">More information about the Feuerkraft-commit
+mailing list</a><br>
+</body></html>

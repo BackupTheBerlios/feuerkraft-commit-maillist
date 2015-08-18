@@ -1,0 +1,333 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Feuerkraft-commit] r375 - trunk/htdocs
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/feuerkraft-commit/2009-July/index.html" >
+   <LINK REL="made" HREF="mailto:feuerkraft-commit%40lists.berlios.de?Subject=Re%3A%20%5BFeuerkraft-commit%5D%20r375%20-%20trunk/htdocs&In-Reply-To=%3C200907252048.n6PKmMUW020817%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000038.html">
+   <LINK REL="Next"  HREF="000040.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Feuerkraft-commit] r375 - trunk/htdocs</H1>
+    <B>grumbel at BerliOS</B> 
+    <A HREF="mailto:feuerkraft-commit%40lists.berlios.de?Subject=Re%3A%20%5BFeuerkraft-commit%5D%20r375%20-%20trunk/htdocs&In-Reply-To=%3C200907252048.n6PKmMUW020817%40sheep.berlios.de%3E"
+       TITLE="[Feuerkraft-commit] r375 - trunk/htdocs">grumbel at mail.berlios.de
+       </A><BR>
+    <I>Sat Jul 25 22:48:22 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000038.html">[Feuerkraft-commit] r374 - in trunk/htdocs/images: . buildings
+</A></li>
+        <LI>Next message: <A HREF="000040.html">[Feuerkraft-commit] r376 - in trunk/htdocs: . images
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#39">[ date ]</a>
+              <a href="thread.html#39">[ thread ]</a>
+              <a href="subject.html#39">[ subject ]</a>
+              <a href="author.html#39">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: grumbel
+Date: 2009-07-25 22:48:13 +0200 (Sat, 25 Jul 2009)
+New Revision: 375
+
+Added:
+   trunk/htdocs/ambulance.png
+   trunk/htdocs/artillery1.png
+   trunk/htdocs/artillery2.png
+   trunk/htdocs/build/
+   trunk/htdocs/classes.png
+   trunk/htdocs/favicon.png
+   trunk/htdocs/feuerkraft.png
+   trunk/htdocs/flak.png
+   trunk/htdocs/gnu.png
+   trunk/htdocs/helicopter.png
+   trunk/htdocs/hovercraft.png
+   trunk/htdocs/jeep.png
+   trunk/htdocs/logo.png
+   trunk/htdocs/logo_feuerkraft.png
+   trunk/htdocs/pathfinding1.png
+   trunk/htdocs/rocketlauncher.png
+   trunk/htdocs/soldier.png
+   trunk/htdocs/tank.png
+   trunk/htdocs/tank2.png
+   trunk/htdocs/trooper.png
+Modified:
+   trunk/htdocs/Makefile
+Log:
+More webpage gfx
+
+Modified: trunk/htdocs/Makefile
+===================================================================
+--- trunk/htdocs/Makefile	2009-07-25 20:46:13 UTC (rev 374)
++++ trunk/htdocs/Makefile	2009-07-25 20:48:13 UTC (rev 375)
+@@ -1,20 +1,21 @@
+ HTMLOUT = \
+- welcome.html  \
+- news.html  \
+- download.html \
+- screenshots.html \
+- screenshots-0.1.html \
+- screenshots-0.0.html \
+- contact.html \
+- artworks.html \
+- development.html
++ build/welcome.html  \
++ build/news.html  \
++ build/download.html \
++ build/screenshots.html \
++ build/screenshots-0.1.html \
++ build/screenshots-0.0.html \
++ build/contact.html \
++ build/artworks.html \
++ build/development.html \
++ build/index.html
+ 
+-all : $(HTMLOUT)
++all : $(HTMLOUT) build/default.css
+ 
+ clean :
+ 	rm -vf $(HTMLOUT)
+ 
+-$(patsubst %,%,$(HTMLOUT)): %.html: %.xml default.xsl
++$(patsubst %,%,$(HTMLOUT)): build/%.html: %.xml default.xsl
+ 	FILENAME=$&lt;; \
+ 	LASTCHANGE=`date -I`; \
+ 	echo $${FILENAME%%.xml}; \
+@@ -25,9 +26,12 @@
+           -out $@ \
+           -xsl default.xsl
+ 
+-index.html : index.xml
++build/index.html : index.xml
+ 	cp -v $&lt; $@
+ 
++build/default.css : default.css
++	cp -v $&lt; $@
++
+ # commit: all
+ # 	cvs commit -m &quot;automatic webpage update&quot;
+ 
+
+Added: trunk/htdocs/ambulance.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/ambulance.png
+___________________________________________________________________
+Name: svn:mime-type
+   + image/png
+
+Added: trunk/htdocs/artillery1.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/artillery1.png
+___________________________________________________________________
+Name: svn:mime-type
+   + image/png
+
+Added: trunk/htdocs/artillery2.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/artillery2.png
+___________________________________________________________________
+Name: svn:mime-type
+   + image/png
+
+Added: trunk/htdocs/classes.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/classes.png
+___________________________________________________________________
+Name: svn:mime-type
+   + image/png
+
+Added: trunk/htdocs/favicon.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/favicon.png
+___________________________________________________________________
+Name: svn:mime-type
+   + image/png
+
+Added: trunk/htdocs/feuerkraft.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/feuerkraft.png
+___________________________________________________________________
+Name: svn:mime-type
+   + image/png
+
+Added: trunk/htdocs/flak.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/flak.png
+___________________________________________________________________
+Name: svn:mime-type
+   + image/png
+
+Added: trunk/htdocs/gnu.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/gnu.png
+___________________________________________________________________
+Name: svn:mime-type
+   + image/png
+
+Added: trunk/htdocs/helicopter.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/helicopter.png
+___________________________________________________________________
+Name: svn:mime-type
+   + image/png
+
+Added: trunk/htdocs/hovercraft.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/hovercraft.png
+___________________________________________________________________
+Name: svn:mime-type
+   + image/png
+
+Added: trunk/htdocs/jeep.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/jeep.png
+___________________________________________________________________
+Name: svn:mime-type
+   + image/png
+
+Added: trunk/htdocs/logo.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/logo.png
+___________________________________________________________________
+Name: svn:mime-type
+   + image/png
+
+Added: trunk/htdocs/logo_feuerkraft.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/logo_feuerkraft.png
+___________________________________________________________________
+Name: svn:mime-type
+   + image/png
+
+Added: trunk/htdocs/pathfinding1.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/pathfinding1.png
+___________________________________________________________________
+Name: svn:mime-type
+   + image/png
+
+Added: trunk/htdocs/rocketlauncher.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/rocketlauncher.png
+___________________________________________________________________
+Name: svn:mime-type
+   + image/png
+
+Added: trunk/htdocs/soldier.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/soldier.png
+___________________________________________________________________
+Name: svn:mime-type
+   + image/png
+
+Added: trunk/htdocs/tank.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/tank.png
+___________________________________________________________________
+Name: svn:mime-type
+   + image/png
+
+Added: trunk/htdocs/tank2.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/tank2.png
+___________________________________________________________________
+Name: svn:mime-type
+   + image/png
+
+Added: trunk/htdocs/trooper.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/trooper.png
+___________________________________________________________________
+Name: svn:mime-type
+   + image/png
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000038.html">[Feuerkraft-commit] r374 - in trunk/htdocs/images: . buildings
+</A></li>
+	<LI>Next message: <A HREF="000040.html">[Feuerkraft-commit] r376 - in trunk/htdocs: . images
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#39">[ date ]</a>
+              <a href="thread.html#39">[ thread ]</a>
+              <a href="subject.html#39">[ subject ]</a>
+              <a href="author.html#39">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/feuerkraft-commit">More information about the Feuerkraft-commit
+mailing list</a><br>
+</body></html>

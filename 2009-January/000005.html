@@ -1,0 +1,185 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Feuerkraft-commit] r341 - in trunk: . src src/scripting
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/feuerkraft-commit/2009-January/index.html" >
+   <LINK REL="made" HREF="mailto:feuerkraft-commit%40lists.berlios.de?Subject=Re%3A%20%5BFeuerkraft-commit%5D%20r341%20-%20in%20trunk%3A%20.%20src%20src/scripting&In-Reply-To=%3C200901271103.n0RB3Pt7004052%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000006.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Feuerkraft-commit] r341 - in trunk: . src src/scripting</H1>
+    <B>grumbel at BerliOS</B> 
+    <A HREF="mailto:feuerkraft-commit%40lists.berlios.de?Subject=Re%3A%20%5BFeuerkraft-commit%5D%20r341%20-%20in%20trunk%3A%20.%20src%20src/scripting&In-Reply-To=%3C200901271103.n0RB3Pt7004052%40sheep.berlios.de%3E"
+       TITLE="[Feuerkraft-commit] r341 - in trunk: . src src/scripting">grumbel at mail.berlios.de
+       </A><BR>
+    <I>Tue Jan 27 12:03:25 CET 2009</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000006.html">[Feuerkraft-commit] r342 - in trunk/src: . display
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5">[ date ]</a>
+              <a href="thread.html#5">[ thread ]</a>
+              <a href="subject.html#5">[ subject ]</a>
+              <a href="author.html#5">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: grumbel
+Date: 2009-01-27 12:03:25 +0100 (Tue, 27 Jan 2009)
+New Revision: 341
+
+Modified:
+   trunk/configure.ac
+   trunk/src/game_world_data.cxx
+   trunk/src/ipc.cxx
+   trunk/src/scripting/debug_commands.cxx
+   trunk/src/system.cxx
+   trunk/src/trigger_manager.hxx
+Log:
+Making things compilable again
+
+Modified: trunk/configure.ac
+===================================================================
+--- trunk/configure.ac	2005-02-12 03:32:49 UTC (rev 340)
++++ trunk/configure.ac	2009-01-27 11:03:25 UTC (rev 341)
+@@ -45,17 +45,17 @@
+ dnl FIXME: this is a hack for my local machine...
+ LIBS=&quot;$LIBS -L/usr/X11R6/lib/ -lXxf86vm&quot;
+ 
+-REQUIRED_CLANLIB_VERSION=&quot;0.7.4&quot;
++REQUIRED_CLANLIB_VERSION=&quot;0.8.0&quot;
+ 
+ PKG_CHECK_MODULES(FEUERKRAFT_DEPS,
+  [
+-  clanCore-0.7    &gt;= $REQUIRED_CLANLIB_VERSION
+-  clanApp-0.7     &gt;= $REQUIRED_CLANLIB_VERSION
+-  clanDisplay-0.7 &gt;= $REQUIRED_CLANLIB_VERSION
+-  clanGL-0.7      &gt;= $REQUIRED_CLANLIB_VERSION
+-  clanSound-0.7   &gt;= $REQUIRED_CLANLIB_VERSION
+-  clanMikMod-0.7  &gt;= $REQUIRED_CLANLIB_VERSION
+-  clanVorbis-0.7  &gt;= $REQUIRED_CLANLIB_VERSION
++  clanCore-0.8    &gt;= $REQUIRED_CLANLIB_VERSION
++  clanApp-0.8     &gt;= $REQUIRED_CLANLIB_VERSION
++  clanDisplay-0.8 &gt;= $REQUIRED_CLANLIB_VERSION
++  clanGL-0.8      &gt;= $REQUIRED_CLANLIB_VERSION
++  clanSound-0.8   &gt;= $REQUIRED_CLANLIB_VERSION
++  clanMikMod-0.8  &gt;= $REQUIRED_CLANLIB_VERSION
++  clanVorbis-0.8  &gt;= $REQUIRED_CLANLIB_VERSION
+   ],
+  [CXXFLAGS=&quot;$CXXFLAGS $FEUERKRAFT_DEPS_CFLAGS&quot;
+   LIBS=&quot;$LIBS $FEUERKRAFT_DEPS_LIBS&quot;])
+
+Modified: trunk/src/game_world_data.cxx
+===================================================================
+--- trunk/src/game_world_data.cxx	2005-02-12 03:32:49 UTC (rev 340)
++++ trunk/src/game_world_data.cxx	2009-01-27 11:03:25 UTC (rev 341)
+@@ -17,6 +17,7 @@
+ //  along with this program; if not, write to the Free Software
+ //  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ 
++#include &lt;typeinfo&gt;
+ #include &lt;assert.h&gt;
+ #include &lt;iostream&gt;
+ #include &quot;guile.hxx&quot;
+
+Modified: trunk/src/ipc.cxx
+===================================================================
+--- trunk/src/ipc.cxx	2005-02-12 03:32:49 UTC (rev 340)
++++ trunk/src/ipc.cxx	2009-01-27 11:03:25 UTC (rev 341)
+@@ -23,6 +23,8 @@
+ #include &lt;unistd.h&gt;
+ #include &lt;sys/types.h&gt;
+ #include &lt;fcntl.h&gt;
++#include &lt;errno.h&gt;
++#include &lt;string.h&gt;
+ #include &lt;sys/stat.h&gt;
+ 
+ #include &quot;ipc.hxx&quot;
+
+Modified: trunk/src/scripting/debug_commands.cxx
+===================================================================
+--- trunk/src/scripting/debug_commands.cxx	2005-02-12 03:32:49 UTC (rev 340)
++++ trunk/src/scripting/debug_commands.cxx	2009-01-27 11:03:25 UTC (rev 341)
+@@ -17,6 +17,7 @@
+ //  along with this program; if not, write to the Free Software
+ //  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ 
++#include &lt;string.h&gt;
+ #include &lt;stdexcept&gt;
+ #include &lt;iostream&gt;
+ #include &quot;../globals.hxx&quot;
+
+Modified: trunk/src/system.cxx
+===================================================================
+--- trunk/src/system.cxx	2005-02-12 03:32:49 UTC (rev 340)
++++ trunk/src/system.cxx	2009-01-27 11:03:25 UTC (rev 341)
+@@ -32,6 +32,8 @@
+ #  include &lt;direct.h&gt;
+ #endif
+ 
++#include &lt;stdlib.h&gt;
++#include &lt;string.h&gt;
+ #include &lt;cstdio&gt;
+ #include &lt;iostream&gt;
+ #include &lt;ClanLib/Core/System/clanstring.h&gt;
+
+Modified: trunk/src/trigger_manager.hxx
+===================================================================
+--- trunk/src/trigger_manager.hxx	2005-02-12 03:32:49 UTC (rev 340)
++++ trunk/src/trigger_manager.hxx	2009-01-27 11:03:25 UTC (rev 341)
+@@ -70,8 +70,8 @@
+       seconds -= delta;
+       if (seconds &lt; 0)
+         {
+-          func();
+-          remove();
++          this-&gt;func();
++          this-&gt;remove();
+         }
+     }
+   };// struct TimedTrigger
+@@ -97,8 +97,8 @@
+         {
+           if (int(unit-&gt;get_pos().x/40) == x &amp;&amp; int(unit-&gt;get_pos().y/40) == y)
+             {
+-              func(SCM_MAKINUM(unit-&gt;get_id()));
+-              remove();
++              this-&gt;func(SCM_MAKINUM(unit-&gt;get_id()));
++              this-&gt;remove();
+             }
+         }
+     }
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000006.html">[Feuerkraft-commit] r342 - in trunk/src: . display
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5">[ date ]</a>
+              <a href="thread.html#5">[ thread ]</a>
+              <a href="subject.html#5">[ subject ]</a>
+              <a href="author.html#5">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/feuerkraft-commit">More information about the Feuerkraft-commit
+mailing list</a><br>
+</body></html>

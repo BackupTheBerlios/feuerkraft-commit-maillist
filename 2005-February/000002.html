@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Feuerkraft-commit] r338 - trunk/src
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/feuerkraft-commit/2005-February/index.html" >
+   <LINK REL="made" HREF="mailto:feuerkraft-commit%40lists.berlios.de?Subject=Re%3A%20%5BFeuerkraft-commit%5D%20r338%20-%20trunk/src&In-Reply-To=%3C200502111549.j1BFnDtT023655%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000001.html">
+   <LINK REL="Next"  HREF="000003.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Feuerkraft-commit] r338 - trunk/src</H1>
+    <B>Ingo Ruhnke at BerliOS</B> 
+    <A HREF="mailto:feuerkraft-commit%40lists.berlios.de?Subject=Re%3A%20%5BFeuerkraft-commit%5D%20r338%20-%20trunk/src&In-Reply-To=%3C200502111549.j1BFnDtT023655%40sheep.berlios.de%3E"
+       TITLE="[Feuerkraft-commit] r338 - trunk/src">grumbel at sheep.berlios.de
+       </A><BR>
+    <I>Fri Feb 11 16:49:13 CET 2005</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000001.html">[Feuerkraft-commit] r337 - in trunk: . contrib contrib/test contrib/tilegen data data/images data/images/vehicles src src/groundmap src/input src/particles
+</A></li>
+        <LI>Next message: <A HREF="000003.html">[Feuerkraft-commit] r339 - trunk/src/input
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2">[ date ]</a>
+              <a href="thread.html#2">[ thread ]</a>
+              <a href="subject.html#2">[ subject ]</a>
+              <a href="author.html#2">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: grumbel
+Date: 2005-02-11 16:49:12 +0100 (Fri, 11 Feb 2005)
+New Revision: 338
+
+Removed:
+   trunk/src/string_converter.cxx
+   trunk/src/string_converter.hxx
+Log:
+- adopted to newest ClanLib
+- some more light
+
+Deleted: trunk/src/string_converter.cxx
+===================================================================
+--- trunk/src/string_converter.cxx	2005-02-11 15:48:49 UTC (rev 337)
++++ trunk/src/string_converter.cxx	2005-02-11 15:49:12 UTC (rev 338)
+@@ -1,37 +0,0 @@
+-//  $Id: string_converter.cxx,v 1.4 2003/06/03 14:11:22 grumbel Exp $
+-//
+-//  Feuerkraft - A Tank Battle Game
+-//  Copyright (C) 2000 Ingo Ruhnke &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/feuerkraft-commit">grumbel at gmx.de</A>&gt;
+-//
+-//  This program is free software; you can redistribute it and/or
+-//  modify it under the terms of the GNU General Public License
+-//  as published by the Free Software Foundation; either version 2
+-//  of the License, or (at your option) any later version.
+-//
+-//  This program is distributed in the hope that it will be useful,
+-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+-//  GNU General Public License for more details.
+-//
+-//  You should have received a copy of the GNU General Public License
+-//  along with this program; if not, write to the Free Software
+-//  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+-
+-#include &lt;algorithm&gt;
+-#include &quot;string_converter.hxx&quot;
+-
+-std::string string_upcase (const std::string&amp; str)
+-{
+-  std::string name = str;
+-  std::transform(name.begin(), name.end(), name.begin(), ::toupper);
+-  return name;
+-}
+-
+-std::string string_downcase (const std::string&amp; str)
+-{
+-  std::string name = str;
+-  std::transform(name.begin(), name.end(), name.begin(), ::tolower);
+-  return name;
+-}
+-
+-/* EOF */
+
+Deleted: trunk/src/string_converter.hxx
+===================================================================
+--- trunk/src/string_converter.hxx	2005-02-11 15:48:49 UTC (rev 337)
++++ trunk/src/string_converter.hxx	2005-02-11 15:49:12 UTC (rev 338)
+@@ -1,70 +0,0 @@
+-//  $Id: string_converter.hxx,v 1.3 2003/06/03 14:11:22 grumbel Exp $
+-//
+-//  Feuerkraft - A Tank Battle Game
+-//  Copyright (C) 2000 Ingo Ruhnke &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/feuerkraft-commit">grumbel at gmx.de</A>&gt;
+-//
+-//  This program is free software; you can redistribute it and/or
+-//  modify it under the terms of the GNU General Public License
+-//  as published by the Free Software Foundation; either version 2
+-//  of the License, or (at your option) any later version.
+-//
+-//  This program is distributed in the hope that it will be useful,
+-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+-//  GNU General Public License for more details.
+-//
+-//  You should have received a copy of the GNU General Public License
+-//  along with this program; if not, write to the Free Software
+-//  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+-
+-#ifndef HEADER_PINGUS_STRING_CONVERTER_HXX
+-#define HEADER_PINGUS_STRING_CONVERTER_HXX
+-
+-#include &lt;string&gt;
+-
+-#ifdef HAVE_CONFIG_H
+-#include &lt;config.h&gt;
+-#endif
+-
+-#include &lt;sstream&gt;
+-
+-template &lt;class T&gt;
+-std::string to_string (const T&amp; any)
+-{
+-  std::ostringstream oss;
+-  oss &lt;&lt; any ;
+-  return oss.str();
+-}
+-
+-/** Convert the contents in string \a rep to type \a T, if conversion
+-    fails false is returned and the value of \a x is unchanged, if
+-    true is returned the conversation was successfull. */
+-template &lt;class T&gt;
+-bool from_string(const std::string&amp; rep, T&amp; x)
+-{
+- // this is necessary so that if &quot;x&quot; is not modified if the conversion fails
+-  T temp;
+-  std::istringstream iss(rep);
+-  iss &gt;&gt; temp;
+-
+-  /*if (iss.fail())
+-    throw std::invalid_argument
+-    (&quot;Exception: 'failed to extract type T from rep' &quot; __FILE__ &quot;: &quot; + rep);*/
+-
+-  if (iss.fail())
+-    {
+-      return false;
+-    }
+-  else
+-    {
+-      x = temp;
+-      return true;
+-    }
+-}
+-
+-std::string string_upcase (const std::string&amp;);
+-std::string string_downcase (const std::string&amp;);
+-
+-#endif
+-
+-/* EOF */
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000001.html">[Feuerkraft-commit] r337 - in trunk: . contrib contrib/test contrib/tilegen data data/images data/images/vehicles src src/groundmap src/input src/particles
+</A></li>
+	<LI>Next message: <A HREF="000003.html">[Feuerkraft-commit] r339 - trunk/src/input
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2">[ date ]</a>
+              <a href="thread.html#2">[ thread ]</a>
+              <a href="subject.html#2">[ subject ]</a>
+              <a href="author.html#2">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/feuerkraft-commit">More information about the Feuerkraft-commit
+mailing list</a><br>
+</body></html>

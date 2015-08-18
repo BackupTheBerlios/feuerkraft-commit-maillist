@@ -1,0 +1,1967 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Feuerkraft-commit] r381 - in trunk/feuerkraft: . data data/images	data/images/tiles data/missions doc src src/buildings	src/editor src/generic src/groundmap src/input src/particles	src/scripting src/sound src/vehicles
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/feuerkraft-commit/2009-July/index.html" >
+   <LINK REL="made" HREF="mailto:feuerkraft-commit%40lists.berlios.de?Subject=Re%3A%20%5BFeuerkraft-commit%5D%20r381%20-%20in%20trunk/feuerkraft%3A%20.%20data%20data/images%0A%09data/images/tiles%20data/missions%20doc%20src%20src/buildings%0A%09src/editor%20src/generic%20src/groundmap%20src/input%20src/particles%0A%09src/scripting%20src/sound%20src/vehicles&In-Reply-To=%3C200907252133.n6PLXjp3025354%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000044.html">
+   <LINK REL="Next"  HREF="000046.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Feuerkraft-commit] r381 - in trunk/feuerkraft: . data data/images	data/images/tiles data/missions doc src src/buildings	src/editor src/generic src/groundmap src/input src/particles	src/scripting src/sound src/vehicles</H1>
+    <B>grumbel at BerliOS</B> 
+    <A HREF="mailto:feuerkraft-commit%40lists.berlios.de?Subject=Re%3A%20%5BFeuerkraft-commit%5D%20r381%20-%20in%20trunk/feuerkraft%3A%20.%20data%20data/images%0A%09data/images/tiles%20data/missions%20doc%20src%20src/buildings%0A%09src/editor%20src/generic%20src/groundmap%20src/input%20src/particles%0A%09src/scripting%20src/sound%20src/vehicles&In-Reply-To=%3C200907252133.n6PLXjp3025354%40sheep.berlios.de%3E"
+       TITLE="[Feuerkraft-commit] r381 - in trunk/feuerkraft: . data data/images	data/images/tiles data/missions doc src src/buildings	src/editor src/generic src/groundmap src/input src/particles	src/scripting src/sound src/vehicles">grumbel at mail.berlios.de
+       </A><BR>
+    <I>Sat Jul 25 23:33:45 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000044.html">[Feuerkraft-commit] r380 - trunk/feuerkraft/src/scripting
+</A></li>
+        <LI>Next message: <A HREF="000046.html">[Feuerkraft-commit] r382 - in trunk/feuerkraft: . src/scripting
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#45">[ date ]</a>
+              <a href="thread.html#45">[ thread ]</a>
+              <a href="subject.html#45">[ subject ]</a>
+              <a href="author.html#45">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: grumbel
+Date: 2009-07-25 23:33:43 +0200 (Sat, 25 Jul 2009)
+New Revision: 381
+
+Removed:
+   trunk/feuerkraft/Feuerkraft.dsp
+   trunk/feuerkraft/Feuerkraft.dsw
+   trunk/feuerkraft/Makefile.am
+   trunk/feuerkraft/autogen.sh
+   trunk/feuerkraft/config.h.in
+   trunk/feuerkraft/configure.ac
+   trunk/feuerkraft/data/Makefile.am
+   trunk/feuerkraft/data/images/Makefile.am
+   trunk/feuerkraft/data/images/tiles/Makefile.am
+   trunk/feuerkraft/data/missions/Makefile.am
+   trunk/feuerkraft/doc/Makefile.am
+   trunk/feuerkraft/install-sh
+   trunk/feuerkraft/missing
+   trunk/feuerkraft/mkinstalldirs
+   trunk/feuerkraft/src/Makefile.am
+   trunk/feuerkraft/src/buildings/Makefile.am
+   trunk/feuerkraft/src/editor/Makefile.am
+   trunk/feuerkraft/src/generic/Makefile.am
+   trunk/feuerkraft/src/groundmap/Makefile.am
+   trunk/feuerkraft/src/input/Makefile.am
+   trunk/feuerkraft/src/particles/Makefile.am
+   trunk/feuerkraft/src/scripting/Makefile.am
+   trunk/feuerkraft/src/sound/Makefile.am
+   trunk/feuerkraft/src/vehicles/Makefile.am
+   trunk/feuerkraft/stamp-h.in
+Modified:
+   trunk/feuerkraft/src/SConscript
+Log:
+Removed obsolete build scripts
+
+Deleted: trunk/feuerkraft/Feuerkraft.dsp
+===================================================================
+--- trunk/feuerkraft/Feuerkraft.dsp	2009-07-25 21:28:24 UTC (rev 380)
++++ trunk/feuerkraft/Feuerkraft.dsp	2009-07-25 21:33:43 UTC (rev 381)
+@@ -1,312 +0,0 @@
+-# Microsoft Developer Studio Project File - Name=&quot;Feuerkraft&quot; - Package Owner=&lt;4&gt;
+-# Microsoft Developer Studio Generated Build File, Format Version 6.00
+-# ** DO NOT EDIT **
+-
+-# TARGTYPE &quot;Win32 (x86) Application&quot; 0x0101
+-
+-CFG=Feuerkraft - Win32 Debug
+-!MESSAGE This is not a valid makefile. To build this project using NMAKE,
+-!MESSAGE use the Export Makefile command and run
+-!MESSAGE 
+-!MESSAGE NMAKE /f &quot;Feuerkraft.mak&quot;.
+-!MESSAGE 
+-!MESSAGE You can specify a configuration when running NMAKE
+-!MESSAGE by defining the macro CFG on the command line. For example:
+-!MESSAGE 
+-!MESSAGE NMAKE /f &quot;Feuerkraft.mak&quot; CFG=&quot;Feuerkraft - Win32 Debug&quot;
+-!MESSAGE 
+-!MESSAGE Possible choices for configuration are:
+-!MESSAGE 
+-!MESSAGE &quot;Feuerkraft - Win32 Release&quot; (based on &quot;Win32 (x86) Application&quot;)
+-!MESSAGE &quot;Feuerkraft - Win32 Debug&quot; (based on &quot;Win32 (x86) Application&quot;)
+-!MESSAGE 
+-
+-# Begin Project
+-# PROP AllowPerConfigDependencies 0
+-# PROP Scc_ProjName &quot;&quot;
+-# PROP Scc_LocalPath &quot;&quot;
+-CPP=cl.exe
+-MTL=midl.exe
+-RSC=rc.exe
+-
+-!IF  &quot;$(CFG)&quot; == &quot;Feuerkraft - Win32 Release&quot;
+-
+-# PROP BASE Use_MFC 0
+-# PROP BASE Use_Debug_Libraries 0
+-# PROP BASE Output_Dir &quot;Release&quot;
+-# PROP BASE Intermediate_Dir &quot;Release&quot;
+-# PROP BASE Target_Dir &quot;&quot;
+-# PROP Use_MFC 0
+-# PROP Use_Debug_Libraries 0
+-# PROP Output_Dir &quot;Release&quot;
+-# PROP Intermediate_Dir &quot;Release&quot;
+-# PROP Ignore_Export_Lib 0
+-# PROP Target_Dir &quot;&quot;
+-# ADD BASE CPP /nologo /W3 /GX /O2 /D &quot;WIN32&quot; /D &quot;NDEBUG&quot; /D &quot;_WINDOWS&quot; /D &quot;_MBCS&quot; /YX /FD /c
+-# ADD CPP /nologo /MT /W3 /GR /GX /O2 /D &quot;WIN32&quot; /D &quot;NDEBUG&quot; /D &quot;_WINDOWS&quot; /D &quot;_MBCS&quot; /YX /FD /TP /c
+-# ADD BASE MTL /nologo /D &quot;NDEBUG&quot; /mktyplib203 /win32
+-# ADD MTL /nologo /D &quot;NDEBUG&quot; /mktyplib203 /win32
+-# ADD BASE RSC /l 0x414 /d &quot;NDEBUG&quot;
+-# ADD RSC /l 0x414 /d &quot;NDEBUG&quot;
+-BSC32=bscmake.exe
+-# ADD BASE BSC32 /nologo
+-# ADD BSC32 /nologo
+-LINK32=link.exe
+-# ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:windows /machine:I386
+-# ADD LINK32 clanCore.lib clanApp.lib clanPNG.lib clanJPEG.lib clanDisplay.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:windows /machine:I386
+-
+-!ELSEIF  &quot;$(CFG)&quot; == &quot;Feuerkraft - Win32 Debug&quot;
+-
+-# PROP BASE Use_MFC 0
+-# PROP BASE Use_Debug_Libraries 1
+-# PROP BASE Output_Dir &quot;Debug&quot;
+-# PROP BASE Intermediate_Dir &quot;Debug&quot;
+-# PROP BASE Target_Dir &quot;&quot;
+-# PROP Use_MFC 0
+-# PROP Use_Debug_Libraries 1
+-# PROP Output_Dir &quot;Debug&quot;
+-# PROP Intermediate_Dir &quot;Debug&quot;
+-# PROP Ignore_Export_Lib 0
+-# PROP Target_Dir &quot;&quot;
+-# ADD BASE CPP /nologo /W3 /Gm /GX /ZI /Od /D &quot;WIN32&quot; /D &quot;_DEBUG&quot; /D &quot;_WINDOWS&quot; /D &quot;_MBCS&quot; /YX /FD /GZ /c
+-# ADD CPP /nologo /MTd /W3 /Gm /GR /GX /ZI /Od /D &quot;WIN32&quot; /D &quot;_DEBUG&quot; /D &quot;_WINDOWS&quot; /D &quot;_MBCS&quot; /FD /GZ /TP /c
+-# SUBTRACT CPP /YX
+-# ADD BASE MTL /nologo /D &quot;_DEBUG&quot; /mktyplib203 /win32
+-# ADD MTL /nologo /D &quot;_DEBUG&quot; /mktyplib203 /win32
+-# ADD BASE RSC /l 0x414 /d &quot;_DEBUG&quot;
+-# ADD RSC /l 0x414 /d &quot;_DEBUG&quot;
+-BSC32=bscmake.exe
+-# ADD BASE BSC32 /nologo
+-# ADD BSC32 /nologo
+-LINK32=link.exe
+-# ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:windows /debug /machine:I386 /pdbtype:sept
+-# ADD LINK32 libguile.lib SphriteLibGLd.lib clanCored.lib clanAppd.lib clanPNGd.lib clanJPEGd.lib clanDisplayd.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:windows /debug /machine:I386 /pdbtype:sept
+-
+-!ENDIF 
+-
+-# Begin Target
+-
+-# Name &quot;Feuerkraft - Win32 Release&quot;
+-# Name &quot;Feuerkraft - Win32 Debug&quot;
+-# Begin Group &quot;Source Files&quot;
+-
+-# PROP Default_Filter &quot;cpp;cc;c;cxx;rc;def;r;odl;idl;hpj;bat&quot;
+-# Begin Source File
+-
+-SOURCE=.\src\Ambulance.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\buildings\Ammotent.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\buildings\AmmotentData.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\Background.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\buildings\Base.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\buildings\BaseData.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\buildings\BuildingMap.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\buildings\BuildingMapData.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\Controller.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\Energie.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\Explosion.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\Feuerkraft.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\Flag.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\vehicles\FoxTank.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\buildings\Fuelstation.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\buildings\FuelstationData.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\GameWorld.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\groundmap\GroundMapData.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\groundmap\GroundMapDataFactory.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\buildings\Headquarter.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\buildings\HeadquarterData.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\Helicopter.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\Jeep.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\JoystickController.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\KeyboardController.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\Mine.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\Pathfinder.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\Playfield.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\Projectile.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\Radar.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\generic\Random.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\Screen.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\Shockwave.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\Soldier.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\groundmap\SpriteTile.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\groundmap\SpriteTileData.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\Stone.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\StringConverter.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\System.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\Tank.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\groundmap\TileDataFactory.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\groundmap\TileMap.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\groundmap\TileMapData.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\buildings\Tower.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\buildings\TowerData.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\Tree.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\Turret.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\Vehicle.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\VehicleStatus.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\VehicleView.cxx
+-# End Source File
+-# Begin Source File
+-
+-SOURCE=.\src\View.cxx
+-# End Source File
+-# End Group
+-# Begin Group &quot;Header Files&quot;
+-
+-# PROP Default_Filter &quot;h;hh;hpp;hxx;hm;inl&quot;
+-# End Group
+-# Begin Group &quot;Resource Files&quot;
+-
+-# PROP Default_Filter &quot;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe&quot;
+-# End Group
+-# Begin Source File
+-
+-SOURCE=.\data\feuerkraft.scr
+-# End Source File
+-# End Target
+-# End Project
+
+Deleted: trunk/feuerkraft/Feuerkraft.dsw
+===================================================================
+--- trunk/feuerkraft/Feuerkraft.dsw	2009-07-25 21:28:24 UTC (rev 380)
++++ trunk/feuerkraft/Feuerkraft.dsw	2009-07-25 21:33:43 UTC (rev 381)
+@@ -1,29 +0,0 @@
+-Microsoft Developer Studio Workspace File, Format Version 6.00
+-# WARNING: DO NOT EDIT OR DELETE THIS WORKSPACE FILE!
+-
+-###############################################################################
+-
+-Project: &quot;Feuerkraft&quot;=.\Feuerkraft.dsp - Package Owner=&lt;4&gt;
+-
+-Package=&lt;5&gt;
+-{{{
+-}}}
+-
+-Package=&lt;4&gt;
+-{{{
+-}}}
+-
+-###############################################################################
+-
+-Global:
+-
+-Package=&lt;5&gt;
+-{{{
+-}}}
+-
+-Package=&lt;3&gt;
+-{{{
+-}}}
+-
+-###############################################################################
+-
+
+Deleted: trunk/feuerkraft/Makefile.am
+===================================================================
+--- trunk/feuerkraft/Makefile.am	2009-07-25 21:28:24 UTC (rev 380)
++++ trunk/feuerkraft/Makefile.am	2009-07-25 21:33:43 UTC (rev 381)
+@@ -1,17 +0,0 @@
+-SUBDIRS = src data doc
+-
+-binarydistdir = $(PACKAGE)-$(VERSION)-binary-i386
+-
+-dist-binary: distdir
+-	cd src &amp;&amp; $(MAKE) feuerkraft.static
+-	$(MAKE) install prefix=$(shell pwd)/$(binarydistdir)
+-	$(mkinstalldirs) $(binarydistdir)/share/guile/
+-	cp -R /usr/share/guile/1.6/ice-9/ $(binarydistdir)/share/guile/
+-	cp -R /usr/share/guile/1.6/oop/   $(binarydistdir)/share/guile/
+-	cp -R /usr/share/guile/1.6/srfi/  $(binarydistdir)/share/guile/
+-	cp src/feuerkraft.static   $(binarydistdir)/games/feuerkraft
+-	cp contrib/feuerkraft   $(binarydistdir)/feuerkraft
+-	$(AMTAR) chof - $(binarydistdir) | bzip2 -9 -c &gt;  $(binarydistdir).tar.bz2
+-	rm -rf $(binarydistdir)
+-
+-# EOF #
+\ No newline at end of file
+
+Deleted: trunk/feuerkraft/autogen.sh
+===================================================================
+--- trunk/feuerkraft/autogen.sh	2009-07-25 21:28:24 UTC (rev 380)
++++ trunk/feuerkraft/autogen.sh	2009-07-25 21:33:43 UTC (rev 381)
+@@ -1,15 +0,0 @@
+-#!/bin/sh
+-
+-set -x
+-
+-aclocal-1.7
+-automake-1.7 --add-missing
+-
+-autoheader
+-autoconf
+-
+-# Local Variables:
+-# compile-command: &quot;./autogen.sh &amp;&amp; ./configure&quot;
+-# End:
+-
+-# EOF #
+
+Deleted: trunk/feuerkraft/config.h.in
+===================================================================
+--- trunk/feuerkraft/config.h.in	2009-07-25 21:28:24 UTC (rev 380)
++++ trunk/feuerkraft/config.h.in	2009-07-25 21:33:43 UTC (rev 381)
+@@ -1,67 +0,0 @@
+-/* config.h.in.  Generated from configure.ac by autoheader.  */
+-
+-/* Define to 1 if you have the &lt;inttypes.h&gt; header file. */
+-#undef HAVE_INTTYPES_H
+-
+-/* clanMikMod is present */
+-#undef HAVE_LIBCLANMIKMOD
+-
+-/* clanSound is present */
+-#undef HAVE_LIBCLANSOUND
+-
+-/* clanVorbis is present */
+-#undef HAVE_LIBCLANVORBIS
+-
+-/* Define to 1 if you have the `guile' library (-lguile). */
+-#undef HAVE_LIBGUILE
+-
+-/* Define to 1 if you have the `qthreads' library (-lqthreads). */
+-#undef HAVE_LIBQTHREADS
+-
+-/* Define to 1 if you have the &lt;memory.h&gt; header file. */
+-#undef HAVE_MEMORY_H
+-
+-/* Define to 1 if you have the &lt;stdint.h&gt; header file. */
+-#undef HAVE_STDINT_H
+-
+-/* Define to 1 if you have the &lt;stdlib.h&gt; header file. */
+-#undef HAVE_STDLIB_H
+-
+-/* Define to 1 if you have the &lt;strings.h&gt; header file. */
+-#undef HAVE_STRINGS_H
+-
+-/* Define to 1 if you have the &lt;string.h&gt; header file. */
+-#undef HAVE_STRING_H
+-
+-/* Define to 1 if you have the &lt;sys/stat.h&gt; header file. */
+-#undef HAVE_SYS_STAT_H
+-
+-/* Define to 1 if you have the &lt;sys/types.h&gt; header file. */
+-#undef HAVE_SYS_TYPES_H
+-
+-/* Define to 1 if you have the &lt;unistd.h&gt; header file. */
+-#undef HAVE_UNISTD_H
+-
+-/* Name of package */
+-#undef PACKAGE
+-
+-/* Define to the address where bug reports for this package should be sent. */
+-#undef PACKAGE_BUGREPORT
+-
+-/* Define to the full name of this package. */
+-#undef PACKAGE_NAME
+-
+-/* Define to the full name and version of this package. */
+-#undef PACKAGE_STRING
+-
+-/* Define to the one symbol short name of this package. */
+-#undef PACKAGE_TARNAME
+-
+-/* Define to the version of this package. */
+-#undef PACKAGE_VERSION
+-
+-/* Define to 1 if you have the ANSI C header files. */
+-#undef STDC_HEADERS
+-
+-/* Version number of package */
+-#undef VERSION
+
+Deleted: trunk/feuerkraft/configure.ac
+===================================================================
+--- trunk/feuerkraft/configure.ac	2009-07-25 21:28:24 UTC (rev 380)
++++ trunk/feuerkraft/configure.ac	2009-07-25 21:33:43 UTC (rev 381)
+@@ -1,94 +0,0 @@
+-AC_INIT(Feuerkraft, 0.1.1)
+-AC_CONFIG_HEADERS([config.h])
+-AC_CONFIG_SRCDIR(src/feuerkraft.hpp)
+-AM_INIT_AUTOMAKE(dist-bzip2)
+-
+-AC_PROG_CXX
+-AC_PROG_CC
+-AC_PROG_INSTALL
+-
+-dnl AC_DISABLE_SHARED
+-dnl AC_PROG_LIBTOOL
+-
+-AC_PROG_RANLIB
+-
+-AC_LANG(C++)
+-
+-dnl Checking for libraries
+-
+-dnl -------------------------
+-dnl Check for Maintainer Mode
+-dnl -------------------------
+-AC_MSG_CHECKING(for maintainer mode)
+-AC_ARG_ENABLE(maintainer-mode, AC_HELP_STRING([--enable-maintainer-mode], [Enable maintainer mode]),, enable_maintainer_mode=&quot;no&quot;)
+-
+-if test &quot;$enable_maintainer_mode&quot; != &quot;no&quot;; then
+-    CXXFLAGS=&quot;$CXXFLAGS -g -O0 -Wall -Werror&quot;
+-    AC_MSG_RESULT([enabled])
+-else
+-    AC_MSG_RESULT([disabled])
+-fi
+-
+-AC_PATH_PROG([SWIG], [swig], [nothing-found])
+-if test &quot;x$SWIG&quot; = &quot;xnothing-found&quot;; then
+-   AC_MSG_ERROR([You need Swig - <A HREF="http://www.swig.org">http://www.swig.org</A> to proceed.])
+-fi
+-
+-AC_CHECK_LIB(qthreads, main)
+-AC_CHECK_LIB(guile, scm_boot_guile,, [
+-  echo &quot;libguile is missing, you need Guile 1.6.x to compile Feuerkraft&quot;
+-  exit
+-  ])
+-
+-AC_CHECK_HEADER(guile/gh.h)
+-
+-dnl FIXME: this is a hack for my local machine...
+-LIBS=&quot;$LIBS -L/usr/X11R6/lib/ -lXxf86vm&quot;
+-
+-REQUIRED_CLANLIB_VERSION=&quot;0.8.0&quot;
+-
+-PKG_CHECK_MODULES(FEUERKRAFT_DEPS,
+- [
+-  clanCore-0.8    &gt;= $REQUIRED_CLANLIB_VERSION
+-  clanApp-0.8     &gt;= $REQUIRED_CLANLIB_VERSION
+-  clanDisplay-0.8 &gt;= $REQUIRED_CLANLIB_VERSION
+-  clanGL-0.8      &gt;= $REQUIRED_CLANLIB_VERSION
+-  clanSound-0.8   &gt;= $REQUIRED_CLANLIB_VERSION
+-  clanMikMod-0.8  &gt;= $REQUIRED_CLANLIB_VERSION
+-  clanVorbis-0.8  &gt;= $REQUIRED_CLANLIB_VERSION
+-  ],
+- [CXXFLAGS=&quot;$CXXFLAGS $FEUERKRAFT_DEPS_CFLAGS&quot;
+-  LIBS=&quot;$LIBS $FEUERKRAFT_DEPS_LIBS&quot;])
+-
+-INPUT_CFLAGS=$FEUERKRAFT_CFLAGS
+-INPUT_LIBS=$FEUERKRAFT_LIBS
+-AC_SUBST(INPUT_CFLAGS)
+-AC_SUBST(INPUT_LIBS)
+-
+-dnl FIXME: Check for optional libraries is missing
+-AC_DEFINE(HAVE_LIBCLANSOUND,  1, [clanSound is present])
+-AC_DEFINE(HAVE_LIBCLANMIKMOD, 1, [clanMikMod is present])
+-AC_DEFINE(HAVE_LIBCLANVORBIS, 1, [clanVorbis is present])
+-
+-AC_OUTPUT( Makefile
+-           doc/Makefile
+-           data/Makefile
+-           data/images/Makefile
+-           data/images/tiles/Makefile
+-           data/missions/Makefile
+-           src/Makefile
+-           src/editor/Makefile
+-           src/groundmap/Makefile
+-           src/vehicles/Makefile
+-           src/particles/Makefile
+-           src/scripting/Makefile
+-           src/input/Makefile
+-           src/buildings/Makefile
+-           src/sound/Makefile
+-           src/generic/Makefile)
+-
+-dnl Local Variables:
+-dnl compile-command: &quot;./autogen.sh &amp;&amp; ./configure&quot;
+-dnl End:
+-
+-dnl EOF
+
+Deleted: trunk/feuerkraft/data/Makefile.am
+===================================================================
+--- trunk/feuerkraft/data/Makefile.am	2009-07-25 21:28:24 UTC (rev 380)
++++ trunk/feuerkraft/data/Makefile.am	2009-07-25 21:33:43 UTC (rev 381)
+@@ -1,14 +0,0 @@
+-SUBDIRS = missions images
+-
+-pkgdatadir = $(datadir)/games/@PACKAGE@
+-
+-pkgdata_DATA = feuerkraft.xml tiles.scm tiles.xml feuerkraft.scm $(wildchar sounds/*.wav)
+-EXTRA_DIST   = $(pkgdata_DATA) tiles.scm tiles.xml gentiledesc.scm gentilesscr.scm 
+-
+-tiles.scm: images/tiles gentiledesc.scm
+-	./gentiledesc.scm &gt; tiles.scm
+-
+-tiles.xml: images/tiles gentilesscr.scm
+-	./gentilesscr.scm &gt; tiles.xml
+-
+-## EOF ##
+
+Deleted: trunk/feuerkraft/data/images/Makefile.am
+===================================================================
+--- trunk/feuerkraft/data/images/Makefile.am	2009-07-25 21:28:24 UTC (rev 380)
++++ trunk/feuerkraft/data/images/Makefile.am	2009-07-25 21:33:43 UTC (rev 381)
+@@ -1,9 +0,0 @@
+-pkgdatadir = $(datadir)/games/@PACKAGE@/images
+-
+-SUBDIRS = tiles
+-
+-EXTRA_DIST = $(wildcard *.png) $(wildcard *.jpg)
+-
+-pkgdata_DATA = $(EXTRA_DIST)
+-
+-# EOF #
+\ No newline at end of file
+
+Deleted: trunk/feuerkraft/data/images/tiles/Makefile.am
+===================================================================
+--- trunk/feuerkraft/data/images/tiles/Makefile.am	2009-07-25 21:28:24 UTC (rev 380)
++++ trunk/feuerkraft/data/images/tiles/Makefile.am	2009-07-25 21:33:43 UTC (rev 381)
+@@ -1,6 +0,0 @@
+-pkgdatadir = $(datadir)/games/@PACKAGE@/images/tiles
+-
+-EXTRA_DIST   = $(wildcard *.png)
+-pkgdata_DATA = $(EXTRA_DIST)
+-
+-# EOF #
+
+Deleted: trunk/feuerkraft/data/missions/Makefile.am
+===================================================================
+--- trunk/feuerkraft/data/missions/Makefile.am	2009-07-25 21:28:24 UTC (rev 380)
++++ trunk/feuerkraft/data/missions/Makefile.am	2009-07-25 21:33:43 UTC (rev 381)
+@@ -1,6 +0,0 @@
+-pkgdatadir = $(datadir)/games/@PACKAGE@/missions/
+-
+-EXTRA_DIST = $(wildcard *.png) $(wildcard *.feu) $(wildcard *.scm)
+-pkgdata_DATA = $(EXTRA_DIST)
+-
+-## EOF ##
+\ No newline at end of file
+
+Deleted: trunk/feuerkraft/doc/Makefile.am
+===================================================================
+--- trunk/feuerkraft/doc/Makefile.am	2009-07-25 21:28:24 UTC (rev 380)
++++ trunk/feuerkraft/doc/Makefile.am	2009-07-25 21:33:43 UTC (rev 381)
+@@ -1,6 +0,0 @@
+-EXTRA_DIST = doxygen.cfg header.html
+-
+-docs: doxygen.cfg
+-	doxygen doxygen.cfg
+-
+-# EOF #
+
+Deleted: trunk/feuerkraft/install-sh
+===================================================================
+--- trunk/feuerkraft/install-sh	2009-07-25 21:28:24 UTC (rev 380)
++++ trunk/feuerkraft/install-sh	2009-07-25 21:33:43 UTC (rev 381)
+@@ -1,251 +0,0 @@
+-#!/bin/sh
+-#
+-# install - install a program, script, or datafile
+-# This comes from X11R5 (mit/util/scripts/install.sh).
+-#
+-# Copyright 1991 by the Massachusetts Institute of Technology
+-#
+-# Permission to use, copy, modify, distribute, and sell this software and its
+-# documentation for any purpose is hereby granted without fee, provided that
+-# the above copyright notice appear in all copies and that both that
+-# copyright notice and this permission notice appear in supporting
+-# documentation, and that the name of M.I.T. not be used in advertising or
+-# publicity pertaining to distribution of the software without specific,
+-# written prior permission.  M.I.T. makes no representations about the
+-# suitability of this software for any purpose.  It is provided &quot;as is&quot;
+-# without express or implied warranty.
+-#
+-# Calling this script install-sh is preferred over install.sh, to prevent
+-# `make' implicit rules from creating a file called install from it
+-# when there is no Makefile.
+-#
+-# This script is compatible with the BSD install script, but was written
+-# from scratch.  It can only install one file at a time, a restriction
+-# shared with many OS's install programs.
+-
+-
+-# set DOITPROG to echo to test this script
+-
+-# Don't use :- since 4.3BSD and earlier shells don't like it.
+-doit=&quot;${DOITPROG-}&quot;
+-
+-
+-# put in absolute paths if you don't have them in your path; or use env. vars.
+-
+-mvprog=&quot;${MVPROG-mv}&quot;
+-cpprog=&quot;${CPPROG-cp}&quot;
+-chmodprog=&quot;${CHMODPROG-chmod}&quot;
+-chownprog=&quot;${CHOWNPROG-chown}&quot;
+-chgrpprog=&quot;${CHGRPPROG-chgrp}&quot;
+-stripprog=&quot;${STRIPPROG-strip}&quot;
+-rmprog=&quot;${RMPROG-rm}&quot;
+-mkdirprog=&quot;${MKDIRPROG-mkdir}&quot;
+-
+-transformbasename=&quot;&quot;
+-transform_arg=&quot;&quot;
+-instcmd=&quot;$mvprog&quot;
+-chmodcmd=&quot;$chmodprog 0755&quot;
+-chowncmd=&quot;&quot;
+-chgrpcmd=&quot;&quot;
+-stripcmd=&quot;&quot;
+-rmcmd=&quot;$rmprog -f&quot;
+-mvcmd=&quot;$mvprog&quot;
+-src=&quot;&quot;
+-dst=&quot;&quot;
+-dir_arg=&quot;&quot;
+-
+-while [ x&quot;$1&quot; != x ]; do
+-    case $1 in
+-	-c) instcmd=&quot;$cpprog&quot;
+-	    shift
+-	    continue;;
+-
+-	-d) dir_arg=true
+-	    shift
+-	    continue;;
+-
+-	-m) chmodcmd=&quot;$chmodprog $2&quot;
+-	    shift
+-	    shift
+-	    continue;;
+-
+-	-o) chowncmd=&quot;$chownprog $2&quot;
+-	    shift
+-	    shift
+-	    continue;;
+-
+-	-g) chgrpcmd=&quot;$chgrpprog $2&quot;
+-	    shift
+-	    shift
+-	    continue;;
+-
+-	-s) stripcmd=&quot;$stripprog&quot;
+-	    shift
+-	    continue;;
+-
+-	-t=*) transformarg=`echo $1 | sed 's/-t=//'`
+-	    shift
+-	    continue;;
+-
+-	-b=*) transformbasename=`echo $1 | sed 's/-b=//'`
+-	    shift
+-	    continue;;
+-
+-	*)  if [ x&quot;$src&quot; = x ]
+-	    then
+-		src=$1
+-	    else
+-		# this colon is to work around a 386BSD /bin/sh bug
+-		:
+-		dst=$1
+-	    fi
+-	    shift
+-	    continue;;
+-    esac
+-done
+-
+-if [ x&quot;$src&quot; = x ]
+-then
+-	echo &quot;install:	no input file specified&quot;
+-	exit 1
+-else
+-	true
+-fi
+-
+-if [ x&quot;$dir_arg&quot; != x ]; then
+-	dst=$src
+-	src=&quot;&quot;
+-	
+-	if [ -d $dst ]; then
+-		instcmd=:
+-		chmodcmd=&quot;&quot;
+-	else
+-		instcmd=mkdir
+-	fi
+-else
+-
+-# Waiting for this to be detected by the &quot;$instcmd $src $dsttmp&quot; command
+-# might cause directories to be created, which would be especially bad 
+-# if $src (and thus $dsttmp) contains '*'.
+-
+-	if [ -f $src -o -d $src ]
+-	then
+-		true
+-	else
+-		echo &quot;install:  $src does not exist&quot;
+-		exit 1
+-	fi
+-	
+-	if [ x&quot;$dst&quot; = x ]
+-	then
+-		echo &quot;install:	no destination specified&quot;
+-		exit 1
+-	else
+-		true
+-	fi
+-
+-# If destination is a directory, append the input filename; if your system
+-# does not like double slashes in filenames, you may need to add some logic
+-
+-	if [ -d $dst ]
+-	then
+-		dst=&quot;$dst&quot;/`basename $src`
+-	else
+-		true
+-	fi
+-fi
+-
+-## this sed command emulates the dirname command
+-dstdir=`echo $dst | sed -e 's,[^/]*$,,;s,/$,,;s,^$,.,'`
+-
+-# Make sure that the destination directory exists.
+-#  this part is taken from Noah Friedman's mkinstalldirs script
+-
+-# Skip lots of stat calls in the usual case.
+-if [ ! -d &quot;$dstdir&quot; ]; then
+-defaultIFS='	
+-'
+-IFS=&quot;${IFS-${defaultIFS}}&quot;
+-
+-oIFS=&quot;${IFS}&quot;
+-# Some sh's can't handle IFS=/ for some reason.
+-IFS='%'
+-set - `echo ${dstdir} | sed -e 's@/@%@g' -e 's@^%@/@'`
+-IFS=&quot;${oIFS}&quot;
+-
+-pathcomp=''
+-
+-while [ $# -ne 0 ] ; do
+-	pathcomp=&quot;${pathcomp}${1}&quot;
+-	shift
+-
+-	if [ ! -d &quot;${pathcomp}&quot; ] ;
+-        then
+-		$mkdirprog &quot;${pathcomp}&quot;
+-	else
+-		true
+-	fi
+-
+-	pathcomp=&quot;${pathcomp}/&quot;
+-done
+-fi
+-
+-if [ x&quot;$dir_arg&quot; != x ]
+-then
+-	$doit $instcmd $dst &amp;&amp;
+-
+-	if [ x&quot;$chowncmd&quot; != x ]; then $doit $chowncmd $dst; else true ; fi &amp;&amp;
+-	if [ x&quot;$chgrpcmd&quot; != x ]; then $doit $chgrpcmd $dst; else true ; fi &amp;&amp;
+-	if [ x&quot;$stripcmd&quot; != x ]; then $doit $stripcmd $dst; else true ; fi &amp;&amp;
+-	if [ x&quot;$chmodcmd&quot; != x ]; then $doit $chmodcmd $dst; else true ; fi
+-else
+-
+-# If we're going to rename the final executable, determine the name now.
+-
+-	if [ x&quot;$transformarg&quot; = x ] 
+-	then
+-		dstfile=`basename $dst`
+-	else
+-		dstfile=`basename $dst $transformbasename | 
+-			sed $transformarg`$transformbasename
+-	fi
+-
+-# don't allow the sed command to completely eliminate the filename
+-
+-	if [ x&quot;$dstfile&quot; = x ] 
+-	then
+-		dstfile=`basename $dst`
+-	else
+-		true
+-	fi
+-
+-# Make a temp file name in the proper directory.
+-
+-	dsttmp=$dstdir/#inst.$$#
+-
+-# Move or copy the file name to the temp name
+-
+-	$doit $instcmd $src $dsttmp &amp;&amp;
+-
+-	trap &quot;rm -f ${dsttmp}&quot; 0 &amp;&amp;
+-
+-# and set any options; do chmod last to preserve setuid bits
+-
+-# If any of these fail, we abort the whole thing.  If we want to
+-# ignore errors from any of these, just make sure not to ignore
+-# errors from the above &quot;$doit $instcmd $src $dsttmp&quot; command.
+-
+-	if [ x&quot;$chowncmd&quot; != x ]; then $doit $chowncmd $dsttmp; else true;fi &amp;&amp;
+-	if [ x&quot;$chgrpcmd&quot; != x ]; then $doit $chgrpcmd $dsttmp; else true;fi &amp;&amp;
+-	if [ x&quot;$stripcmd&quot; != x ]; then $doit $stripcmd $dsttmp; else true;fi &amp;&amp;
+-	if [ x&quot;$chmodcmd&quot; != x ]; then $doit $chmodcmd $dsttmp; else true;fi &amp;&amp;
+-
+-# Now rename the file to the real destination.
+-
+-	$doit $rmcmd -f $dstdir/$dstfile &amp;&amp;
+-	$doit $mvcmd $dsttmp $dstdir/$dstfile 
+-
+-fi &amp;&amp;
+-
+-
+-exit 0
+
+Deleted: trunk/feuerkraft/missing
+===================================================================
+--- trunk/feuerkraft/missing	2009-07-25 21:28:24 UTC (rev 380)
++++ trunk/feuerkraft/missing	2009-07-25 21:33:43 UTC (rev 381)
+@@ -1,336 +0,0 @@
+-#! /bin/sh
+-# Common stub for a few missing GNU programs while installing.
+-# Copyright (C) 1996, 1997, 1999, 2000, 2002 Free Software Foundation, Inc.
+-# Originally by Fran,cois Pinard &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/feuerkraft-commit">pinard at iro.umontreal.ca</A>&gt;, 1996.
+-
+-# This program is free software; you can redistribute it and/or modify
+-# it under the terms of the GNU General Public License as published by
+-# the Free Software Foundation; either version 2, or (at your option)
+-# any later version.
+-
+-# This program is distributed in the hope that it will be useful,
+-# but WITHOUT ANY WARRANTY; without even the implied warranty of
+-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+-# GNU General Public License for more details.
+-
+-# You should have received a copy of the GNU General Public License
+-# along with this program; if not, write to the Free Software
+-# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
+-# 02111-1307, USA.
+-
+-# As a special exception to the GNU General Public License, if you
+-# distribute this file as part of a program that contains a
+-# configuration script generated by Autoconf, you may include it under
+-# the same distribution terms that you use for the rest of that program.
+-
+-if test $# -eq 0; then
+-  echo 1&gt;&amp;2 &quot;Try \`$0 --help' for more information&quot;
+-  exit 1
+-fi
+-
+-run=:
+-
+-# In the cases where this matters, `missing' is being run in the
+-# srcdir already.
+-if test -f configure.ac; then
+-  configure_ac=configure.ac
+-else
+-  configure_ac=configure.in
+-fi
+-
+-case &quot;$1&quot; in
+---run)
+-  # Try to run requested program, and just exit if it succeeds.
+-  run=
+-  shift
+-  &quot;$@&quot; &amp;&amp; exit 0
+-  ;;
+-esac
+-
+-# If it does not exist, or fails to run (possibly an outdated version),
+-# try to emulate it.
+-case &quot;$1&quot; in
+-
+-  -h|--h|--he|--hel|--help)
+-    echo &quot;\
+-$0 [OPTION]... PROGRAM [ARGUMENT]...
+-
+-Handle \`PROGRAM [ARGUMENT]...' for when PROGRAM is missing, or return an
+-error status if there is no known handling for PROGRAM.
+-
+-Options:
+-  -h, --help      display this help and exit
+-  -v, --version   output version information and exit
+-  --run           try to run the given command, and emulate it if it fails
+-
+-Supported PROGRAM values:
+-  aclocal      touch file \`aclocal.m4'
+-  autoconf     touch file \`configure'
+-  autoheader   touch file \`config.h.in'
+-  automake     touch all \`Makefile.in' files
+-  bison        create \`y.tab.[ch]', if possible, from existing .[ch]
+-  flex         create \`lex.yy.c', if possible, from existing .c
+-  help2man     touch the output file
+-  lex          create \`lex.yy.c', if possible, from existing .c
+-  makeinfo     touch the output file
+-  tar          try tar, gnutar, gtar, then tar without non-portable flags
+-  yacc         create \`y.tab.[ch]', if possible, from existing .[ch]&quot;
+-    ;;
+-
+-  -v|--v|--ve|--ver|--vers|--versi|--versio|--version)
+-    echo &quot;missing 0.4 - GNU automake&quot;
+-    ;;
+-
+-  -*)
+-    echo 1&gt;&amp;2 &quot;$0: Unknown \`$1' option&quot;
+-    echo 1&gt;&amp;2 &quot;Try \`$0 --help' for more information&quot;
+-    exit 1
+-    ;;
+-
+-  aclocal*)
+-    if test -z &quot;$run&quot; &amp;&amp; ($1 --version) &gt; /dev/null 2&gt;&amp;1; then
+-       # We have it, but it failed.
+-       exit 1
+-    fi
+-
+-    echo 1&gt;&amp;2 &quot;\
+-WARNING: \`$1' is missing on your system.  You should only need it if
+-         you modified \`acinclude.m4' or \`${configure_ac}'.  You might want
+-         to install the \`Automake' and \`Perl' packages.  Grab them from
+-         any GNU archive site.&quot;
+-    touch aclocal.m4
+-    ;;
+-
+-  autoconf)
+-    if test -z &quot;$run&quot; &amp;&amp; ($1 --version) &gt; /dev/null 2&gt;&amp;1; then
+-       # We have it, but it failed.
+-       exit 1
+-    fi
+-
+-    echo 1&gt;&amp;2 &quot;\
+-WARNING: \`$1' is missing on your system.  You should only need it if
+-         you modified \`${configure_ac}'.  You might want to install the
+-         \`Autoconf' and \`GNU m4' packages.  Grab them from any GNU
+-         archive site.&quot;
+-    touch configure
+-    ;;
+-
+-  autoheader)
+-    if test -z &quot;$run&quot; &amp;&amp; ($1 --version) &gt; /dev/null 2&gt;&amp;1; then
+-       # We have it, but it failed.
+-       exit 1
+-    fi
+-
+-    echo 1&gt;&amp;2 &quot;\
+-WARNING: \`$1' is missing on your system.  You should only need it if
+-         you modified \`acconfig.h' or \`${configure_ac}'.  You might want
+-         to install the \`Autoconf' and \`GNU m4' packages.  Grab them
+-         from any GNU archive site.&quot;
+-    files=`sed -n 's/^[ ]*A[CM]_CONFIG_HEADER(\([^)]*\)).*/\1/p' ${configure_ac}`
+-    test -z &quot;$files&quot; &amp;&amp; files=&quot;config.h&quot;
+-    touch_files=
+-    for f in $files; do
+-      case &quot;$f&quot; in
+-      *:*) touch_files=&quot;$touch_files &quot;`echo &quot;$f&quot; |
+-				       sed -e 's/^[^:]*://' -e 's/:.*//'`;;
+-      *) touch_files=&quot;$touch_files $f.in&quot;;;
+-      esac
+-    done
+-    touch $touch_files
+-    ;;
+-
+-  automake*)
+-    if test -z &quot;$run&quot; &amp;&amp; ($1 --version) &gt; /dev/null 2&gt;&amp;1; then
+-       # We have it, but it failed.
+-       exit 1
+-    fi
+-
+-    echo 1&gt;&amp;2 &quot;\
+-WARNING: \`$1' is missing on your system.  You should only need it if
+-         you modified \`Makefile.am', \`acinclude.m4' or \`${configure_ac}'.
+-         You might want to install the \`Automake' and \`Perl' packages.
+-         Grab them from any GNU archive site.&quot;
+-    find . -type f -name Makefile.am -print |
+-	   sed 's/\.am$/.in/' |
+-	   while read f; do touch &quot;$f&quot;; done
+-    ;;
+-
+-  autom4te)
+-    if test -z &quot;$run&quot; &amp;&amp; ($1 --version) &gt; /dev/null 2&gt;&amp;1; then
+-       # We have it, but it failed.
+-       exit 1
+-    fi
+-
+-    echo 1&gt;&amp;2 &quot;\
+-WARNING: \`$1' is needed, and you do not seem to have it handy on your
+-         system.  You might have modified some files without having the
+-         proper tools for further handling them.
+-         You can get \`$1Help2man' as part of \`Autoconf' from any GNU
+-         archive site.&quot;
+-
+-    file=`echo &quot;$*&quot; | sed -n 's/.*--output[ =]*\([^ ]*\).*/\1/p'`
+-    test -z &quot;$file&quot; &amp;&amp; file=`echo &quot;$*&quot; | sed -n 's/.*-o[ ]*\([^ ]*\).*/\1/p'`
+-    if test -f &quot;$file&quot;; then
+-	touch $file
+-    else
+-	test -z &quot;$file&quot; || exec &gt;$file
+-	echo &quot;#! /bin/sh&quot;
+-	echo &quot;# Created by GNU Automake missing as a replacement of&quot;
+-	echo &quot;#  $ $@&quot;
+-	echo &quot;exit 0&quot;
+-	chmod +x $file
+-	exit 1
+-    fi
+-    ;;
+-
+-  bison|yacc)
+-    echo 1&gt;&amp;2 &quot;\
+-WARNING: \`$1' is missing on your system.  You should only need it if
+-         you modified a \`.y' file.  You may need the \`Bison' package
+-         in order for those modifications to take effect.  You can get
+-         \`Bison' from any GNU archive site.&quot;
+-    rm -f y.tab.c y.tab.h
+-    if [ $# -ne 1 ]; then
+-        eval LASTARG=&quot;\${$#}&quot;
+-	case &quot;$LASTARG&quot; in
+-	*.y)
+-	    SRCFILE=`echo &quot;$LASTARG&quot; | sed 's/y$/c/'`
+-	    if [ -f &quot;$SRCFILE&quot; ]; then
+-	         cp &quot;$SRCFILE&quot; y.tab.c
+-	    fi
+-	    SRCFILE=`echo &quot;$LASTARG&quot; | sed 's/y$/h/'`
+-	    if [ -f &quot;$SRCFILE&quot; ]; then
+-	         cp &quot;$SRCFILE&quot; y.tab.h
+-	    fi
+-	  ;;
+-	esac
+-    fi
+-    if [ ! -f y.tab.h ]; then
+-	echo &gt;y.tab.h
+-    fi
+-    if [ ! -f y.tab.c ]; then
+-	echo 'main() { return 0; }' &gt;y.tab.c
+-    fi
+-    ;;
+-
+-  lex|flex)
+-    echo 1&gt;&amp;2 &quot;\
+-WARNING: \`$1' is missing on your system.  You should only need it if
+-         you modified a \`.l' file.  You may need the \`Flex' package
+-         in order for those modifications to take effect.  You can get
+-         \`Flex' from any GNU archive site.&quot;
+-    rm -f lex.yy.c
+-    if [ $# -ne 1 ]; then
+-        eval LASTARG=&quot;\${$#}&quot;
+-	case &quot;$LASTARG&quot; in
+-	*.l)
+-	    SRCFILE=`echo &quot;$LASTARG&quot; | sed 's/l$/c/'`
+-	    if [ -f &quot;$SRCFILE&quot; ]; then
+-	         cp &quot;$SRCFILE&quot; lex.yy.c
+-	    fi
+-	  ;;
+-	esac
+-    fi
+-    if [ ! -f lex.yy.c ]; then
+-	echo 'main() { return 0; }' &gt;lex.yy.c
+-    fi
+-    ;;
+-
+-  help2man)
+-    if test -z &quot;$run&quot; &amp;&amp; ($1 --version) &gt; /dev/null 2&gt;&amp;1; then
+-       # We have it, but it failed.
+-       exit 1
+-    fi
+-
+-    echo 1&gt;&amp;2 &quot;\
+-WARNING: \`$1' is missing on your system.  You should only need it if
+-	 you modified a dependency of a manual page.  You may need the
+-	 \`Help2man' package in order for those modifications to take
+-	 effect.  You can get \`Help2man' from any GNU archive site.&quot;
+-
+-    file=`echo &quot;$*&quot; | sed -n 's/.*-o \([^ ]*\).*/\1/p'`
+-    if test -z &quot;$file&quot;; then
+-	file=`echo &quot;$*&quot; | sed -n 's/.*--output=\([^ ]*\).*/\1/p'`
+-    fi
+-    if [ -f &quot;$file&quot; ]; then
+-	touch $file
+-    else
+-	test -z &quot;$file&quot; || exec &gt;$file
+-	echo &quot;.ab help2man is required to generate this page&quot;
+-	exit 1
+-    fi
+-    ;;
+-
+-  makeinfo)
+-    if test -z &quot;$run&quot; &amp;&amp; (makeinfo --version) &gt; /dev/null 2&gt;&amp;1; then
+-       # We have makeinfo, but it failed.
+-       exit 1
+-    fi
+-
+-    echo 1&gt;&amp;2 &quot;\
+-WARNING: \`$1' is missing on your system.  You should only need it if
+-         you modified a \`.texi' or \`.texinfo' file, or any other file
+-         indirectly affecting the aspect of the manual.  The spurious
+-         call might also be the consequence of using a buggy \`make' (AIX,
+-         DU, IRIX).  You might want to install the \`Texinfo' package or
+-         the \`GNU make' package.  Grab either from any GNU archive site.&quot;
+-    file=`echo &quot;$*&quot; | sed -n 's/.*-o \([^ ]*\).*/\1/p'`
+-    if test -z &quot;$file&quot;; then
+-      file=`echo &quot;$*&quot; | sed 's/.* \([^ ]*\) *$/\1/'`
+-      file=`sed -n '/^@setfilename/ { s/.* \([^ ]*\) *$/\1/; p; q; }' $file`
+-    fi
+-    touch $file
+-    ;;
+-
+-  tar)
+-    shift
+-    if test -n &quot;$run&quot;; then
+-      echo 1&gt;&amp;2 &quot;ERROR: \`tar' requires --run&quot;
+-      exit 1
+-    fi
+-
+-    # We have already tried tar in the generic part.
+-    # Look for gnutar/gtar before invocation to avoid ugly error
+-    # messages.
+-    if (gnutar --version &gt; /dev/null 2&gt;&amp;1); then
+-       gnutar &quot;$@&quot; &amp;&amp; exit 0
+-    fi
+-    if (gtar --version &gt; /dev/null 2&gt;&amp;1); then
+-       gtar &quot;$@&quot; &amp;&amp; exit 0
+-    fi
+-    firstarg=&quot;$1&quot;
+-    if shift; then
+-	case &quot;$firstarg&quot; in
+-	*o*)
+-	    firstarg=`echo &quot;$firstarg&quot; | sed s/o//`
+-	    tar &quot;$firstarg&quot; &quot;$@&quot; &amp;&amp; exit 0
+-	    ;;
+-	esac
+-	case &quot;$firstarg&quot; in
+-	*h*)
+-	    firstarg=`echo &quot;$firstarg&quot; | sed s/h//`
+-	    tar &quot;$firstarg&quot; &quot;$@&quot; &amp;&amp; exit 0
+-	    ;;
+-	esac
+-    fi
+-
+-    echo 1&gt;&amp;2 &quot;\
+-WARNING: I can't seem to be able to run \`tar' with the given arguments.
+-         You may want to install GNU tar or Free paxutils, or check the
+-         command line arguments.&quot;
+-    exit 1
+-    ;;
+-
+-  *)
+-    echo 1&gt;&amp;2 &quot;\
+-WARNING: \`$1' is needed, and you do not seem to have it handy on your
+-         system.  You might have modified some files without having the
+-         proper tools for further handling them.  Check the \`README' file,
+-         it often tells you about the needed prerequirements for installing
+-         this package.  You may also peek at any GNU archive site, in case
+-         some other package would contain this missing \`$1' program.&quot;
+-    exit 1
+-    ;;
+-esac
+-
+-exit 0
+
+Deleted: trunk/feuerkraft/mkinstalldirs
+===================================================================
+--- trunk/feuerkraft/mkinstalldirs	2009-07-25 21:28:24 UTC (rev 380)
++++ trunk/feuerkraft/mkinstalldirs	2009-07-25 21:33:43 UTC (rev 381)
+@@ -1,40 +0,0 @@
+-#! /bin/sh
+-# mkinstalldirs --- make directory hierarchy
+-# Author: Noah Friedman &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/feuerkraft-commit">friedman at prep.ai.mit.edu</A>&gt;
+-# Created: 1993-05-16
+-# Public domain
+-
+-# $Id: mkinstalldirs,v 1.1 2001/02/17 20:02:09 grumbel Exp $
+-
+-errstatus=0
+-
+-for file
+-do
+-   set fnord `echo &quot;:$file&quot; | sed -ne 's/^:\//#/;s/^://;s/\// /g;s/^#/\//;p'`
+-   shift
+-
+-   pathcomp=
+-   for d
+-   do
+-     pathcomp=&quot;$pathcomp$d&quot;
+-     case &quot;$pathcomp&quot; in
+-       -* ) pathcomp=./$pathcomp ;;
+-     esac
+-
+-     if test ! -d &quot;$pathcomp&quot;; then
+-        echo &quot;mkdir $pathcomp&quot;
+-
+-        mkdir &quot;$pathcomp&quot; || lasterr=$?
+-
+-        if test ! -d &quot;$pathcomp&quot;; then
+-  	  errstatus=$lasterr
+-        fi
+-     fi
+-
+-     pathcomp=&quot;$pathcomp/&quot;
+-   done
+-done
+-
+-exit $errstatus
+-
+-# mkinstalldirs ends here
+
+Deleted: trunk/feuerkraft/src/Makefile.am
+===================================================================
+--- trunk/feuerkraft/src/Makefile.am	2009-07-25 21:28:24 UTC (rev 380)
++++ trunk/feuerkraft/src/Makefile.am	2009-07-25 21:33:43 UTC (rev 381)
+@@ -1,238 +0,0 @@
+-SUBDIRS = editor groundmap input particles generic buildings scripting sound vehicles
+-
+-bindir=$(prefix)/games
+-
+-bin_PROGRAMS = feuerkraft
+-
+-LDADD = \
+- scripting/libfeuerkraft_scripting.a \
+- editor/libfeuerkraft_editor.a \
+- groundmap/libfeuerkraft_groundmap.a \
+- buildings/libfeuerkraft_buildings.a \
+- vehicles/libfeuerkraft_vehicles.a \
+- generic/libfeuerkraft_generic.a     \
+- input/libfeuerkraft_input.a     \
+- particles/libfeuerkraft_particles.a \
+- sound/libpingus_sound.a
+-
+-feuerkraft_SOURCES = \
+-display/drawing_context.cpp \
+-display/scene_context.cpp \
+-alist.hpp \
+-alist.cpp \
+-ai_vehicle.hpp \
+-ai_vehicle.cpp \
+-ai_manager.hpp \
+-ai_manager.cpp \
+-ambulance.cpp \
+-ambulance.hpp \
+-background.cpp \
+-background.hpp \
+-command_line_arguments.hpp \
+-command_line_arguments.cpp \
+-color.hpp \
+-color.cpp \
+-controller_def.cpp \
+-controller_def.hpp \
+-communication_dialog.hpp \
+-communication_dialog.cpp \
+-collision_manager.hpp \
+-collision_manager.cpp \
+-display_manager.hpp \
+-display_manager.cpp \
+-energie.cpp \
+-energie.hpp \
+-explosion.cpp \
+-explosion.hpp \
+-feuerkraft.cpp \
+-feuerkraft.hpp \
+-feuerkraft_error.hpp \
+-field.hpp \
+-fonts.hpp \
+-fonts.cpp \
+-game_delta.cpp \
+-game_delta.hpp \
+-game_mission.cpp \
+-game_mission.hpp \
+-game_obj.hpp \
+-game_obj.cpp \
+-game_session.hpp \
+-game_session.cpp \
+-game_session_manager.hpp \
+-game_session_manager.cpp \
+-game_obj_manager.hpp \
+-game_obj_manager.cpp \
+-game_obj_data.hpp \
+-game_obj_factory.cpp \
+-game_obj_factory.hpp \
+-game_obj_data_factory.cpp \
+-game_obj_data_factory.hpp \
+-help.hpp \
+-help.cpp \
+-ipc.cpp \
+-ipc.hpp \
+-keys.hpp \
+-keys.cpp \
+-world_builder.hpp \
+-game_world_builder.cpp \
+-game_world_builder.hpp \
+-game_world.cpp \
+-game_world.hpp \
+-game_world_data.cpp \
+-game_world_data.hpp \
+-goal_manager.hpp \
+-goal_manager.cpp \
+-gui_obj.hpp \
+-guile.cpp \
+-guile.hpp \
+-keyboard_manager.hpp \
+-keyboard_manager.cpp \
+-level_map.cpp \
+-level_map.hpp \
+-line_segments.hpp \
+-line_segments.cpp \
+-marker.hpp \
+-marker.cpp \
+-math.hpp \
+-math.cpp \
+-message_buffer.hpp \
+-message_buffer.cpp \
+-menu.hpp \
+-menu.cpp \
+-menu_item.hpp \
+-menu_item.cpp \
+-menu_handle_mgr.hpp \
+-menu_handle_mgr.cpp \
+-handle_manager.hpp \
+-mine.cpp \
+-mine.hpp \
+-path_manager.cpp \
+-path_manager.hpp \
+-player.hpp \
+-player.cpp \
+-player_view.hpp \
+-player_view.cpp \
+-output_world_builder.hpp \
+-output_world_builder.cpp \
+-property.hpp \
+-property.cpp \
+-property_set.hpp \
+-property_set.cpp \
+-projectile.cpp \
+-projectile.hpp \
+-radar.cpp \
+-radar.hpp \
+-robot_tank.hpp \
+-robot_tank.cpp \
+-rocket.hpp \
+-rocket.cpp \
+-resource_manager.cpp \
+-resource_manager.hpp \
+-satchel_charge.hpp \
+-satchel_charge.cpp \
+-screen.cpp \
+-screen.hpp \
+-screenshot.hpp \
+-screenshot.cpp \
+-scm_functor.hpp \
+-scm_functor.cpp \
+-scm_sequence_hook.hpp \
+-scm_sequence_hook.cpp \
+-sequence_manager.hpp \
+-sequence_manager.cpp \
+-shockwave.cpp \
+-shockwave.hpp \
+-sexpr_world_reader.hpp \
+-sexpr_world_reader.cpp \
+-soldier.cpp \
+-soldier.hpp \
+-soldier_ai.cpp \
+-soldier_ai.hpp \
+-start_screen.cpp \
+-start_screen.hpp \
+-globals.hpp \
+-globals.cpp \
+-system.cpp \
+-system.hpp \
+-trigger_manager.hpp \
+-trigger_manager.cpp \
+-tree.cpp \
+-tree.hpp \
+-unit.hpp \
+-unit.cpp \
+-vector2d.hpp \
+-vector2d.cpp \
+-vehicle_ai.cpp \
+-vehicle_ai.hpp \
+-vehicle_status.cpp \
+-vehicle_status.hpp \
+-vehicle_view.cpp \
+-vehicle_view.hpp \
+-view.cpp \
+-view.hpp \
+-view_plugin.hpp \
+-view_properties.hpp \
+-z_pos_layers.hpp
+-
+-STATIC_READLINE=
+-#STATIC_READLINE=-lguilereadline-v-12 -lreadline -lncurses
+-
+-STATICBIN_LIBS = \
+--L/usr/X11R6/lib/ \
+--Wl,-Bstatic \
+--lclanApp \
+--lclanVorbis \
+--lclanMikMod \
+--lclanSound \
+--lclanGL \
+--lclanDisplay \
+--lclanCore \
+--lguile \
+--lguile-ltdl \
+-$(STATIC_READLINE) \
+--lqthreads \
+--lcrypt \
+--lHermes \
+--lvorbis \
+--logg \
+--lmikmod \
+--ljpeg \
+--lpng12 \
+--lz \
+--lm \
+--lX11 \
+--lXxf86vm \
+--lSM \
+--lXt \
+--lXext \
+--lGLU \
+--ldl \
+--lX11 \
+--lstdc++ \
+--lgcc_eh \
+--lgcc \
+--Wl,-Bdynamic \
+--lGL \
+--lc
+-
+-feuerkraft.static: $(feuerkraft_OBJECTS) $(feuerkraft_DEPENDENCIES) Makefile
+-	$(CXX) -nodefaultlibs $(CXXFLAGS)  -o $@ $(feuerkraft_OBJECTS) \
+-         $(feuerkraft_DEPENDENCIES) $(STATICBIN_LIBS) 
+-
+-feuerkraft.static.comp: feuerkraft.static
+-	cp $&lt; $@
+-	strip -s $@
+-	upx-ucl -q --best $@
+-
+-docs:
+-	$(MAKE) -C ../doc/ docs
+-
+-BROWSE:
+-	TMPFILE=`tempfile`; \
+-	find ./ -name &quot;*.?pp&quot; | sed &quot;s/.\///&quot; | grep -v &quot;old/&quot; | grep -v &quot;feuerkraft_wrap.cpp&quot; | \
+-          sort -t . -k 2 -r &gt; $$TMPFILE; \
+-	ebrowse --files=$$TMPFILE; rm -v $$TMPFILE
+-
+-.PHONY: BROWSE
+-
+-# EOF #
+
+Modified: trunk/feuerkraft/src/SConscript
+===================================================================
+--- trunk/feuerkraft/src/SConscript	2009-07-25 21:28:24 UTC (rev 380)
++++ trunk/feuerkraft/src/SConscript	2009-07-25 21:33:43 UTC (rev 381)
+@@ -13,6 +13,9 @@
+                 &quot;clanMikMod-0.8 &quot; +
+                 &quot;clanVorbis-0.8&quot;)
+ 
++env.Command(&quot;scripting/feuerkraft_wrap.cpp&quot;, &quot;scripting/feuerkraft.i&quot;,
++            &quot;swig -guile -c++  -o $TARGET $SOURCE&quot;)
++
+ env.Program(&quot;feuerkraft&quot;, [
+     &quot;editor/editor.cpp&quot;,
+ 
+
+Deleted: trunk/feuerkraft/src/buildings/Makefile.am
+===================================================================
+--- trunk/feuerkraft/src/buildings/Makefile.am	2009-07-25 21:28:24 UTC (rev 380)
++++ trunk/feuerkraft/src/buildings/Makefile.am	2009-07-25 21:33:43 UTC (rev 381)
+@@ -1,31 +0,0 @@
+-noinst_LIBRARIES = libfeuerkraft_buildings.a
+-
+-libfeuerkraft_buildings_a_SOURCES = \
+-ammotent.cpp \
+-ammotent.hpp \
+-building.hpp \
+-building.cpp \
+-building_map.cpp \
+-building_map.hpp \
+-building_manager.cpp \
+-building_manager.hpp \
+-building_map_data.cpp \
+-building_map_data.hpp \
+-building_type_manager.hpp \
+-building_type_manager.cpp \
+-fuelstation.cpp \
+-fuelstation.hpp \
+-custom_building.hpp \
+-custom_building.cpp \
+-headquarter.cpp \
+-headquarter.hpp \
+-tower_ai.cpp \
+-tower_ai.hpp \
+-tower.cpp \
+-tower.hpp \
+-wall.cpp \
+-wall.hpp \
+-wall_door.cpp \
+-wall_door.hpp
+-
+-# EOF #
+\ No newline at end of file
+
+Deleted: trunk/feuerkraft/src/editor/Makefile.am
+===================================================================
+--- trunk/feuerkraft/src/editor/Makefile.am	2009-07-25 21:28:24 UTC (rev 380)
++++ trunk/feuerkraft/src/editor/Makefile.am	2009-07-25 21:33:43 UTC (rev 381)
+@@ -1,24 +0,0 @@
+-# Feuerkraft - A Tank Battle Game
+-# Copyright (C) 2003 Ingo Ruhnke &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/feuerkraft-commit">grumbel at gmx.de</A>&gt;
+-#
+-# This program is free software; you can redistribute it and/or
+-# modify it under the terms of the GNU General Public License
+-# as published by the Free Software Foundation; either version 2
+-# of the License, or (at your option) any later version.
+-#
+-# This program is distributed in the hope that it will be useful,
+-# but WITHOUT ANY WARRANTY; without even the implied warranty of
+-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+-# GNU General Public License for more details.
+-#
+-# You should have received a copy of the GNU General Public License
+-# along with this program; if not, write to the Free Software
+-# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+-
+-# -- Static Libs --
+-noinst_LIBRARIES = libfeuerkraft_editor.a
+-
+-libfeuerkraft_editor_a_SOURCES = \
+-  editor.hpp editor.cpp
+-
+-# EOF #
+\ No newline at end of file
+
+Deleted: trunk/feuerkraft/src/generic/Makefile.am
+===================================================================
+--- trunk/feuerkraft/src/generic/Makefile.am	2009-07-25 21:28:24 UTC (rev 380)
++++ trunk/feuerkraft/src/generic/Makefile.am	2009-07-25 21:33:43 UTC (rev 381)
+@@ -1,7 +0,0 @@
+-noinst_LIBRARIES = libfeuerkraft_generic.a
+-
+-libfeuerkraft_generic_a_SOURCES = \
+-  random.hpp \
+-  random.cpp
+-
+-# EOF #
+
+Deleted: trunk/feuerkraft/src/groundmap/Makefile.am
+===================================================================
+--- trunk/feuerkraft/src/groundmap/Makefile.am	2009-07-25 21:28:24 UTC (rev 380)
++++ trunk/feuerkraft/src/groundmap/Makefile.am	2009-07-25 21:33:43 UTC (rev 381)
+@@ -1,39 +0,0 @@
+-noinst_LIBRARIES = libfeuerkraft_groundmap.a
+-
+-libfeuerkraft_groundmap_a_SOURCES = \
+-grid_map.cpp \
+-grid_map.hpp \
+-grid_map_data.cpp \
+-grid_map_data.hpp \
+-grid_tile.cpp \
+-grid_tile.hpp \
+-grid_tile_data.cpp \
+-grid_tile_data.hpp \
+-grid_tile_generator.cpp \
+-grid_tile_generator.hpp \
+-ground_map.hpp \
+-ground_map_data.cpp \
+-ground_map_data.hpp \
+-ground_map_data_factory.cpp \
+-ground_map_data_factory.hpp \
+-ground_type.hpp \
+-ground_type.cpp \
+-multi_ground_map.cpp \
+-multi_ground_map.hpp \
+-multi_ground_map_data.cpp \
+-multi_ground_map_data.hpp \
+-sprite_tile.cpp \
+-sprite_tile.hpp \
+-sprite_tile_data.cpp \
+-sprite_tile_data.hpp \
+-tile.hpp \
+-tile_data.hpp \
+-tile_data_factory.cpp \
+-tile_data_factory.hpp \
+-tile_map.cpp \
+-tile_map.hpp \
+-tile_map_data.cpp \
+-tile_map_data.hpp
+-
+-
+-# EOF #
+\ No newline at end of file
+
+Deleted: trunk/feuerkraft/src/input/Makefile.am
+===================================================================
+--- trunk/feuerkraft/src/input/Makefile.am	2009-07-25 21:28:24 UTC (rev 380)
++++ trunk/feuerkraft/src/input/Makefile.am	2009-07-25 21:33:43 UTC (rev 381)
+@@ -1,37 +0,0 @@
+-LDADD    = @INPUT_LIBS@
+-CPPFLAGS = @INPUT_CFLAGS@
+-
+-noinst_LIBRARIES = libfeuerkraft_input.a
+-
+-libfeuerkraft_input_a_SOURCES = \
+-  controller.hpp \
+-  controller.cpp \
+-  input_event.hpp \
+-  input_manager.hpp \
+-  input_manager.cpp \
+-  input_manager_impl.hpp \
+-  input_manager_impl.cpp \
+-  input_manager_custom.hpp \
+-  input_manager_custom.cpp \
+-  input_manager_player.hpp \
+-  input_manager_player.cpp \
+-  input_button.hpp \
+-  input_axis.hpp \
+-  input_button_input_device.hpp \
+-  input_button_input_device.cpp \
+-  input_axis_input_device.hpp \
+-  input_axis_input_device.cpp \
+-  axis_button.hpp \
+-  axis_button.cpp \
+-  button_axis.hpp \
+-  button_axis.cpp \
+-  button_factory.hpp \
+-  button_factory.cpp \
+-  axis_factory.hpp \
+-  axis_factory.cpp \
+-  input_recorder.hpp \
+-  input_recorder.cpp \
+-  multi_button.hpp \
+-  multi_button.cpp
+-
+-# EOF #
+
+Deleted: trunk/feuerkraft/src/particles/Makefile.am
+===================================================================
+--- trunk/feuerkraft/src/particles/Makefile.am	2009-07-25 21:28:24 UTC (rev 380)
++++ trunk/feuerkraft/src/particles/Makefile.am	2009-07-25 21:33:43 UTC (rev 381)
+@@ -1,19 +0,0 @@
+-noinst_LIBRARIES = libfeuerkraft_particles.a
+-
+-libfeuerkraft_particles_a_SOURCES = \
+- explosion_particle.hpp \
+- particle.hpp           \
+- particle_system.hpp    \
+- smoke_particle.hpp     \
+- sand_particle.hpp      \
+- grass_particle.hpp     \
+- fire_particle.hpp     \
+- fire_particle.cpp     \
+- fire_emitter.hpp      \
+- fire_emitter.cpp      \
+- rocket_smoke_particle.hpp     \
+- rocket_smoke_particle.cpp     \
+- smoke_emitter.hpp     \
+- smoke_emitter.cpp     
+-
+-# EOF #
+\ No newline at end of file
+
+Deleted: trunk/feuerkraft/src/scripting/Makefile.am
+===================================================================
+--- trunk/feuerkraft/src/scripting/Makefile.am	2009-07-25 21:28:24 UTC (rev 380)
++++ trunk/feuerkraft/src/scripting/Makefile.am	2009-07-25 21:33:43 UTC (rev 381)
+@@ -1,63 +0,0 @@
+-noinst_LIBRARIES = libfeuerkraft_scripting.a
+-
+-command_source = \
+- ai_commands.cpp \
+- ai_commands.hpp \
+- ai_vehicle_commands.cpp \
+- ai_vehicle_commands.hpp \
+- building_commands.cpp   \
+- building_commands.hpp   \
+- clanlib_commands.hpp    \
+- clanlib_commands.cpp    \
+- comm_commands.cpp       \
+- comm_commands.hpp       \
+- display_commands.hpp    \
+- display_commands.cpp    \
+- debug_commands.hpp      \
+- debug_commands.cpp      \
+- effect_commands.cpp     \
+- effect_commands.hpp     \
+- gameobj_commands.cpp    \
+- gameobj_commands.hpp    \
+- game_commands.cpp       \
+- game_commands.hpp       \
+- input_commands.cpp      \
+- input_commands.hpp      \
+- menu_commands.cpp       \
+- menu_commands.hpp       \
+- object_commands.cpp     \
+- object_commands.hpp     \
+- player_commands.cpp     \
+- player_commands.hpp     \
+- sequence_commands.cpp   \
+- sequence_commands.hpp   \
+- sound_commands.cpp      \
+- sound_commands.hpp      \
+- trigger_commands.cpp    \
+- trigger_commands.hpp    \
+- vehicle_commands.cpp    \
+- vehicle_commands.hpp    \
+- script_helper.cpp       \
+- script_helper.hpp
+-
+-libfeuerkraft_scripting_a_SOURCES = \
+- $(command_source) \
+- feuerkraft_wrap.cpp
+-
+-#lib_LTLIBRARIES = libguile-feuerkraft.la
+-
+-#libguile_feuerkraft_la_SOURCES = feuerkraft_wrap.cpp
+-#libguile_feuerkraft_la_LIBADD = libfeuerkraft_scripting.a
+-
+-# Include feuerkraft_wrap.cpp in case the user doesn't have swig installed
+-EXTRA_DIST = feuerkraft_wrap.cpp
+-
+-feuerkraft_wrap.cpp: feuerkraft.i  $(command_source)
+-	$(SWIG) -guile -c++  -o $@ $&lt;
+-
+-# We override the default compile command to skip all the warnings
+-# that compiling the wrappers causes.
+-feuerkraft_wrap.o : feuerkraft_wrap.cpp
+-	$(CXX) -c -O2 -o $@ $&lt;
+-
+-# EOF #
+
+Deleted: trunk/feuerkraft/src/sound/Makefile.am
+===================================================================
+--- trunk/feuerkraft/src/sound/Makefile.am	2009-07-25 21:28:24 UTC (rev 380)
++++ trunk/feuerkraft/src/sound/Makefile.am	2009-07-25 21:33:43 UTC (rev 381)
+@@ -1,26 +0,0 @@
+-# Pingus - A free Lemmings clone
+-# Copyright (C) 1999 Ingo Ruhnke &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/feuerkraft-commit">grumbel at gmx.de</A>&gt;
+-#
+-# This program is free software; you can redistribute it and/or
+-# modify it under the terms of the GNU General Public License
+-# as published by the Free Software Foundation; either version 2
+-# of the License, or (at your option) any later version.
+-#
+-# This program is distributed in the hope that it will be useful,
+-# but WITHOUT ANY WARRANTY; without even the implied warranty of
+-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+-# GNU General Public License for more details.
+-#
+-# You should have received a copy of the GNU General Public License
+-# along with this program; if not, write to the Free Software
+-# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+-
+-# -- Static Libs --
+-noinst_LIBRARIES = libpingus_sound.a
+-
+-libpingus_sound_a_SOURCES = \
+-	sound.cpp  sound_dummy.cpp  sound_real.cpp \
+-	sound.hpp  sound_dummy.hpp  sound_real.hpp \
+-        sounds.hpp sound_res_mgr.hpp sound_res_mgr.cpp
+-
+-# EOF #
+
+Deleted: trunk/feuerkraft/src/vehicles/Makefile.am
+===================================================================
+--- trunk/feuerkraft/src/vehicles/Makefile.am	2009-07-25 21:28:24 UTC (rev 380)
++++ trunk/feuerkraft/src/vehicles/Makefile.am	2009-07-25 21:33:43 UTC (rev 381)
+@@ -1,12 +0,0 @@
+-noinst_LIBRARIES = libfeuerkraft_vehicles.a
+-
+-libfeuerkraft_vehicles_a_SOURCES = \
+-  tank.cpp tank.hpp \
+-  helicopter.cpp helicopter.hpp \
+-  jeep.cpp   jeep.hpp \
+-  turret.cpp turret.hpp \
+-  rotor.cpp  rotor.hpp \
+-  vehicle.cpp \
+-  vehicle.hpp
+-
+-# EOF #
+
+Deleted: trunk/feuerkraft/stamp-h.in
+===================================================================
+--- trunk/feuerkraft/stamp-h.in	2009-07-25 21:28:24 UTC (rev 380)
++++ trunk/feuerkraft/stamp-h.in	2009-07-25 21:33:43 UTC (rev 381)
+@@ -1 +0,0 @@
+-timestamp
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000044.html">[Feuerkraft-commit] r380 - trunk/feuerkraft/src/scripting
+</A></li>
+	<LI>Next message: <A HREF="000046.html">[Feuerkraft-commit] r382 - in trunk/feuerkraft: . src/scripting
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#45">[ date ]</a>
+              <a href="thread.html#45">[ thread ]</a>
+              <a href="subject.html#45">[ subject ]</a>
+              <a href="author.html#45">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/feuerkraft-commit">More information about the Feuerkraft-commit
+mailing list</a><br>
+</body></html>

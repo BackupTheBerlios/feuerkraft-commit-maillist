@@ -1,0 +1,760 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Feuerkraft-commit] r342 - in trunk/src: . display
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/feuerkraft-commit/2009-January/index.html" >
+   <LINK REL="made" HREF="mailto:feuerkraft-commit%40lists.berlios.de?Subject=Re%3A%20%5BFeuerkraft-commit%5D%20r342%20-%20in%20trunk/src%3A%20.%20display&In-Reply-To=%3C200901271106.n0RB628Z004304%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000005.html">
+   <LINK REL="Next"  HREF="000009.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Feuerkraft-commit] r342 - in trunk/src: . display</H1>
+    <B>grumbel at BerliOS</B> 
+    <A HREF="mailto:feuerkraft-commit%40lists.berlios.de?Subject=Re%3A%20%5BFeuerkraft-commit%5D%20r342%20-%20in%20trunk/src%3A%20.%20display&In-Reply-To=%3C200901271106.n0RB628Z004304%40sheep.berlios.de%3E"
+       TITLE="[Feuerkraft-commit] r342 - in trunk/src: . display">grumbel at mail.berlios.de
+       </A><BR>
+    <I>Tue Jan 27 12:06:02 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000005.html">[Feuerkraft-commit] r341 - in trunk: . src src/scripting
+</A></li>
+        <LI>Next message: <A HREF="000009.html">[Feuerkraft-commit] r343 - in trunk/src: . buildings display editor	generic groundmap input particles scripting sound vehicles
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6">[ date ]</a>
+              <a href="thread.html#6">[ thread ]</a>
+              <a href="subject.html#6">[ subject ]</a>
+              <a href="author.html#6">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: grumbel
+Date: 2009-01-27 12:06:02 +0100 (Tue, 27 Jan 2009)
+New Revision: 342
+
+Added:
+   trunk/src/display/
+   trunk/src/display/drawing_context.cxx
+   trunk/src/display/drawing_context.hxx
+   trunk/src/display/drawing_request.hxx
+   trunk/src/display/scene_context.cxx
+   trunk/src/display/scene_context.hxx
+Modified:
+   trunk/src/
+Log:
+Replaced svn:external with hard copy
+
+
+Property changes on: trunk/src
+___________________________________________________________________
+Name: svn:externals
+   - display <A HREF="svn://svn.berlios.de/windstille/trunk/src/display/">svn://svn.berlios.de/windstille/trunk/src/display/</A>
+
+   + 
+
+
+Added: trunk/src/display/drawing_context.cxx
+===================================================================
+--- trunk/src/display/drawing_context.cxx	2009-01-27 11:03:25 UTC (rev 341)
++++ trunk/src/display/drawing_context.cxx	2009-01-27 11:06:02 UTC (rev 342)
+@@ -0,0 +1,220 @@
++//  $Id$
++//
++//  Pingus - A free Lemmings clone
++//  Copyright (C) 2002 Ingo Ruhnke &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/feuerkraft-commit">grumbel at gmx.de</A>&gt;
++//
++//  This program is free software; you can redistribute it and/or
++//  modify it under the terms of the GNU General Public License
++//  as published by the Free Software Foundation; either version 2
++//  of the License, or (at your option) any later version.
++//
++//  This program is distributed in the hope that it will be useful,
++//  but WITHOUT ANY WARRANTY; without even the implied warranty of
++//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++//  GNU General Public License for more details.
++//
++//  You should have received a copy of the GNU General Public License
++//  along with this program; if not, write to the Free Software
++//  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
++
++#include &lt;assert.h&gt;
++#include &lt;ClanLib/Display/sprite.h&gt;
++#include &lt;ClanLib/Display/graphic_context.h&gt;
++#include &lt;iostream&gt;
++#include &quot;drawing_context.hxx&quot;
++
++struct DrawingRequestsSorter
++{
++  bool operator()(DrawingRequest* a, DrawingRequest* b) {
++    return a-&gt;get_z_pos() &lt; b-&gt;get_z_pos();
++  }
++};
++
++class FillScreenDrawingRequest : public DrawingRequest
++{
++private:
++  CL_Color color;
++public:
++  FillScreenDrawingRequest(const CL_Color&amp; color_) 
++    : DrawingRequest(CL_Vector(0, 0, -1000.0f)), color(color_)
++  {
++  }
++  virtual ~FillScreenDrawingRequest() {}
++
++  void draw(CL_GraphicContext* gc) {
++    gc-&gt;clear(color);
++  }
++};
++
++class SpriteDrawingRequest : public DrawingRequest
++{
++private:
++  CL_Sprite sprite;
++
++public:
++  SpriteDrawingRequest(const CL_Sprite&amp; sprite_, const CL_Vector&amp; pos_)
++    : DrawingRequest(pos_),
++      sprite(sprite_)
++  {}
++  virtual ~SpriteDrawingRequest() {}
++
++  void draw(CL_GraphicContext* gc) {
++    sprite.draw(static_cast&lt;int&gt;(pos.x), static_cast&lt;int&gt;(pos.y), gc);
++  }
++};
++
++class TextDrawingRequest : public DrawingRequest
++{
++private:
++  std::string text;
++public:
++  TextDrawingRequest(const std::string&amp; text_, const CL_Vector&amp; pos_)
++    : DrawingRequest(pos_),
++      text(text_)
++  {}
++  virtual ~TextDrawingRequest() {}
++
++  void draw(CL_GraphicContext* gc) {
++    // FIXME: not implemented
++  }
++};
++
++DrawingContext::DrawingContext()
++{
++  translate_stack.push_back(CL_Pointf(0, 0));
++}
++
++void
++DrawingContext::render(CL_GraphicContext* gc)
++{
++  std::stable_sort(drawingrequests.begin(), drawingrequests.end(), DrawingRequestsSorter());
++  
++  for(DrawingRequests::iterator i = drawingrequests.begin(); i != drawingrequests.end(); ++i)
++    {
++      (*i)-&gt;draw(gc);
++    }
++}
++
++void
++DrawingContext::clear()
++{
++  for(DrawingRequests::iterator i = drawingrequests.begin(); i != drawingrequests.end(); ++i)
++    {
++      delete *i;
++    }
++  drawingrequests.clear();
++}
++
++void
++DrawingContext::draw(DrawingRequest* request)
++{
++  drawingrequests.push_back(request);
++}
++
++void
++DrawingContext::draw(const CL_Sprite&amp;   sprite,  float x, float y, float z)
++{ // FIXME: This should get flattend down to a simple texture draw
++  // command for easier sorting after texture-id/alpha
++  draw(new SpriteDrawingRequest(sprite, CL_Vector(translate_stack.back().x + x,
++                                                  translate_stack.back().y + y,
++                                                  z)));
++}
++
++void
++DrawingContext::draw(const std::string&amp; text,    float x, float y, float z)
++{ 
++  draw(new TextDrawingRequest(text, CL_Vector(x, y, z)));
++}
++
++void
++DrawingContext::draw_line (float x1, float y1, float x2, float y2, 
++                           const CL_Color&amp; color)
++{
++}
++
++void
++DrawingContext::draw_fillrect (float x1, float y1, float x2, float y2, 
++		      const CL_Color&amp; color)
++{
++}
++
++void
++DrawingContext::draw_rect (float x1, float y1, float x2, float y2, 
++		  const CL_Color&amp; color)
++{
++}
++
++void
++DrawingContext::draw_pixel (float x_pos, float y_pos, 
++		   const CL_Color&amp; color)
++{
++}
++
++void
++DrawingContext::draw_circle (float x_pos, float y_pos, float radius,
++                             const CL_Color&amp; color)
++{
++}
++
++/** Draws an arc, starting from angle_start to angle_end in
++      counterclockwise direction. Angles are taken in radian */
++void
++DrawingContext::draw_arc (float x_pos, float y_pos, float radius, float angle_start, float angle_end,
++                          const CL_Color&amp; color)
++{
++}
++
++void
++DrawingContext::fill_screen(const CL_Color&amp; color)
++{
++  draw(new FillScreenDrawingRequest(color));
++}
++
++void
++DrawingContext::rotate(float angel)
++{
++  // FIXME: not implemented
++}
++
++void
++DrawingContext::scale(float x, float y)
++{
++  // FIXME: not implemented
++}
++
++void
++DrawingContext::translate(float x, float y)
++{
++  translate_stack.back().x += x;
++  translate_stack.back().y += y;
++}
++
++void
++DrawingContext::push_modelview()
++{
++  translate_stack.push_back(translate_stack.back());
++}
++
++void
++DrawingContext::pop_modelview()
++{
++  translate_stack.pop_back();
++  assert(!translate_stack.empty());
++}
++
++void
++DrawingContext::reset_modelview()
++{
++  translate_stack.clear();
++  translate_stack.push_back(CL_Pointf(0, 0));
++}
++
++CL_Rect
++DrawingContext::get_clip_rect()
++{
++  return CL_Rect(CL_Point(static_cast&lt;int&gt;(translate_stack.back().x),
++                          static_cast&lt;int&gt;(translate_stack.back().y)),
++                 CL_Size(800, 600));
++}
++
++/* EOF */
+
+
+Property changes on: trunk/src/display/drawing_context.cxx
+___________________________________________________________________
+Name: svn:keywords
+   + Id
+Name: svn:eol-style
+   + native
+
+Added: trunk/src/display/drawing_context.hxx
+===================================================================
+--- trunk/src/display/drawing_context.hxx	2009-01-27 11:03:25 UTC (rev 341)
++++ trunk/src/display/drawing_context.hxx	2009-01-27 11:06:02 UTC (rev 342)
+@@ -0,0 +1,102 @@
++//  $Id$
++// 
++//  Pingus - A free Lemmings clone
++//  Copyright (C) 2002 Ingo Ruhnke &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/feuerkraft-commit">grumbel at gmx.de</A>&gt;
++//
++//  This program is free software; you can redistribute it and/or
++//  modify it under the terms of the GNU General Public License
++//  as published by the Free Software Foundation; either version 2
++//  of the License, or (at your option) any later version.
++//
++//  This program is distributed in the hope that it will be useful,
++//  but WITHOUT ANY WARRANTY; without even the implied warranty of
++//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++//  GNU General Public License for more details.
++// 
++//  You should have received a copy of the GNU General Public License
++//  along with this program; if not, write to the Free Software
++//  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
++
++#ifndef HEADER_DRAWING_CONTEXT_HXX
++#define HEADER_DRAWING_CONTEXT_HXX
++
++#include &lt;ClanLib/Core/Math/rect.h&gt;
++#include &lt;ClanLib/Display/color.h&gt;
++#include &lt;vector&gt;
++#include &quot;drawing_request.hxx&quot;
++
++class CL_Sprite;
++
++/** The DrawingContext collects all DrawingRequests and allows you to
++    flush them all down to the graphics card in one run, this has the
++    advantage that it is possible to z-sort, texture-id sort or
++    otherwise optimize the drawing. In addition to that it also allows
++    you do render the drawing commands to multiple buffers which might
++    be usefull for post-processing effects and such. */
++class DrawingContext
++{
++private:
++  typedef std::vector&lt;DrawingRequest*&gt; DrawingRequests;
++  DrawingRequests drawingrequests;
++
++  std::vector&lt;CL_Pointf&gt; translate_stack;
++
++public:
++  DrawingContext();
++
++  /** Draws everything in the drawing context to the screen */
++  void render(CL_GraphicContext* gc);
++
++  /** Empties the drawing context */
++  void clear();
++
++  /** Fills the screen with a given color, this is different from
++      clear() in that it doesn't remove other DrawingRequest from the
++      queue */
++  void fill_screen(const CL_Color&amp; color);
++
++  /*{ */
++  void draw(DrawingRequest* request);
++  void draw(const CL_Sprite&amp;   sprite,  float x, float y, float z = 0);
++  void draw(const std::string&amp; text,    float x, float y, float z = 0);
++
++  void draw_line (float x1, float y1, float x2, float y2, 
++		  const CL_Color&amp; color);
++  void draw_fillrect (float x1, float y1, float x2, float y2, 
++		      const CL_Color&amp; color);
++  void draw_rect (float x1, float y1, float x2, float y2, 
++		  const CL_Color&amp; color);
++  void draw_pixel (float x_pos, float y_pos, 
++		   const CL_Color&amp; color);
++  void draw_circle (float x_pos, float y_pos, float radius,
++                    const CL_Color&amp; color);
++
++  /** Draws an arc, starting from angle_start to angle_end in
++      counterclockwise direction. Angles are taken in radian */
++  void draw_arc (float x_pos, float y_pos, float radius, float angle_start, float angle_end,
++                 const CL_Color&amp; color);
++  /*} */
++  
++  /** Translate the drawing context */
++  void translate(float x, float y);
++
++  /** Set the rotation of the drawing context */
++  void rotate(float angel);
++
++  /** Set the scaling of the drawing context */
++  void scale(float x, float y);
++
++  void push_modelview();
++  void pop_modelview();
++  void reset_modelview();
++
++  /** Return the area of the screen that will be visible*/
++  CL_Rect get_clip_rect();
++private:
++  DrawingContext (const DrawingContext&amp;);
++  DrawingContext&amp; operator= (const DrawingContext&amp;);
++};
++
++#endif
++
++/* EOF */
+
+
+Property changes on: trunk/src/display/drawing_context.hxx
+___________________________________________________________________
+Name: svn:keywords
+   + Id
+Name: svn:eol-style
+   + native
+
+Added: trunk/src/display/drawing_request.hxx
+===================================================================
+--- trunk/src/display/drawing_request.hxx	2009-01-27 11:03:25 UTC (rev 341)
++++ trunk/src/display/drawing_request.hxx	2009-01-27 11:06:02 UTC (rev 342)
+@@ -0,0 +1,51 @@
++//  $Id$
++// 
++//  Pingus - A free Lemmings clone
++//  Copyright (C) 2002 Ingo Ruhnke &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/feuerkraft-commit">grumbel at gmx.de</A>&gt;
++//
++//  This program is free software; you can redistribute it and/or
++//  modify it under the terms of the GNU General Public License
++//  as published by the Free Software Foundation; either version 2
++//  of the License, or (at your option) any later version.
++//
++//  This program is distributed in the hope that it will be useful,
++//  but WITHOUT ANY WARRANTY; without even the implied warranty of
++//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++//  GNU General Public License for more details.
++// 
++//  You should have received a copy of the GNU General Public License
++//  along with this program; if not, write to the Free Software
++//  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
++
++#ifndef HEADER_DRAWING_REQUEST_HXX
++#define HEADER_DRAWING_REQUEST_HXX
++
++#include &lt;ClanLib/Core/Math/cl_vector.h&gt;
++
++class CL_GraphicContext;
++
++/** 
++ */
++class DrawingRequest
++{
++protected:
++  CL_Vector pos;
++public:
++  DrawingRequest(const CL_Vector&amp; pos_) : pos(pos_) {}
++  
++  virtual void draw(CL_GraphicContext* gc) = 0;
++  
++  /** Returns true if the request contains an alpha channel and needs
++      to be drawn in order */
++  virtual bool has_alpha() { return true; }
++
++  /** Returns the position at which the request should be drawn */
++  virtual float get_z_pos() { return pos.z; }
++private:
++  DrawingRequest (const DrawingRequest&amp;);
++  DrawingRequest&amp; operator= (const DrawingRequest&amp;);
++};
++
++#endif
++
++/* EOF */
+
+
+Property changes on: trunk/src/display/drawing_request.hxx
+___________________________________________________________________
+Name: svn:keywords
+   + Id
+Name: svn:eol-style
+   + native
+
+Added: trunk/src/display/scene_context.cxx
+===================================================================
+--- trunk/src/display/scene_context.cxx	2009-01-27 11:03:25 UTC (rev 341)
++++ trunk/src/display/scene_context.cxx	2009-01-27 11:06:02 UTC (rev 342)
+@@ -0,0 +1,149 @@
++//  $Id$
++//
++//  Pingus - A free Lemmings clone
++//  Copyright (C) 2002 Ingo Ruhnke &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/feuerkraft-commit">grumbel at gmx.de</A>&gt;
++//
++//  This program is free software; you can redistribute it and/or
++//  modify it under the terms of the GNU General Public License
++//  as published by the Free Software Foundation; either version 2
++//  of the License, or (at your option) any later version.
++//
++//  This program is distributed in the hope that it will be useful,
++//  but WITHOUT ANY WARRANTY; without even the implied warranty of
++//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++//  GNU General Public License for more details.
++//
++//  You should have received a copy of the GNU General Public License
++//  along with this program; if not, write to the Free Software
++//  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
++
++#include &lt;ClanLib/display.h&gt;
++#include &lt;ClanLib/gl.h&gt;
++#include &quot;scene_context.hxx&quot;
++
++class SceneContextImpl
++{
++public:
++  DrawingContext color;
++  DrawingContext light;
++  DrawingContext highlight; 
++
++  CL_OpenGLSurface lightmap;
++  CL_Canvas        canvas;
++
++  SceneContextImpl() 
++    : lightmap(CL_PixelBuffer(200, 
++                              150,
++                              200*4, CL_PixelFormat::rgba8888)),
++      canvas(lightmap)
++  {
++    canvas.get_gc()-&gt;set_scale(0.25, 0.25);
++  }
++};
++
++SceneContext::SceneContext()
++{
++  impl = new SceneContextImpl();
++}
++
++SceneContext::~SceneContext()
++{
++  delete impl;
++}
++
++DrawingContext&amp;
++SceneContext::color()
++{
++  return impl-&gt;color; 
++}
++
++DrawingContext&amp;
++SceneContext::light()
++{ 
++  return impl-&gt;light; 
++}
++
++DrawingContext&amp;
++SceneContext::highlight()
++{ 
++  return impl-&gt;highlight; 
++}
++
++
++/** Translate the drawing context */
++void
++SceneContext::translate(float x, float y)
++{
++  impl-&gt;color.translate(x, y);
++  impl-&gt;light.translate(x, y);
++  impl-&gt;highlight.translate(x, y);
++}
++
++/** Set the rotation of the drawing context */
++void
++SceneContext::rotate(float angel)
++{
++  impl-&gt;color.rotate(angel);
++  impl-&gt;light.rotate(angel);
++  impl-&gt;highlight.rotate(angel);
++}
++
++/** Set the scaling of the drawing context */
++void
++SceneContext::scale(float x, float y)
++{
++  impl-&gt;color.scale(x, y);
++  impl-&gt;light.scale(x, y);
++  impl-&gt;highlight.scale(x, y);
++}
++
++void
++SceneContext::push_modelview()
++{
++  impl-&gt;color.push_modelview();
++  impl-&gt;light.push_modelview();
++  impl-&gt;highlight.push_modelview();
++}
++
++void
++SceneContext::pop_modelview()
++{
++  impl-&gt;color.pop_modelview();
++  impl-&gt;light.pop_modelview();
++  impl-&gt;highlight.pop_modelview();
++}
++
++void
++SceneContext::reset_modelview()
++{
++  impl-&gt;color.reset_modelview();
++  impl-&gt;light.reset_modelview();
++  impl-&gt;highlight.reset_modelview();
++}
++
++void
++SceneContext::render()
++{
++  // Render all buffers
++  // FIXME: Render all to pbuffer for later combining of them
++  impl-&gt;color.render(0);
++  
++  impl-&gt;light.render(impl-&gt;canvas.get_gc());
++  impl-&gt;canvas.sync_surface();
++
++  //impl-&gt;lightmap.set_blend_func(blend_src_alpha, blend_one);
++  impl-&gt;lightmap.set_blend_func(blend_dest_color, blend_zero);
++  //GL_DST_COLOR, GL_ZERO
++  impl-&gt;lightmap.set_scale(4.0f, 4.0f);
++  impl-&gt;lightmap.draw();
++  impl-&gt;canvas.get_gc()-&gt;clear();
++
++  impl-&gt;highlight.render(0);
++
++  // Clear all DrawingContexts
++  impl-&gt;color.clear();
++  impl-&gt;light.clear();
++  impl-&gt;highlight.clear();
++}
++
++/* EOF */
+
+
+Property changes on: trunk/src/display/scene_context.cxx
+___________________________________________________________________
+Name: svn:keywords
+   + Id
+Name: svn:eol-style
+   + native
+
+Added: trunk/src/display/scene_context.hxx
+===================================================================
+--- trunk/src/display/scene_context.hxx	2009-01-27 11:03:25 UTC (rev 341)
++++ trunk/src/display/scene_context.hxx	2009-01-27 11:06:02 UTC (rev 342)
+@@ -0,0 +1,82 @@
++//  $Id$
++// 
++//  Pingus - A free Lemmings clone
++//  Copyright (C) 2002 Ingo Ruhnke &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/feuerkraft-commit">grumbel at gmx.de</A>&gt;
++//
++//  This program is free software; you can redistribute it and/or
++//  modify it under the terms of the GNU General Public License
++//  as published by the Free Software Foundation; either version 2
++//  of the License, or (at your option) any later version.
++//
++//  This program is distributed in the hope that it will be useful,
++//  but WITHOUT ANY WARRANTY; without even the implied warranty of
++//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++//  GNU General Public License for more details.
++// 
++//  You should have received a copy of the GNU General Public License
++//  along with this program; if not, write to the Free Software
++//  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
++
++#ifndef HEADER_SCENE_CONTEXT_HXX
++#define HEADER_SCENE_CONTEXT_HXX
++
++#include &quot;drawing_context.hxx&quot;
++
++class SceneContextImpl;
++
++/** The SceneContext maintains all the different drawing layers to
++    which a game object can draw. Each drawing layer serves a
++    different purporse and all are combined in the end to form the
++    final image. */
++class SceneContext
++{
++public:
++  SceneContext();
++  ~SceneContext();
++  
++  /** The main drawing context, also known as color buffer, to this
++      you draw all normal graphics, sprites and enemies, as you would
++      do with a normal framebuffer */
++  DrawingContext&amp; color();
++
++  /** This is the lightmap, to this you draw all lights, meaning that
++      a color of white will result in a area that is completly
++      visible, while a value of black will mean that the area will be
++      not lighted at all and be completly black. This lightmap is
++      multiplied with the color buffer to get the light effect */
++  DrawingContext&amp; light();
++
++  /** The highlight map is usefull for all objects that are extremly
++      bright so that they generate a lenseflare or a glow. The
++      highlight map doesn't light the scenario itself, but gets
++      additionally rendered above the color and light buffer, thus its
++      allows to add glow without risking to losing it in an area of
++      darkness */
++  DrawingContext&amp; highlight();
++
++  /** Translate the drawing context */
++  void translate(float x, float y);
++
++  /** Set the rotation of the drawing context */
++  void rotate(float angel);
++
++  /** Set the scaling of the drawing context */
++  void scale(float x, float y);
++
++  void push_modelview();
++  void pop_modelview();
++  void reset_modelview();
++
++  /** Takes all the buffers and combines them to form the final image
++      that will be shown on the screen */
++  void render();
++private:
++  SceneContextImpl* impl;
++
++  SceneContext (const SceneContext&amp;);
++  SceneContext&amp; operator= (const SceneContext&amp;);
++};
++
++#endif
++
++/* EOF */
+
+
+Property changes on: trunk/src/display/scene_context.hxx
+___________________________________________________________________
+Name: svn:keywords
+   + Id
+Name: svn:eol-style
+   + native
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000005.html">[Feuerkraft-commit] r341 - in trunk: . src src/scripting
+</A></li>
+	<LI>Next message: <A HREF="000009.html">[Feuerkraft-commit] r343 - in trunk/src: . buildings display editor	generic groundmap input particles scripting sound vehicles
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6">[ date ]</a>
+              <a href="thread.html#6">[ thread ]</a>
+              <a href="subject.html#6">[ subject ]</a>
+              <a href="author.html#6">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/feuerkraft-commit">More information about the Feuerkraft-commit
+mailing list</a><br>
+</body></html>

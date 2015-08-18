@@ -1,0 +1,829 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Feuerkraft-commit] r400 - in trunk/feuerkraft/src: . buildings	display particles vehicles
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/feuerkraft-commit/2010-May/index.html" >
+   <LINK REL="made" HREF="mailto:feuerkraft-commit%40lists.berlios.de?Subject=Re%3A%20%5BFeuerkraft-commit%5D%20r400%20-%20in%20trunk/feuerkraft/src%3A%20.%20buildings%0A%09display%20particles%20vehicles&In-Reply-To=%3C201005132321.o4DNLPdo026344%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000060.html">
+   <LINK REL="Next"  HREF="000062.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Feuerkraft-commit] r400 - in trunk/feuerkraft/src: . buildings	display particles vehicles</H1>
+    <B>grumbel at BerliOS</B> 
+    <A HREF="mailto:feuerkraft-commit%40lists.berlios.de?Subject=Re%3A%20%5BFeuerkraft-commit%5D%20r400%20-%20in%20trunk/feuerkraft/src%3A%20.%20buildings%0A%09display%20particles%20vehicles&In-Reply-To=%3C201005132321.o4DNLPdo026344%40sheep.berlios.de%3E"
+       TITLE="[Feuerkraft-commit] r400 - in trunk/feuerkraft/src: . buildings	display particles vehicles">grumbel at mail.berlios.de
+       </A><BR>
+    <I>Fri May 14 01:21:25 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000060.html">[Feuerkraft-commit] r399 - trunk/feuerkraft/src
+</A></li>
+        <LI>Next message: <A HREF="000062.html">[Feuerkraft-commit] r401 - trunk/feuerkraft/src
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#61">[ date ]</a>
+              <a href="thread.html#61">[ thread ]</a>
+              <a href="subject.html#61">[ subject ]</a>
+              <a href="author.html#61">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: grumbel
+Date: 2010-05-14 01:21:23 +0200 (Fri, 14 May 2010)
+New Revision: 400
+
+Modified:
+   trunk/feuerkraft/src/buildings/building.cpp
+   trunk/feuerkraft/src/buildings/building.hpp
+   trunk/feuerkraft/src/buildings/building_manager.cpp
+   trunk/feuerkraft/src/buildings/building_map.cpp
+   trunk/feuerkraft/src/buildings/building_map_data.cpp
+   trunk/feuerkraft/src/buildings/building_type_manager.cpp
+   trunk/feuerkraft/src/buildings/building_type_manager.hpp
+   trunk/feuerkraft/src/buildings/custom_building.cpp
+   trunk/feuerkraft/src/buildings/custom_building.hpp
+   trunk/feuerkraft/src/buildings/headquarter.cpp
+   trunk/feuerkraft/src/buildings/headquarter.hpp
+   trunk/feuerkraft/src/buildings/tower.cpp
+   trunk/feuerkraft/src/buildings/tower_ai.cpp
+   trunk/feuerkraft/src/buildings/tower_ai.hpp
+   trunk/feuerkraft/src/buildings/wall.cpp
+   trunk/feuerkraft/src/buildings/wall_door.cpp
+   trunk/feuerkraft/src/display/drawing_request.hpp
+   trunk/feuerkraft/src/energie.hpp
+   trunk/feuerkraft/src/game_obj.hpp
+   trunk/feuerkraft/src/game_obj_data.hpp
+   trunk/feuerkraft/src/game_world.hpp
+   trunk/feuerkraft/src/game_world_data.hpp
+   trunk/feuerkraft/src/particles/grass_particle.hpp
+   trunk/feuerkraft/src/particles/particle.hpp
+   trunk/feuerkraft/src/particles/sand_particle.hpp
+   trunk/feuerkraft/src/particles/smoke_particle.hpp
+   trunk/feuerkraft/src/projectile.hpp
+   trunk/feuerkraft/src/radar.hpp
+   trunk/feuerkraft/src/resource_manager.hpp
+   trunk/feuerkraft/src/sequence_manager.hpp
+   trunk/feuerkraft/src/soldier.hpp
+   trunk/feuerkraft/src/soldier_ai.hpp
+   trunk/feuerkraft/src/unit.cpp
+   trunk/feuerkraft/src/vehicle_ai.hpp
+   trunk/feuerkraft/src/vehicle_view.cpp
+   trunk/feuerkraft/src/vehicle_view.hpp
+   trunk/feuerkraft/src/vehicles/helicopter.hpp
+   trunk/feuerkraft/src/vehicles/tank.hpp
+   trunk/feuerkraft/src/vehicles/turret.hpp
+   trunk/feuerkraft/src/view.cpp
+Log:
+Some -Weffc++ cleanup
+
+Modified: trunk/feuerkraft/src/buildings/building.cpp
+===================================================================
+--- trunk/feuerkraft/src/buildings/building.cpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/buildings/building.cpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -20,9 +20,11 @@
+ #include &quot;../radar.hpp&quot;
+ #include &quot;building.hpp&quot;
+ 
+-Building::Building (const AList&amp; lst)
+-  : x_pos (lst.get_int(&quot;x-pos&quot;)),
+-    y_pos (lst.get_int(&quot;y-pos&quot;))
++Building::Building (const AList&amp; lst) :
++  id(),
++  properties(),
++  x_pos (lst.get_int(&quot;x-pos&quot;)),
++  y_pos (lst.get_int(&quot;y-pos&quot;))
+ {
+   register_properties();
+ }
+
+Modified: trunk/feuerkraft/src/buildings/building.hpp
+===================================================================
+--- trunk/feuerkraft/src/buildings/building.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/buildings/building.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -89,6 +89,10 @@
+       false the building will 'disapear' from the collision map
+    */
+   virtual bool alive () { return true; }
++
++private:
++  Building(const Building&amp;);
++  Building&amp; operator=(const Building&amp;);
+ };
+ 
+ #endif
+
+Modified: trunk/feuerkraft/src/buildings/building_manager.cpp
+===================================================================
+--- trunk/feuerkraft/src/buildings/building_manager.cpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/buildings/building_manager.cpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -24,7 +24,8 @@
+ BuildingManager* BuildingManager::current_ = 0;
+ int BuildingManager::next_id = 1;
+ 
+-BuildingManager::BuildingManager()
++BuildingManager::BuildingManager() :
++  buildings()
+ {
+   current_ = this;
+ }
+
+Modified: trunk/feuerkraft/src/buildings/building_map.cpp
+===================================================================
+--- trunk/feuerkraft/src/buildings/building_map.cpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/buildings/building_map.cpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -28,8 +28,11 @@
+ #include &quot;wall.hpp&quot;
+ #include &quot;wall_door.hpp&quot;
+ 
+-BuildingMap::BuildingMap(const BuildingMapData&amp; data)
+-  : BuildingMapData (data)
++BuildingMap::BuildingMap(const BuildingMapData&amp; data) :
++  BuildingMapData (data),
++  buildings(),
++  building_map()
++
+ {
+   for (std::vector&lt;BuildingData&gt;::iterator i = buildings_data.begin ();
+        i != buildings_data.end ();
+
+Modified: trunk/feuerkraft/src/buildings/building_map_data.cpp
+===================================================================
+--- trunk/feuerkraft/src/buildings/building_map_data.cpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/buildings/building_map_data.cpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -21,7 +21,10 @@
+ #include &quot;building_map.hpp&quot;
+ #include &quot;../guile.hpp&quot;
+ 
+-BuildingMapData::BuildingMapData (SCM desc)
++BuildingMapData::BuildingMapData (SCM desc) :
++  buildings_data(),
++  width(),
++  height()
+ {
+   //std::cout &lt;&lt; &quot;BuildingMapData: parsing: start&quot; &lt;&lt; std::endl;
+ 
+
+Modified: trunk/feuerkraft/src/buildings/building_type_manager.cpp
+===================================================================
+--- trunk/feuerkraft/src/buildings/building_type_manager.cpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/buildings/building_type_manager.cpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -28,7 +28,9 @@
+ 
+ BuildingTypeManager* BuildingTypeManager::current_ = 0;
+ 
+-BuildingTypeManager::BuildingTypeManager()
++BuildingTypeManager::BuildingTypeManager() :
++  next_id(),
++  factories()
+ {
+   next_id = 2;
+   current_ = this;
+
+Modified: trunk/feuerkraft/src/buildings/building_type_manager.hpp
+===================================================================
+--- trunk/feuerkraft/src/buildings/building_type_manager.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/buildings/building_type_manager.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -35,7 +35,7 @@
+       portability. */
+   std::string name;
+ 
+-  BuildingFactory() {}
++  BuildingFactory() : id(), name() {}
+   virtual ~BuildingFactory() {}
+ 
+   virtual Building* create(const AList&amp; lst) =0;
+
+Modified: trunk/feuerkraft/src/buildings/custom_building.cpp
+===================================================================
+--- trunk/feuerkraft/src/buildings/custom_building.cpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/buildings/custom_building.cpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -20,8 +20,12 @@
+ #include &quot;../resource_manager.hpp&quot;
+ #include &quot;custom_building.hpp&quot;
+ 
+-CustomBuilding::CustomBuilding(const AList&amp; type, const AList&amp; lst)
+-  : Building(lst)
++CustomBuilding::CustomBuilding(const AList&amp; type, const AList&amp; lst) :
++  Building(lst),
++  sprite(),
++  energie(),
++  width(),
++  height()
+ {
+   std::string sprite_str = &quot;feuerkraft/nobuilding&quot;;
+   int         i_energie = 100;
+
+Modified: trunk/feuerkraft/src/buildings/custom_building.hpp
+===================================================================
+--- trunk/feuerkraft/src/buildings/custom_building.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/buildings/custom_building.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -38,6 +38,7 @@
+ 
+   int width;
+   int height;
++
+ public:
+   CustomBuilding(const AList&amp; type, const AList&amp; lst);
+   virtual ~CustomBuilding() {}
+
+Modified: trunk/feuerkraft/src/buildings/headquarter.cpp
+===================================================================
+--- trunk/feuerkraft/src/buildings/headquarter.cpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/buildings/headquarter.cpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -27,6 +27,7 @@
+     headquarter (resources-&gt;get_sprite(&quot;feuerkraft/headquarter&quot;)),
+     headquarter_damaged (resources-&gt;get_sprite(&quot;feuerkraft/headquarterdamaged&quot;)),
+     headquarter_destroyed (resources-&gt;get_sprite(&quot;feuerkraft/headquarterdestroyed&quot;)),
++    current_sur(),
+     energie (100),
+     destroyed (false)
+ {
+
+Modified: trunk/feuerkraft/src/buildings/headquarter.hpp
+===================================================================
+--- trunk/feuerkraft/src/buildings/headquarter.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/buildings/headquarter.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -50,6 +50,10 @@
+   int get_map_height () { return 2; }
+ 
+   bool alive ();
++
++private:
++  Headquarter(const Headquarter&amp;);
++  Headquarter&amp; operator=(const Headquarter&amp;);
+ };
+ 
+ #endif
+
+Modified: trunk/feuerkraft/src/buildings/tower.cpp
+===================================================================
+--- trunk/feuerkraft/src/buildings/tower.cpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/buildings/tower.cpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -25,14 +25,17 @@
+ #include &quot;../explosion.hpp&quot;
+ #include &quot;tower.hpp&quot;
+ 
+-Tower::Tower(const AList&amp; lst)
+-  : Building(lst),
+-    towerbase(resources-&gt;get_sprite(&quot;feuerkraft/tower/base&quot;)),
+-    towerdamaged (resources-&gt;get_sprite(&quot;feuerkraft/tower/damaged&quot;)),
+-    towerdestroyed (resources-&gt;get_sprite(&quot;feuerkraft/tower/destroyed&quot;)),
+-    turret (resources-&gt;get_sprite(&quot;feuerkraft/tower/turret&quot;)),
+-    energie (lst.get_int(&quot;start-energie&quot;, 100)),
+-    destroyed (false)
++Tower::Tower(const AList&amp; lst) :
++  Building(lst),
++  towerbase(resources-&gt;get_sprite(&quot;feuerkraft/tower/base&quot;)),
++  towerdamaged (resources-&gt;get_sprite(&quot;feuerkraft/tower/damaged&quot;)),
++  towerdestroyed (resources-&gt;get_sprite(&quot;feuerkraft/tower/destroyed&quot;)),
++  turret (resources-&gt;get_sprite(&quot;feuerkraft/tower/turret&quot;)),
++  steering(),
++  orientation(),
++  energie (lst.get_int(&quot;start-energie&quot;, 100)),
++  destroyed (false),
++  pos()
+ {  
+   //int energie;
+   //std::cout &lt;&lt; lst.retrieve_int(&quot;start-energie&quot;, energie) &lt;&lt; std::endl;
+
+Modified: trunk/feuerkraft/src/buildings/tower_ai.cpp
+===================================================================
+--- trunk/feuerkraft/src/buildings/tower_ai.cpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/buildings/tower_ai.cpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -26,6 +26,7 @@
+ 
+ TowerAI::TowerAI(Tower* arg_tower)
+   : tower(arg_tower),
++    controller(),
+     ai_count(0)
+ {
+ }
+
+Modified: trunk/feuerkraft/src/buildings/tower_ai.hpp
+===================================================================
+--- trunk/feuerkraft/src/buildings/tower_ai.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/buildings/tower_ai.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -30,10 +30,15 @@
+   Tower* tower;
+   Controller controller;
+   float ai_count;
++
+ public:
+   TowerAI(Tower* arg_tower);
+   GameObj* get_object();
+   void update(float delta);
++
++private:
++  TowerAI(const TowerAI&amp;);
++  TowerAI&amp; operator=(const TowerAI&amp;);
+ };
+ 
+ #endif
+
+Modified: trunk/feuerkraft/src/buildings/wall.cpp
+===================================================================
+--- trunk/feuerkraft/src/buildings/wall.cpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/buildings/wall.cpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -27,7 +27,8 @@
+     pos (x_pos * 40 + 20, y_pos * 40 + 20),
+     wall (resources-&gt;get_sprite(&quot;feuerkraft/wall&quot;)),
+     wall_damaged (resources-&gt;get_sprite (&quot;feuerkraft/wall_damaged&quot;)),
+-    wall_destroyed (resources-&gt;get_sprite (&quot;feuerkraft/wall_destroyed&quot;))
++    wall_destroyed (resources-&gt;get_sprite (&quot;feuerkraft/wall_destroyed&quot;)),
++    energie()
+ {
+   energie = lst.get_int(&quot;energie&quot;, 100);
+   properties-&gt;register_int(&quot;energie&quot;, &amp;energie);
+
+Modified: trunk/feuerkraft/src/buildings/wall_door.cpp
+===================================================================
+--- trunk/feuerkraft/src/buildings/wall_door.cpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/buildings/wall_door.cpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -22,8 +22,13 @@
+ #include &quot;../resource_manager.hpp&quot;
+ #include &quot;wall_door.hpp&quot;
+ 
+-WallDoor::WallDoor(const AList&amp; lst)
+-  : Building(lst)
++WallDoor::WallDoor(const AList&amp; lst) :
++  Building(lst),
++  sprite(),
++  map_width(),
++  map_height(),
++  status(),
++  pos()
+ {
+   if (lst.get_string(&quot;orientation&quot;) == &quot;vertical&quot;)
+     {
+
+Modified: trunk/feuerkraft/src/display/drawing_request.hpp
+===================================================================
+--- trunk/feuerkraft/src/display/drawing_request.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/display/drawing_request.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -31,6 +31,7 @@
+   CL_Vector pos;
+ public:
+   DrawingRequest(const CL_Vector&amp; pos_) : pos(pos_) {}
++  virtual ~DrawingRequest() {}
+   
+   virtual void draw(CL_GraphicContext* gc) = 0;
+   
+
+Modified: trunk/feuerkraft/src/energie.hpp
+===================================================================
+--- trunk/feuerkraft/src/energie.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/energie.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -39,14 +39,16 @@
+   void draw (View&amp; view, int x_pos, int y_pos);
+   operator int () { return int(energie); }
+ 
+-  void operator--() { 
++  Energie&amp; operator--() { 
+     --energie; 
+     last_change = CL_System::get_time ();
++    return *this;
+   }
+ 
+-  void operator++() {
++  Energie&amp; operator++() {
+     ++energie; 
+     last_change = CL_System::get_time ();
++    return *this;
+   }
+ 
+   void operator+=(int i) { 
+
+Modified: trunk/feuerkraft/src/game_obj.hpp
+===================================================================
+--- trunk/feuerkraft/src/game_obj.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/game_obj.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -109,6 +109,10 @@
+      on */
+   virtual float get_physical_mass () { return 1.0; }
+   virtual float get_physical_size () { return 1.0; }
++
++private:
++  GameObj(const GameObj&amp;);
++  GameObj&amp; operator=(const GameObj&amp;);
+ };
+ 
+ typedef GameObj* GameObjPtr;
+
+Modified: trunk/feuerkraft/src/game_obj_data.hpp
+===================================================================
+--- trunk/feuerkraft/src/game_obj_data.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/game_obj_data.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -27,6 +27,8 @@
+ private:
+ 
+ public:
++  virtual ~GameObjData() {}
++
+   /** Create the correct GameObj out of an GameObjData object. This is
+       something like a virtual constructor. */
+   virtual GameObj* create() =0;
+
+Modified: trunk/feuerkraft/src/game_world.hpp
+===================================================================
+--- trunk/feuerkraft/src/game_world.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/game_world.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -54,7 +54,7 @@
+ 
+ public:
+   GameWorld (SCM scm);
+-  ~GameWorld ();
++  virtual ~GameWorld ();
+ 
+   float get_time() { return current_time; }
+   
+@@ -78,6 +78,10 @@
+   static GameWorld* current_world;
+ public:
+   static GameWorld* current() { return current_world; }
++
++private:
++  GameWorld(const GameWorld&amp;);
++  GameWorld&amp; operator=(const GameWorld&amp;);
+ };
+ 
+ #endif
+
+Modified: trunk/feuerkraft/src/game_world_data.hpp
+===================================================================
+--- trunk/feuerkraft/src/game_world_data.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/game_world_data.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -39,7 +39,7 @@
+   
+ public:
+   explicit GameWorldData (SCM desc);
+-  ~GameWorldData ();
++  virtual ~GameWorldData ();
+  
+   /** Convert the data from a given data object into an SCM which can
+       be written to a save game file or similar things */
+@@ -48,6 +48,10 @@
+ private:
+   void parse_objects(SCM desc);
+   void parse_scripts(SCM desc);
++
++private:
++  GameWorldData(const GameWorldData&amp;);
++  GameWorldData&amp; operator=(const GameWorldData&amp;);
+ };
+ 
+ #endif
+
+Modified: trunk/feuerkraft/src/particles/grass_particle.hpp
+===================================================================
+--- trunk/feuerkraft/src/particles/grass_particle.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/particles/grass_particle.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -31,7 +31,11 @@
+   float max_life_time;
+   
+ public:
+-  GrassParticle(const FloatVector2d&amp; arg_pos)
++  GrassParticle(const FloatVector2d&amp; arg_pos) :
++    sprite(),
++    size(),
++    angle(),
++    max_life_time()
+   {
+     pos = arg_pos;
+     size = 1;
+
+Modified: trunk/feuerkraft/src/particles/particle.hpp
+===================================================================
+--- trunk/feuerkraft/src/particles/particle.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/particles/particle.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -33,7 +33,12 @@
+   float life_time;
+ 
+ public:
+-  Particle () {}
++  Particle () :
++    pos(),
++    velocity(),
++    acceleration(),
++    life_time()
++  {}
+   virtual ~Particle () {}
+ 
+   virtual void update (float delta) {
+
+Modified: trunk/feuerkraft/src/particles/sand_particle.hpp
+===================================================================
+--- trunk/feuerkraft/src/particles/sand_particle.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/particles/sand_particle.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -31,7 +31,11 @@
+   float angle;
+   float max_life_time;
+ public:
+-  SandParticle(const FloatVector2d&amp; arg_pos)
++  SandParticle(const FloatVector2d&amp; arg_pos) :
++    sprite(),
++    size(),
++    angle(),
++    max_life_time()
+   {
+     pos = arg_pos;
+     size = 1;
+
+Modified: trunk/feuerkraft/src/particles/smoke_particle.hpp
+===================================================================
+--- trunk/feuerkraft/src/particles/smoke_particle.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/particles/smoke_particle.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -31,7 +31,11 @@
+   float angle;
+   float max_life_time;
+ public:
+-  SmokeParticle(const FloatVector2d&amp; arg_pos)
++  SmokeParticle(const FloatVector2d&amp; arg_pos) :
++    sprite(),
++    size(),
++    angle(),
++    max_life_time()
+   {
+     pos = arg_pos;
+     size = 1;
+
+Modified: trunk/feuerkraft/src/projectile.hpp
+===================================================================
+--- trunk/feuerkraft/src/projectile.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/projectile.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -55,6 +55,10 @@
+ 
+   void detonate ();
+   bool is_colliding(FloatVector2d) { return false;}
++
++private:
++  Projectile(const Projectile&amp;);
++  Projectile&amp; operator=(const Projectile&amp;);
+ };
+ 
+ #endif
+
+Modified: trunk/feuerkraft/src/radar.hpp
+===================================================================
+--- trunk/feuerkraft/src/radar.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/radar.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -53,6 +53,10 @@
+       3: large vehicle, 4: building) */
+   void draw_blip(const FloatVector2d&amp; pos, int size, 
+ 		  float red = 1.0f, float green = 0.0f, float blue = 0.0f);
++
++private:
++  Radar(const Radar&amp;);
++  Radar&amp; operator=(const Radar&amp;);
+ };
+ 
+ typedef Radar* RadarPtr;
+
+Modified: trunk/feuerkraft/src/resource_manager.hpp
+===================================================================
+--- trunk/feuerkraft/src/resource_manager.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/resource_manager.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -41,6 +41,10 @@
+   CL_Surface get_surface(const std::string&amp; location);
+   CL_Sprite  get_sprite(const std::string&amp; location);
+   CL_Font    get_font(const std::string&amp; location);
++
++private:
++  ResourceManager(const ResourceManager&amp;);
++  ResourceManager&amp; operator=(const ResourceManager&amp;);
+ };
+ 
+ //extern CL_SpriteProviderStorage* storage;
+
+Modified: trunk/feuerkraft/src/sequence_manager.hpp
+===================================================================
+--- trunk/feuerkraft/src/sequence_manager.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/sequence_manager.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -27,7 +27,8 @@
+   int id;
+ public:
+   SequenceHook();
+-  
++  virtual ~SequenceHook() {}
++
+   int  get_id() const { return id; }
+   void set_id(int arg_id) { id = arg_id; }
+ 
+
+Modified: trunk/feuerkraft/src/soldier.hpp
+===================================================================
+--- trunk/feuerkraft/src/soldier.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/soldier.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -54,6 +54,10 @@
+   void attach_ai();
+ 
+   void deattach_ai();
++
++private:
++  Soldier(const Soldier&amp;);
++  Soldier&amp; operator=(const Soldier&amp;);
+ };
+ 
+ #endif
+
+Modified: trunk/feuerkraft/src/soldier_ai.hpp
+===================================================================
+--- trunk/feuerkraft/src/soldier_ai.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/soldier_ai.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -43,6 +43,10 @@
+ 
+   void goto_to(const FloatVector2d&amp; target_pos);
+   void stop();
++
++private:
++  SoldierAI(const SoldierAI&amp;);
++  SoldierAI&amp; operator=(const SoldierAI&amp;);
+ };
+ 
+ #endif
+
+Modified: trunk/feuerkraft/src/unit.cpp
+===================================================================
+--- trunk/feuerkraft/src/unit.cpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/unit.cpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -23,7 +23,9 @@
+ 
+ extern Player* player;
+ 
+-Unit::Unit()
++Unit::Unit() :
++  pos(),
++  orientation()
+ {
+   pos = FloatVector2d(0,0);
+   orientation = 0;
+
+Modified: trunk/feuerkraft/src/vehicle_ai.hpp
+===================================================================
+--- trunk/feuerkraft/src/vehicle_ai.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/vehicle_ai.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -33,6 +33,10 @@
+   VehicleAI(Vehicle* vehicle);
+   virtual ~VehicleAI() {};
+   GameObj* get_object() { return vehicle; }
++
++private:
++  VehicleAI(const VehicleAI&amp;);
++  VehicleAI&amp; operator=(const VehicleAI&amp;);
+ };
+ 
+ /** class for robot like ai which controlls a vehicle with physic
+@@ -59,6 +63,10 @@
+   
+   void drive_to(const FloatVector2d&amp; pos);
+   void update(float delta);
++
++private:
++  VehiclePathAI(const VehiclePathAI&amp;);
++  VehiclePathAI&amp; operator=(const VehiclePathAI&amp;);
+ };
+ 
+ #endif
+
+Modified: trunk/feuerkraft/src/vehicle_view.cpp
+===================================================================
+--- trunk/feuerkraft/src/vehicle_view.cpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/vehicle_view.cpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -19,8 +19,11 @@
+ #include &lt;math.h&gt;
+ #include &quot;vehicle_view.hpp&quot;
+ 
+-VehicleViewUpdater::VehicleViewUpdater (Unit* arg_unit)
+-  : unit(arg_unit)
++VehicleViewUpdater::VehicleViewUpdater (Unit* arg_unit) :
++  unit(arg_unit),
++  pos(),
++  speed(),
++  zoom_follower()
+ {
+   pos = unit-&gt;get_pos();
+   speed = 0.1f;
+
+Modified: trunk/feuerkraft/src/vehicle_view.hpp
+===================================================================
+--- trunk/feuerkraft/src/vehicle_view.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/vehicle_view.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -31,12 +31,17 @@
+ 
+   float speed;
+   float zoom_follower;
++
+ public:
+   VehicleViewUpdater (Unit* arg_unit);
+   virtual ~VehicleViewUpdater ();
+ 
+   virtual void update(float delta, ViewState&amp; state);
+   void set_unit(Unit* arg_unit);
++
++private:
++  VehicleViewUpdater(const VehicleViewUpdater&amp;);
++  VehicleViewUpdater&amp; operator=(const VehicleViewUpdater&amp;);
+ };
+ 
+ #endif
+
+Modified: trunk/feuerkraft/src/vehicles/helicopter.hpp
+===================================================================
+--- trunk/feuerkraft/src/vehicles/helicopter.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/vehicles/helicopter.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -69,6 +69,10 @@
+ 
+   void attach_ai();
+   void dettach_ai();
++
++private:
++  Helicopter(const Helicopter&amp;);
++  Helicopter&amp; operator=(const Helicopter&amp;);
+ };
+ 
+ #endif
+
+Modified: trunk/feuerkraft/src/vehicles/tank.hpp
+===================================================================
+--- trunk/feuerkraft/src/vehicles/tank.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/vehicles/tank.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -127,6 +127,9 @@
+   void attach_ai();
+   void dettach_ai();
+ 
++private:
++  Tank(const Tank&amp;);
++  Tank&amp; operator=(const Tank&amp;);
+ };
+ 
+ #endif // TANK_HH
+
+Modified: trunk/feuerkraft/src/vehicles/turret.hpp
+===================================================================
+--- trunk/feuerkraft/src/vehicles/turret.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/vehicles/turret.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -51,6 +51,10 @@
+   
+   void set_absolute_orientation (float orientation);
+   void set_relative_orientation (float orientation);
++
++private:
++  Turret(const Turret&amp;);
++  Turret&amp; operator=(const Turret&amp;);
+ };
+ 
+ #endif // TURRET_HH
+
+Modified: trunk/feuerkraft/src/view.cpp
+===================================================================
+--- trunk/feuerkraft/src/view.cpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/view.cpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -30,10 +30,13 @@
+ 
+ View::View (int arg_x1, int arg_y1, 
+ 	    int arg_x2, int arg_y2,
+-	    ViewUpdater* arg_updater)
+-  : x1 (arg_x1), y1 (arg_y1),
+-    x2 (arg_x2), y2 (arg_y2),
+-    view_updater(arg_updater)
++	    ViewUpdater* arg_updater) :
++  x1 (arg_x1), y1 (arg_y1),
++  x2 (arg_x2), y2 (arg_y2),
++  state(),
++  view_updater(arg_updater),
++  properties(),
++  scene_context()
+ {
+   //std::cout &lt;&lt; &quot;View: &quot; &lt;&lt; x1 &lt;&lt; &quot; &quot; &lt;&lt; y1 &lt;&lt; &quot; &quot; &lt;&lt; x2 &lt;&lt; &quot; &quot; &lt;&lt; y2 
+     //&lt;&lt; &quot; &quot; &lt;&lt; state.x_offset &lt;&lt; &quot; &quot; &lt;&lt; state.y_offset &lt;&lt; std::endl;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000060.html">[Feuerkraft-commit] r399 - trunk/feuerkraft/src
+</A></li>
+	<LI>Next message: <A HREF="000062.html">[Feuerkraft-commit] r401 - trunk/feuerkraft/src
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#61">[ date ]</a>
+              <a href="thread.html#61">[ thread ]</a>
+              <a href="subject.html#61">[ subject ]</a>
+              <a href="author.html#61">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/feuerkraft-commit">More information about the Feuerkraft-commit
+mailing list</a><br>
+</body></html>

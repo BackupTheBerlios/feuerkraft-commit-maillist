@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Feuerkraft-commit] r394 - in trunk/feuerkraft: . src
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/feuerkraft-commit/2010-May/index.html" >
+   <LINK REL="made" HREF="mailto:feuerkraft-commit%40lists.berlios.de?Subject=Re%3A%20%5BFeuerkraft-commit%5D%20r394%20-%20in%20trunk/feuerkraft%3A%20.%20src&In-Reply-To=%3C201005121926.o4CJQh33031354%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000054.html">
+   <LINK REL="Next"  HREF="000056.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Feuerkraft-commit] r394 - in trunk/feuerkraft: . src</H1>
+    <B>grumbel at BerliOS</B> 
+    <A HREF="mailto:feuerkraft-commit%40lists.berlios.de?Subject=Re%3A%20%5BFeuerkraft-commit%5D%20r394%20-%20in%20trunk/feuerkraft%3A%20.%20src&In-Reply-To=%3C201005121926.o4CJQh33031354%40sheep.berlios.de%3E"
+       TITLE="[Feuerkraft-commit] r394 - in trunk/feuerkraft: . src">grumbel at mail.berlios.de
+       </A><BR>
+    <I>Wed May 12 21:26:43 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000054.html">[Feuerkraft-commit] r393 - trunk/feuerkraft/src
+</A></li>
+        <LI>Next message: <A HREF="000056.html">[Feuerkraft-commit] r395 - trunk/feuerkraft/src
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#55">[ date ]</a>
+              <a href="thread.html#55">[ thread ]</a>
+              <a href="subject.html#55">[ subject ]</a>
+              <a href="author.html#55">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: grumbel
+Date: 2010-05-12 21:26:43 +0200 (Wed, 12 May 2010)
+New Revision: 394
+
+Modified:
+   trunk/feuerkraft/SConstruct
+   trunk/feuerkraft/src/SConscript
+Log:
+Use clanlib from external/
+
+Modified: trunk/feuerkraft/SConstruct
+===================================================================
+--- trunk/feuerkraft/SConstruct	2010-05-12 19:25:44 UTC (rev 393)
++++ trunk/feuerkraft/SConstruct	2010-05-12 19:26:43 UTC (rev 394)
+@@ -1,3 +1,4 @@
++SConscript(&quot;external/clanlib/SConstruct&quot;)
+ SConscript(&quot;src/SConscript&quot;)
+ 
+ # EOF #
+
+Modified: trunk/feuerkraft/src/SConscript
+===================================================================
+--- trunk/feuerkraft/src/SConscript	2010-05-12 19:25:44 UTC (rev 393)
++++ trunk/feuerkraft/src/SConscript	2010-05-12 19:26:43 UTC (rev 394)
+@@ -1,19 +1,35 @@
+ import os
+ 
+-env = Environment(ENV = os.environ,
+-                  CXXFLAGS=[&quot;-g&quot;, &quot;-O2&quot;, &quot;-Wall&quot;, &quot;-ansi&quot;, &quot;-pedantic&quot;],
+-                  CPPPATH=[&quot;..&quot;, &quot;.&quot;],
+-                  LIBS=[&quot;guile&quot;])
++if True:
++    env = Environment(CXXFLAGS=[&quot;-g&quot;, &quot;-O2&quot;, &quot;-Wall&quot;, &quot;-ansi&quot;, &quot;-pedantic&quot;],
++                      CPPPATH=['../external/clanlib/', '..', '.'],
++                      LIBPATH=['/usr/X11R6/lib/',
++                               '../external/clanlib/'],
++                      LIBS=['clanSound',      
++                            'clanGL',
++                            'clanApp',
++                            'clanVorbis',
++                            'clanMikMod',
++                            'clanDisplay',
++                            'clanSignals', 
++                            'clanCore',
++                            'X11', 'Xmu', 'GL', 'GLU', 'png', 'jpeg', 'Xxf86vm', 'Xi',
++                            'guile'])
++else:
++    env = Environment(ENV = os.environ,
++                      CXXFLAGS=[&quot;-g&quot;, &quot;-O2&quot;, &quot;-Wall&quot;, &quot;-ansi&quot;, &quot;-pedantic&quot;],
++                      CPPPATH=[&quot;..&quot;, &quot;.&quot;],
++                      LIBS=[&quot;guile&quot;])
++    
++    env.ParseConfig(&quot;pkg-config --cflags --libs &quot; +
++                    &quot;clanCore-0.8 &quot; +
++                    &quot;clanApp-0.8 &quot; +
++                    &quot;clanDisplay-0.8 &quot; +
++                    &quot;clanGL-0.8 &quot; +
++                    &quot;clanSound-0.8 &quot; +
++                    &quot;clanMikMod-0.8 &quot; +
++                    &quot;clanVorbis-0.8&quot;)
+ 
+-env.ParseConfig(&quot;pkg-config --cflags --libs &quot; +
+-                &quot;clanCore-0.8 &quot; +
+-                &quot;clanApp-0.8 &quot; +
+-                &quot;clanDisplay-0.8 &quot; +
+-                &quot;clanGL-0.8 &quot; +
+-                &quot;clanSound-0.8 &quot; +
+-                &quot;clanMikMod-0.8 &quot; +
+-                &quot;clanVorbis-0.8&quot;)
+-
+ env.Command(&quot;scripting/feuerkraft_wrap.cpp&quot;, &quot;scripting/feuerkraft.i&quot;,
+             &quot;swig -guile -c++  -o $TARGET $SOURCE&quot;)
+ 
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000054.html">[Feuerkraft-commit] r393 - trunk/feuerkraft/src
+</A></li>
+	<LI>Next message: <A HREF="000056.html">[Feuerkraft-commit] r395 - trunk/feuerkraft/src
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#55">[ date ]</a>
+              <a href="thread.html#55">[ thread ]</a>
+              <a href="subject.html#55">[ subject ]</a>
+              <a href="author.html#55">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/feuerkraft-commit">More information about the Feuerkraft-commit
+mailing list</a><br>
+</body></html>

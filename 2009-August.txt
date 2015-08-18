@@ -1,0 +1,151 @@
+From grumbel at mail.berlios.de  Sat Aug  1 19:42:18 2009
+From: grumbel at mail.berlios.de (grumbel at BerliOS)
+Date: Sat, 1 Aug 2009 19:42:18 +0200
+Subject: [Feuerkraft-commit] r389 - trunk/feuerkraft/src
+Message-ID: <200908011742.n71HgIaN003007@sheep.berlios.de>
+
+Author: grumbel
+Date: 2009-08-01 19:42:18 +0200 (Sat, 01 Aug 2009)
+New Revision: 389
+
+Modified:
+   trunk/feuerkraft/src/radar.cpp
+   trunk/feuerkraft/src/radar.hpp
+   trunk/feuerkraft/src/system.hpp
+Log:
+Upgraded to GPLv3+
+
+Modified: trunk/feuerkraft/src/radar.cpp
+===================================================================
+--- trunk/feuerkraft/src/radar.cpp	2009-08-01 17:38:16 UTC (rev 388)
++++ trunk/feuerkraft/src/radar.cpp	2009-08-01 17:42:18 UTC (rev 389)
+@@ -3,19 +3,18 @@
+ //  Feuerkraft - A Tank Battle Game
+ //  Copyright(C) 2000 Ingo Ruhnke <grumbel at gmx.de>
+ //
+-//  This program is free software; you can redistribute it and/or
+-//  modify it under the terms of the GNU General Public License
+-//  as published by the Free Software Foundation; either version 2
+-//  of the License, or(at your option) any later version.
+-//
++//  This program is free software: you can redistribute it and/or modify
++//  it under the terms of the GNU General Public License as published by
++//  the Free Software Foundation, either version 3 of the License, or
++//  (at your option) any later version.
++//  
+ //  This program is distributed in the hope that it will be useful,
+ //  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ //  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ //  GNU General Public License for more details.
+-//
++//  
+ //  You should have received a copy of the GNU General Public License
+-//  along with this program; if not, write to the Free Software
+-//  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
++//  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ 
+ #include <ClanLib/Display/display.h>
+ #include "buildings/building_map.hpp"
+
+Modified: trunk/feuerkraft/src/radar.hpp
+===================================================================
+--- trunk/feuerkraft/src/radar.hpp	2009-08-01 17:38:16 UTC (rev 388)
++++ trunk/feuerkraft/src/radar.hpp	2009-08-01 17:42:18 UTC (rev 389)
+@@ -3,19 +3,18 @@
+ //  Feuerkraft - A Tank Battle Game
+ //  Copyright(C) 2000 Ingo Ruhnke <grumbel at gmx.de>
+ //
+-//  This program is free software; you can redistribute it and/or
+-//  modify it under the terms of the GNU General Public License
+-//  as published by the Free Software Foundation; either version 2
+-//  of the License, or(at your option) any later version.
+-//
++//  This program is free software: you can redistribute it and/or modify
++//  it under the terms of the GNU General Public License as published by
++//  the Free Software Foundation, either version 3 of the License, or
++//  (at your option) any later version.
++//  
+ //  This program is distributed in the hope that it will be useful,
+ //  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ //  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ //  GNU General Public License for more details.
+-// 
++//  
+ //  You should have received a copy of the GNU General Public License
+-//  along with this program; if not, write to the Free Software
+-//  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
++//  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ 
+ #ifndef RADAR_HH
+ #define RADAR_HH
+
+Modified: trunk/feuerkraft/src/system.hpp
+===================================================================
+--- trunk/feuerkraft/src/system.hpp	2009-08-01 17:38:16 UTC (rev 388)
++++ trunk/feuerkraft/src/system.hpp	2009-08-01 17:42:18 UTC (rev 389)
+@@ -3,20 +3,18 @@
+ //  Feuerkraft - A Tank Battle Game
+ //  Copyright (C) 1999 Ingo Ruhnke <grumbel at gmx.de>
+ //
+-//  This program is free software; you can redistribute it and/or
+-//  modify it under the terms of the GNU General Public License
+-//  as published by the Free Software Foundation; either version 2
+-//  of the License, or (at your option) any later version.
+-//
++//  This program is free software: you can redistribute it and/or modify
++//  it under the terms of the GNU General Public License as published by
++//  the Free Software Foundation, either version 3 of the License, or
++//  (at your option) any later version.
++//  
+ //  This program is distributed in the hope that it will be useful,
+ //  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ //  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ //  GNU General Public License for more details.
+-// 
++//  
+ //  You should have received a copy of the GNU General Public License
+-//  along with this program; if not, write to the Free Software
+-//  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
+-//  02111-1307, USA. 
++//  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ 
+ #ifndef SYSTEM_HH
+ #define SYSTEM_HH
+
+
+
+From grumbel at mail.berlios.de  Sat Aug  1 19:45:20 2009
+From: grumbel at mail.berlios.de (grumbel at BerliOS)
+Date: Sat, 1 Aug 2009 19:45:20 +0200
+Subject: [Feuerkraft-commit] r390 - trunk/feuerkraft/src
+Message-ID: <200908011745.n71HjKg3003806@sheep.berlios.de>
+
+Author: grumbel
+Date: 2009-08-01 19:45:19 +0200 (Sat, 01 Aug 2009)
+New Revision: 390
+
+Added:
+   trunk/feuerkraft/src/config.h
+Log:
+Added missing config.h
+
+Added: trunk/feuerkraft/src/config.h
+===================================================================
+--- trunk/feuerkraft/src/config.h	2009-08-01 17:42:18 UTC (rev 389)
++++ trunk/feuerkraft/src/config.h	2009-08-01 17:45:19 UTC (rev 390)
+@@ -0,0 +1,4 @@
++#define PACKAGE_STRING "Feuerkraft 0.1.0"
++#define HAVE_LIBCLANVORBIS 1
++#define HAVE_LIBCLANMIKMOD 1
++
+
+
+Property changes on: trunk/feuerkraft/src/config.h
+___________________________________________________________________
+Name: svn:keywords
+   + Id
+Name: svn:eol-style
+   + native
+
+
+

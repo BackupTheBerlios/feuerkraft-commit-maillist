@@ -1,0 +1,467 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Feuerkraft-commit] r398 - in trunk/feuerkraft: . src
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/feuerkraft-commit/2010-May/index.html" >
+   <LINK REL="made" HREF="mailto:feuerkraft-commit%40lists.berlios.de?Subject=Re%3A%20%5BFeuerkraft-commit%5D%20r398%20-%20in%20trunk/feuerkraft%3A%20.%20src&In-Reply-To=%3C201005132258.o4DMwIlx019875%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000058.html">
+   <LINK REL="Next"  HREF="000060.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Feuerkraft-commit] r398 - in trunk/feuerkraft: . src</H1>
+    <B>grumbel at BerliOS</B> 
+    <A HREF="mailto:feuerkraft-commit%40lists.berlios.de?Subject=Re%3A%20%5BFeuerkraft-commit%5D%20r398%20-%20in%20trunk/feuerkraft%3A%20.%20src&In-Reply-To=%3C201005132258.o4DMwIlx019875%40sheep.berlios.de%3E"
+       TITLE="[Feuerkraft-commit] r398 - in trunk/feuerkraft: . src">grumbel at mail.berlios.de
+       </A><BR>
+    <I>Fri May 14 00:58:18 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000058.html">[Feuerkraft-commit] r397 - trunk/feuerkraft
+</A></li>
+        <LI>Next message: <A HREF="000060.html">[Feuerkraft-commit] r399 - trunk/feuerkraft/src
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#59">[ date ]</a>
+              <a href="thread.html#59">[ thread ]</a>
+              <a href="subject.html#59">[ subject ]</a>
+              <a href="author.html#59">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: grumbel
+Date: 2010-05-14 00:58:17 +0200 (Fri, 14 May 2010)
+New Revision: 398
+
+Removed:
+   trunk/feuerkraft/src/SConscript
+Modified:
+   trunk/feuerkraft/SConstruct
+Log:
+Deleted src/SConscript, moved content to main SConstruct file
+
+Modified: trunk/feuerkraft/SConstruct
+===================================================================
+--- trunk/feuerkraft/SConstruct	2010-05-12 20:42:12 UTC (rev 397)
++++ trunk/feuerkraft/SConstruct	2010-05-13 22:58:17 UTC (rev 398)
+@@ -1,4 +1,182 @@
+-# SConscript(&quot;external/clanlib/SConstruct&quot;)
+-SConscript(&quot;src/SConscript&quot;)
++# -*- python -*-
+ 
++env = Environment(CXXFLAGS=[&quot;-g&quot;, &quot;-O2&quot;, &quot;-Wall&quot;, &quot;-ansi&quot;, &quot;-pedantic&quot;],
++                  CPPPATH=[&quot;-Isrc/&quot;],
++                  LIBS=[&quot;guile&quot;])
++    
++env.ParseConfig(&quot;pkg-config --cflags --libs &quot; +
++                &quot;clanCore-1.0 &quot; +
++                &quot;clanApp-1.0 &quot; +
++                &quot;clanDisplay-1.0 &quot; +
++                &quot;clanGL-1.0 &quot; +
++                &quot;clanSound-1.0 &quot; +
++                &quot;clanMikMod-1.0 &quot; +
++                &quot;clanVorbis-1.0 | sed 's/-I/-isystem/'&quot;)
++
++env.Command(&quot;src/scripting/feuerkraft_wrap.cpp&quot;, &quot;src/scripting/feuerkraft.i&quot;,
++            &quot;swig -guile -c++  -o $TARGET $SOURCE&quot;)
++
++env.Program(&quot;feuerkraft&quot;, [
++    &quot;src/editor/editor.cpp&quot;,
++
++    &quot;src/buildings/ammotent.cpp&quot;, 
++    &quot;src/buildings/building.cpp&quot;, 
++    &quot;src/buildings/building_manager.cpp&quot;, 
++    &quot;src/buildings/building_map.cpp&quot;, 
++    &quot;src/buildings/building_map_data.cpp&quot;, 
++    &quot;src/buildings/building_type_manager.cpp&quot;, 
++    &quot;src/buildings/custom_building.cpp&quot;, 
++    &quot;src/buildings/fuelstation.cpp&quot;, 
++    &quot;src/buildings/headquarter.cpp&quot;, 
++    &quot;src/buildings/tower.cpp&quot;, 
++    &quot;src/buildings/tower_ai.cpp&quot;, 
++    &quot;src/buildings/wall.cpp&quot;, 
++    &quot;src/buildings/wall_door.cpp&quot;, 
++    
++    &quot;src/vehicles/tank.cpp&quot;,
++    &quot;src/vehicles/helicopter.cpp&quot;,
++    &quot;src/vehicles/jeep.cpp&quot;,
++    &quot;src/vehicles/turret.cpp&quot;,
++    &quot;src/vehicles/rotor.cpp&quot;,
++    &quot;src/vehicles/vehicle.cpp&quot;,
++    &quot;src/generic/random.cpp&quot;,
++    
++    
++    &quot;src/input/axis_button.cpp&quot;, 
++    &quot;src/input/axis_factory.cpp&quot;, 
++    &quot;src/input/button_axis.cpp&quot;, 
++    &quot;src/input/button_factory.cpp&quot;, 
++    &quot;src/input/controller.cpp&quot;, 
++    &quot;src/input/input_axis_input_device.cpp&quot;, 
++    &quot;src/input/input_button_input_device.cpp&quot;, 
++    &quot;src/input/input_manager.cpp&quot;, 
++    &quot;src/input/input_manager_custom.cpp&quot;, 
++    &quot;src/input/input_manager_impl.cpp&quot;, 
++    &quot;src/input/input_manager_player.cpp&quot;, 
++    &quot;src/input/input_recorder.cpp&quot;, 
++    &quot;src/input/multi_button.cpp&quot;,
++    &quot;src/particles/fire_particle.cpp&quot;,
++    &quot;src/particles/fire_emitter.cpp&quot;,
++    &quot;src/particles/rocket_smoke_particle.cpp&quot;,
++    &quot;src/particles/smoke_emitter.cpp&quot;,
++
++    &quot;src/scripting/ai_commands.cpp&quot;,
++    &quot;src/scripting/ai_vehicle_commands.cpp&quot;,
++    &quot;src/scripting/building_commands.cpp&quot;,
++    &quot;src/scripting/clanlib_commands.cpp&quot;,
++    &quot;src/scripting/comm_commands.cpp&quot;,
++    &quot;src/scripting/debug_commands.cpp&quot;,
++    &quot;src/scripting/display_commands.cpp&quot;,
++    &quot;src/scripting/effect_commands.cpp&quot;,
++    &quot;src/scripting/feuerkraft_wrap.cpp&quot;,
++    &quot;src/scripting/game_commands.cpp&quot;,
++    &quot;src/scripting/gameobj_commands.cpp&quot;,
++    &quot;src/scripting/input_commands.cpp&quot;,
++    &quot;src/scripting/menu_commands.cpp&quot;,
++    &quot;src/scripting/object_commands.cpp&quot;,
++    &quot;src/scripting/player_commands.cpp&quot;,
++    &quot;src/scripting/script_helper.cpp&quot;,
++    &quot;src/scripting/sequence_commands.cpp&quot;,
++    &quot;src/scripting/sound_commands.cpp&quot;,
++    &quot;src/scripting/trigger_commands.cpp&quot;,
++    &quot;src/scripting/vehicle_commands.cpp&quot;,
++    
++    &quot;src/sound/sound.cpp&quot;,
++    &quot;src/sound/sound_dummy.cpp&quot;,
++    &quot;src/sound/sound_real.cpp&quot;,
++    &quot;src/sound/sound_res_mgr.cpp&quot;,
++
++    &quot;src/groundmap/grid_map.cpp&quot;, 
++    &quot;src/groundmap/grid_map_data.cpp&quot;, 
++    &quot;src/groundmap/grid_tile.cpp&quot;, 
++    &quot;src/groundmap/grid_tile_data.cpp&quot;, 
++    &quot;src/groundmap/grid_tile_generator.cpp&quot;, 
++    &quot;src/groundmap/ground_map_data.cpp&quot;, 
++    &quot;src/groundmap/ground_map_data_factory.cpp&quot;, 
++    &quot;src/groundmap/ground_type.cpp&quot;, 
++    &quot;src/groundmap/multi_ground_map.cpp&quot;, 
++    &quot;src/groundmap/multi_ground_map_data.cpp&quot;, 
++    &quot;src/groundmap/sprite_tile.cpp&quot;, 
++    &quot;src/groundmap/sprite_tile_data.cpp&quot;, 
++    &quot;src/groundmap/tile_data_factory.cpp&quot;, 
++    &quot;src/groundmap/tile_map.cpp&quot;, 
++    &quot;src/groundmap/tile_map_data.cpp&quot;, 
++    
++    &quot;src/ai_manager.cpp&quot;, 
++    &quot;src/ai_vehicle.cpp&quot;, 
++    &quot;src/alist.cpp&quot;, 
++    &quot;src/ambulance.cpp&quot;, 
++    &quot;src/background.cpp&quot;, 
++    &quot;src/collision_manager.cpp&quot;, 
++    &quot;src/color.cpp&quot;, 
++    &quot;src/command_line_arguments.cpp&quot;, 
++    &quot;src/communication_dialog.cpp&quot;, 
++    &quot;src/controller_def.cpp&quot;, 
++    &quot;src/display/drawing_context.cpp&quot;, 
++    &quot;src/display/scene_context.cpp&quot;, 
++    &quot;src/display_manager.cpp&quot;, 
++    &quot;src/energie.cpp&quot;, 
++    &quot;src/explosion.cpp&quot;, 
++    &quot;src/feuerkraft.cpp&quot;, 
++    &quot;src/fonts.cpp&quot;, 
++    &quot;src/game_delta.cpp&quot;, 
++    &quot;src/game_mission.cpp&quot;, 
++    &quot;src/game_obj.cpp&quot;, 
++    &quot;src/game_obj_data_factory.cpp&quot;, 
++    &quot;src/game_obj_factory.cpp&quot;, 
++    &quot;src/game_obj_manager.cpp&quot;, 
++    &quot;src/game_session.cpp&quot;, 
++    &quot;src/game_session_manager.cpp&quot;, 
++    &quot;src/game_world.cpp&quot;, 
++    &quot;src/game_world_builder.cpp&quot;, 
++    &quot;src/game_world_data.cpp&quot;, 
++    &quot;src/globals.cpp&quot;, 
++    &quot;src/goal_manager.cpp&quot;, 
++    &quot;src/guile.cpp&quot;, 
++    &quot;src/help.cpp&quot;, 
++    &quot;src/ipc.cpp&quot;, 
++    &quot;src/keyboard_manager.cpp&quot;, 
++    &quot;src/keys.cpp&quot;, 
++    &quot;src/level_map.cpp&quot;, 
++    &quot;src/line_segments.cpp&quot;, 
++    &quot;src/marker.cpp&quot;, 
++    &quot;src/math.cpp&quot;, 
++    &quot;src/menu.cpp&quot;, 
++    &quot;src/menu_handle_mgr.cpp&quot;, 
++    &quot;src/menu_item.cpp&quot;, 
++    &quot;src/message_buffer.cpp&quot;, 
++    &quot;src/mine.cpp&quot;, 
++    &quot;src/output_world_builder.cpp&quot;, 
++    &quot;src/path_manager.cpp&quot;, 
++    &quot;src/player.cpp&quot;, 
++    &quot;src/player_view.cpp&quot;, 
++    &quot;src/projectile.cpp&quot;, 
++    &quot;src/property.cpp&quot;, 
++    &quot;src/property_set.cpp&quot;, 
++    &quot;src/radar.cpp&quot;, 
++    &quot;src/resource_manager.cpp&quot;, 
++    &quot;src/robot_tank.cpp&quot;, 
++    &quot;src/rocket.cpp&quot;, 
++    &quot;src/satchel_charge.cpp&quot;, 
++    &quot;src/scm_functor.cpp&quot;, 
++    &quot;src/scm_sequence_hook.cpp&quot;, 
++    &quot;src/screen.cpp&quot;, 
++    &quot;src/screenshot.cpp&quot;, 
++    &quot;src/sequence_manager.cpp&quot;, 
++    &quot;src/sexpr_world_reader.cpp&quot;, 
++    &quot;src/shockwave.cpp&quot;, 
++    &quot;src/soldier.cpp&quot;, 
++    &quot;src/soldier_ai.cpp&quot;, 
++    &quot;src/start_screen.cpp&quot;, 
++    &quot;src/system.cpp&quot;, 
++    &quot;src/tree.cpp&quot;, 
++    &quot;src/trigger_manager.cpp&quot;, 
++    &quot;src/unit.cpp&quot;, 
++    &quot;src/vector2d.cpp&quot;, 
++    &quot;src/vehicle_ai.cpp&quot;, 
++    &quot;src/vehicle_status.cpp&quot;, 
++    &quot;src/vehicle_view.cpp&quot;, 
++    &quot;src/view.cpp&quot;, 
++    ])
++
+ # EOF #
+
+Deleted: trunk/feuerkraft/src/SConscript
+===================================================================
+--- trunk/feuerkraft/src/SConscript	2010-05-12 20:42:12 UTC (rev 397)
++++ trunk/feuerkraft/src/SConscript	2010-05-13 22:58:17 UTC (rev 398)
+@@ -1,199 +0,0 @@
+-import os
+-
+-if True:
+-    env = Environment(CXXFLAGS=[&quot;-g&quot;, &quot;-O2&quot;, &quot;-Wall&quot;, &quot;-ansi&quot;, &quot;-pedantic&quot;],
+-                      CPPPATH=['../external/clanlib/', '..', '.'],
+-                      LIBPATH=['/usr/X11R6/lib/',
+-                               '../external/clanlib/'],
+-                      LIBS=['clanSound',      
+-                            'clanGL',
+-                            'clanApp',
+-                            'clanVorbis',
+-                            'clanMikMod',
+-                            'clanDisplay',
+-                            'clanSignals', 
+-                            'clanCore',
+-                            'X11', 'Xmu', 'GL', 'GLU', 'png', 'jpeg', 'Xxf86vm', 'Xi',
+-                            'guile'])
+-else:
+-    env = Environment(ENV = os.environ,
+-                      CXXFLAGS=[&quot;-g&quot;, &quot;-O2&quot;, &quot;-Wall&quot;, &quot;-ansi&quot;, &quot;-pedantic&quot;],
+-                      CPPPATH=[&quot;..&quot;, &quot;.&quot;],
+-                      LIBS=[&quot;guile&quot;])
+-    
+-    env.ParseConfig(&quot;pkg-config --cflags --libs &quot; +
+-                    &quot;clanCore-0.8 &quot; +
+-                    &quot;clanApp-0.8 &quot; +
+-                    &quot;clanDisplay-0.8 &quot; +
+-                    &quot;clanGL-0.8 &quot; +
+-                    &quot;clanSound-0.8 &quot; +
+-                    &quot;clanMikMod-0.8 &quot; +
+-                    &quot;clanVorbis-0.8&quot;)
+-
+-env.Command(&quot;scripting/feuerkraft_wrap.cpp&quot;, &quot;scripting/feuerkraft.i&quot;,
+-            &quot;swig -guile -c++  -o $TARGET $SOURCE&quot;)
+-
+-env.Program(&quot;../feuerkraft&quot;, [
+-    &quot;editor/editor.cpp&quot;,
+-
+-    &quot;buildings/ammotent.cpp&quot;, 
+-    &quot;buildings/building.cpp&quot;, 
+-    &quot;buildings/building_manager.cpp&quot;, 
+-    &quot;buildings/building_map.cpp&quot;, 
+-    &quot;buildings/building_map_data.cpp&quot;, 
+-    &quot;buildings/building_type_manager.cpp&quot;, 
+-    &quot;buildings/custom_building.cpp&quot;, 
+-    &quot;buildings/fuelstation.cpp&quot;, 
+-    &quot;buildings/headquarter.cpp&quot;, 
+-    &quot;buildings/tower.cpp&quot;, 
+-    &quot;buildings/tower_ai.cpp&quot;, 
+-    &quot;buildings/wall.cpp&quot;, 
+-    &quot;buildings/wall_door.cpp&quot;, 
+-    
+-    &quot;vehicles/tank.cpp&quot;,
+-    &quot;vehicles/helicopter.cpp&quot;,
+-    &quot;vehicles/jeep.cpp&quot;,
+-    &quot;vehicles/turret.cpp&quot;,
+-    &quot;vehicles/rotor.cpp&quot;,
+-    &quot;vehicles/vehicle.cpp&quot;,
+-    &quot;generic/random.cpp&quot;,
+-    
+-    
+-    &quot;input/axis_button.cpp&quot;, 
+-    &quot;input/axis_factory.cpp&quot;, 
+-    &quot;input/button_axis.cpp&quot;, 
+-    &quot;input/button_factory.cpp&quot;, 
+-    &quot;input/controller.cpp&quot;, 
+-    &quot;input/input_axis_input_device.cpp&quot;, 
+-    &quot;input/input_button_input_device.cpp&quot;, 
+-    &quot;input/input_manager.cpp&quot;, 
+-    &quot;input/input_manager_custom.cpp&quot;, 
+-    &quot;input/input_manager_impl.cpp&quot;, 
+-    &quot;input/input_manager_player.cpp&quot;, 
+-    &quot;input/input_recorder.cpp&quot;, 
+-    &quot;input/multi_button.cpp&quot;,
+-    &quot;particles/fire_particle.cpp&quot;,
+-    &quot;particles/fire_emitter.cpp&quot;,
+-    &quot;particles/rocket_smoke_particle.cpp&quot;,
+-    &quot;particles/smoke_emitter.cpp&quot;,
+-
+-    &quot;scripting/ai_commands.cpp&quot;,
+-    &quot;scripting/ai_vehicle_commands.cpp&quot;,
+-    &quot;scripting/building_commands.cpp&quot;,
+-    &quot;scripting/clanlib_commands.cpp&quot;,
+-    &quot;scripting/comm_commands.cpp&quot;,
+-    &quot;scripting/debug_commands.cpp&quot;,
+-    &quot;scripting/display_commands.cpp&quot;,
+-    &quot;scripting/effect_commands.cpp&quot;,
+-    &quot;scripting/feuerkraft_wrap.cpp&quot;,
+-    &quot;scripting/game_commands.cpp&quot;,
+-    &quot;scripting/gameobj_commands.cpp&quot;,
+-    &quot;scripting/input_commands.cpp&quot;,
+-    &quot;scripting/menu_commands.cpp&quot;,
+-    &quot;scripting/object_commands.cpp&quot;,
+-    &quot;scripting/player_commands.cpp&quot;,
+-    &quot;scripting/script_helper.cpp&quot;,
+-    &quot;scripting/sequence_commands.cpp&quot;,
+-    &quot;scripting/sound_commands.cpp&quot;,
+-    &quot;scripting/trigger_commands.cpp&quot;,
+-    &quot;scripting/vehicle_commands.cpp&quot;,
+-    
+-    &quot;sound/sound.cpp&quot;,
+-    &quot;sound/sound_dummy.cpp&quot;,
+-    &quot;sound/sound_real.cpp&quot;,
+-    &quot;sound/sound_res_mgr.cpp&quot;,
+-
+-    &quot;groundmap/grid_map.cpp&quot;, 
+-    &quot;groundmap/grid_map_data.cpp&quot;, 
+-    &quot;groundmap/grid_tile.cpp&quot;, 
+-    &quot;groundmap/grid_tile_data.cpp&quot;, 
+-    &quot;groundmap/grid_tile_generator.cpp&quot;, 
+-    &quot;groundmap/ground_map_data.cpp&quot;, 
+-    &quot;groundmap/ground_map_data_factory.cpp&quot;, 
+-    &quot;groundmap/ground_type.cpp&quot;, 
+-    &quot;groundmap/multi_ground_map.cpp&quot;, 
+-    &quot;groundmap/multi_ground_map_data.cpp&quot;, 
+-    &quot;groundmap/sprite_tile.cpp&quot;, 
+-    &quot;groundmap/sprite_tile_data.cpp&quot;, 
+-    &quot;groundmap/tile_data_factory.cpp&quot;, 
+-    &quot;groundmap/tile_map.cpp&quot;, 
+-    &quot;groundmap/tile_map_data.cpp&quot;, 
+-    
+-    &quot;ai_manager.cpp&quot;, 
+-    &quot;ai_vehicle.cpp&quot;, 
+-    &quot;alist.cpp&quot;, 
+-    &quot;ambulance.cpp&quot;, 
+-    &quot;background.cpp&quot;, 
+-    &quot;collision_manager.cpp&quot;, 
+-    &quot;color.cpp&quot;, 
+-    &quot;command_line_arguments.cpp&quot;, 
+-    &quot;communication_dialog.cpp&quot;, 
+-    &quot;controller_def.cpp&quot;, 
+-    &quot;display/drawing_context.cpp&quot;, 
+-    &quot;display/scene_context.cpp&quot;, 
+-    &quot;display_manager.cpp&quot;, 
+-    &quot;energie.cpp&quot;, 
+-    &quot;explosion.cpp&quot;, 
+-    &quot;feuerkraft.cpp&quot;, 
+-    &quot;fonts.cpp&quot;, 
+-    &quot;game_delta.cpp&quot;, 
+-    &quot;game_mission.cpp&quot;, 
+-    &quot;game_obj.cpp&quot;, 
+-    &quot;game_obj_data_factory.cpp&quot;, 
+-    &quot;game_obj_factory.cpp&quot;, 
+-    &quot;game_obj_manager.cpp&quot;, 
+-    &quot;game_session.cpp&quot;, 
+-    &quot;game_session_manager.cpp&quot;, 
+-    &quot;game_world.cpp&quot;, 
+-    &quot;game_world_builder.cpp&quot;, 
+-    &quot;game_world_data.cpp&quot;, 
+-    &quot;globals.cpp&quot;, 
+-    &quot;goal_manager.cpp&quot;, 
+-    &quot;guile.cpp&quot;, 
+-    &quot;help.cpp&quot;, 
+-    &quot;ipc.cpp&quot;, 
+-    &quot;keyboard_manager.cpp&quot;, 
+-    &quot;keys.cpp&quot;, 
+-    &quot;level_map.cpp&quot;, 
+-    &quot;line_segments.cpp&quot;, 
+-    &quot;marker.cpp&quot;, 
+-    &quot;math.cpp&quot;, 
+-    &quot;menu.cpp&quot;, 
+-    &quot;menu_handle_mgr.cpp&quot;, 
+-    &quot;menu_item.cpp&quot;, 
+-    &quot;message_buffer.cpp&quot;, 
+-    &quot;mine.cpp&quot;, 
+-    &quot;output_world_builder.cpp&quot;, 
+-    &quot;path_manager.cpp&quot;, 
+-    &quot;player.cpp&quot;, 
+-    &quot;player_view.cpp&quot;, 
+-    &quot;projectile.cpp&quot;, 
+-    &quot;property.cpp&quot;, 
+-    &quot;property_set.cpp&quot;, 
+-    &quot;radar.cpp&quot;, 
+-    &quot;resource_manager.cpp&quot;, 
+-    &quot;robot_tank.cpp&quot;, 
+-    &quot;rocket.cpp&quot;, 
+-    &quot;satchel_charge.cpp&quot;, 
+-    &quot;scm_functor.cpp&quot;, 
+-    &quot;scm_sequence_hook.cpp&quot;, 
+-    &quot;screen.cpp&quot;, 
+-    &quot;screenshot.cpp&quot;, 
+-    &quot;sequence_manager.cpp&quot;, 
+-    &quot;sexpr_world_reader.cpp&quot;, 
+-    &quot;shockwave.cpp&quot;, 
+-    &quot;soldier.cpp&quot;, 
+-    &quot;soldier_ai.cpp&quot;, 
+-    &quot;start_screen.cpp&quot;, 
+-    &quot;system.cpp&quot;, 
+-    &quot;tree.cpp&quot;, 
+-    &quot;trigger_manager.cpp&quot;, 
+-    &quot;unit.cpp&quot;, 
+-    &quot;vector2d.cpp&quot;, 
+-    &quot;vehicle_ai.cpp&quot;, 
+-    &quot;vehicle_status.cpp&quot;, 
+-    &quot;vehicle_view.cpp&quot;, 
+-    &quot;view.cpp&quot;, 
+-    ])
+-
+-# EOF #
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000058.html">[Feuerkraft-commit] r397 - trunk/feuerkraft
+</A></li>
+	<LI>Next message: <A HREF="000060.html">[Feuerkraft-commit] r399 - trunk/feuerkraft/src
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#59">[ date ]</a>
+              <a href="thread.html#59">[ thread ]</a>
+              <a href="subject.html#59">[ subject ]</a>
+              <a href="author.html#59">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/feuerkraft-commit">More information about the Feuerkraft-commit
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,1850 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Feuerkraft-commit] r350 - in trunk: . htdocs htdocs/images
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/feuerkraft-commit/2009-July/index.html" >
+   <LINK REL="made" HREF="mailto:feuerkraft-commit%40lists.berlios.de?Subject=Re%3A%20%5BFeuerkraft-commit%5D%20r350%20-%20in%20trunk%3A%20.%20htdocs%20htdocs/images&In-Reply-To=%3C200907241507.n6OF7YmC000300%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000012.html">
+   <LINK REL="Next"  HREF="000015.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Feuerkraft-commit] r350 - in trunk: . htdocs htdocs/images</H1>
+    <B>grumbel at BerliOS</B> 
+    <A HREF="mailto:feuerkraft-commit%40lists.berlios.de?Subject=Re%3A%20%5BFeuerkraft-commit%5D%20r350%20-%20in%20trunk%3A%20.%20htdocs%20htdocs/images&In-Reply-To=%3C200907241507.n6OF7YmC000300%40sheep.berlios.de%3E"
+       TITLE="[Feuerkraft-commit] r350 - in trunk: . htdocs htdocs/images">grumbel at mail.berlios.de
+       </A><BR>
+    <I>Fri Jul 24 17:07:34 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000012.html">[Feuerkraft-commit] r349 - in trunk/media: . images
+</A></li>
+        <LI>Next message: <A HREF="000015.html">[Feuerkraft-commit] r351 - in trunk/media/images: . tilemasks
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#14">[ date ]</a>
+              <a href="thread.html#14">[ thread ]</a>
+              <a href="subject.html#14">[ subject ]</a>
+              <a href="author.html#14">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: grumbel
+Date: 2009-07-24 17:03:21 +0200 (Fri, 24 Jul 2009)
+New Revision: 350
+
+Added:
+   trunk/htdocs/
+   trunk/htdocs/Makefile
+   trunk/htdocs/artworks.xml
+   trunk/htdocs/contact.xml
+   trunk/htdocs/default.css
+   trunk/htdocs/default.xsl
+   trunk/htdocs/development.xml
+   trunk/htdocs/download.xml
+   trunk/htdocs/images/
+   trunk/htdocs/images/background.jpg
+   trunk/htdocs/images/bomber.jpg
+   trunk/htdocs/images/conceptart1.jpg
+   trunk/htdocs/images/conceptart1_small.jpg
+   trunk/htdocs/images/conceptart2.jpg
+   trunk/htdocs/images/conceptart2_small.jpg
+   trunk/htdocs/images/feuerkraft_scan0001.jpg
+   trunk/htdocs/images/feuerkraft_scan0002.jpg
+   trunk/htdocs/images/feuerkraft_scan0003.jpg
+   trunk/htdocs/images/feuerkraft_scan0004.jpg
+   trunk/htdocs/images/feuerkraft_scan0005.jpg
+   trunk/htdocs/images/feuerkraft_scan0006.jpg
+   trunk/htdocs/images/feuerkraft_scan0007.jpg
+   trunk/htdocs/images/feuerkraft_scan0008.jpg
+   trunk/htdocs/images/feuerkraft_scan0009.jpg
+   trunk/htdocs/images/feuerkraft_scan0010.jpg
+   trunk/htdocs/images/feuerkraft_scan0011.jpg
+   trunk/htdocs/images/feuerkraft_scan0012.jpg
+   trunk/htdocs/images/feuerkraft_scan0013.jpg
+   trunk/htdocs/images/feuerkraft_scan0014.jpg
+   trunk/htdocs/images/huey.jpg
+   trunk/htdocs/images/logo.jpg
+   trunk/htdocs/images/logo_large_0.1.0.jpg
+   trunk/htdocs/images/preview.jpg
+   trunk/htdocs/images/screenshot-1.jpg
+   trunk/htdocs/images/screenshot-10.jpg
+   trunk/htdocs/images/screenshot-10_small.jpg
+   trunk/htdocs/images/screenshot-11.jpg
+   trunk/htdocs/images/screenshot-11_small.jpg
+   trunk/htdocs/images/screenshot-12.jpg
+   trunk/htdocs/images/screenshot-12_small.jpg
+   trunk/htdocs/images/screenshot-13.jpg
+   trunk/htdocs/images/screenshot-13_small.jpg
+   trunk/htdocs/images/screenshot-14.jpg
+   trunk/htdocs/images/screenshot-15.jpg
+   trunk/htdocs/images/screenshot-16.jpg
+   trunk/htdocs/images/screenshot-1_small.jpg
+   trunk/htdocs/images/screenshot-2.jpg
+   trunk/htdocs/images/screenshot-2_small.jpg
+   trunk/htdocs/images/screenshot-3.jpg
+   trunk/htdocs/images/screenshot-3_small.jpg
+   trunk/htdocs/images/screenshot-4.jpg
+   trunk/htdocs/images/screenshot-4_small.jpg
+   trunk/htdocs/images/screenshot-5.jpg
+   trunk/htdocs/images/screenshot-5_small.jpg
+   trunk/htdocs/images/screenshot-6.jpg
+   trunk/htdocs/images/screenshot-6_small.jpg
+   trunk/htdocs/images/screenshot-7.jpg
+   trunk/htdocs/images/screenshot-7_small.jpg
+   trunk/htdocs/images/screenshot-8.jpg
+   trunk/htdocs/images/screenshot-8_small.jpg
+   trunk/htdocs/images/screenshot-9.jpg
+   trunk/htdocs/images/screenshot-9_small.jpg
+   trunk/htdocs/images/sketch.jpg
+   trunk/htdocs/images/sketch_small.jpg
+   trunk/htdocs/images/trooper.jpg
+   trunk/htdocs/index.xml
+   trunk/htdocs/news.xml
+   trunk/htdocs/screenshots-0.0.xml
+   trunk/htdocs/screenshots-0.1.xml
+   trunk/htdocs/screenshots-0.2.xml
+   trunk/htdocs/screenshots.xml
+   trunk/htdocs/welcome.xml
+Log:
+Moved webpage into svn
+
+Added: trunk/htdocs/Makefile
+===================================================================
+--- trunk/htdocs/Makefile	2009-07-24 14:48:23 UTC (rev 349)
++++ trunk/htdocs/Makefile	2009-07-24 15:03:21 UTC (rev 350)
+@@ -0,0 +1,40 @@
++HTMLOUT = \
++ welcome.html  \
++ news.html  \
++ download.html \
++ screenshots.html \
++ screenshots-0.1.html \
++ screenshots-0.0.html \
++ contact.html \
++ artworks.html \
++ development.html
++
++all : $(HTMLOUT)
++
++clean :
++	rm -vf $(HTMLOUT)
++
++$(patsubst %,%,$(HTMLOUT)): %.html: %.xml default.xsl
++	FILENAME=$&lt;; \
++	LASTCHANGE=`date -I`; \
++	echo $${FILENAME%%.xml}; \
++	xalan \
++          -param filename   &quot;'$${FILENAME%%.xml}'&quot; \
++          -param lastchange &quot;'$${LASTCHANGE}'&quot; \
++          -in $&lt; \
++          -out $@ \
++          -xsl default.xsl
++
++index.html : index.xml
++	cp -v $&lt; $@
++
++# commit: all
++# 	cvs commit -m &quot;automatic webpage update&quot;
++
++# upload: commit
++
++#tidy -asxml -indent -quiet -modify $@
++
++.PHONY: all clean upload
++
++# EOF #
+\ No newline at end of file
+
+Added: trunk/htdocs/artworks.xml
+===================================================================
+--- trunk/htdocs/artworks.xml	2009-07-24 14:48:23 UTC (rev 349)
++++ trunk/htdocs/artworks.xml	2009-07-24 15:03:21 UTC (rev 350)
+@@ -0,0 +1,211 @@
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
++&lt;page title=&quot;Artwork&quot;&gt;
++  &lt;p style=&quot;text-align: center;&quot;&gt;
++    [
++    &lt;a href=&quot;#Vehicles&quot;&gt;Vehicles&lt;/a&gt;
++    | &lt;a href=&quot;#Buildings&quot;&gt;Buildings&lt;/a&gt;
++    | &lt;a href=&quot;#Concept Art&quot;&gt;Concept Art&lt;/a&gt;
++    ]
++  &lt;/p&gt;
++  &lt;section title=&quot;Vehicles&quot;&gt;
++    &lt;p&gt;
++      &lt;table bgcolor=&quot;lightgrey&quot; border=&quot;1&quot;  width=&quot;100%&quot; style=&quot;border-style: solid;&quot;&gt;
++        &lt;tr&gt;
++          &lt;td  align=&quot;center&quot;&gt;
++            &lt;img src=&quot;images/tank.png&quot; alt=&quot;&quot; /&gt;
++          &lt;/td&gt;
++          &lt;td&gt;&lt;h3&gt;Tank Nr.1&lt;/h3&gt; 
++
++            A slow tank, with a low fire frequency, but with an
++            extremely strong gun, can drop mines.
++          &lt;/td&gt;
++        &lt;/tr&gt;
++
++        &lt;tr&gt;
++          &lt;td align=&quot;center&quot;&gt;		
++            &lt;img src=&quot;images/tank2.png&quot; alt=&quot;&quot; /&gt;
++          &lt;/td&gt;
++          &lt;td&gt;
++            &lt;h3&gt;Tank Nr.2&lt;/h3&gt;
++            
++            This tank is faster than Nr.1, has weaker gun, but
++            a faster fire frequency. As Nr.1 it can drop
++            mine.
++          &lt;/td&gt;
++        &lt;/tr&gt;
++
++        &lt;tr&gt;
++          &lt;td align=&quot;center&quot;&gt;
++            &lt;img src=&quot;images/helicopter.png&quot; alt=&quot;&quot; /&gt;
++          &lt;/td&gt;
++          &lt;td&gt;
++            &lt;h3&gt;Helicopter&lt;/h3&gt;
++
++            The helicopter is faster than all ground vehicles,
++            but it lacks a strong plating, so it can be easily
++            shoot down. Weapons are a minigun and rockets.
++          &lt;/td&gt;
++        &lt;/tr&gt;
++
++        &lt;tr&gt;
++          &lt;td align=&quot;center&quot;&gt;
++            &lt;img src=&quot;images/jeep.png&quot; alt=&quot;&quot; /&gt;
++          &lt;/td&gt;
++          &lt;td&gt;
++            &lt;h3&gt;Jeep&lt;/h3&gt;
++            
++            The jeep as basically no plating and only a week
++            machine gun, but it is fast and the only vehicle
++            that can capture the flag.
++          &lt;/td&gt;
++        &lt;/tr&gt;
++
++        &lt;tr&gt;
++          &lt;td align=&quot;center&quot;&gt;
++            &lt;img src=&quot;images/hovercraft.png&quot; alt=&quot;&quot; /&gt;
++          &lt;/td&gt;
++          &lt;td&gt;
++            &lt;h3&gt;Hovercraft&lt;/h3&gt;
++            
++            Can travel over water and land. Weak gun, strong
++            plating. Can't be destroyed by mines.
++          &lt;/td&gt;
++        &lt;/tr&gt;
++
++        &lt;tr&gt;
++          &lt;td align=&quot;center&quot;&gt;
++            &lt;img src=&quot;images/trooper.png&quot; alt=&quot;&quot; /&gt;
++          &lt;/td&gt;
++          &lt;td&gt;
++            &lt;h3&gt;Trooper&lt;/h3&gt;
++
++            Can transport a number of soldiers and release them.
++            Weapons are two maschine guns + the weapons which the
++            soldiers carry.
++          &lt;/td&gt;
++        &lt;/tr&gt;
++
++        &lt;tr&gt;
++          &lt;td align=&quot;center&quot;&gt;
++            &lt;img src=&quot;images/artillery1.png&quot; alt=&quot;&quot; /&gt;
++          &lt;/td&gt;
++          &lt;td&gt;
++            &lt;h3&gt;Artillery 1&lt;/h3&gt;
++            &lt;p&gt;Long Range Weapon Vehicle, can shoot gradates over a long distance.
++            &lt;/p&gt;
++          &lt;/td&gt;
++        &lt;/tr&gt;
++
++        &lt;tr&gt;
++          &lt;td align=&quot;center&quot;&gt;
++            &lt;img src=&quot;images/flak.png&quot; alt=&quot;&quot; /&gt;
++          &lt;/td&gt;
++          &lt;td&gt;
++            &lt;h3&gt;Flak/MG&lt;/h3&gt;
++
++            &lt;p&gt;Extreme high fire frequenze, usefull against soldiers, planes and helicopters&lt;/p&gt;
++
++          &lt;/td&gt;
++        &lt;/tr&gt;
++
++        &lt;tr&gt;
++          &lt;td align=&quot;center&quot;&gt;
++            &lt;img src=&quot;images/artillery2.png&quot; alt=&quot;&quot; /&gt;
++          &lt;/td&gt;
++          &lt;td&gt;
++            &lt;h3&gt;Artillery 2&lt;/h3&gt;
++
++            &lt;p&gt;Same as Artillery 1, but shoots rockets. Longer Range and more powerfull.&lt;/p&gt;
++
++          &lt;/td&gt;
++        &lt;/tr&gt;
++
++        &lt;tr&gt;
++          &lt;td align=&quot;center&quot;&gt;
++            &lt;img src=&quot;images/bomber.jpg&quot; alt=&quot;&quot; /&gt;
++          &lt;/td&gt;
++          &lt;td&gt;
++            &lt;h3&gt;Bomber&lt;/h3&gt;
++
++            Might not be controllable directly by the player.  Can
++            only be destroyed by ground-to-air missles. Weapons:
++            Lots of bombs, be used to destroy a basis.
++          &lt;/td&gt;
++        &lt;/tr&gt;
++
++        &lt;tr&gt;
++          &lt;td align=&quot;center&quot;&gt;
++            &lt;img src=&quot;images/huey.jpg&quot; alt=&quot;&quot; /&gt;
++          &lt;/td&gt;
++          &lt;td&gt;
++            &lt;h3&gt;UH-1 Huey&lt;/h3&gt;
++
++            Rescue helicopter, might be able to capture the
++            flag. Weapon is a maschine gun.
++          &lt;/td&gt;
++        &lt;/tr&gt;
++
++        &lt;tr&gt;
++          &lt;td align=&quot;center&quot;&gt;
++            &lt;img src=&quot;images/ambulance.png&quot; alt=&quot;&quot; /&gt;
++          &lt;/td&gt;
++          &lt;td&gt;
++            &lt;h3&gt;Ambulance&lt;/h3&gt;
++
++            Rescue vehicle, can collect wounded soldiers
++          &lt;/td&gt;
++        &lt;/tr&gt;
++
++        &lt;tr&gt;
++          &lt;td align=&quot;center&quot;&gt;
++            &lt;img src=&quot;images/soldier.png&quot; alt=&quot;&quot; /&gt;
++          &lt;/td&gt;
++          &lt;td&gt;
++            &lt;h3&gt;Soldier&lt;/h3&gt;
++
++            There should be different kinds of soldiers, nothing
++            specific at the moment. Soldiers should be controllable
++            by the computer.
++          &lt;/td&gt;
++        &lt;/tr&gt;
++
++      &lt;/table&gt;
++    &lt;/p&gt;
++  &lt;/section&gt;
++  
++  &lt;section title=&quot;Buildings&quot;&gt;
++    &lt;p&gt;
++      &lt;table bgcolor=&quot;lightgrey&quot; border=&quot;1&quot; width=&quot;100%&quot;&gt;
++        &lt;tr&gt;
++          &lt;td  align=&quot;center&quot;&gt;
++            &lt;img src=&quot;images/buildings/armoredgenerator.png&quot; alt=&quot;&quot; /&gt;
++          &lt;/td&gt;
++          &lt;td&gt;&lt;h3&gt;Armored Generator&lt;/h3&gt; 
++          &lt;/td&gt;
++        &lt;/tr&gt;
++
++        &lt;tr&gt;
++          &lt;td  align=&quot;center&quot;&gt;
++            &lt;img src=&quot;images/buildings/generator.png&quot; alt=&quot;&quot; /&gt;
++          &lt;/td&gt;
++          &lt;td&gt;&lt;h3&gt;Generator&lt;/h3&gt; 
++          &lt;/td&gt;
++        &lt;/tr&gt;
++
++        &lt;tr&gt;
++          &lt;td  align=&quot;center&quot;&gt;
++            &lt;img src=&quot;images/buildings/garage.png&quot; alt=&quot;&quot; /&gt;
++          &lt;/td&gt;
++          &lt;td&gt;&lt;h3&gt;Garage&lt;/h3&gt; 
++          &lt;/td&gt;
++        &lt;/tr&gt;
++      &lt;/table&gt;
++    &lt;/p&gt;
++  &lt;/section&gt;
++
++  &lt;section title=&quot;Concept Art&quot;&gt;
++    &lt;thumbnail-link href=&quot;images/conceptart1.jpg&quot; /&gt;
++    &lt;thumbnail-link href=&quot;images/conceptart2.jpg&quot; /&gt;
++    &lt;thumbnail-link href=&quot;images/sketch.jpg&quot; /&gt;
++  &lt;/section&gt;
++&lt;/page&gt;
+\ No newline at end of file
+
+Added: trunk/htdocs/contact.xml
+===================================================================
+--- trunk/htdocs/contact.xml	2009-07-24 14:48:23 UTC (rev 349)
++++ trunk/htdocs/contact.xml	2009-07-24 15:03:21 UTC (rev 350)
+@@ -0,0 +1,58 @@
++&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;page title=&quot;Contact&quot;&gt;
++  &lt;section title=&quot;Mailing Lists&quot;&gt;
++
++    &lt;dl&gt;
++      &lt;dt&gt;
++        &lt;a HREF=&quot;<A HREF="http://mail.nongnu.org/mailman/listinfo/feuerkraft-devel">http://mail.nongnu.org/mailman/listinfo/feuerkraft-devel</A>&quot;&gt;feuerkraft-devel&lt;/a&gt;
++        &lt;i&gt;Feuerkraft Developers List&lt;/i&gt;&lt;/dt&gt;
++
++      &lt;dd&gt;To see the collection of prior posting to the list, visit
++        the &lt;a HREF=&quot;<A HREF="http://mail.nongnu.org/archive/html/feuerkraft-devel">http://mail.nongnu.org/archive/html/feuerkraft-devel</A>&quot;&gt;feuerkraft-devel archives&lt;/a&gt;.&lt;br /&gt;
++        
++        To post a message to all the list members,
++        send email to &lt;a href=&quot;mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/feuerkraft-commit">feuerkraft-devel at nongnu.org</A>&quot;&gt;<A HREF="https://lists.berlios.de/mailman/listinfo/feuerkraft-commit">feuerkraft-devel at nongnu.org</A>&lt;/a&gt;&lt;br /&gt;
++        
++        (Un)Subscribe by following instructions on the &lt;a
++          HREF=&quot;<A HREF="http://mail.nongnu.org/mailman/listinfo/feuerkraft-devel">http://mail.nongnu.org/mailman/listinfo/feuerkraft-devel</A>&quot;&gt;list
++          information page&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;
++      &lt;/dd&gt;
++
++
++      &lt;dt&gt;
++        &lt;a HREF=&quot;<A HREF="http://mail.nongnu.org/mailman/listinfo/feuerkraft-cvs">http://mail.nongnu.org/mailman/listinfo/feuerkraft-cvs</A>&quot;&gt;feuerkraft-cvs&lt;/a&gt;
++        &lt;i&gt;Feuerkraft CVS Commit List&lt;/i&gt;&lt;/dt&gt;
++
++      &lt;dd&gt;To see the collection of prior posting to the list, visit
++        the &lt;a HREF=&quot;<A HREF="http://mail.nongnu.org/archive/html/feuerkraft-cvs">http://mail.nongnu.org/archive/html/feuerkraft-cvs</A>&quot;&gt;feuerkraft-cvs archives&lt;/a&gt;.&lt;br /&gt;
++        
++        To post a message to all the list members,
++        send email to &lt;a href=&quot;mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/feuerkraft-commit">feuerkraft-cvs at nongnu.org</A>&quot;&gt;<A HREF="https://lists.berlios.de/mailman/listinfo/feuerkraft-commit">feuerkraft-cvs at nongnu.org</A>&lt;/a&gt;&lt;br /&gt;
++        
++        (Un)Subscribe by following instructions on the &lt;a
++          HREF=&quot;<A HREF="http://mail.nongnu.org/mailman/listinfo/feuerkraft-cvs">http://mail.nongnu.org/mailman/listinfo/feuerkraft-cvs</A>&quot;&gt;list
++          information page&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;
++      &lt;/dd&gt;
++
++    &lt;/dl&gt;
++  &lt;/section&gt;
++
++  &lt;section title=&quot;Instant Messaging&quot;&gt;
++    &lt;dl&gt;
++      &lt;dt&gt;Ingo Ruhnke (nick: grumbel) [Maintainer/Programmer/Graphic]&lt;/dt&gt;
++      &lt;dd&gt;Jabber: <A HREF="https://lists.berlios.de/mailman/listinfo/feuerkraft-commit">grumbel at jabber.org</A>&lt;br /&gt;
++        ICQ UIN: 59461927&lt;/dd&gt;
++    &lt;/dl&gt;
++  &lt;/section&gt;
++
++
++  &lt;section title=&quot;IRC&quot;&gt;
++    &lt;p&gt;There is no special channel for Feuerkraft, but you can find me
++    quite often on IRC at #gametome:&lt;/p&gt;
++    &lt;p&gt;
++    Server: &lt;a href=&quot;<A HREF="http://www.freenode.net">http://www.freenode.net</A>&quot;&gt;irc.freenode.net&lt;/a&gt;&lt;br /&gt;
++    Channel: #gametome&lt;br /&gt;
++    Nick: grumbel&lt;br /&gt;
++    &lt;/p&gt;
++  &lt;/section&gt;
++&lt;/page&gt;
+\ No newline at end of file
+
+Added: trunk/htdocs/default.css
+===================================================================
+--- trunk/htdocs/default.css	2009-07-24 14:48:23 UTC (rev 349)
++++ trunk/htdocs/default.css	2009-07-24 15:03:21 UTC (rev 350)
+@@ -0,0 +1,178 @@
++BODY { 
++	margin: 0px;
++	color: black;
++	background: rgb(200, 200, 173);
++	background: url(&quot;images/background.jpg&quot;);
++/*	text-align: justify; */
++}
++
++img
++{
++        border-style: none;
++}
++
++
++DIV.menu {
++	font-size: 0.8em;
++	font-family: sans-serif;
++	text-align: center;
++	background:	#a4a68e;
++	border:	        solid thin;
++	padding:	0.2em;
++	text:           width;
++	margin: 0px 0px 0px 0px;
++}
++
++div.menu a
++{
++	text-decoration: none;
++}
++
++
++h1,h2,h3,h4
++{
++	font-family: Sans-Serif;
++        margin-top: 0px;
++}
++
++a:hover {
++        color: white;
++}
++
++a:visited {
++        color: #00007f;
++}
++
++a {
++        color: #0000e5;
++}
++
++a.menuitem:hover
++{
++        color: black;
++        background-color: #c6c7b8;
++}
++
++a.menuitem:visited
++{
++        color: black;
++}
++
++a.menuitem
++{
++	text-decoration: none;
++	font-size: 18px;
++	font-family: Sans-Serif;
++	text-align: center;
++
++        border-color: black;
++        border-style: solid;
++        border-width: thin;
++        background-color: #797b69;
++/*	background-image: url(images/menubackground.png);*/
++        background-repeat: repeat-y;
++        color: black;        
++        padding: 2px 0px 2px 0px;
++        display: block;
++        margin: 10px 15px 10px 15px;
++}
++
++h1
++{
++        background: #797b69;
++        color: white;
++        border-style: solid;
++        border-color: black;
++	padding-left: 1em;
++        margin-top: 0px;
++        margin-bottom: .5em;
++}
++
++div.menu
++{
++        width: 190px;
++        margin-top: 10px;
++}
++
++
++H1,H2,H3,H4,H5,H6 {
++	font-family: &quot;helvetica&quot;, sans-serif;
++}
++
++DIV.answer { color: darkblue }
++
++DIV.question {
++	color: darkgreen;
++}
++
++DL.news {
++		font-sive:      0.5em;
++}
++
++TD.news {
++	color:		black;
++	background:	lightgrey;
++	font-sive:      0.5em;
++}
++
++TH.news {
++	font-family:	sans-serif;
++	text-align:	center;
++	color:		white;
++	background:	darkgrey;
++	font-sive:      0.5em;
++}
++
++DIV.shell {
++	border:		solid thin;
++	font-size:	1.0em;
++	font-family:	monospace;
++	padding:	0.3em;
++	background:	rgb(220,220,220); 
++}
++
++UL.sitebar {
++	font-family: &quot;helvetica&quot;, sans-serif;
++	font-size:	1.2em;
++}
++
++TT.command {
++	color: green;
++}
++
++TT.key {
++	color: blue;
++}
++
++TT.file {
++	color: red;
++}
++
++SMALL.grey {
++	color:          rgb(150,150,150);
++}
++
++div.mainbody
++{
++        background-color: #aaaa9f;
++        color: black;
++        border-color: black;
++        border-style: solid;
++        padding: 1em;
++}
++
++
++img.screenshot {
++        border-style: solid;
++        border-width: medium;
++}
++
++a img.screenshot {
++        border-color: red;
++}
++
++a:visited img.screenshot {
++        border-color: gray;
++}
++
++/* EOF */
+\ No newline at end of file
+
+Added: trunk/htdocs/default.xsl
+===================================================================
+--- trunk/htdocs/default.xsl	2009-07-24 14:48:23 UTC (rev 349)
++++ trunk/htdocs/default.xsl	2009-07-24 15:03:21 UTC (rev 350)
+@@ -0,0 +1,273 @@
++&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;xsl:stylesheet version=&quot;1.0&quot;
++  xmlns:xsl=&quot;<A HREF="http://www.w3.org/1999/XSL/Transform">http://www.w3.org/1999/XSL/Transform</A>&quot;&gt;
++  
++  &lt;xsl:output 
++    method=&quot;html&quot; 
++    indent=&quot;yes&quot; 
++    doctype-public=&quot;-//W3C//DTD HTML 4.01//EN&quot; 
++    doctype-system=&quot;<A HREF="http://www.w3.org/TR/html4/strict.dtd">http://www.w3.org/TR/html4/strict.dtd</A>&quot;
++    encoding=&quot;ISO-8859-1&quot; /&gt;
++
++  &lt;xsl:param name=&quot;filename&quot;/&gt;
++  &lt;xsl:param name=&quot;lastchange&quot;/&gt;
++  
++  &lt;xsl:template match=&quot;node()|@*&quot;&gt;
++    &lt;xsl:copy&gt;&lt;xsl:apply-templates select=&quot;@* | node()&quot; /&gt;&lt;/xsl:copy&gt;
++  &lt;/xsl:template&gt;
++
++  &lt;xsl:template match=&quot;dlink&quot;&gt;
++    &lt;a href=&quot;{@href}&quot;&gt;&lt;xsl:value-of select=&quot;substring-after(@href,'<A HREF="http://savannah.nongnu.org/download/feuerkraft/">http://savannah.nongnu.org/download/feuerkraft/</A>')&quot;/&gt;&lt;/a&gt;
++  &lt;/xsl:template&gt; 
++
++  &lt;xsl:template match=&quot;dlink-full&quot;&gt;
++    &lt;a href=&quot;{@href}&quot;&gt;&lt;xsl:value-of select=&quot;@href&quot;/&gt;&lt;/a&gt;
++  &lt;/xsl:template&gt; 
++
++  &lt;xsl:template name=&quot;menuitem&quot;&gt;
++    &lt;xsl:param name=&quot;name&quot;/&gt;    
++    &lt;xsl:param name=&quot;lowername&quot;/&gt;
++
++    &lt;xsl:choose&gt;
++      &lt;xsl:when test=&quot;$filename = $lowername&quot;&gt;
++        &lt;div&gt;&lt;a class=&quot;currentmenuitem&quot; href=&quot;{.}.html&quot;&gt;&lt;xsl:value-of select=&quot;.&quot;/&gt;&lt;/a&gt;&lt;/div&gt;
++      &lt;/xsl:when&gt;
++      &lt;xsl:otherwise&gt;
++        &lt;div&gt;&lt;a class=&quot;menuitem&quot; href=&quot;{.}.html&quot;&gt;&lt;xsl:value-of select=&quot;.&quot;/&gt;&lt;/a&gt;&lt;/div&gt;
++      &lt;/xsl:otherwise&gt;
++    &lt;/xsl:choose&gt;
++  &lt;/xsl:template&gt;
++
++  &lt;xsl:template match=&quot;page&quot;&gt;
++    &lt;html&gt;
++      &lt;head&gt;
++        &lt;title&gt;Feuerkraft - &lt;xsl:value-of select=&quot;@title&quot; /&gt; - Page: &lt;xsl:value-of select=&quot;$filename&quot;/&gt;&lt;/title&gt;
++        &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;default.css&quot; /&gt;
++        &lt;link rel=&quot;icon&quot; href=&quot;images/favicon.png&quot; type=&quot;image/png&quot; /&gt;
++        &lt;!--&lt;link REL=&quot;help&quot; HREF=&quot;faq.html&quot; title=&quot;FAQ&quot;/&gt;
++        &lt;link REL=&quot;section&quot; HREF=&quot;faq.html&quot; title=&quot;Intro&quot;/&gt;
++        &lt;link REL=&quot;shortcut icon&quot; href=&quot;/favicon.ico&quot; type=&quot;image/x-icon&quot; /&gt;--&gt;
++      &lt;/head&gt;
++      &lt;body style=&quot;margin:0px;&quot; bgcolor=&quot;#a4a68e&quot;&gt;
++        &lt;table summary=&quot;&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot;&gt;
++          &lt;colgroup width=&quot;180&quot; /&gt;
++          &lt;tr&gt;
++            &lt;td valign=&quot;top&quot; align=&quot;center&quot;&gt;
++              &lt;a href=&quot;<A HREF="http://fs.fsf.org/feuerkraft/">http://fs.fsf.org/feuerkraft/</A>&quot;&gt;&lt;img src=&quot;images/logo_feuerkraft.png&quot; alt=&quot;Feuerkraft&quot; border=&quot;0&quot; /&gt;&lt;/a&gt;
++
++              &lt;div&gt;&lt;a class=&quot;menuitem&quot; href=&quot;news.html&quot;&gt;News&lt;/a&gt;&lt;/div&gt;
++              &lt;div&gt;&lt;a class=&quot;menuitem&quot; href=&quot;welcome.html&quot;&gt;Welcome&lt;/a&gt;&lt;/div&gt;
++              &lt;div&gt;&lt;a class=&quot;menuitem&quot; href=&quot;artworks.html&quot;&gt;Artworks&lt;/a&gt;&lt;/div&gt;
++              &lt;div&gt;&lt;a class=&quot;menuitem&quot; href=&quot;screenshots.html&quot;&gt;Screenshots&lt;/a&gt;&lt;/div&gt;
++              &lt;div&gt;&lt;a class=&quot;menuitem&quot; href=&quot;development.html&quot;&gt;Development&lt;/a&gt;&lt;/div&gt;
++              &lt;div&gt;&lt;a class=&quot;menuitem&quot; href=&quot;download.html&quot;&gt;Download&lt;/a&gt;&lt;/div&gt;
++              &lt;div&gt;&lt;a class=&quot;menuitem&quot; href=&quot;contact.html&quot;&gt;Contact&lt;/a&gt;&lt;/div&gt;
++              &lt;br /&gt;
++              &lt;div&gt;&lt;a class=&quot;menuitem&quot; href=&quot;<A HREF="http://savannah.nongnu.org/projects/feuerkraft/">http://savannah.nongnu.org/projects/feuerkraft/</A>&quot;&gt;Savanna Project Page&lt;/a&gt;&lt;/div&gt;
++              &lt;!--
++              &lt;br /&gt;
++              &lt;p&gt;
++              &lt;a href=&quot;<A HREF="http://validator.w3.org/check/referer">http://validator.w3.org/check/referer</A>&quot;&gt;&lt;img
++              src=&quot;<A HREF="http://www.w3.org/Icons/valid-xhtml10">http://www.w3.org/Icons/valid-xhtml10</A>&quot;
++              alt=&quot;Valid XHTML 1.0!&quot; height=&quot;31&quot; width=&quot;88&quot; /&gt;&lt;/a&gt;
++            &lt;/p&gt;
++              
++              
++              &lt;p&gt;
++              &lt;a href=&quot;<A HREF="http://jigsaw.w3.org/css-validator/">http://jigsaw.w3.org/css-validator/</A>&quot;&gt;
++              &lt;img style=&quot;border:0;width:88px;height:31px&quot;
++              src=&quot;<A HREF="http://jigsaw.w3.org/css-validator/images/vcss">http://jigsaw.w3.org/css-validator/images/vcss</A>&quot; 
++              alt=&quot;Valid CSS!&quot; /&gt;
++            &lt;/a&gt;
++            &lt;/p&gt;
++              --&gt;
++              &lt;!--&lt;img alt=&quot;&quot; src=&quot;images/logo_gnu.jpg&quot; width=&quot;150&quot; height=&quot;130&quot; /&gt;--&gt;
++            &lt;/td&gt;
++            &lt;td valign=&quot;top&quot; style=&quot;padding:20px;&quot;&gt;
++              &lt;!--
++              &lt;table  summary=&quot;&quot; border=&quot;0&quot; width=&quot;100%&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;&gt;
++              &lt;tr&gt;
++              &lt;td align=&quot;left&quot; valign=&quot;bottom&quot;&gt;
++              &lt;h1&gt;&lt;xsl:value-of select=&quot;@title&quot;/&gt;&lt;/h1&gt;
++            &lt;/td&gt;&lt;td align=&quot;right&quot;&gt;
++              &lt;img alt=&quot;&quot; src=&quot;images/walking.png&quot;/&gt;
++            &lt;/td&gt;
++            &lt;/tr&gt;
++            &lt;/table&gt;
++              &lt;br /&gt;
++              --&gt;
++              
++              &lt;h1&gt;&lt;xsl:value-of select=&quot;@title&quot;/&gt;&lt;/h1&gt;
++
++              &lt;div class=&quot;mainbody&quot;&gt;
++                &lt;xsl:apply-templates /&gt;
++              &lt;/div&gt;
++              
++              &lt;div style=&quot;font-size: smaller; text-align: right; background-color: gray; padding: 5px; border-style: solid; border-color: black; border-width: thin; margin-top: 8px;&quot;&gt;
++                &lt;table width=&quot;100%&quot; cellspacing=&quot;0&quot; cellpadding=&quot;0&quot;&gt;
++                  &lt;tr&gt;
++                    &lt;td align=&quot;left&quot;&gt;
++                      Last Change: &lt;xsl:value-of select=&quot;$lastchange&quot;/&gt;
++                    &lt;/td&gt;
++                    &lt;td align=&quot;right&quot;&gt;
++                      Copyright &#169; 2001-2003 &lt;a href=&quot;<A HREF="http://pingus.seul.org/~grumbel/">http://pingus.seul.org/~grumbel/</A>&quot;&gt;Ingo Ruhnke&lt;/a&gt;, &lt;&lt;a href=&quot;mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/feuerkraft-commit">grumbel at gmx.de</A>&quot;&gt;<A HREF="https://lists.berlios.de/mailman/listinfo/feuerkraft-commit">grumbel at gmx.de</A>&lt;/a&gt;&gt;
++                    &lt;/td&gt;
++                  &lt;/tr&gt;
++                &lt;/table&gt;
++              &lt;/div&gt;
++            &lt;/td&gt;
++          &lt;/tr&gt;
++        &lt;/table&gt;
++      &lt;/body&gt;
++    &lt;/html&gt;
++  &lt;/xsl:template&gt;
++  
++  &lt;xsl:template match=&quot;section&quot;&gt;
++    &lt;h2 id=&quot;{@title}&quot;&gt;&lt;xsl:value-of select=&quot;@title&quot; /&gt;&lt;/h2&gt;
++    &lt;xsl:apply-templates /&gt;
++  &lt;/xsl:template&gt;
++
++  &lt;xsl:template match=&quot;subsection&quot;&gt;
++    &lt;h3&gt;&lt;xsl:value-of select=&quot;@title&quot; /&gt;&lt;/h3&gt;
++    &lt;xsl:apply-templates /&gt;
++  &lt;/xsl:template&gt;
++  
++  &lt;xsl:template match=&quot;screenshots&quot;&gt;
++    &lt;table summary=&quot;&quot; width=&quot;100%&quot; border=&quot;0&quot; cellpadding=&quot;0&quot;  cellspacing=&quot;0&quot;&gt;
++      
++      &lt;tr&gt;
++        &lt;td align=&quot;center&quot;&gt;
++          &lt;xsl:apply-templates select=&quot;item[1]&quot;/&gt;
++        &lt;/td&gt;
++        &lt;td align=&quot;center&quot;&gt;
++          &lt;xsl:apply-templates select=&quot;item[2]&quot;/&gt;
++        &lt;/td&gt;
++        &lt;td align=&quot;center&quot;&gt;
++          &lt;xsl:apply-templates select=&quot;item[3]&quot;/&gt;
++        &lt;/td&gt;
++      &lt;/tr&gt;
++
++      &lt;xsl:if test=&quot;count(item)&gt;3&quot;&gt;
++        &lt;tr&gt;
++          &lt;td align=&quot;center&quot;&gt;
++            &lt;xsl:apply-templates select=&quot;item[4]&quot;/&gt;
++          &lt;/td&gt;
++          &lt;td align=&quot;center&quot;&gt;
++            &lt;xsl:apply-templates select=&quot;item[5]&quot;/&gt;
++          &lt;/td&gt;
++          &lt;td align=&quot;center&quot;&gt;
++            &lt;xsl:apply-templates select=&quot;item[6]&quot;/&gt;
++          &lt;/td&gt;
++        &lt;/tr&gt;
++      &lt;/xsl:if&gt;
++
++
++      &lt;xsl:if test=&quot;count(item)&gt;6&quot;&gt;
++        &lt;tr&gt;
++          &lt;td align=&quot;center&quot;&gt;
++            &lt;xsl:apply-templates select=&quot;item[7]&quot;/&gt;
++          &lt;/td&gt;
++          &lt;td align=&quot;center&quot;&gt;
++            &lt;xsl:apply-templates select=&quot;item[8]&quot;/&gt;
++          &lt;/td&gt;
++          &lt;td align=&quot;center&quot;&gt;
++            &lt;xsl:apply-templates select=&quot;item[9]&quot;/&gt;
++          &lt;/td&gt;
++        &lt;/tr&gt;
++      &lt;/xsl:if&gt;
++
++    &lt;/table&gt;
++  &lt;/xsl:template&gt;
++
++  &lt;xsl:template match=&quot;screenshots/item&quot;&gt;
++    &lt;a href=&quot;images/{@file}.jpg&quot;&gt;&lt;img class=&quot;screenshot&quot; alt=&quot;{@file}&quot; src=&quot;images/{@file}_small.jpg&quot; title=&quot;{.}&quot;/&gt;&lt;/a&gt;
++  &lt;/xsl:template&gt;
++
++  &lt;xsl:template match=&quot;screenshot-menu&quot;&gt;
++    &lt;p style=&quot;text-align: center;&quot;&gt;
++      [ 
++      &lt;a href=&quot;screenshots.html&quot;&gt;0.2&lt;/a&gt;
++      |
++      &lt;a href=&quot;screenshots-0.1.html&quot;&gt;0.1&lt;/a&gt;
++      |
++      &lt;a href=&quot;screenshots-0.0.html&quot;&gt;0.0&lt;/a&gt;
++      ]
++    &lt;/p&gt;
++  &lt;/xsl:template&gt;
++
++  &lt;xsl:template match=&quot;section-toc&quot;&gt;
++    &lt;ul&gt;
++      &lt;xsl:for-each select=&quot;section&quot;&gt;
++        &lt;li&gt;&lt;a href=&quot;#section{generate-id(.)}&quot;&gt;
++            &lt;xsl:apply-templates/&gt;&lt;/a&gt;&lt;/li&gt;
++      &lt;/xsl:for-each&gt;
++    &lt;/ul&gt;
++    &lt;hr/&gt;
++    &lt;xsl:apply-templates/&gt;
++  &lt;/xsl:template&gt;
++
++  &lt;xsl:template match=&quot;faq-list&quot;&gt;
++    &lt;ul&gt;
++      &lt;xsl:for-each select=&quot;faq/question&quot;&gt;
++        &lt;li&gt;&lt;a href=&quot;#faq{generate-id(.)}&quot;&gt;
++            &lt;xsl:apply-templates/&gt;&lt;/a&gt;&lt;/li&gt;
++      &lt;/xsl:for-each&gt;
++    &lt;/ul&gt;
++    &lt;hr/&gt;
++    &lt;xsl:apply-templates/&gt;
++  &lt;/xsl:template&gt;
++
++  &lt;xsl:template match=&quot;faq&quot;&gt;
++    &lt;p&gt;&lt;/p&gt;
++    &lt;table width=&quot;100%&quot;  class=&quot;question&quot;&gt;
++      &lt;colgroup width=&quot;60%&quot; /&gt;
++      &lt;tr&gt;&lt;td valign=&quot;top&quot;&gt;
++          &lt;div id=&quot;faq{generate-id(question)}&quot;&gt;
++            &lt;xsl:apply-templates select=&quot;question/node()&quot;/&gt;
++          &lt;/div&gt;
++        &lt;/td&gt;
++        
++        
++        &lt;td align=&quot;right&quot; valign=&quot;top&quot;&gt;
++          &lt;small&gt;Last update:&lt;xsl:value-of select=&quot;@date&quot;/&gt;&lt;/small&gt;
++          [&lt;small&gt;&lt;a href=&quot;#faqtoc&quot;&gt;Up&lt;/a&gt;&lt;/small&gt;]
++        &lt;/td&gt;
++      &lt;/tr&gt;
++    &lt;/table&gt;
++
++    &lt;p class=&quot;answer&quot;&gt;&lt;xsl:apply-templates select=&quot;answer/node()&quot;/&gt; &lt;/p&gt;
++  &lt;/xsl:template&gt;
++
++  &lt;xsl:template match=&quot;news&quot;&gt;
++    &lt;table border=&quot;0&quot; width=&quot;100%&quot; cellpadding=&quot;5&quot; cellspacing=&quot;5&quot;&gt;
++      &lt;colgroup width=&quot;*&quot;/&gt;
++      &lt;xsl:apply-templates/&gt;
++    &lt;/table&gt;
++  &lt;/xsl:template&gt;
++
++  &lt;xsl:template match=&quot;news/item&quot;&gt;
++    &lt;tr&gt;
++      &lt;td style=&quot;border-style: solid; border-width: thin; white-space: nowrap;&quot; align=&quot;right&quot;&gt;&lt;tt&gt;&lt;xsl:value-of select=&quot;@date&quot;/&gt;&lt;/tt&gt;&lt;/td&gt;
++      &lt;td style=&quot;background-color: rgb(180,180,180); color: black;&quot;&gt;&lt;xsl:apply-templates/&gt;&lt;/td&gt;
++    &lt;/tr&gt;
++  &lt;/xsl:template&gt;
++
++  &lt;xsl:template match=&quot;german-flag&quot;&gt;
++    (german)
++  &lt;/xsl:template&gt;
++
++  &lt;xsl:template match=&quot;english-flag&quot;&gt;
++    (english)
++  &lt;/xsl:template&gt;
++
++  &lt;xsl:template match=&quot;dutch-flag&quot;&gt;
++    (dutch)
++  &lt;/xsl:template&gt;
++
++  &lt;xsl:template match=&quot;thumbnail-link&quot;&gt;
++    &lt;a href=&quot;{@href}&quot;&gt;&lt;img 
++        class=&quot;screenshot&quot; 
++        src=&quot;{substring-before(@href, '.jpg')}_small.jpg&quot;
++        alt=&quot;{substring-before(@href, '.jpg')}_small.jpg&quot;/&gt;&lt;/a&gt;
++  &lt;/xsl:template&gt;
++&lt;/xsl:stylesheet&gt;
+
+Added: trunk/htdocs/development.xml
+===================================================================
+--- trunk/htdocs/development.xml	2009-07-24 14:48:23 UTC (rev 349)
++++ trunk/htdocs/development.xml	2009-07-24 15:03:21 UTC (rev 350)
+@@ -0,0 +1,56 @@
++&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;page title=&quot;Development&quot;&gt;
++  &lt;section title=&quot;Milestone 2 - Chaos rules&quot;&gt;
++    &lt;subsection title=&quot;What its about?&quot;&gt;
++      &lt;p&gt;
++        Milestone 2 of Feuerkraft should present a fully playable
++        game, it might be short and the missions might be simple, but
++        beside that it should be fully playable and provide a
++        challange for the player. Milestone 2 should also give an
++        introduction to the overall story that will be part of
++        Feuerkraft. The characters that one will meet in M2 might or
++        might not be the same as in M3, this has not yet been decided.
++      &lt;/p&gt;
++    &lt;/subsection&gt;
++
++    &lt;subsection title=&quot;Planed Features&quot;&gt;
++      &lt;ul&gt;
++        &lt;li&gt;defining of new vehicle/building types/parameters via
++        scripts&lt;/li&gt;      
++        &lt;li&gt;communication/command with/over other troops&lt;/li&gt;
++        &lt;li&gt;mission recording and replay&lt;/li&gt;
++        &lt;li&gt;savegame support in the mission (might be limited)&lt;/li&gt;
++        &lt;li&gt;many different kinds of vehicles with different abilities&lt;/li&gt;
++        &lt;li&gt;an interesting storyline (well... and maybe not, I am not a writer, but I'll try my best)&lt;/li&gt;
++        &lt;li&gt;joystick and gamepad support (currently in bad shape)&lt;/li&gt;
++      &lt;/ul&gt;
++    &lt;/subsection&gt;
++
++    &lt;subsection title=&quot;Finished Features&quot;&gt;
++      &lt;ul&gt;
++        &lt;li&gt;level file format is mostly done, serialisation is still
++        and issue&lt;/li&gt;
++        &lt;li&gt;scripting support via Guile with help of Swig is working
++          and so far easily extensible if needed&lt;/li&gt;
++        &lt;li&gt;you can walk around without a vehicle and change the
++          vehicle if you like&lt;/li&gt;
++        &lt;li&gt;OpenGL support is working (via ClanLib0.7)&lt;/li&gt;
++        &lt;li&gt;map engine is basically working&lt;/li&gt;
++        &lt;li&gt;some more vehicle types needs to be added&lt;/li&gt;
++        &lt;li&gt;some kind of ai, pathfind, etc. for computer controlled vehicle is missing&lt;/li&gt;
++      &lt;/ul&gt;
++    &lt;/subsection&gt;
++  &lt;/section&gt;
++
++  &lt;section title=&quot;Milestone 1 - Drive Demo&quot;&gt;
++    &lt;p&gt;
++      Milestone 1, also known as Drive Demo provides a simple drive
++      around on the map, no missions or anything, just simple driving.
++      It provides an intro the the lock and feel of Feuerkraft and
++      presents a few special effects. It isn't meant as a game, but
++      simply as a techdemo. No scripting support is available and no
++      multiplayer.
++    &lt;/p&gt;
++  &lt;/section&gt;
++
++&lt;/page&gt;
+\ No newline at end of file
+
+Added: trunk/htdocs/download.xml
+===================================================================
+--- trunk/htdocs/download.xml	2009-07-24 14:48:23 UTC (rev 349)
++++ trunk/htdocs/download.xml	2009-07-24 15:03:21 UTC (rev 350)
+@@ -0,0 +1,58 @@
++&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;page title=&quot;Download&quot;&gt;
++  &lt;section title=&quot;Static Binaries&quot;&gt;
++    &lt;subsection title=&quot;GNU/Linux (i386)&quot;&gt;
++
++    &lt;ul&gt;
++      &lt;li&gt;&lt;dlink href=&quot;<A HREF="http://savannah.nongnu.org/download/feuerkraft/feuerkraft-0.1.0-3-binary-linux-i386.tar.bz2">http://savannah.nongnu.org/download/feuerkraft/feuerkraft-0.1.0-3-binary-linux-i386.tar.bz2</A>&quot; /&gt; [2.6MB] Sat Apr 19 16:25:45 2003&lt;/li&gt;
++      &lt;!-- &lt;li&gt;&lt;dlink href=&quot;<A HREF="http://savannah.nongnu.org/download/feuerkraftfeuerkraft-0.1.0-binary-i386.tar.gz">http://savannah.nongnu.org/download/feuerkraftfeuerkraft-0.1.0-binary-i386.tar.gz</A>&quot; /&gt; [2.6MB] Fri Mar 29 14:09:42 2002&lt;/li&gt; --&gt;
++&lt;/ul&gt;
++&lt;/subsection&gt;
++
++    &lt;subsection title=&quot;Windows&quot;&gt;
++&lt;ul&gt;
++      &lt;li&gt;&lt;dlink href=&quot;<A HREF="http://savannah.nongnu.org/download/feuerkraft/feuerkraft-0.1.0-binary-win32.zip">http://savannah.nongnu.org/download/feuerkraft/feuerkraft-0.1.0-binary-win32.zip</A>&quot; /&gt; [2.3MB] Mon Apr  1 00:37:15 2002&lt;/li&gt;
++    &lt;/ul&gt;
++&lt;/subsection&gt;
++&lt;hr /&gt;
++
++    &lt;section title=&quot;Source Tarballs&quot;&gt;
++      &lt;p&gt;Requires &lt;a href=&quot;<A HREF="http://www.clanlib.org">http://www.clanlib.org</A>&quot;&gt;ClanLib 0.6.x&lt;/a&gt;,
++        &lt;a
++        href=&quot;<A HREF="http://dark.x.dtu.dk/~sphair/SphriteLib/">http://dark.x.dtu.dk/~sphair/SphriteLib/</A>&quot;&gt;SphriteLib&lt;/a&gt;,
++        &lt;a href=&quot;<A HREF="http://www.gnu.org/software/guile/">http://www.gnu.org/software/guile/</A>&quot;&gt;Guile&lt;/a&gt; and
++        OpenGL.&lt;/p&gt;
++      &lt;ul&gt;
++        &lt;li&gt;&lt;dlink href=&quot;<A HREF="http://savannah.nongnu.org/download/feuerkraft/feuerkraft-0.1.0.tar.gz">http://savannah.nongnu.org/download/feuerkraft/feuerkraft-0.1.0.tar.gz</A>&quot; /&gt; [2.7MB] Sat Mar 30 13:42:14 2002&lt;/li&gt;
++        &lt;li&gt;&lt;dlink href=&quot;<A HREF="http://savannah.nongnu.org/download/feuerkraft/feuerkraft-0.0.3.tar.gz">http://savannah.nongnu.org/download/feuerkraft/feuerkraft-0.0.3.tar.gz</A>&quot; /&gt; [780kb] Wed May  9 20:33:27 2001&lt;/li&gt;
++        &lt;li&gt;&lt;dlink href=&quot;<A HREF="http://savannah.nongnu.org/download/feuerkraft/feuerkraft-0.0.2.tar.gz">http://savannah.nongnu.org/download/feuerkraft/feuerkraft-0.0.2.tar.gz</A>&quot; /&gt; [688kb]&lt;/li&gt;
++        &lt;li&gt;&lt;dlink href=&quot;<A HREF="http://savannah.nongnu.org/download/feuerkraft/firepower-0.0.1.tar.gz">http://savannah.nongnu.org/download/feuerkraft/firepower-0.0.1.tar.gz</A>&quot; /&gt; [452kb]&lt;/li&gt;
++        &lt;li&gt;&lt;dlink href=&quot;<A HREF="http://savannah.nongnu.org/download/feuerkraft/firepower-0.0.0.tar.gz">http://savannah.nongnu.org/download/feuerkraft/firepower-0.0.0.tar.gz</A>&quot; /&gt; [188kb]&lt;/li&gt;
++      &lt;/ul&gt;
++    &lt;/section&gt;
++&lt;hr /&gt;
++
++    &lt;section title=&quot;Source for images and other data&quot;&gt;
++      &lt;p&gt;
++        The source for the images, which means the layered
++        &lt;tt&gt;.xcf&lt;/tt&gt; files, are not provided in the tarball above,
++        since they are quite large and not needed to compile the
++        game from source. They are also not part of the Subversion source
++        tree. The &lt;tt&gt;.xcf&lt;/tt&gt; files should be mostly interesting
++        for artist which want to modify some of the in game gfx. You
++        can find the .xcf files at:
++      &lt;/p&gt;
++
++      &lt;ul&gt;
++        &lt;li&gt;&lt;dlink-full href=&quot;<A HREF="http://savannah.nongnu.org/download/feuerkraft/contrib/">http://savannah.nongnu.org/download/feuerkraft/contrib/</A>&quot; /&gt;&lt;/li&gt;
++      &lt;/ul&gt;
++
++    &lt;/section&gt;
++&lt;hr /&gt;
++&lt;section title=&quot;Subversion&quot;&gt;
++&lt;pre&gt;svn co <A HREF="svn://clanlib.org/Games/Feuerkraft/trunk/&lt;/pre">svn://clanlib.org/Games/Feuerkraft/trunk/&lt;/pre</A>&gt;
++&lt;/section&gt;
++
++    
++  &lt;/section&gt;
++&lt;/page&gt;
+\ No newline at end of file
+
+Added: trunk/htdocs/images/background.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/background.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/bomber.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/bomber.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/conceptart1.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/conceptart1.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/conceptart1_small.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/conceptart1_small.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/conceptart2.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/conceptart2.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/conceptart2_small.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/conceptart2_small.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/feuerkraft_scan0001.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/feuerkraft_scan0001.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/feuerkraft_scan0002.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/feuerkraft_scan0002.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/feuerkraft_scan0003.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/feuerkraft_scan0003.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/feuerkraft_scan0004.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/feuerkraft_scan0004.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/feuerkraft_scan0005.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/feuerkraft_scan0005.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/feuerkraft_scan0006.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/feuerkraft_scan0006.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/feuerkraft_scan0007.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/feuerkraft_scan0007.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/feuerkraft_scan0008.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/feuerkraft_scan0008.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/feuerkraft_scan0009.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/feuerkraft_scan0009.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/feuerkraft_scan0010.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/feuerkraft_scan0010.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/feuerkraft_scan0011.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/feuerkraft_scan0011.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/feuerkraft_scan0012.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/feuerkraft_scan0012.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/feuerkraft_scan0013.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/feuerkraft_scan0013.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/feuerkraft_scan0014.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/feuerkraft_scan0014.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/huey.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/huey.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/logo.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/logo.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/logo_large_0.1.0.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/logo_large_0.1.0.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/preview.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/preview.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/screenshot-1.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/screenshot-1.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/screenshot-10.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/screenshot-10.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/screenshot-10_small.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/screenshot-10_small.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/screenshot-11.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/screenshot-11.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/screenshot-11_small.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/screenshot-11_small.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/screenshot-12.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/screenshot-12.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/screenshot-12_small.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/screenshot-12_small.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/screenshot-13.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/screenshot-13.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/screenshot-13_small.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/screenshot-13_small.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/screenshot-14.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/screenshot-14.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/screenshot-15.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/screenshot-15.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/screenshot-16.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/screenshot-16.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/screenshot-1_small.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/screenshot-1_small.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/screenshot-2.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/screenshot-2.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/screenshot-2_small.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/screenshot-2_small.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/screenshot-3.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/screenshot-3.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/screenshot-3_small.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/screenshot-3_small.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/screenshot-4.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/screenshot-4.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/screenshot-4_small.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/screenshot-4_small.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/screenshot-5.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/screenshot-5.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/screenshot-5_small.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/screenshot-5_small.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/screenshot-6.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/screenshot-6.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/screenshot-6_small.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/screenshot-6_small.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/screenshot-7.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/screenshot-7.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/screenshot-7_small.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/screenshot-7_small.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/screenshot-8.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/screenshot-8.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/screenshot-8_small.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/screenshot-8_small.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/screenshot-9.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/screenshot-9.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/screenshot-9_small.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/screenshot-9_small.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/sketch.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/sketch.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/sketch_small.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/sketch_small.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/images/trooper.jpg
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/htdocs/images/trooper.jpg
+___________________________________________________________________
+Name: svn:mime-type
+   + image/jpeg
+
+Added: trunk/htdocs/index.xml
+===================================================================
+--- trunk/htdocs/index.xml	2009-07-24 14:48:23 UTC (rev 349)
++++ trunk/htdocs/index.xml	2009-07-24 15:03:21 UTC (rev 350)
+@@ -0,0 +1,24 @@
++&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
++&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Strict//EN&quot; &quot;<A HREF="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd</A>&quot;&gt;
++
++&lt;html&gt;
++  &lt;head&gt;
++    &lt;title&gt;Feuerkraft - Chaos Rules... [Release 0.1.0 out now!]&lt;/title&gt;
++    &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;default.css&quot; /&gt;
++    &lt;link rel=&quot;icon&quot; href=&quot;images/favicon.png&quot; type=&quot;image/png&quot; /&gt;
++    &lt;style type=&quot;text/css&quot;&gt;
++      .div { display: table-cell; vertical-align: middle; }
++      .body { position: fixed; top: 0; left: 0; right: 0; bottom: 0; display: table; height: 100%; margin: 0 auto; }
++    &lt;/style&gt;
++  &lt;/head&gt;
++
++  &lt;body text=&quot;text&quot; bgcolor=&quot;#707f9b&quot;&gt;
++    &lt;div class=&quot;body&quot;&gt;
++      &lt;div class=&quot;div&quot;&gt;
++        &lt;a href=&quot;welcome.html&quot;&gt;&lt;img style=&quot;border-style: none&quot; src=&quot;images/logo_large_0.1.0.jpg&quot;
++            alt=&quot;Feuerkraft - Chaos Rules...&quot;/&gt;&lt;/a&gt;
++        &lt;h1 style=&quot;text-align: center;&quot;&gt;Release 0.1.0 is out now (again)!&lt;/h1&gt;           
++      &lt;/div&gt;
++    &lt;/div&gt;
++  &lt;/body&gt;
++&lt;/html&gt;
+
+Added: trunk/htdocs/news.xml
+===================================================================
+--- trunk/htdocs/news.xml	2009-07-24 14:48:23 UTC (rev 349)
++++ trunk/htdocs/news.xml	2009-07-24 15:03:21 UTC (rev 350)
+@@ -0,0 +1,72 @@
++&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;page title=&quot;News&quot;&gt;
++  &lt;news&gt;
++    &lt;item date=&quot;02. Dec 2003&quot;&gt;
++      Feuerkraft repository has moved from CVS to &lt;a
++      href=&quot;<A HREF="http://subversion.tigris.org/">http://subversion.tigris.org/</A>&quot;&gt;Subversion&lt;/a&gt;,
++      there have also been two new helicopters included in Feuerkraft
++      CVS and a new release will follow in the next weeks.
++    &lt;/item&gt;
++
++    &lt;item date=&quot;15. Jun 2003&quot;&gt;
++      Another little webpage update, added development section,
++      scripting in Feuerkraft is mostly working.
++    &lt;/item&gt;
++
++    &lt;item date=&quot;19. Apr 2003&quot;&gt;
++      Recreated the Webpage and build a new static binary for GNU/Linux (i386).
++    &lt;/item&gt;
++
++    &lt;item date=&quot;19. Apr. 2003&quot;&gt;
++      rebuild of the static 0.1.0 binary is available
++    &lt;/item&gt;
++
++    &lt;item date=&quot;23. Sept. 2002&quot;&gt;
++      Just a little lifesign, even so currently not much happen on the
++      code base, I am still working on this one and trying out ideas,
++      so this project is not dead. You can find a little nice concept
++      art here
++    &lt;/item&gt;
++
++    &lt;item date=&quot;01. Apr. 2002&quot;&gt;
++      Added binary for win32, special thanks to Kenneth Gangstoe for the Win32 port
++    &lt;/item&gt;
++
++    &lt;item date=&quot;30. Mar 2002&quot;&gt;
++      Added source tarball for feuerkraft-0.1.0
++    &lt;/item&gt;
++
++    &lt;item date=&quot;29. Mar 2002&quot;&gt;
++      Released binary for version 0.1.0
++    &lt;/item&gt;
++
++    &lt;item date=&quot;2. Mar 2002&quot;&gt;
++      Added some hand-written plans and gamedesign ideas to the todo section
++    &lt;/item&gt;
++
++    &lt;item date=&quot;21. Jan 2002&quot;&gt;
++      Added ToDo
++    &lt;/item&gt;
++
++    &lt;item date=&quot;16. Nov 2001&quot;&gt;
++      Website redesign
++    &lt;/item&gt;
++
++    &lt;item date=&quot;9.May 2001&quot;&gt;
++      a new release
++    &lt;/item&gt;
++
++    &lt;item date=&quot;6.May 2001&quot;&gt;
++      added a yet another new screenshot, refuelling and reloading of ammo are working now
++    &lt;/item&gt;
++
++    &lt;item date=&quot;4.May 2001&quot;&gt;
++      added a new screenshot
++    &lt;/item&gt;
++
++    &lt;item date=&quot;17.Feb 2001&quot;&gt;
++      CVS access is available, added a new screenshot
++    &lt;/item&gt;
++
++  &lt;/news&gt;
++&lt;/page&gt;
+\ No newline at end of file
+
+Added: trunk/htdocs/screenshots-0.0.xml
+===================================================================
+--- trunk/htdocs/screenshots-0.0.xml	2009-07-24 14:48:23 UTC (rev 349)
++++ trunk/htdocs/screenshots-0.0.xml	2009-07-24 15:03:21 UTC (rev 350)
+@@ -0,0 +1,14 @@
++&lt;?xml version=&quot;1.0&quot; ?&gt;
++&lt;page title=&quot;Screenshots of Version 0.0&quot;&gt;
++  &lt;screenshot-menu/&gt;
++  
++  &lt;screenshots&gt;
++    &lt;item file=&quot;screenshot-6&quot; /&gt;
++    &lt;item file=&quot;screenshot-5&quot; /&gt;
++    &lt;item file=&quot;screenshot-4&quot; /&gt;
++    &lt;item file=&quot;screenshot-3&quot; /&gt;
++    &lt;item file=&quot;screenshot-2&quot; /&gt;
++    &lt;item file=&quot;screenshot-1&quot; /&gt;
++  &lt;/screenshots&gt;
++
++&lt;/page&gt;
+
+Added: trunk/htdocs/screenshots-0.1.xml
+===================================================================
+--- trunk/htdocs/screenshots-0.1.xml	2009-07-24 14:48:23 UTC (rev 349)
++++ trunk/htdocs/screenshots-0.1.xml	2009-07-24 15:03:21 UTC (rev 350)
+@@ -0,0 +1,13 @@
++&lt;?xml version=&quot;1.0&quot; ?&gt;
++&lt;page title=&quot;Screenshots of Version 0.1&quot;&gt;
++  &lt;screenshot-menu/&gt;
++  
++  &lt;screenshots&gt;
++    &lt;item file=&quot;screenshot-11&quot; /&gt;
++    &lt;item file=&quot;screenshot-10&quot; /&gt;
++    &lt;item file=&quot;screenshot-9&quot; /&gt;
++    &lt;item file=&quot;screenshot-8&quot; /&gt;
++    &lt;item file=&quot;screenshot-7&quot; /&gt;
++  &lt;/screenshots&gt;
++
++&lt;/page&gt;
+
+Added: trunk/htdocs/screenshots-0.2.xml
+===================================================================
+--- trunk/htdocs/screenshots-0.2.xml	2009-07-24 14:48:23 UTC (rev 349)
++++ trunk/htdocs/screenshots-0.2.xml	2009-07-24 15:03:21 UTC (rev 350)
+@@ -0,0 +1,9 @@
++&lt;?xml version=&quot;1.0&quot; ?&gt;
++&lt;page title=&quot;Screenshots of Version 0.2&quot;&gt;
++  &lt;screenshot-menu/&gt;
++  
++  &lt;screenshots&gt;
++    &lt;item file=&quot;screenshot-13&quot; /&gt;
++    &lt;item file=&quot;screenshot-12&quot; /&gt;
++  &lt;/screenshots&gt;
++&lt;/page&gt;
+
+Added: trunk/htdocs/screenshots.xml
+===================================================================
+--- trunk/htdocs/screenshots.xml	2009-07-24 14:48:23 UTC (rev 349)
++++ trunk/htdocs/screenshots.xml	2009-07-24 15:03:21 UTC (rev 350)
+@@ -0,0 +1,13 @@
++&lt;?xml version=&quot;1.0&quot; ?&gt;
++&lt;page title=&quot;Screenshots of Version 0.2&quot;&gt;
++  &lt;screenshot-menu/&gt;
++  
++  &lt;screenshots&gt;
++    &lt;item file=&quot;screenshot-13&quot; /&gt;
++    &lt;item file=&quot;screenshot-12&quot; /&gt;
++  &lt;/screenshots&gt;
++
++  &lt;p&gt;
++    &lt;a href=&quot;<A HREF="http://pingus.seul.org/~grumbel/tmp/feuerkraft-400x300-xvid.avi">http://pingus.seul.org/~grumbel/tmp/feuerkraft-400x300-xvid.avi</A>&quot;&gt;Gameplay Video (Resolution: 400x300, Codec: Xvid, Size: 7.5MB)&lt;/a&gt;
++  &lt;/p&gt;
++&lt;/page&gt;
+
+Added: trunk/htdocs/welcome.xml
+===================================================================
+--- trunk/htdocs/welcome.xml	2009-07-24 14:48:23 UTC (rev 349)
++++ trunk/htdocs/welcome.xml	2009-07-24 15:03:21 UTC (rev 350)
+@@ -0,0 +1,39 @@
++&lt;?xml version=&quot;1.0&quot;?&gt;
++&lt;page title=&quot;Welcome&quot;&gt;
++  &lt;section title=&quot;What is Feuerkraft?&quot;&gt;
++    &lt;p&gt;
++      Feuerkraft is (or better: 'will be') a 2d top-down tank battle
++      game. You will be able to control many different kinds of
++      vehicles, change them or simply walk around with your own feet.
++      The game will provide a story driven single player mode with
++      some simple adventure like elemets (rescue somebody, talk to
++      people, collect a key, steal a car, etc.) and in addition it
++      will also provide a multiplayer mode which will be something
++      similar to the game 'Firepower' or 'Return Fire', which means
++      basically defend your base against the enemy. Since I consider
++      single player much more important than multiplayer, single
++      player will come first and multiplayer has to wait. There are
++      also plans for providing cooperative multiplayer missions.
++    &lt;/p&gt;
++  &lt;/section&gt; 
++
++&lt;div align=&quot;right&quot;&gt;
++&lt;!-- Begin Nedstat Basic code --&gt;
++&lt;!-- Title: Feuerkraft --&gt;
++&lt;!-- URL: <A HREF="http://www.nongnu.org/feuerkraft/">http://www.nongnu.org/feuerkraft/</A> --&gt;
++&lt;script language=&quot;JavaScript&quot; src=&quot;<A HREF="http://m1.nedstatbasic.net/basic.js">http://m1.nedstatbasic.net/basic.js</A>&quot;&gt;
++&lt;/script&gt;
++&lt;script language=&quot;JavaScript&quot;&gt;
++&lt;!--
++  nedstatbasic(&quot;ACLiNQJjpeD4oNgDB6EH7UvsQcwQ&quot;, 0);
++// --&gt;
++&lt;/script&gt;
++&lt;noscript&gt;
++&lt;a target=&quot;_blank&quot; href=&quot;<A HREF="http://v1.nedstatbasic.net/stats?ACLiNQJjpeD4oNgDB6EH7UvsQcwQ">http://v1.nedstatbasic.net/stats?ACLiNQJjpeD4oNgDB6EH7UvsQcwQ</A>&quot;&gt;&lt;img
++src=&quot;<A HREF="http://m1.nedstatbasic.net/n?id=ACLiNQJjpeD4oNgDB6EH7UvsQcwQ">http://m1.nedstatbasic.net/n?id=ACLiNQJjpeD4oNgDB6EH7UvsQcwQ</A>&quot;
++border=&quot;0&quot;  width=&quot;18&quot; height=&quot;18&quot; /&gt;&lt;/a&gt;
++&lt;/noscript&gt;
++&lt;!-- End Nedstat Basic code --&gt;
++&lt;/div&gt;
++
++&lt;/page&gt;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000012.html">[Feuerkraft-commit] r349 - in trunk/media: . images
+</A></li>
+	<LI>Next message: <A HREF="000015.html">[Feuerkraft-commit] r351 - in trunk/media/images: . tilemasks
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#14">[ date ]</a>
+              <a href="thread.html#14">[ thread ]</a>
+              <a href="subject.html#14">[ subject ]</a>
+              <a href="author.html#14">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/feuerkraft-commit">More information about the Feuerkraft-commit
+mailing list</a><br>
+</body></html>

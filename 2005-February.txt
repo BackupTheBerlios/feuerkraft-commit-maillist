@@ -1,0 +1,2395 @@
+From grumbel at sheep.berlios.de  Tue Feb  1 21:27:21 2005
+From: grumbel at sheep.berlios.de (Ingo Ruhnke at BerliOS)
+Date: Tue, 1 Feb 2005 21:27:21 +0100
+Subject: [Feuerkraft-commit] r336 - in trunk: data data/images data/images/vehicles src src/buildings src/groundmap src/particles src/vehicles
+Message-ID: <200502012027.j11KRLLY018428@sheep.berlios.de>
+
+Author: grumbel
+Date: 2005-02-01 21:27:20 +0100 (Tue, 01 Feb 2005)
+New Revision: 336
+
+Added:
+   trunk/data/images/soldier-light.png
+   trunk/data/images/vehicles/tank2-highlight.png
+   trunk/data/images/vehicles/tank2-light.png
+Modified:
+   trunk/data/feuerkraft.xml
+   trunk/data/images/vehicles/tank2.png
+   trunk/src/Makefile.am
+   trunk/src/ai_vehicle.cxx
+   trunk/src/ambulance.cxx
+   trunk/src/buildings/ammotent.cxx
+   trunk/src/buildings/custom_building.cxx
+   trunk/src/buildings/fuelstation.cxx
+   trunk/src/buildings/headquarter.cxx
+   trunk/src/buildings/tower.cxx
+   trunk/src/buildings/wall.cxx
+   trunk/src/buildings/wall_door.cxx
+   trunk/src/collision_manager.cxx
+   trunk/src/energie.cxx
+   trunk/src/game_session.cxx
+   trunk/src/groundmap/grid_tile.cxx
+   trunk/src/groundmap/sprite_tile.cxx
+   trunk/src/line_segments.cxx
+   trunk/src/marker.cxx
+   trunk/src/mine.cxx
+   trunk/src/particles/explosion_particle.hxx
+   trunk/src/particles/fire_particle.cxx
+   trunk/src/particles/grass_particle.hxx
+   trunk/src/particles/rocket_smoke_particle.cxx
+   trunk/src/particles/sand_particle.hxx
+   trunk/src/particles/smoke_particle.hxx
+   trunk/src/projectile.cxx
+   trunk/src/robot_tank.cxx
+   trunk/src/rocket.cxx
+   trunk/src/satchel_charge.cxx
+   trunk/src/shockwave.cxx
+   trunk/src/soldier.cxx
+   trunk/src/soldier.hxx
+   trunk/src/tree.cxx
+   trunk/src/vehicles/helicopter.cxx
+   trunk/src/vehicles/jeep.cxx
+   trunk/src/vehicles/rotor.cxx
+   trunk/src/vehicles/tank.cxx
+   trunk/src/vehicles/tank.hxx
+   trunk/src/vehicles/turret.cxx
+   trunk/src/view.cxx
+   trunk/src/view.hxx
+Log:
+- added light support
+
+
+Modified: trunk/data/feuerkraft.xml
+===================================================================
+--- trunk/data/feuerkraft.xml	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/data/feuerkraft.xml	2005-02-01 20:27:20 UTC (rev 336)
+@@ -112,6 +112,15 @@
+       <image file="images/vehicles/huey_shadow.png"  />
+     </sprite>
+ 
++    <sprite name="tank_light">
++      <image file="images/vehicles/tank2-light.png"  />
++    </sprite>
++
++    <sprite name="tank_highlight">
++      <image file="images/vehicles/tank2-highlight.png"  />
++    </sprite>
++
++
+     <sprite name="tank">
+       <image 
+         file="images/vehicles/tank.png" 
+@@ -251,6 +260,10 @@
+       <image file="images/tree2_shadow.png" />
+     </sprite>
+ 
++    <sprite name="soldier-light">
++      <image file="images/soldier-light.png" />
++    </sprite>
++
+     <sprite name="soldier">
+       <image file="images/soldier1.png" delay="200" />
+       <image name="image2" file="images/soldier2.png" delay="200" />
+
+Added: trunk/data/images/soldier-light.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/data/images/soldier-light.png
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: trunk/data/images/vehicles/tank2-highlight.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/data/images/vehicles/tank2-highlight.png
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: trunk/data/images/vehicles/tank2-light.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/data/images/vehicles/tank2-light.png
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Modified: trunk/data/images/vehicles/tank2.png
+===================================================================
+--- trunk/data/images/vehicles/tank2.png	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/data/images/vehicles/tank2.png	2005-02-01 20:27:20 UTC (rev 336)
+@@ -1,16 +1,19 @@
+ ?PNG
+ 
+-
+-ca"???m?0?q?0??1??X??R)?L?HH??|
+-?s?ql?1??6Q!??$"Rl? ?MS(\?j\?a??A?(??M????????!??i6??u?&?16??????8???M?????,?????????K(???]@JE???1M???????\wJ)?{??__?;???}????z????e??%!%??q?){)?V)???a!z
+-????1!B"D'"?D??T0:???=?I?h?`B?QJ?u"????1-??25??
+-??T????i??*?>?c6?)X??R????:{l?0(???+|????"N,?b????*??hE\???)?O?w&e????R?!??:?P?r?M??h?J?i????%?:I)?wl2?4??e?`~?,R?;????7??W?	?0?0?z	?5?}$e????????+\,?J???3Z|?d?"?????????????H?????????*e???8????)%?2?J?+a0(?D??*?$BD;F???;??R?8N??_b???)?j?i'B????"$d???R=??????????tr?/?t??????_???%?;B??ct???*/??%??!???7?d??O??k	zD?x??!?
+-%jfA????m??wv?N?:?F?5?m??&?????B?^`DA?????8????^Z?D???#;u3Eo??%"$??j1d2{?6??????m??? O<????
+-cc??'??,tn"??`??FR?u!?H??!j???????cI???1
+-c??q:??	"?@Y?\??s?=?cY?a??s????Pk??G?????O??K?J???u????8#??~?<z?cG?u
+-`hs??<Q??.2=?f??K????APC?AX?uGy?L??.yy???????Pv
+-??X???vV?????????1M??!g???If?^EI?6uz??Bq?????????V??N???:??P-_?i???f????@???
+-R?????B??kt??!|b"???CRR????6??)?I????q???9??u)xK??i??5???????'??qf?:F?Rem????.???_??#D???R??uF?*??zY6?*	??e)?!?p??n?Tq?i???????T
+-???????'?$Qd?.;??$?n?d??G?Z?09y
+-??????Zk?=J>??????w??'O2;;??8???????mc??????k|??'y??#????!A>???????!?}?;?:?????????qVVV?|?*a?I.?*??iOcPJ??.?????nHB???7????X? ???R?a?W??L?D??N7?LV???}?k?0w[J??f??p? ??nQ?k	???}??m!???,????
+-#
+\ No newline at end of file
++
++)?$???
++?J)????S<?fmm?+?r9??w"?R)?0????l?0?B?1???y?6??_#?;A6?#????y?I?t?tz?+?_?ak\?????OR?V)^???c??q?c?????????(?gn?c<??o???~?????????b??d!???x;??P?[??8??Xk??6Q!??X?$"R???X ??P,??????/?QrY?r9 at 9)??|?GA?n?DL?'?
++-?X??N?yc:4???
++
+++S????p?j?KS???bm?1w!??YZ?Z???(?b????~???k?*ZWv????Q??)??L??/???KW?\???=?R3?SG)??@J????5~l?8???P??<?%?;???}?b?*?`??BH?hvnc"X[??(???B$??	B??G)A??$D?ag
++{??????;?_??E?T???5?J"??????????O63??~?O?qc9rG???/?F;?y????j?L?8.J?X?b??9?:??????????A?8?dko????E?*??%?? %?????????T?\?`???c	????????A?$??>?]?????? ?I?%????cP1/"E?#<-?`?Ba??p?????G?9?H???2?s???w)??o??O?!?????????C???2H????V??p?????<??|~?bq???H[????X?L?T
++lD!???EP3?? ?T??7H?Y?`+???U-?M?D(??pT??l???P????\?"?M?(H''h??[?Y|?5????#_???S'(??i?\^????d???-??]S??}?M<
++;??b?=?? ????@?????iZAg????5`llS?u????#
++?
++??J?m!??B?83?,P??RG!?!??d0?1???
++J??M??????P?<t??N?/?
++wO?n?Xc???
++*H??u??j?r???u??3????????]?>???????? 
++??U??b"?????2??0?`???Qb?cq?FG??Lp??????c??N??
++N????a??+?23?g????????Kw?dVV?"_x?s??'?#?Q*I.;?T???$?B?6?3????(??<?????S?utX!?? e?t?#?ck??XB???????$B?_ .FX??
++???????a??{?O<?S?r9 ??!UG??n?u????qBME??0M?*??Mxc`?8? ?JP???*?I*I?????#?Jb???l?Aw???*??t???Z????'??y?e'??=???G?u?'b??5?7?5???op??y\w???z???%^y??_???_?r?n??_?L?/?\???S?V^eG?2?9??8? 1?????N??e???#??B	?=??}h???U??E?\E?k?M?d?1??]?{???e?\|?{2cx?4J?(????R??~d?YZ?O?n?g?q9?I?f???_dn??H)y????cc?s?????3(???????s?????yJ????,--????F??????O???&??*?l?r??1M>??^|??????rpr??7n2??=N?z?\?~?~{?+W???}???%?1?<y?B???
+\ No newline at end of file
+
+Modified: trunk/src/Makefile.am
+===================================================================
+--- trunk/src/Makefile.am	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/Makefile.am	2005-02-01 20:27:20 UTC (rev 336)
+@@ -17,6 +17,7 @@
+ 
+ feuerkraft_SOURCES = \
+ display/drawing_context.cxx \
++display/scene_context.cxx \
+ alist.hxx \
+ alist.cxx \
+ ai_vehicle.hxx \
+
+Modified: trunk/src/ai_vehicle.cxx
+===================================================================
+--- trunk/src/ai_vehicle.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/ai_vehicle.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -140,12 +140,12 @@
+   if (!destroyed)
+     {
+       sprite.set_angle(Math::rad2deg(orientation + PI));
+-      view.get_dc().draw(sprite, pos.x, pos.y);
++      view.get_sc().color().draw(sprite, pos.x, pos.y);
+     }
+   else
+     {
+       destroyed_sprite.set_angle(Math::rad2deg(orientation + PI));
+-      view.get_dc().draw(destroyed_sprite, pos.x, pos.y);
++      view.get_sc().color().draw(destroyed_sprite, pos.x, pos.y);
+     }
+   //line_segments.draw(view);
+ }
+
+Modified: trunk/src/ambulance.cxx
+===================================================================
+--- trunk/src/ambulance.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/ambulance.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -30,7 +30,7 @@
+ void
+ Ambulance::draw (View& view)
+ {
+-  view.get_dc().draw(sur, 0, 0);
++  view.get_sc().color().draw(sur, 0, 0);
+ }
+ 
+ 
+
+Modified: trunk/src/buildings/ammotent.cxx
+===================================================================
+--- trunk/src/buildings/ammotent.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/buildings/ammotent.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -41,10 +41,10 @@
+ void 
+ Ammotent::draw (View& view)
+ {
+-  view.get_dc().draw(ammotent, pos.x, pos.y);
++  view.get_sc().color().draw(ammotent, pos.x, pos.y);
+   if (reloading)
+     {
+-      view.get_dc().draw_fillrect(pos.x - 32, pos.y + 25,
++      view.get_sc().color().draw_fillrect(pos.x - 32, pos.y + 25,
+                                   pos.x + 31, pos.y + 57,
+                                   CL_Color(CL_Colorf(1.0f, 1.0f, 1.0f, 
+                                                      sin(GameWorld::current()->get_time () * 10.0f)
+
+Modified: trunk/src/buildings/custom_building.cxx
+===================================================================
+--- trunk/src/buildings/custom_building.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/buildings/custom_building.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -42,7 +42,7 @@
+ void
+ CustomBuilding::draw(View& view)
+ {
+-  view.get_dc().draw(sprite,
++  view.get_sc().color().draw(sprite,
+                      x_pos * 40 + get_map_width()*20, 
+                      y_pos * 40 + get_map_height()*20); // FIXME: Hardcoded tilesize
+ }
+
+Modified: trunk/src/buildings/fuelstation.cxx
+===================================================================
+--- trunk/src/buildings/fuelstation.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/buildings/fuelstation.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -41,10 +41,10 @@
+ void 
+ Fuelstation::draw (View& view)
+ {
+-  view.get_dc().draw(fuelstation, pos.x, pos.y);
++  view.get_sc().color().draw(fuelstation, pos.x, pos.y);
+   if (refueling)
+     {
+-      view.get_dc().draw_fillrect(pos.x - 32, pos.y + 25,
++      view.get_sc().color().draw_fillrect(pos.x - 32, pos.y + 25,
+                                   pos.x + 31, pos.y + 57,
+                                   CL_Color(CL_Colorf(1.0, 1.0, 1.0,
+                                                      sin(GameWorld::current()->get_time () * 10.0f)
+
+Modified: trunk/src/buildings/headquarter.cxx
+===================================================================
+--- trunk/src/buildings/headquarter.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/buildings/headquarter.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -51,7 +51,7 @@
+ void 
+ Headquarter::draw (View& view)
+ {
+-  view.get_dc().draw(*current_sur, pos.x, pos.y);
++  view.get_sc().color().draw(*current_sur, pos.x, pos.y);
+   energie.draw (view, int(pos.x), int(pos.y - 40));
+ }
+ 
+
+Modified: trunk/src/buildings/tower.cxx
+===================================================================
+--- trunk/src/buildings/tower.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/buildings/tower.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -60,21 +60,21 @@
+ {
+   if (energie > 50)
+     {
+-      view.get_dc().draw(towerbase, pos.x, pos.y);
++      view.get_sc().color().draw(towerbase, pos.x, pos.y);
+     }
+   else if (energie > 0)
+     {
+-      view.get_dc().draw(towerdamaged, pos.x, pos.y);
++      view.get_sc().color().draw(towerdamaged, pos.x, pos.y);
+     }
+   else
+     {
+-      view.get_dc().draw(towerdestroyed, pos.x, pos.y);
++      view.get_sc().color().draw(towerdestroyed, pos.x, pos.y);
+     }
+ 
+   if (energie > 0)
+     {
+       turret.set_angle(orientation);
+-      view.get_dc().draw(turret, pos.x, pos.y);
++      view.get_sc().color().draw(turret, pos.x, pos.y);
+     }
+ }
+   
+
+Modified: trunk/src/buildings/wall.cxx
+===================================================================
+--- trunk/src/buildings/wall.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/buildings/wall.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -42,11 +42,11 @@
+ Wall::draw (View& view)
+ {
+   if (energie > 60)
+-    view.get_dc().draw (wall, pos.x, pos.y);
++    view.get_sc().color().draw (wall, pos.x, pos.y);
+   else if (energie > 0)
+-    view.get_dc().draw (wall_damaged, pos.x, pos.y);
++    view.get_sc().color().draw (wall_damaged, pos.x, pos.y);
+   else
+-    view.get_dc().draw (wall_destroyed, pos.x, pos.y);
++    view.get_sc().color().draw (wall_destroyed, pos.x, pos.y);
+ }
+ 
+ void
+
+Modified: trunk/src/buildings/wall_door.cxx
+===================================================================
+--- trunk/src/buildings/wall_door.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/buildings/wall_door.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -50,7 +50,7 @@
+ WallDoor::draw (View& view)
+ {
+   if (status != S_OPENED)
+-    view.get_dc().draw(sprite, pos.x, pos.y);
++    view.get_sc().color().draw(sprite, pos.x, pos.y);
+ }
+ 
+ void
+
+Modified: trunk/src/collision_manager.cxx
+===================================================================
+--- trunk/src/collision_manager.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/collision_manager.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -127,17 +127,17 @@
+       switch (i->type)
+         {
+         case SHAPE_CIRCLE:
+-          view.get_dc().draw_circle(i->circle.x, i->circle.y, i->circle.radius,
++          view.get_sc().color().draw_circle(i->circle.x, i->circle.y, i->circle.radius,
+                                     CL_Color(255, 0, 0));
+           break;
+         case SHAPE_RECT:
+           {
+             CL_Color color(255, 0, 0);
+             Math::Quad quad = rect2quad(i->rect);
+-            view.get_dc().draw_line(quad.a.x, quad.a.y, quad.b.x, quad.b.y, color);
+-            view.get_dc().draw_line(quad.b.x, quad.b.y, quad.c.x, quad.c.y, color);
+-            view.get_dc().draw_line(quad.c.x, quad.c.y, quad.d.x, quad.d.y, color);
+-            view.get_dc().draw_line(quad.d.x, quad.d.y, quad.a.x, quad.a.y, color);
++            view.get_sc().color().draw_line(quad.a.x, quad.a.y, quad.b.x, quad.b.y, color);
++            view.get_sc().color().draw_line(quad.b.x, quad.b.y, quad.c.x, quad.c.y, color);
++            view.get_sc().color().draw_line(quad.c.x, quad.c.y, quad.d.x, quad.d.y, color);
++            view.get_sc().color().draw_line(quad.d.x, quad.d.y, quad.a.x, quad.a.y, color);
+           }
+           break;
+         default:
+
+Modified: trunk/src/energie.cxx
+===================================================================
+--- trunk/src/energie.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/energie.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -59,13 +59,13 @@
+       && CL_System::get_time () > 2000)
+     {
+       // Black border rectangle
+-      view.get_dc().draw_fillrect(x_pos - 32, y_pos - 5,
++      view.get_sc().color().draw_fillrect(x_pos - 32, y_pos - 5,
+                                   x_pos + 32, y_pos + 5,
+                                   CL_Color(CL_Colorf(0.0f, 0.0f, 0.0f,
+                                                      (1000.0f - float(time_diff))/1000.0f * 0.8f)));
+       
+       // Energie bar
+-      view.get_dc().draw_fillrect(x_pos - 30, y_pos - 3,
++      view.get_sc().color().draw_fillrect(x_pos - 30, y_pos - 3,
+                                   x_pos - 30 + (ratio * 60),
+                                   y_pos + 3,
+                                   CL_Color(CL_Colorf(1.0f - energie/float(max_energie),
+
+Modified: trunk/src/game_session.cxx
+===================================================================
+--- trunk/src/game_session.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/game_session.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -211,7 +211,7 @@
+ 
+   GameWorld::current()->draw(*view);
+   GameWorld::current()->draw_energie(*view);
+-  view->get_dc().render(CL_Display::get_current_window()->get_gc());
++  view->get_sc().render();
+ 
+   if (draw_colmap)
+     collision_mgr->draw(*view);
+@@ -303,7 +303,6 @@
+     }
+ 
+   InputManager::clear();
+-  view->get_dc().clear();
+ }
+ 
+ void
+
+Modified: trunk/src/groundmap/grid_tile.cxx
+===================================================================
+--- trunk/src/groundmap/grid_tile.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/groundmap/grid_tile.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -32,7 +32,7 @@
+ void
+ GridTile::draw(View& view, float x, float y)
+ {
+-  view.get_dc().draw(sprite, x, y);
++  view.get_sc().color().draw(sprite, x, y);
+ }
+ 
+ /* EOF */
+
+Modified: trunk/src/groundmap/sprite_tile.cxx
+===================================================================
+--- trunk/src/groundmap/sprite_tile.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/groundmap/sprite_tile.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -35,7 +35,7 @@
+ void
+ SpriteTile::draw(View& view, float x, float y)
+ {
+-  view.get_dc().draw(sprite, x, y);
++  view.get_sc().color().draw(sprite, x, y);
+ }
+ 
+ /** FIXME: 'float delta' should be replaced with GameDelta */
+
+Modified: trunk/src/line_segments.cxx
+===================================================================
+--- trunk/src/line_segments.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/line_segments.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -443,7 +443,7 @@
+ 
+           if (i->radial.turn_right)
+             {
+-              view.get_dc().draw_arc(i->radial.x, i->radial.y, i->radial.radius,
++              view.get_sc().color().draw_arc(i->radial.x, i->radial.y, i->radial.radius,
+                                      i->radial.start_angle, i->radial.end_angle, 
+                                      CL_Color(255, 255, 255));
+               /*
+@@ -454,7 +454,7 @@
+             }
+           else
+             {
+-              view.get_dc().draw_arc(i->radial.x, i->radial.y, i->radial.radius,
++              view.get_sc().color().draw_arc(i->radial.x, i->radial.y, i->radial.radius,
+                                      i->radial.end_angle, i->radial.start_angle, 
+                                      CL_Color(255, 255, 255));
+               /*
+@@ -482,7 +482,7 @@
+           break;
+ 
+         case STRAIGHT:
+-          view.get_dc().draw_line(i->straight.x1, i->straight.y1,
++          view.get_sc().color().draw_line(i->straight.x1, i->straight.y1,
+                                   i->straight.x2, i->straight.y2, 
+                                   CL_Color(255, 255, 255, 255));
+           break;
+
+Modified: trunk/src/marker.cxx
+===================================================================
+--- trunk/src/marker.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/marker.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -44,7 +44,7 @@
+ void
+ Marker::draw (View& view)
+ {
+-  view.get_dc().draw(sprite, pos.x, pos.y);
++  view.get_sc().color().draw(sprite, pos.x, pos.y);
+ }
+ 
+ void
+
+Modified: trunk/src/mine.cxx
+===================================================================
+--- trunk/src/mine.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/mine.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -88,11 +88,11 @@
+ {
+   if (!is_active ())
+     {
+-      view.get_dc().draw(sur, pos.x, pos.y);
++      view.get_sc().color().draw(sur, pos.x, pos.y);
+     }
+   else if (!detonated)
+     {
+-      view.get_dc().draw(sur_active, pos.x, pos.y);
++      view.get_sc().color().draw(sur_active, pos.x, pos.y);
+     }
+   else
+     {
+
+Modified: trunk/src/particles/explosion_particle.hxx
+===================================================================
+--- trunk/src/particles/explosion_particle.hxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/particles/explosion_particle.hxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -82,7 +82,7 @@
+                           ((1 - life_time/max_life_time)) * size);
+ 
+         sprite.set_angle(Math::rad2deg(angle));
+-	view.get_dc().draw(sprite, pos.x, pos.y);
++	view.get_sc().color().draw(sprite, pos.x, pos.y);
+       }
+   }
+ 
+
+Modified: trunk/src/particles/fire_particle.cxx
+===================================================================
+--- trunk/src/particles/fire_particle.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/particles/fire_particle.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -63,7 +63,7 @@
+ void
+ FireParticle::draw (View& view)
+ {
+-  view.get_dc().draw(sprite, pos.x, pos.y);
++  view.get_sc().color().draw(sprite, pos.x, pos.y);
+ }
+ 
+ /* EOF */
+
+Modified: trunk/src/particles/grass_particle.hxx
+===================================================================
+--- trunk/src/particles/grass_particle.hxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/particles/grass_particle.hxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -59,7 +59,7 @@
+     sprite.set_scale (0.8f + ((1 - life_time/max_life_time)) * 4.0f,
+ 		       0.8f + ((1 - life_time/max_life_time)) * 4.0f);
+     sprite.set_angle(angle);
+-    view.get_dc().draw(sprite, pos.x, pos.y);
++    view.get_sc().color().draw(sprite, pos.x, pos.y);
+   }
+ 
+   float get_z_pos () { return 100; }
+
+Modified: trunk/src/particles/rocket_smoke_particle.cxx
+===================================================================
+--- trunk/src/particles/rocket_smoke_particle.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/particles/rocket_smoke_particle.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -53,7 +53,7 @@
+   sprite.set_scale (0.8f + ((1 - life_time/max_life_time)) * 4.0f,
+                     0.8f + ((1 - life_time/max_life_time)) * 4.0f);
+   sprite.set_angle(angle);
+-  view.get_dc().draw(sprite, pos.x, pos.y);
++  view.get_sc().color().draw(sprite, pos.x, pos.y);
+ }
+ 
+ float
+
+Modified: trunk/src/particles/sand_particle.hxx
+===================================================================
+--- trunk/src/particles/sand_particle.hxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/particles/sand_particle.hxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -62,7 +62,7 @@
+     sprite.set_scale (0.65f + ((1 - life_time/max_life_time)) * 4.0f,
+                       0.65f + ((1 - life_time/max_life_time)) * 4.0f);
+     sprite.set_angle(angle);
+-    view.get_dc().draw(sprite, pos.x, pos.y);
++    view.get_sc().color().draw(sprite, pos.x, pos.y);
+   }
+ 
+   float get_z_pos () { return 100; }
+
+Modified: trunk/src/particles/smoke_particle.hxx
+===================================================================
+--- trunk/src/particles/smoke_particle.hxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/particles/smoke_particle.hxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -62,7 +62,7 @@
+     sprite.set_scale (0.8f + ((1 - life_time/max_life_time)) * 4.0f,
+ 		       0.8f + ((1 - life_time/max_life_time)) * 4.0f);
+     sprite.set_angle(angle);
+-    view.get_dc().draw(sprite, pos.x, pos.y);
++    view.get_sc().color().draw(sprite, pos.x, pos.y);
+   }
+ 
+   float get_z_pos () { return 100; }
+
+Modified: trunk/src/projectile.cxx
+===================================================================
+--- trunk/src/projectile.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/projectile.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -57,7 +57,7 @@
+ {
+   if (lifetime > 0) {
+     sur.set_angle(Math::rad2deg(velocity.get_orientation()));
+-    view.get_dc().draw(sur, pos.x, pos.y);
++    view.get_sc().color().draw(sur, pos.x, pos.y);
+   }
+ 
+   //std::cout << "Pos: " << pos.x << " " << pos.y << std::endl;
+
+Modified: trunk/src/robot_tank.cxx
+===================================================================
+--- trunk/src/robot_tank.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/robot_tank.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -124,7 +124,7 @@
+ {
+   // FIXME: Orientation is wrong
+   sprite.set_angle(Math::deg2rad(-orientation - Math::pi_2));
+-  view.get_dc().draw(sprite, pos.x, pos.y);
++  view.get_sc().color().draw(sprite, pos.x, pos.y);
+ }
+ 
+ void
+
+Modified: trunk/src/rocket.cxx
+===================================================================
+--- trunk/src/rocket.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/rocket.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -45,7 +45,7 @@
+ Rocket::draw(View& view)
+ {
+   sprite.set_angle(Math::rad2deg(orientation));
+-  view.get_dc().draw(sprite, pos.x, pos.y);
++  view.get_sc().color().draw(sprite, pos.x, pos.y);
+ }
+ 
+ void
+
+Modified: trunk/src/satchel_charge.cxx
+===================================================================
+--- trunk/src/satchel_charge.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/satchel_charge.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -43,7 +43,7 @@
+ void
+ SatchelCharge::draw(View& view)
+ {
+-  view.get_dc().draw(sprite, pos.x, pos.y);
++  view.get_sc().color().draw(sprite, pos.x, pos.y);
+ }
+ 
+ void
+
+Modified: trunk/src/shockwave.cxx
+===================================================================
+--- trunk/src/shockwave.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/shockwave.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -43,7 +43,7 @@
+ {
+   sprite.set_alpha(1.0f - (progress/10.0f));
+   sprite.set_scale(progress + .5, progress + .5);
+-  view.get_dc().draw(sprite, pos.x, pos.y);
++  view.get_sc().color().draw(sprite, pos.x, pos.y);
+ }
+ 
+ void 
+
+Modified: trunk/src/soldier.cxx
+===================================================================
+--- trunk/src/soldier.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/soldier.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -30,7 +30,8 @@
+ 
+ Soldier::Soldier(const AList& lst) 
+   : ai(0),
+-    sur(resources->get_sprite("feuerkraft/soldier"))
++    sur(resources->get_sprite("feuerkraft/soldier")),
++    sur_light(resources->get_sprite("feuerkraft/soldier-light"))
+ {
+   pos.x = lst.get_float("x-pos");
+   pos.y = lst.get_float("y-pos");
+@@ -65,7 +66,8 @@
+     }
+ 
+   sur.set_angle(Math::rad2deg(new_orientation));
+-  view.get_dc().draw(sur, pos.x, pos.y);
++  view.get_sc().color().draw(sur, pos.x, pos.y);
++  view.get_sc().light().draw(sur_light, pos.x, pos.y);
+   orientation = new_orientation;
+ }
+ 
+
+Modified: trunk/src/soldier.hxx
+===================================================================
+--- trunk/src/soldier.hxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/soldier.hxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -32,6 +32,7 @@
+ private:
+   SoldierAI* ai;
+   CL_Sprite sur;
++  CL_Sprite sur_light;
+ 
+   // Controll variables
+   float acceleration;
+
+Modified: trunk/src/tree.cxx
+===================================================================
+--- trunk/src/tree.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/tree.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -68,7 +68,7 @@
+ void 
+ Tree::draw (View& view)
+ {
+-  view.get_dc().draw(sur, pos.x, pos.y);
++  view.get_sc().color().draw(sur, pos.x, pos.y);
+ }
+ 
+ /* EOF */
+
+Modified: trunk/src/vehicles/helicopter.cxx
+===================================================================
+--- trunk/src/vehicles/helicopter.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/vehicles/helicopter.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -101,10 +101,10 @@
+   if (!destroyed)
+     {
+       heli_shadow.set_angle(Math::rad2deg(orientation));
+-      view.get_dc().draw(heli_shadow, pos.x + height/2.0f, pos.y + height);
++      view.get_sc().color().draw(heli_shadow, pos.x + height/2.0f, pos.y + height);
+ 
+       heli.set_angle(Math::rad2deg(orientation));
+-      view.get_dc().draw(heli, pos.x, pos.y);
++      view.get_sc().color().draw(heli, pos.x, pos.y);
+ 
+       for (Rotors::iterator i = rotors.begin(); i != rotors.end(); ++i)
+         {
+@@ -116,7 +116,7 @@
+   else
+     {
+       helidestroyed.set_angle(Math::rad2deg(orientation));
+-      view.get_dc().draw(helidestroyed, pos.x, pos.y);
++      view.get_sc().color().draw(helidestroyed, pos.x, pos.y);
+     }
+ }
+ 
+
+Modified: trunk/src/vehicles/jeep.cxx
+===================================================================
+--- trunk/src/vehicles/jeep.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/vehicles/jeep.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -70,7 +70,7 @@
+   const float circle = 6.2831854f;
+   
+   jeep.set_angle(angle/(circle/2.0)*180);
+-  view.get_dc().draw(jeep, pos.x, pos.y);
++  view.get_sc().color().draw(jeep, pos.x, pos.y);
+   energie.draw (view, int(pos.x), int(pos.y - 30));
+ }
+ 
+
+Modified: trunk/src/vehicles/rotor.cxx
+===================================================================
+--- trunk/src/vehicles/rotor.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/vehicles/rotor.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -48,12 +48,12 @@
+       if (direction == RotorDescription::LEFT)
+         {
+           fast.set_angle(Math::rad2deg(orientation));
+-          view.get_dc().draw(fast, p.x, p.y);
++          view.get_sc().color().draw(fast, p.x, p.y);
+         }
+       else
+         {
+           fast.set_angle(Math::rad2deg(-orientation));
+-          view.get_dc().draw(fast, p.x, p.y);
++          view.get_sc().color().draw(fast, p.x, p.y);
+         }
+     }
+   else
+@@ -61,12 +61,12 @@
+       if (direction == RotorDescription::LEFT)
+         {
+           slow.set_angle(Math::rad2deg(orientation));
+-          view.get_dc().draw(slow, p.x, p.y);
++          view.get_sc().color().draw(slow, p.x, p.y);
+         }
+       else
+         {
+           slow.set_angle(Math::rad2deg(-orientation));
+-          view.get_dc().draw(slow, p.x, p.y);
++          view.get_sc().color().draw(slow, p.x, p.y);
+         }
+     }
+ }
+
+Modified: trunk/src/vehicles/tank.cxx
+===================================================================
+--- trunk/src/vehicles/tank.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/vehicles/tank.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -63,6 +63,9 @@
+   // Load
+   smod   = resources->get_sprite(def.get_string("tank"));
+   sur    = resources->get_sprite(def.get_string("tank"));
++  sur_light     = resources->get_sprite("feuerkraft/tank_light");
++  sur_highlight = resources->get_sprite("feuerkraft/tank_highlight");
++
+   turret = new Turret(this, 
+                       def.get_int("reloading_speed"),
+                       def.get_string("turret"), 
+@@ -106,6 +109,8 @@
+     smod (resources->get_sprite (tank.c_str ())),
+     sur_destroyed (resources->get_sprite ("feuerkraft/tank2destroyed")),
+     sur (resources->get_sprite (tank.c_str ())),
++    sur_light(resources->get_sprite("feuerkraft/tank_light")),
++    sur_highlight(resources->get_sprite("feuerkraft/tank_highlight")),
+     shadow (resources->get_sprite ("feuerkraft/tank2_shadow")),
+     turret (NULL),
+     smod_step (0),
+@@ -159,7 +164,7 @@
+ {
+   if (destroyed)
+     {
+-      view.get_dc().draw(sur_destroyed, pos.x, pos.y);
++      view.get_sc().color().draw(sur_destroyed, pos.x, pos.y);
+     }
+   else
+     {
+@@ -181,8 +186,19 @@
+ #endif /* UGLY_SHADOWS_ENABLED */
+ 
+       // Draw the tank
++      sur_light.set_scale(2.5, 2.5);
++      sur_highlight.set_scale(2.5, 2.5);
+       sur.set_angle(Math::rad2deg(orientation + Math::pi));
+-      view.get_dc().draw(sur, pos.x, pos.y);
++      sur_light.set_angle(Math::rad2deg(orientation + Math::pi));
++      sur_highlight.set_angle(Math::rad2deg(orientation + Math::pi));
++
++      view.get_sc().color().draw(sur, pos.x, pos.y);
++
++      if (sur_light)
++        view.get_sc().light().draw(sur_light, pos.x, pos.y);
++      if (sur_highlight)
++        view.get_sc().highlight().draw(sur_highlight, pos.x, pos.y);
++
+       turret->draw(view);
+ 
+       // Draw Collision rect
+
+Modified: trunk/src/vehicles/tank.hxx
+===================================================================
+--- trunk/src/vehicles/tank.hxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/vehicles/tank.hxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -62,6 +62,8 @@
+   CL_Sprite sur_destroyed;
+ 
+   CL_Sprite sur;
++  CL_Sprite sur_light;
++  CL_Sprite sur_highlight;
+   CL_Sprite shadow;
+ 
+   Turret* turret;
+
+Modified: trunk/src/vehicles/turret.cxx
+===================================================================
+--- trunk/src/vehicles/turret.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/vehicles/turret.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -38,12 +38,12 @@
+ #endif 
+ 
+   sur.set_angle((absolute_orientation + Math::pi) / Math::pi * 180.0f);
+-  view.get_dc().draw(sur, tank->get_pos().x, tank->get_pos().y);
++  view.get_sc().color().draw(sur, tank->get_pos().x, tank->get_pos().y);
+ 
+   if (fireing && reloading == 0 && tank->ammo > 0.0)
+     {
+       fire_sur.set_angle(Math::rad2deg(absolute_orientation + Math::pi));
+-      view.get_dc().draw(fire_sur, tank->get_pos().x, tank->get_pos().y);
++      view.get_sc().color().draw(fire_sur, tank->get_pos().x, tank->get_pos().y);
+       fireing = false;
+       reloading = reloading_speed;
+     }
+
+Modified: trunk/src/view.cxx
+===================================================================
+--- trunk/src/view.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/view.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -26,7 +26,6 @@
+ #include "color.hxx"
+ #include "math.hxx"
+ #include "view.hxx"
+-#include "display/drawing_context.hxx"
+ 
+ View* View::current_ = 0;
+ 
+@@ -46,7 +45,7 @@
+   state.zoom = 1.0;
+   state.rotation = 0;
+   
+-  drawing_context = new DrawingContext();
++  scene_context = new SceneContext();
+ 
+   current_ = this;
+ }
+@@ -142,7 +141,7 @@
+       FloatVector2d current = next;
+       next = FloatVector2d::make_polar(radius, i * pi/float(steps));
+       
+-      get_dc().draw_line(x_pos + current.x, y_pos + current.y,
++     .get_sc().color().draw_line(x_pos + current.x, y_pos + current.y,
+                          x_pos + next.x,    y_pos + next.y,
+                          color);
+     }
+@@ -169,7 +168,7 @@
+       x = x_pos + radius * cos(angle_start + i*enclosed_angle/steps);
+       y = y_pos + radius * sin(angle_start + i*enclosed_angle/steps);
+ 
+-      get_dc().draw_line(last_x, last_y, x, y, color);
++     .get_sc().color().draw_line(last_x, last_y, x, y, color);
+ 
+       last_x = x;
+       last_y = y;
+@@ -192,8 +191,8 @@
+   if (view_updater)
+     view_updater->update(delta, state);
+ 
+-  drawing_context->reset_modelview();
+-  drawing_context->translate(get_x_offset(), get_y_offset());
++  scene_context->reset_modelview();
++  scene_context->translate(get_x_offset(), get_y_offset());
+   //drawing_context.translate(state.x_offset, state.y_offset);
+ }
+ 
+
+Modified: trunk/src/view.hxx
+===================================================================
+--- trunk/src/view.hxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/view.hxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -23,6 +23,7 @@
+ #include "view_properties.hxx"
+ #include "vector2d.hxx"
+ #include "display/drawing_context.hxx"
++#include "display/scene_context.hxx"
+ 
+ class CL_Sprite;
+ class Color;
+@@ -68,7 +69,7 @@
+   ViewState state;
+   ViewUpdater* view_updater;
+   ViewProperty properties;
+-  DrawingContext* drawing_context;
++  SceneContext* scene_context;
+   
+   static View* current_;
+ public:
+@@ -88,7 +89,7 @@
+   void set_updater(ViewUpdater* arg_updater);
+   void update(float delta);
+ 
+-  DrawingContext& get_dc() { return *drawing_context; } 
++  SceneContext& get_sc() { return *scene_context; } 
+ 
+   bool get_property (ViewProperty p);
+   void set_property (ViewProperty p);
+
+
+
+From grumbel at sheep.berlios.de  Fri Feb 11 16:48:50 2005
+From: grumbel at sheep.berlios.de (Ingo Ruhnke at BerliOS)
+Date: Fri, 11 Feb 2005 16:48:50 +0100
+Subject: [Feuerkraft-commit] r337 - in trunk: . contrib contrib/test contrib/tilegen data data/images data/images/vehicles src src/groundmap src/input src/particles
+Message-ID: <200502111548.j1BFmoDu023605@sheep.berlios.de>
+
+Author: grumbel
+Date: 2005-02-11 16:48:49 +0100 (Fri, 11 Feb 2005)
+New Revision: 337
+
+Added:
+   trunk/contrib/
+   trunk/contrib/test/
+   trunk/contrib/test/Makefile
+   trunk/contrib/test/quad.cxx
+   trunk/contrib/test/triangle.cxx
+   trunk/contrib/tilegen/
+   trunk/contrib/tilegen/Makefile
+   trunk/contrib/tilegen/asphalt.png
+   trunk/contrib/tilegen/grass.png
+   trunk/contrib/tilegen/mask.png
+   trunk/contrib/tilegen/mud.png
+   trunk/contrib/tilegen/sand.png
+   trunk/contrib/tilegen/tilegen.cc
+   trunk/data/images/explosion-light.png
+   trunk/data/images/projectile-light.png
+   trunk/data/images/rocket-highlight.png
+   trunk/data/images/rocket_light.png
+Modified:
+   trunk/data/feuerkraft.xml
+   trunk/data/images/soldier-light.png
+   trunk/data/images/vehicles/tank2-light.png
+   trunk/src/Makefile.am
+   trunk/src/alist.cxx
+   trunk/src/game_session.cxx
+   trunk/src/groundmap/grid_map.cxx
+   trunk/src/groundmap/grid_map_data.cxx
+   trunk/src/groundmap/grid_map_data.hxx
+   trunk/src/input/button_factory.cxx
+   trunk/src/particles/explosion_particle.hxx
+   trunk/src/projectile.cxx
+   trunk/src/projectile.hxx
+   trunk/src/property.cxx
+   trunk/src/rocket.cxx
+   trunk/src/rocket.hxx
+   trunk/src/screenshot.cxx
+   trunk/src/screenshot.hxx
+   trunk/src/system.cxx
+Log:
+- adopted to newest ClanLib
+- some more light
+
+Added: trunk/contrib/test/Makefile
+===================================================================
+--- trunk/contrib/test/Makefile	2005-02-01 20:27:20 UTC (rev 336)
++++ trunk/contrib/test/Makefile	2005-02-11 15:48:49 UTC (rev 337)
+@@ -0,0 +1,10 @@
++CXXFLAGS=-I/home/ingo/projects/gquickdraw/cvs/ -I../../src/
++LDFLAGS=-L/home/ingo/projects/gquickdraw/cvs/ -lgquickdraw -L/usr/X11R6/lib/ -lX11
++
++triangle : triangle.cxx
++	$(CXX) $(CXXFLAGS) $< -o $@ $(LDFLAGS)
++
++quad : quad.cxx
++	$(CXX) $(CXXFLAGS) ../../src/math.cxx $< -o $@ $(LDFLAGS)
++
++# EOF #
+\ No newline at end of file
+
+Added: trunk/contrib/test/quad.cxx
+===================================================================
+--- trunk/contrib/test/quad.cxx	2005-02-01 20:27:20 UTC (rev 336)
++++ trunk/contrib/test/quad.cxx	2005-02-11 15:48:49 UTC (rev 337)
+@@ -0,0 +1,73 @@
++#include <unistd.h>
++#include <gquickdraw.h>
++#include "math.hxx"
++
++void draw_quad(const Math::Quad& quad)
++{
++  gd_draw_line((int)quad.a.x, (int)quad.a.y, 
++               (int)quad.b.x, (int)quad.b.y);
++
++  gd_draw_line((int)quad.b.x, (int)quad.b.y, 
++               (int)quad.c.x, (int)quad.c.y);
++
++  gd_draw_line((int)quad.c.x, (int)quad.c.y, 
++               (int)quad.d.x, (int)quad.d.y);
++
++  gd_draw_line((int)quad.a.x, (int)quad.a.y, 
++               (int)quad.d.x, (int)quad.d.y);
++}
++
++int main()
++{
++  srand(time(NULL));
++
++  Math::Quad a;
++  Math::Quad b;
++  
++  gd_init_screen(640, 480, true);
++
++  while (1)
++    {
++      gd_clear_screen();
++
++      a.a.x = rand()%640;
++      a.a.y = rand()%480;
++
++      a.b.x = rand()%640;
++      a.b.y = rand()%480;
++
++      a.c.x = rand()%640;
++      a.c.y = rand()%480;
++
++      a.d.x = rand()%640;
++      a.d.y = rand()%480;
++
++      b.a.x = rand()%640;
++      b.a.y = rand()%480;
++
++      b.b.x = rand()%640;
++      b.b.y = rand()%480;
++
++      b.c.x = rand()%640;
++      b.c.y = rand()%480;
++
++      b.d.x = rand()%640;
++      b.d.y = rand()%480;
++  
++      if (Math::quad_collide(a, b))
++        gd_draw_rect(0, 0, 50, 50, true);
++  
++      draw_quad(a);
++      draw_quad(b);
++
++      gd_flip_screen();
++      
++      do{
++          gd_process_events();
++          usleep(1000);
++        }
++      while(gd_get_mouse_button(1) == false);
++    }
++}
++
++/* EOF */
+
+Added: trunk/contrib/test/triangle.cxx
+===================================================================
+--- trunk/contrib/test/triangle.cxx	2005-02-01 20:27:20 UTC (rev 336)
++++ trunk/contrib/test/triangle.cxx	2005-02-11 15:48:49 UTC (rev 337)
+@@ -0,0 +1,48 @@
++#include <unistd.h>
++#include <gquickdraw.h>
++#include "math.hxx"
++
++int main()
++{
++  srand(time(NULL));
++
++  float x1 = rand()%640;
++  float y1 = rand()%480;
++
++  float x2 = rand()%640;
++  float y2 = rand()%480;
++
++  float x3 = rand()%640;
++  float y3 = rand()%480;
++
++  gd_init_screen(640, 480, true);
++
++  while (1)
++    {
++      gd_clear_screen();
++      if (Math::point_inside_triangle(gd_get_mouse_x(), gd_get_mouse_y(), 
++                                      x1, y1, x2, y2, x3, y3))
++        gd_draw_rect(0, 0, 50, 50, true);
++      
++      if (Math::lines_intersect(x2, y2, x3, y3,
++                                0, 0, gd_get_mouse_x(), gd_get_mouse_y()))
++        gd_draw_rect(590, 0, 50, 50, true);
++      
++      gd_draw_line(0, 0, gd_get_mouse_x(), gd_get_mouse_y());
++
++      gd_set_fg_color(0xFFFFFF);
++      gd_draw_line((int)x1, (int)y1, (int)x2, (int)y2);
++      gd_set_fg_color(0xFF00F);
++      gd_draw_line((int)x2, (int)y2, (int)x3, (int)y3);
++      gd_set_fg_color(0xFFFFFF);
++      gd_draw_line((int)x3, (int)y3, (int)x1, (int)y1);
++
++      gd_flip_screen();
++
++      gd_process_events();
++      usleep(1000);
++    }
++}
++
++/* EOF */
++
+
+Added: trunk/contrib/tilegen/Makefile
+===================================================================
+--- trunk/contrib/tilegen/Makefile	2005-02-01 20:27:20 UTC (rev 336)
++++ trunk/contrib/tilegen/Makefile	2005-02-11 15:48:49 UTC (rev 337)
+@@ -0,0 +1,10 @@
++tilegen : tilegen.cc
++	$(CXX) -Wall -O0 -g -o $@ $< -lpng
++
++tiles:
++	./tilegen ./tilegen 40x40/wwbw.png \
++           40x40/sand1.png  \
++           40x40/darksand1.png \
++           --output 40x40-output/wwsw1.png
++
++# EOF #
+\ No newline at end of file
+
+Added: trunk/contrib/tilegen/asphalt.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/contrib/tilegen/asphalt.png
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: trunk/contrib/tilegen/grass.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/contrib/tilegen/grass.png
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: trunk/contrib/tilegen/mask.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/contrib/tilegen/mask.png
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: trunk/contrib/tilegen/mud.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/contrib/tilegen/mud.png
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: trunk/contrib/tilegen/sand.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/contrib/tilegen/sand.png
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: trunk/contrib/tilegen/tilegen.cc
+===================================================================
+--- trunk/contrib/tilegen/tilegen.cc	2005-02-01 20:27:20 UTC (rev 336)
++++ trunk/contrib/tilegen/tilegen.cc	2005-02-11 15:48:49 UTC (rev 337)
+@@ -0,0 +1,389 @@
++//  Copyright (C) 2002 Ingo Ruhnke <grumbel at gmx.de>
++//
++//  This program is free software; you can redistribute it and/or
++//  modify it under the terms of the GNU General Public License
++//  as published by the Free Software Foundation; either version 2
++//  of the License, or (at your option) any later version.
++//
++//  This program is distributed in the hope that it will be useful,
++//  but WITHOUT ANY WARRANTY; without even the implied warranty of
++//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++//  GNU General Public License for more details.
++//
++//  You should have received a copy of the GNU General Public License
++//  along with this program; if not, write to the Free Software
++//  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
++
++#include <argp.h>
++#include <string>
++#include <vector>
++#include <iostream>
++#include <stdio.h>
++#include <stdlib.h>
++#include <png.h>
++
++const char *argp_program_version = "Feuerkraft TileGen Version 0.0.0";
++const char *argp_program_bug_address = "<grumbel at gmx.de>";
++
++static char doc[] = "Feuerkraft TileGen";
++     
++static struct argp_option options[] = {
++  {"verbose",  'v', 0,      0,  "Produce verbose output" },
++  {"quiet",    'q', 0,      0,  "Don't produce any output" },
++  {"output",   'o', "FILE", 0,  "Output to FILE instead of standard output" },
++  {"rot90",    'r', 0,      0,  "Rotate mask by 90 degrees" },
++  {"rot180",   'u', 0,      0,  "Rotate mask by 180 degrees" },
++  {"rot270",   'l', 0,      0,  "Rotate mask by 270 degrees" },
++  {"flip",     'f', 0,      0,  "Flip image" },
++  { 0 }
++};
++
++struct arguments {
++  bool flip;
++  enum { ROT0, ROT90, ROT180, ROT270 } rotate;
++  char* mask_file;
++  char* layer1_file;
++  char* layer2_file;
++  char* output_file;
++};
++
++error_t
++parse_option(int key, char *arg, struct argp_state *state)
++{
++  struct arguments* args = static_cast<arguments*>(state->input);
++
++  switch (key)
++    {
++    case ARGP_KEY_ARG:
++      if (state->arg_num == 0)
++        args->mask_file = arg;
++      else if (state->arg_num == 1)
++        args->layer1_file = arg;
++      else if (state->arg_num == 2)
++        args->layer2_file = arg;
++      else
++        return ARGP_ERR_UNKNOWN;
++      break;
++
++    case ARGP_KEY_ARGS:
++      //std::cout << "Arguments: " << key << " " << (int)arg  << std::endl;
++      break;
++
++    case ARGP_KEY_NO_ARGS:
++      //std::cout << "no arguments" << std::endl;
++      break;
++
++    case ARGP_KEY_END:
++      if (args->mask_file == 0
++          || args->layer1_file == 0
++          || args->layer2_file == 0)
++        argp_usage(state);
++      break;
++      
++    case ARGP_KEY_INIT:
++      //std::cout << "Init" << std::endl;
++      break;
++
++    case ARGP_KEY_FINI:
++      //std::cout << "Fini" << std::endl;
++      break;
++
++    case ARGP_KEY_SUCCESS:
++      //std::cout << "Success" << std::endl;
++      break;
++
++    case ARGP_KEY_ERROR:
++      std::cout << "ERROR" << std::endl;
++      break;
++
++    case 'f':
++      args->flip = true;
++      break;
++
++    case 'r':
++      args->rotate = arguments::ROT90;
++      break;
++
++    case 'u':
++      args->rotate = arguments::ROT180;
++      break;
++
++    case 'l':
++      args->rotate = arguments::ROT270;
++      break;
++
++    case 'o':
++      args->output_file = arg;
++      break;
++
++    default:
++      std::cout << "Unknown Key: " << (char)key << " Arg: " << (int)arg << " State: " << state << std::endl;
++      break;
++    }
++  return 0;
++}
++
++static struct argp argp = { options, parse_option, "MASK LAYER1 LAYER2", doc, 0, 0 };
++
++class Color
++{
++public:
++  int red;
++  int green;
++  int blue;
++
++  Color ()
++    : red (0), green (255), blue (0)
++  {
++  }
++
++  Color (int r, int g, int b) 
++    : red (r), green (g), blue (b)
++  {    
++  }
++};
++
++class Image
++{
++private:
++  int m_width;
++  int m_height;
++  int row_bytes;
++
++  std::vector<unsigned char> m_image;
++  
++public:
++  Image (const Image& image)
++    : m_width(image.m_width),
++      m_height(image.m_height),
++      row_bytes(image.row_bytes),
++      m_image(image.m_image)
++  {
++  }
++
++  /** Load an image from a given png source */
++  Image (const std::string& filename) 
++  {
++    FILE* fp;
++    png_structp png_ptr;
++    png_infop info_ptr;
++    png_uint_32 pwidth, pheight;
++    int bit_depth, color_type, interlace_type, compression_type, filter_type;
++
++    if ((fp = fopen(filename.c_str (), "rb")) == NULL)
++      {
++	perror (filename.c_str ());
++	exit (EXIT_FAILURE);
++      }
++
++    png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING,
++				     NULL, NULL, NULL);
++    info_ptr = png_create_info_struct(png_ptr);
++    png_init_io(png_ptr, fp);
++    png_read_info(png_ptr, info_ptr);
++    png_get_IHDR(png_ptr, info_ptr, &pwidth, &pheight,
++		 &bit_depth, &color_type, &interlace_type,
++		 &compression_type, &filter_type);
++    row_bytes = png_get_rowbytes(png_ptr, info_ptr);
++
++    std::cout << "BitDepth:    " << bit_depth << "\n"
++              << "Colortype:   " << color_type << "\n"
++              << "Interlace:   " << interlace_type << "\n"
++              << "Filter Type: " << filter_type << "\n"
++              << "Row Bytes:   " << row_bytes << "\n"
++              << "Width:       " << pwidth << "\n"
++              << "Height:      " << pheight << "\n"
++              << std::endl;
++
++    // Create the 'data' array
++    png_bytep row_pointers[pheight];
++    for (unsigned int i = 0; i < pheight; ++i)
++      row_pointers[i] = new png_byte[row_bytes];
++
++    png_read_image(png_ptr, row_pointers);
++    
++    if (color_type != PNG_COLOR_TYPE_RGB)
++      {
++        std::cout << "Unsupported color type" << std::endl;
++        exit (EXIT_FAILURE);
++      }
++
++    m_width  = pwidth;
++    m_height = pheight;
++
++    m_image.resize (m_height * row_bytes);
++
++    // Convert the png into our internal data structure
++    for (int y = 0; y < m_height; ++y)
++      for (int i = 0; i < row_bytes; ++i)
++        {
++          m_image[i + (row_bytes * y)] = row_pointers[y][i];
++        }
++	  
++    png_destroy_read_struct(&png_ptr, &info_ptr, (png_infopp)NULL);
++    fclose (fp);
++  }
++  
++  ~Image () 
++  {
++  }
++
++  void write_pnm(std::string filename)
++  {
++    FILE* fp;
++    fp = fopen(filename.c_str (), "wb");
++    if (fp == NULL)
++      assert (false);
++
++    fprintf(fp, "P3\n# CREATOR\n");
++    fprintf(fp, "%d %d\n", m_width, m_height);
++    fprintf(fp, "255\n");
++
++    for (unsigned int i = 0; i < m_image.size (); ++i)
++      fprintf(fp, "%d\n", m_image[i]);
++
++    fclose(fp);
++  }
++
++  void write_png_file(std::string filename)
++  {
++    FILE* fp;
++    fp = fopen(filename.c_str (), "wb");
++    if (fp == NULL)
++      assert (false);
++
++    write_png(fp);
++
++    fclose(fp);
++  }
++
++  void write_png (FILE* fp)
++  {
++    png_structp png_ptr;
++    png_infop info_ptr;
++
++    png_ptr  = png_create_write_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
++    info_ptr = png_create_info_struct(png_ptr);
++
++    png_init_io(png_ptr, fp);
++
++    png_set_IHDR(png_ptr, info_ptr, 
++                 m_width, m_height, 8 /* bitdepth */,
++                 PNG_COLOR_TYPE_RGB,
++                 PNG_INTERLACE_NONE, 
++                 PNG_COMPRESSION_TYPE_BASE, 
++                 PNG_FILTER_TYPE_BASE);
++
++    png_write_info(png_ptr, info_ptr);
++
++    png_uint_32 height = m_height;
++
++    png_byte image[height * row_bytes];
++    png_bytep row_pointers[height];
++   
++    // fill the image with data
++    for (unsigned int i = 0; i < m_image.size (); ++i)
++      image[i] = m_image[i];
++    
++    // generate row pointers
++    for (unsigned int k = 0; k < height; k++)
++      row_pointers[k] = image + (k * row_bytes);
++
++    png_write_image(png_ptr, row_pointers);
++
++    png_write_end(png_ptr, info_ptr);
++  }
++
++  void add_overlay(Image& mask, Image& image)
++  {
++    for (int y = 0; y < m_height; ++y)
++      for (int x = 0; x < row_bytes; ++x)
++        {
++          int i = (y * row_bytes) + x;
++          float alpha = (mask.m_image[i]/255.0);
++          int new_color = int((m_image[i] * (1.0f - alpha)) + (image.m_image[i] * alpha));
++          m_image[i] = new_color > 255 ? 255 : new_color;
++        }
++  }
++
++  void rotate_90()
++  {
++    Image image(*this);
++    
++    for (int y = 0; y < m_height; ++y)
++      for (int x = 0; x < m_width; ++x)
++        {
++          m_image[(y * row_bytes) + 3*x + 0] = image.m_image[((m_height - x - 1) * row_bytes) + 3*y + 0];
++          m_image[(y * row_bytes) + 3*x + 1] = image.m_image[((m_height - x - 1) * row_bytes) + 3*y + 1];
++          m_image[(y * row_bytes) + 3*x + 2] = image.m_image[((m_height - x - 1) * row_bytes) + 3*y + 2];
++        }
++  }
++
++  void flip()
++  {
++    Image image(*this);
++    
++    for (int y = 0; y < m_height; ++y)
++      for (int x = 0; x < m_width; ++x)
++        {
++          m_image[(y * row_bytes) + 3*x + 0] = image.m_image[((m_height - y - 1) * row_bytes) + 3*x + 0];
++          m_image[(y * row_bytes) + 3*x + 1] = image.m_image[((m_height - y - 1) * row_bytes) + 3*x + 1];
++          m_image[(y * row_bytes) + 3*x + 2] = image.m_image[((m_height - y - 1) * row_bytes) + 3*x + 2];
++        }
++  }
++};
++
++int main (int argc, char* argv[])
++{
++  struct arguments args;
++
++  args.flip   = false;
++  args.rotate = arguments::ROT0;
++  args.mask_file = 0;
++  args.layer1_file = 0;
++  args.layer2_file = 0;
++  args.output_file = 0;
++
++  argp_parse (&argp, argc, argv, 0, 0, &args);
++
++  std::cout << "Loading..." << std::endl;
++  Image mask  (args.mask_file);
++  Image layer1(args.layer1_file);
++  Image layer2(args.layer2_file);
++  std::cout << "Loading... done" << std::endl;
++  std::cout << "writing png" << std::endl;
++
++  if (args.flip)
++    mask.flip();
++
++  switch (args.rotate)
++    {
++    case arguments::ROT0:
++      break;
++
++    case arguments::ROT90:
++      mask.rotate_90();
++      break;
++
++    case arguments::ROT180:
++      mask.rotate_90();
++      mask.rotate_90();
++      break;
++      
++    case arguments::ROT270:
++      mask.rotate_90();
++      mask.rotate_90();
++      mask.rotate_90();
++      break;
++    }
++
++  layer1.add_overlay(mask, layer2);
++
++  if (args.output_file)
++    layer1.write_png_file(args.output_file);
++  else
++    layer1.write_png(stdout);
++}
++
++
++// EOF //
+
+Modified: trunk/data/feuerkraft.xml
+===================================================================
+--- trunk/data/feuerkraft.xml	2005-02-01 20:27:20 UTC (rev 336)
++++ trunk/data/feuerkraft.xml	2005-02-11 15:48:49 UTC (rev 337)
+@@ -23,6 +23,14 @@
+       <image file="images/rocket_smoke.png" />
+     </sprite>
+ 
++    <sprite name="rocket-light">
++      <image file="images/rocket_light.png" />
++    </sprite>
++
++    <sprite name="rocket-highlight">
++      <image file="images/rocket-highlight.png" />
++    </sprite>
++
+     <sprite name="rocket">
+       <image file="images/rocket.png" />
+       <image file="images/rocket1.png" />
+@@ -189,6 +197,10 @@
+     <sprite name="jeep">
+       <image file="images/jeep.png" />
+     </sprite>
++
++    <sprite name="projectile-light">
++      <image file="images/projectile-light.png" />
++    </sprite>
+     
+     <sprite name="projectile">
+       <image file="images/projectile1.png" delay="10" />
+@@ -210,6 +222,10 @@
+         />
+     </sprite>
+ 
++    <sprite name="explosion-light">
++      <image file="images/explosion-light.png" />
++    </sprite>
++
+     <sprite name="explosion">
+       <image 
+         file="images/explosion.png"
+
+Added: trunk/data/images/explosion-light.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/data/images/explosion-light.png
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: trunk/data/images/projectile-light.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/data/images/projectile-light.png
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: trunk/data/images/rocket-highlight.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/data/images/rocket-highlight.png
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: trunk/data/images/rocket_light.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/data/images/rocket_light.png
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Modified: trunk/data/images/soldier-light.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/vehicles/tank2-light.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/src/Makefile.am
+===================================================================
+--- trunk/src/Makefile.am	2005-02-01 20:27:20 UTC (rev 336)
++++ trunk/src/Makefile.am	2005-02-11 15:48:49 UTC (rev 337)
+@@ -152,8 +152,6 @@
+ start_screen.hxx \
+ globals.hxx \
+ globals.cxx \
+-string_converter.cxx \
+-string_converter.hxx \
+ system.cxx \
+ system.hxx \
+ trigger_manager.hxx \
+
+Modified: trunk/src/alist.cxx
+===================================================================
+--- trunk/src/alist.cxx	2005-02-01 20:27:20 UTC (rev 336)
++++ trunk/src/alist.cxx	2005-02-11 15:48:49 UTC (rev 337)
+@@ -18,7 +18,6 @@
+ //  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ 
+ #include <iostream>
+-#include "string_converter.hxx"
+ #include "alist.hxx"
+ 
+ AList::AList()
+
+Modified: trunk/src/game_session.cxx
+===================================================================
+--- trunk/src/game_session.cxx	2005-02-01 20:27:20 UTC (rev 336)
++++ trunk/src/game_session.cxx	2005-02-11 15:48:49 UTC (rev 337)
+@@ -23,6 +23,7 @@
+ #include <ClanLib/Display/mouse.h>
+ #include <ClanLib/Display/keyboard.h>
+ #include <ClanLib/Display/keys.h>
++#include <sstream>
+ #include <iostream>
+ #include <assert.h>
+ 
+@@ -57,7 +58,6 @@
+ #include "player.hxx"
+ #include "path_manager.hxx"
+ #include "command_line_arguments.hxx"
+-#include "string_converter.hxx"
+ #include "screenshot.hxx"
+ #include "game_session.hxx"
+ 
+@@ -212,6 +212,7 @@
+   GameWorld::current()->draw(*view);
+   GameWorld::current()->draw_energie(*view);
+   view->get_sc().render();
++  view->get_sc().light().fill_screen(CL_Color(50, 50, 100));
+ 
+   if (draw_colmap)
+     collision_mgr->draw(*view);
+
+Modified: trunk/src/groundmap/grid_map.cxx
+===================================================================
+--- trunk/src/groundmap/grid_map.cxx	2005-02-01 20:27:20 UTC (rev 336)
++++ trunk/src/groundmap/grid_map.cxx	2005-02-11 15:48:49 UTC (rev 337)
+@@ -24,7 +24,7 @@
+ GridMap::GridMap (const GridMapData& data)
+   : GridMapData (data),
+     tiles (path_manager.complete("tiles.scm")),
+-    surface (provider)
++    surface(provider)
+ {
+   std::vector<GridTileData> tile_data;
+   
+
+Modified: trunk/src/groundmap/grid_map_data.cxx
+===================================================================
+--- trunk/src/groundmap/grid_map_data.cxx	2005-02-01 20:27:20 UTC (rev 336)
++++ trunk/src/groundmap/grid_map_data.cxx	2005-02-11 15:48:49 UTC (rev 337)
+@@ -25,7 +25,6 @@
+ #include "grid_map_data.hxx"
+ 
+ GridMapData::GridMapData (SCM desc)
+-  : provider (0)
+ {
+   grid_width  = -1;
+   grid_height = -1;
+@@ -70,26 +69,26 @@
+   free (str);
+ #endif
+ 
+-  provider = new CL_PNGProvider (path_manager.complete("missions/" + filename));
++  provider = CL_PNGProvider (path_manager.complete("missions/" + filename));
+ 
+-  provider->lock ();
+-  //FIXME:Display2 assert (provider->is_indexed ());
++  provider.lock ();
++  //FIXME:Display2 assert (provider.is_indexed ());
+ 
+-  grid_width  = provider->get_width () + 2;
+-  grid_height = provider->get_height () + 2;
++  grid_width  = provider.get_width () + 2;
++  grid_height = provider.get_height () + 2;
+ 
+   grid_data.resize (grid_width * grid_height);
+   
+   for (int i = 0; i < grid_height * grid_width; ++i)
+     grid_data[i] = GT_SAND; // FIXME: should be variable not hardcoded!
+ 
+-  unsigned char* buffer = static_cast<unsigned char*>(provider->get_data ());
+-  for (int y = 0; y < provider->get_height (); ++y)
+-    for (int x = 0; x < provider->get_width (); ++x)
++  unsigned char* buffer = static_cast<unsigned char*>(provider.get_data ());
++  for (int y = 0; y < provider.get_height (); ++y)
++    for (int x = 0; x < provider.get_width (); ++x)
+       grid_data[(x + 1) + ((y+1) * grid_width)] 
+-	= static_cast<GroundType>(buffer[x + (provider->get_width () * y)]);
++	= static_cast<GroundType>(buffer[x + (provider.get_width () * y)]);
+ 
+-  provider->unlock (); 
++  provider.unlock (); 
+ }
+ 
+ GroundMap*
+
+Modified: trunk/src/groundmap/grid_map_data.hxx
+===================================================================
+--- trunk/src/groundmap/grid_map_data.hxx	2005-02-01 20:27:20 UTC (rev 336)
++++ trunk/src/groundmap/grid_map_data.hxx	2005-02-11 15:48:49 UTC (rev 337)
+@@ -23,6 +23,7 @@
+ #include <vector>
+ 
+ #include <guile/gh.h>
++#include <ClanLib/Display/pixel_buffer.h>
+ #include "ground_type.hxx"
+ #include "ground_map_data.hxx"
+ 
+@@ -39,7 +40,7 @@
+   /** The data of the grid */
+   std::vector<GroundType> grid_data;
+   
+-  CL_PixelBuffer* provider;
++  CL_PixelBuffer provider;
+   
+ public:
+   GridMapData (SCM desc);
+
+Modified: trunk/src/input/button_factory.cxx
+===================================================================
+--- trunk/src/input/button_factory.cxx	2005-02-01 20:27:20 UTC (rev 336)
++++ trunk/src/input/button_factory.cxx	2005-02-11 15:48:49 UTC (rev 337)
+@@ -19,8 +19,8 @@
+ 
+ #include <ClanLib/Display/joystick.h>
+ #include <ClanLib/Display/keyboard.h>
++#include <ClanLib/Core/System/clanstring.h>
+ #include "../guile.hxx"
+-#include "../string_converter.hxx"
+ #include "../feuerkraft_error.hxx"
+ #include "input_button.hxx"
+ #include "input_axis.hxx"
+@@ -80,7 +80,7 @@
+   else
+     {
+       throw FeuerkraftError("Error: ButtonFactory::create_joystick_button: device out of range"
+-                            + to_string(device_num) + " " + Guile::scm2string(lst));
++                            + CL_String::to(device_num) + " " + Guile::scm2string(lst));
+     }
+ }
+ 
+
+Modified: trunk/src/particles/explosion_particle.hxx
+===================================================================
+--- trunk/src/particles/explosion_particle.hxx	2005-02-01 20:27:20 UTC (rev 336)
++++ trunk/src/particles/explosion_particle.hxx	2005-02-11 15:48:49 UTC (rev 337)
+@@ -31,6 +31,7 @@
+ private:
+   float size;
+   CL_Sprite sprite;
++  CL_Sprite sprite_light;
+   float max_life_time;
+   bool direction;
+   float angle;
+@@ -51,6 +52,7 @@
+ 
+     // FIXME: memory leak
+     sprite = resources->get_sprite("feuerkraft/explosion");
++    sprite_light = resources->get_sprite("feuerkraft/explosion-light");
+     sprite.rotate (angle);
+     sprite.set_blend_func(blend_src_alpha, blend_one);
+   
+@@ -81,8 +83,12 @@
+ 	sprite.set_scale (((1 - life_time/max_life_time)) * size,
+                           ((1 - life_time/max_life_time)) * size);
+ 
++	sprite_light.set_scale (((1 - life_time/max_life_time)) * size * 2.0f,
++                                ((1 - life_time/max_life_time)) * size * 2.0f);
++
+         sprite.set_angle(Math::rad2deg(angle));
+ 	view.get_sc().color().draw(sprite, pos.x, pos.y);
++	view.get_sc().light().draw(sprite_light, pos.x, pos.y);
+       }
+   }
+ 
+
+Modified: trunk/src/projectile.cxx
+===================================================================
+--- trunk/src/projectile.cxx	2005-02-01 20:27:20 UTC (rev 336)
++++ trunk/src/projectile.cxx	2005-02-11 15:48:49 UTC (rev 337)
+@@ -32,6 +32,7 @@
+ Projectile::Projectile (GameObj* p,
+ 			const FloatVector2d& arg_pos, const FloatVector2d& arg_velocity)
+   : sur (resources->get_sprite("feuerkraft/projectile")),
++    sur_light (resources->get_sprite("feuerkraft/projectile-light")),
+     tmp_pos (arg_pos),
+     velocity (arg_velocity),
+     lifetime (45 + rand () % 5 ),
+@@ -57,7 +58,9 @@
+ {
+   if (lifetime > 0) {
+     sur.set_angle(Math::rad2deg(velocity.get_orientation()));
++    sur_light.set_angle(Math::rad2deg(velocity.get_orientation()));
+     view.get_sc().color().draw(sur, pos.x, pos.y);
++    view.get_sc().light().draw(sur_light, pos.x, pos.y);
+   }
+ 
+   //std::cout << "Pos: " << pos.x << " " << pos.y << std::endl;
+
+Modified: trunk/src/projectile.hxx
+===================================================================
+--- trunk/src/projectile.hxx	2005-02-01 20:27:20 UTC (rev 336)
++++ trunk/src/projectile.hxx	2005-02-11 15:48:49 UTC (rev 337)
+@@ -29,6 +29,7 @@
+ private:
+   FloatVector2d pos;
+   CL_Sprite sur;
++  CL_Sprite sur_light;
+   FloatVector2d tmp_pos;
+   FloatVector2d velocity;
+   float lifetime;
+
+Modified: trunk/src/property.cxx
+===================================================================
+--- trunk/src/property.cxx	2005-02-01 20:27:20 UTC (rev 336)
++++ trunk/src/property.cxx	2005-02-11 15:48:49 UTC (rev 337)
+@@ -19,7 +19,7 @@
+ 
+ #include <iostream>
+ #include <assert.h>
+-#include "string_converter.hxx"
++#include <ClanLib/Core/System/clanstring.h>
+ #include "property.hxx"
+ 
+ Property::Property(const std::string& arg_name)
+@@ -118,13 +118,13 @@
+   switch (type)
+     {
+     case Property::T_BOOL:
+-      return ::to_string(get_bool());
++      return CL_String::to(get_bool());
+ 
+     case Property::T_FLOAT:
+-      return ::to_string(get_float());
++      return CL_String::to(get_float());
+       
+     case Property::T_INT:
+-      return ::to_string(get_int());
++      return CL_String::to(get_int());
+ 
+     case Property::T_STRING:
+       return get_string();
+
+Modified: trunk/src/rocket.cxx
+===================================================================
+--- trunk/src/rocket.cxx	2005-02-01 20:27:20 UTC (rev 336)
++++ trunk/src/rocket.cxx	2005-02-11 15:48:49 UTC (rev 337)
+@@ -34,6 +34,10 @@
+ {
+   release_count = 0;
+   sprite = resources->get_sprite("feuerkraft/rocket");
++
++  sprite_light     = resources->get_sprite("feuerkraft/rocket-light");
++  sprite_highlight = resources->get_sprite("feuerkraft/rocket-highlight");
++
+   smoke  = resources->get_sprite("feuerkraft/rocket_smoke");
+ }
+ 
+@@ -45,7 +49,16 @@
+ Rocket::draw(View& view)
+ {
+   sprite.set_angle(Math::rad2deg(orientation));
++  sprite_light.set_angle(Math::rad2deg(orientation));
++  sprite_highlight.set_angle(Math::rad2deg(orientation));
++
++  // Light flicker
++  sprite_light.set_alpha(Math::frand()*0.5f + 0.5f);
++  sprite_highlight.set_alpha(Math::frand()*0.5f + 0.5f);
++
+   view.get_sc().color().draw(sprite, pos.x, pos.y);
++  view.get_sc().light().draw(sprite_light, pos.x, pos.y);
++  view.get_sc().highlight().draw(sprite_highlight, pos.x, pos.y);
+ }
+ 
+ void
+
+Modified: trunk/src/rocket.hxx
+===================================================================
+--- trunk/src/rocket.hxx	2005-02-01 20:27:20 UTC (rev 336)
++++ trunk/src/rocket.hxx	2005-02-11 15:48:49 UTC (rev 337)
+@@ -28,6 +28,8 @@
+ {
+ private:
+   CL_Sprite sprite;
++  CL_Sprite sprite_light;
++  CL_Sprite sprite_highlight;
+   CL_Sprite smoke;
+   FloatVector2d pos;
+   float orientation;
+
+Modified: trunk/src/screenshot.cxx
+===================================================================
+--- trunk/src/screenshot.cxx	2005-02-01 20:27:20 UTC (rev 336)
++++ trunk/src/screenshot.cxx	2005-02-11 15:48:49 UTC (rev 337)
+@@ -28,7 +28,7 @@
+ void
+ Screenshot::write_screenshot_pnm(const std::string& filename)
+ {
+-  CL_PixelBuffer* buf = take_screen_shot();
++  CL_PixelBuffer buf = take_screen_shot();
+ 
+   FILE* out = fopen(filename.c_str(), "wb");
+   
+@@ -39,10 +39,10 @@
+       return;
+     }
+ 
+-  buf->lock();
+-  int width  = buf->get_width();
+-  int pitch  = buf->get_width()*3;
+-  int height = buf->get_height();
++  buf.lock();
++  int width  = buf.get_width();
++  int pitch  = buf.get_width()*3;
++  int height = buf.get_height();
+ 
+   fprintf(out,
+ 	  "P6\n"
+@@ -52,7 +52,7 @@
+ 	  width,
+ 	  height);
+ 
+-  unsigned char* data = static_cast<unsigned char*>(buf->get_data());
++  unsigned char* data = static_cast<unsigned char*>(buf.get_data());
+   
+   for(int i = height-1; i >= 0; --i)
+     {
+@@ -62,13 +62,11 @@
+              out);
+     }
+ 
+-  buf->unlock();
++  buf.unlock();
+   fclose(out);
+-  
+-  delete buf;
+ }
+ 
+-CL_PixelBuffer*
++CL_PixelBuffer
+ Screenshot::take_screen_shot()
+ {
+   CL_PixelBuffer back_buffer = CL_Display::get_current_window()->get_back_buffer();
+@@ -76,7 +74,7 @@
+   unsigned short width = back_buffer.get_width();
+   unsigned short height = back_buffer.get_height();
+ 		
+-  CL_PixelBuffer *pbuf = new CL_PixelBuffer(width, height, width*3, CL_PixelFormat::bgr888);
++  CL_PixelBuffer pbuf(width, height, width*3, CL_PixelFormat::bgr888);
+   back_buffer.convert(pbuf);
+   
+   return pbuf;
+
+Modified: trunk/src/screenshot.hxx
+===================================================================
+--- trunk/src/screenshot.hxx	2005-02-01 20:27:20 UTC (rev 336)
++++ trunk/src/screenshot.hxx	2005-02-11 15:48:49 UTC (rev 337)
+@@ -29,7 +29,7 @@
+ {
+ private:
+ public:
+-  static CL_PixelBuffer* take_screen_shot();
++  static CL_PixelBuffer take_screen_shot();
+   static void write_screenshot_pnm(const std::string& filename);
+ private:
+   Screenshot (const Screenshot&);
+
+Modified: trunk/src/system.cxx
+===================================================================
+--- trunk/src/system.cxx	2005-02-01 20:27:20 UTC (rev 336)
++++ trunk/src/system.cxx	2005-02-11 15:48:49 UTC (rev 337)
+@@ -34,11 +34,10 @@
+ 
+ #include <cstdio>
+ #include <iostream>
+-
++#include <ClanLib/Core/System/clanstring.h>
+ #include "gettext.h"
+ 
+ //#include "PingusError.hxx" 
+-#include "string_converter.hxx"
+ #include "system.hxx"
+ 
+ int System::verbose;
+@@ -344,7 +343,7 @@
+ 
+   fclose (in);
+ 
+-  return to_string(checksum);
++  return CL_String::to(checksum);
+ }
+ 
+ /* EOF */
+
+
+
+From grumbel at sheep.berlios.de  Fri Feb 11 16:49:13 2005
+From: grumbel at sheep.berlios.de (Ingo Ruhnke at BerliOS)
+Date: Fri, 11 Feb 2005 16:49:13 +0100
+Subject: [Feuerkraft-commit] r338 - trunk/src
+Message-ID: <200502111549.j1BFnDtT023655@sheep.berlios.de>
+
+Author: grumbel
+Date: 2005-02-11 16:49:12 +0100 (Fri, 11 Feb 2005)
+New Revision: 338
+
+Removed:
+   trunk/src/string_converter.cxx
+   trunk/src/string_converter.hxx
+Log:
+- adopted to newest ClanLib
+- some more light
+
+Deleted: trunk/src/string_converter.cxx
+===================================================================
+--- trunk/src/string_converter.cxx	2005-02-11 15:48:49 UTC (rev 337)
++++ trunk/src/string_converter.cxx	2005-02-11 15:49:12 UTC (rev 338)
+@@ -1,37 +0,0 @@
+-//  $Id: string_converter.cxx,v 1.4 2003/06/03 14:11:22 grumbel Exp $
+-//
+-//  Feuerkraft - A Tank Battle Game
+-//  Copyright (C) 2000 Ingo Ruhnke <grumbel at gmx.de>
+-//
+-//  This program is free software; you can redistribute it and/or
+-//  modify it under the terms of the GNU General Public License
+-//  as published by the Free Software Foundation; either version 2
+-//  of the License, or (at your option) any later version.
+-//
+-//  This program is distributed in the hope that it will be useful,
+-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+-//  GNU General Public License for more details.
+-//
+-//  You should have received a copy of the GNU General Public License
+-//  along with this program; if not, write to the Free Software
+-//  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+-
+-#include <algorithm>
+-#include "string_converter.hxx"
+-
+-std::string string_upcase (const std::string& str)
+-{
+-  std::string name = str;
+-  std::transform(name.begin(), name.end(), name.begin(), ::toupper);
+-  return name;
+-}
+-
+-std::string string_downcase (const std::string& str)
+-{
+-  std::string name = str;
+-  std::transform(name.begin(), name.end(), name.begin(), ::tolower);
+-  return name;
+-}
+-
+-/* EOF */
+
+Deleted: trunk/src/string_converter.hxx
+===================================================================
+--- trunk/src/string_converter.hxx	2005-02-11 15:48:49 UTC (rev 337)
++++ trunk/src/string_converter.hxx	2005-02-11 15:49:12 UTC (rev 338)
+@@ -1,70 +0,0 @@
+-//  $Id: string_converter.hxx,v 1.3 2003/06/03 14:11:22 grumbel Exp $
+-//
+-//  Feuerkraft - A Tank Battle Game
+-//  Copyright (C) 2000 Ingo Ruhnke <grumbel at gmx.de>
+-//
+-//  This program is free software; you can redistribute it and/or
+-//  modify it under the terms of the GNU General Public License
+-//  as published by the Free Software Foundation; either version 2
+-//  of the License, or (at your option) any later version.
+-//
+-//  This program is distributed in the hope that it will be useful,
+-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+-//  GNU General Public License for more details.
+-//
+-//  You should have received a copy of the GNU General Public License
+-//  along with this program; if not, write to the Free Software
+-//  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+-
+-#ifndef HEADER_PINGUS_STRING_CONVERTER_HXX
+-#define HEADER_PINGUS_STRING_CONVERTER_HXX
+-
+-#include <string>
+-
+-#ifdef HAVE_CONFIG_H
+-#include <config.h>
+-#endif
+-
+-#include <sstream>
+-
+-template <class T>
+-std::string to_string (const T& any)
+-{
+-  std::ostringstream oss;
+-  oss << any ;
+-  return oss.str();
+-}
+-
+-/** Convert the contents in string \a rep to type \a T, if conversion
+-    fails false is returned and the value of \a x is unchanged, if
+-    true is returned the conversation was successfull. */
+-template <class T>
+-bool from_string(const std::string& rep, T& x)
+-{
+- // this is necessary so that if "x" is not modified if the conversion fails
+-  T temp;
+-  std::istringstream iss(rep);
+-  iss >> temp;
+-
+-  /*if (iss.fail())
+-    throw std::invalid_argument
+-    ("Exception: 'failed to extract type T from rep' " __FILE__ ": " + rep);*/
+-
+-  if (iss.fail())
+-    {
+-      return false;
+-    }
+-  else
+-    {
+-      x = temp;
+-      return true;
+-    }
+-}
+-
+-std::string string_upcase (const std::string&);
+-std::string string_downcase (const std::string&);
+-
+-#endif
+-
+-/* EOF */
+
+
+
+From grumbel at sheep.berlios.de  Fri Feb 11 19:53:48 2005
+From: grumbel at sheep.berlios.de (Ingo Ruhnke at BerliOS)
+Date: Fri, 11 Feb 2005 19:53:48 +0100
+Subject: [Feuerkraft-commit] r339 - trunk/src/input
+Message-ID: <200502111853.j1BIrmeI027171@sheep.berlios.de>
+
+Author: grumbel
+Date: 2005-02-11 19:53:46 +0100 (Fri, 11 Feb 2005)
+New Revision: 339
+
+Modified:
+   trunk/src/input/button_factory.cxx
+Log:
+- adoption to newest clanlib
+
+Modified: trunk/src/input/button_factory.cxx
+===================================================================
+--- trunk/src/input/button_factory.cxx	2005-02-11 15:49:12 UTC (rev 338)
++++ trunk/src/input/button_factory.cxx	2005-02-11 18:53:46 UTC (rev 339)
+@@ -88,7 +88,7 @@
+ ButtonFactory::create_keyboard_button(SCM lst)
+ {
+   std::string key_str = Guile::scm2string(gh_car(lst));
+-  int key_num         = CL_Keyboard::get_device().keyid_to_string(key_str);
++  int key_num         = CL_Keyboard::get_device().string_to_keyid(key_str);
+ 
+   // FIXME: No error checking
+   return new InputButtonInputDevice(CL_Keyboard::get_device(), key_num);
+
+
+
+From grumbel at sheep.berlios.de  Sat Feb 12 04:32:55 2005
+From: grumbel at sheep.berlios.de (Ingo Ruhnke at BerliOS)
+Date: Sat, 12 Feb 2005 04:32:55 +0100
+Subject: [Feuerkraft-commit] r340 - trunk/src
+Message-ID: <200502120332.j1C3Wtmk026788@sheep.berlios.de>
+
+Author: grumbel
+Date: 2005-02-12 04:32:49 +0100 (Sat, 12 Feb 2005)
+New Revision: 340
+
+Modified:
+   trunk/src/feuerkraft.cxx
+   trunk/src/feuerkraft.hxx
+Log:
+- added fullscreen toggle on F11
+- added screenshot support on F12
+
+Modified: trunk/src/feuerkraft.cxx
+===================================================================
+--- trunk/src/feuerkraft.cxx	2005-02-11 18:53:46 UTC (rev 339)
++++ trunk/src/feuerkraft.cxx	2005-02-12 03:32:49 UTC (rev 340)
+@@ -22,6 +22,9 @@
+ #include <ClanLib/gl.h>
+ #include <ClanLib/Display/setupdisplay.h>
+ #include <ClanLib/Display/display.h>
++#include <ClanLib/Display/keyboard.h>
++#include <ClanLib/Display/Providers/provider_factory.h>
++#include <ClanLib/Display/keys.h>
+ #include <ClanLib/GL/setupgl.h>
+ #include <ClanLib/core.h>
+ #include <libguile.h>
+@@ -137,6 +140,9 @@
+ {
+   Fonts::deinit();
+   PingusSound::deinit();
++
++  delete window;
++
+   CL_SetupGL::deinit();
+   CL_SetupDisplay::deinit();
+   CL_SetupCore::deinit();
+@@ -160,6 +166,8 @@
+       if (args->mission_file.empty())
+         args->mission_file = path_manager.complete("missions/airport.feu");
+ 
++      CL_Slot slot = CL_Keyboard::sig_key_down().connect(this, &Feuerkraft::key_down);
++
+       GameSessionManager::instance()->load(args->mission_file);
+       GameSessionManager::instance()->run();
+ 
+@@ -189,4 +197,25 @@
+   return 0;
+ }
+ 
++void
++Feuerkraft::key_down(const CL_InputEvent& event)
++{
++  if (event.id == CL_KEY_F12)
++    {
++      std::string filename = "screenshot.jpg";
++      std::cout << "Saving screenshot to: " << filename << std::endl;
++      CL_ProviderFactory::save(CL_Display::get_front_buffer(),
++                               filename);
++    } 
++  else if (event.id == CL_KEY_F11)
++    {
++      if (CL_Display::is_fullscreen())
++        CL_Display::set_windowed();
++      else
++        CL_Display::set_fullscreen(CL_Display::get_width(),
++                                   CL_Display::get_height(),
++                                   32);
++    }
++}
++
+ // EOF //
+
+Modified: trunk/src/feuerkraft.hxx
+===================================================================
+--- trunk/src/feuerkraft.hxx	2005-02-11 18:53:46 UTC (rev 339)
++++ trunk/src/feuerkraft.hxx	2005-02-12 03:32:49 UTC (rev 340)
+@@ -98,6 +98,9 @@
+   void init();
+   void deinit();
+   int  main(int argc, char** argv);
++
++private:
++  void key_down(const CL_InputEvent& event);
+ };
+ 
+ #endif
+
+
+

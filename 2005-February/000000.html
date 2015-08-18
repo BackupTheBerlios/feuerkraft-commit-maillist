@@ -1,0 +1,1009 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Feuerkraft-commit] r336 - in trunk: data data/images data/images/vehicles src src/buildings src/groundmap src/particles src/vehicles
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/feuerkraft-commit/2005-February/index.html" >
+   <LINK REL="made" HREF="mailto:feuerkraft-commit%40lists.berlios.de?Subject=Re%3A%20%5BFeuerkraft-commit%5D%20r336%20-%20in%20trunk%3A%20data%20data/images%20data/images/vehicles%20src%20src/buildings%20src/groundmap%20src/particles%20src/vehicles&In-Reply-To=%3C200502012027.j11KRLLY018428%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000001.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Feuerkraft-commit] r336 - in trunk: data data/images data/images/vehicles src src/buildings src/groundmap src/particles src/vehicles</H1>
+    <B>Ingo Ruhnke at BerliOS</B> 
+    <A HREF="mailto:feuerkraft-commit%40lists.berlios.de?Subject=Re%3A%20%5BFeuerkraft-commit%5D%20r336%20-%20in%20trunk%3A%20data%20data/images%20data/images/vehicles%20src%20src/buildings%20src/groundmap%20src/particles%20src/vehicles&In-Reply-To=%3C200502012027.j11KRLLY018428%40sheep.berlios.de%3E"
+       TITLE="[Feuerkraft-commit] r336 - in trunk: data data/images data/images/vehicles src src/buildings src/groundmap src/particles src/vehicles">grumbel at sheep.berlios.de
+       </A><BR>
+    <I>Tue Feb  1 21:27:21 CET 2005</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000001.html">[Feuerkraft-commit] r337 - in trunk: . contrib contrib/test contrib/tilegen data data/images data/images/vehicles src src/groundmap src/input src/particles
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#0">[ date ]</a>
+              <a href="thread.html#0">[ thread ]</a>
+              <a href="subject.html#0">[ subject ]</a>
+              <a href="author.html#0">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: grumbel
+Date: 2005-02-01 21:27:20 +0100 (Tue, 01 Feb 2005)
+New Revision: 336
+
+Added:
+   trunk/data/images/soldier-light.png
+   trunk/data/images/vehicles/tank2-highlight.png
+   trunk/data/images/vehicles/tank2-light.png
+Modified:
+   trunk/data/feuerkraft.xml
+   trunk/data/images/vehicles/tank2.png
+   trunk/src/Makefile.am
+   trunk/src/ai_vehicle.cxx
+   trunk/src/ambulance.cxx
+   trunk/src/buildings/ammotent.cxx
+   trunk/src/buildings/custom_building.cxx
+   trunk/src/buildings/fuelstation.cxx
+   trunk/src/buildings/headquarter.cxx
+   trunk/src/buildings/tower.cxx
+   trunk/src/buildings/wall.cxx
+   trunk/src/buildings/wall_door.cxx
+   trunk/src/collision_manager.cxx
+   trunk/src/energie.cxx
+   trunk/src/game_session.cxx
+   trunk/src/groundmap/grid_tile.cxx
+   trunk/src/groundmap/sprite_tile.cxx
+   trunk/src/line_segments.cxx
+   trunk/src/marker.cxx
+   trunk/src/mine.cxx
+   trunk/src/particles/explosion_particle.hxx
+   trunk/src/particles/fire_particle.cxx
+   trunk/src/particles/grass_particle.hxx
+   trunk/src/particles/rocket_smoke_particle.cxx
+   trunk/src/particles/sand_particle.hxx
+   trunk/src/particles/smoke_particle.hxx
+   trunk/src/projectile.cxx
+   trunk/src/robot_tank.cxx
+   trunk/src/rocket.cxx
+   trunk/src/satchel_charge.cxx
+   trunk/src/shockwave.cxx
+   trunk/src/soldier.cxx
+   trunk/src/soldier.hxx
+   trunk/src/tree.cxx
+   trunk/src/vehicles/helicopter.cxx
+   trunk/src/vehicles/jeep.cxx
+   trunk/src/vehicles/rotor.cxx
+   trunk/src/vehicles/tank.cxx
+   trunk/src/vehicles/tank.hxx
+   trunk/src/vehicles/turret.cxx
+   trunk/src/view.cxx
+   trunk/src/view.hxx
+Log:
+- added light support
+
+
+Modified: trunk/data/feuerkraft.xml
+===================================================================
+--- trunk/data/feuerkraft.xml	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/data/feuerkraft.xml	2005-02-01 20:27:20 UTC (rev 336)
+@@ -112,6 +112,15 @@
+       &lt;image file=&quot;images/vehicles/huey_shadow.png&quot;  /&gt;
+     &lt;/sprite&gt;
+ 
++    &lt;sprite name=&quot;tank_light&quot;&gt;
++      &lt;image file=&quot;images/vehicles/tank2-light.png&quot;  /&gt;
++    &lt;/sprite&gt;
++
++    &lt;sprite name=&quot;tank_highlight&quot;&gt;
++      &lt;image file=&quot;images/vehicles/tank2-highlight.png&quot;  /&gt;
++    &lt;/sprite&gt;
++
++
+     &lt;sprite name=&quot;tank&quot;&gt;
+       &lt;image 
+         file=&quot;images/vehicles/tank.png&quot; 
+@@ -251,6 +260,10 @@
+       &lt;image file=&quot;images/tree2_shadow.png&quot; /&gt;
+     &lt;/sprite&gt;
+ 
++    &lt;sprite name=&quot;soldier-light&quot;&gt;
++      &lt;image file=&quot;images/soldier-light.png&quot; /&gt;
++    &lt;/sprite&gt;
++
+     &lt;sprite name=&quot;soldier&quot;&gt;
+       &lt;image file=&quot;images/soldier1.png&quot; delay=&quot;200&quot; /&gt;
+       &lt;image name=&quot;image2&quot; file=&quot;images/soldier2.png&quot; delay=&quot;200&quot; /&gt;
+
+Added: trunk/data/images/soldier-light.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/data/images/soldier-light.png
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: trunk/data/images/vehicles/tank2-highlight.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/data/images/vehicles/tank2-highlight.png
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: trunk/data/images/vehicles/tank2-light.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/data/images/vehicles/tank2-light.png
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Modified: trunk/data/images/vehicles/tank2.png
+===================================================================
+--- trunk/data/images/vehicles/tank2.png	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/data/images/vehicles/tank2.png	2005-02-01 20:27:20 UTC (rev 336)
+@@ -1,16 +1,19 @@
+ &#137;PNG
+ 
+-
+-ca&quot;&#132;&#192;&#182;m&#194;0&#196;q&#198;0&#166;&#129;1&#180;&#214;X&#150;&#133;R)&#164;L&#146;HH&#214;&#214;|
+-&#133;s&#236;ql&#140;1&#148;&#195;6Q!&#193;&#211;$&quot;Rl&#171; &#155;MS(\&#161;j\&#215;a&#143;&#147;A&#136;(&#217;&#140;M&#169;&#228;&#163;&#172;&#133;&#194;&#158;&#231;!&#132;&#160;i6&#241;&#253;u&#162;&amp;&#220;16&#131;&#214;&#134;&#153;&#153;&#163;8&#206;&#251;&#246;M&#176;&#188;&#188;&#192;&#248;,&#247;&#221;&#247;&#251;&#248;&#190;&#207;&#194;&#194;K(&#213;&#135;&#231;]@JE&#169;&#180;&#140;1M&#199;&#249;&#249;&#174;&#193;&#194;&#194;\wJ)&#158;{&#238;&#185;__&#144;;&#238;&#184;&#163;}&#236;&#216;&#187;&#208;z&#155;&#167;&#159;&#158;e&#208;&#234;%!%&#251;&#220;q&#198;){)&#149;V)&#249;&#235;&#132;a!z
+-&#133;&#139;&#128;&#133;1!B&quot;D'&quot;&#211;D&#235;&#198;T0:&#138;&#178;&#182;=&#128;I&#164;h&#130;`B&#196;QJ&#132;u&quot;&#194;&#160;&#213;&#135;1-&#182;&#195;25&#221;&#192;
+-&#178;&#235;T?&#255;&#249;?i&#251;&#254;*&#207;&gt;&#251;c6&#130;)X&#150;&#141;R&#198;&#180;&#168;&#233;:{l&#139;0(&#243;&#252;&#252;+|&#226;&#228;&#135;&#144;&quot;N,&#233;b&#180;&#230;&#229;&#220;*&#198;&#180;hE\&#218;&#184;&#238;)&#165;O&#181;w&amp;e&#156;&#133;&#133;&#165;R&#131;!&#192;&#178;:&#144;P&#138;r&#176;M&#177;&#180;h&#148;J&#130;i&#129;&#232;&#193;&#152;%&#246;:I)&#128;wl2&#153;4&#247;&#223;e&#221;`~&#254;,R&#196;;&#194;&#211;&#194;&#247;7&#201;&#231;W&#136;	&#155;0&#172;0&#160;z	&#131;5&#172;}$e&#239;&#175;&#210;&#226;&#173;&#130;&#188;&#153;+\,&#188;J&#169;&#180;&#186;3Z|&#203;d&#219;&quot;&#155;&#189;&#137;&#247;&#204;&#238;&#152;&#177;&#216;&#131;&#161;&#213;&#210;H&#153;&#246;&#143;&#181;&#168;&#148;&#219;&#132;&#193;*e&#213;&#131;&#227;8&#185;&#220;&#133;&#194;)%&#145;2&#166;J&#209;+a0(&#153;D&#169;&#152;*&#136;$BD;F&#131;&#160;&#170;;&#130;&#128;R&#189;8N?&#190;_b&#197;&#175;&#131;)&#140;j&#129;i'B&#177;&#184;&#130;&#165;&quot;$d&#203;&#222;&#135;R=&#188;&#128;&#197;&#210;&#137;&#157;&#180;&#225;&#186;&#130;tr&#130;/&#189;t&#154;&#249;&#231;&#159;&#227;&#235;_&#255;&#185;&#252;%&#142;;B&#177;&#228;ct&#131;&#197;&#210;*/&#204;&#159;%&#237;&#142;!&#232;&#193;&#247;7&#200;d&#182;&#233;O&#245;&#161;k	zD&#155;x&#182;&#202;!&#151;
+-%jfA&#132;&#173;&#176;&#194;m&#217;&#155;wv&#175;N&#211;:&#171;F&#136;5&#140;m&#132;&#254;&amp;&#229;&#176;&#206;&#128;&#213;B&#235;^`DA&#139;&#164;&#140;&#145;&#201;8&#209;&#187;&#243;&#190;^Z&#232;D&#157;&#164;&#234;#;u3Eo&#132;&#160;%&quot;$&#165;&#224;j1d2{&#144;6&#132;&#157;&#220;&#168;&#180;&#129;m&#143;&#188;&#179; O&lt;&#241;&#247;&#158;&#248;
+-cc&#140;&#141;'&#208;&#175;,tn&quot;&#162;&#221;`&#169;&#184;FR&#198;u!&#154;H&#153;&#164;!j&#216;&#182;&#197;&#225;&#169;&#195;&#196;cI&#154;&#166;&#133;1
+-c&#202;&#199;q:&#181;&#213;	&quot;&#132;@Y&#227;\&#245;&#206;s&#207;=&#183;cY&#189;a&#136;&#137;s&#243;&#231;&#131;&#128;Pk&#190;&#250;G&#204;&#205;&#159;&#229;?O&#255;&#140;K&#222;J&#165;&#240;&#253;u&#190;&#253;&#157;&#225;8#&#244;&#169;~&#238;&lt;z&#136;cG&#239;u
+-`hs&#250;&#244;&lt;Q&#192;&#243;.2=&#149;f&#216;&#217;K&#166;&#133;&#171;&#193;APC&#202;AX&#197;uGy&#239;L&#199;&#250;.yy&#158;&#159;&#207;&#134;&#148;&#234;&#229;Pv
+-&#178;&#235;X&#134;&#134;&#172;vV&#174;&#146;&#148;&#234;&#229;&#131;&#247;&#220;&#142;1M&#134;&#173;!g&#136;&#233;&#233;If&#231;^EI&#137;6uz&#180;&#225;Bq&#149;&#148;&#140;&#241;&#149;&#199;&#191;&#196;&#214;V&#149;&#232;N&#148;&#168;&#155;:&#166;&#225;P-_&#160;i&#170;&#186;&#197;f&#152;&#128;&#148;&#230;@&#230;&#230;&#142;
+-R&#140;&#216;&#253;&#164;&#148;B&#235;&#206;kt&#156;&#173;!|b&quot;&#193;&#129;&#140;CRR&#213;&#165;&#154;&#193;6&#190;&#175;)&#149;I&#208;&#166;&#223;&#216;q&#188;&#189;&#140;9&#163;&#236;u)xK&#164;&#211;i&#214;&#253;5&#254;&#235;?&#225;&#192;&#176;&#205;'?&#253;qf&#238;:F&#173;Rem&#171;&#204;&#185;&#215;.&#243;&#248;&#227;_&#185;&#177;#D&#232;&#132;&#224;R&#201;&#199;uF&#144;*&#137;&#165;zY6&#195;*	&#217;&#139;e)&#224;!&#229;p&#155;&#134;n&#146;Tq&#140;i&#178;&#199;&#211;&#198;&#178;&#251;&#177;T
+-&#128;&#146;&#191;&#129;&#252;&#133;&#140;'&#169;$Qd&#231;.;&#130;&#170;$&#198;n&#201;d&#233;&#183;G&#217;Z&#175;09y
+-&#204;&#204;&#220;&#206;&#194;&#194;Zk&#142;=J&gt;&#159;&#199;&#182;&#251;&#128;&#158;w&#137;&#147;'O2;;&#139;&#227;8&#204;&#207;&#191;&#184;&#243;&#251;&#182;mc&#219;&#197;&#162;&#199;&#249;&#252;k|&#226;&#228;'y&#207;&#145;#&#239;&#216;&#168;&#186;!A&gt;&#244;&#161;&#181;&#255;&#240;&#211;&#247;!&#147;}&#156;;&#247;:&#179;&#179;?&#225;&#131;&#188;&#135;&#177;&#177;qVVV&#185;|&#249;*a&#184;I.&#247;*&#182;&#221;iOcPJ&#225;&#186;.&#190;&#239;&#227;&#251;&#254;nHB&#236;&#250;&#139;7&#175;&#139;&#197;&#171;X&#214; &#197;&#162;&#128;R&#132;a&#167;W&#134;&#164;L&#236;D&#191;&#202;N7&#174;LV&#152;&#204;&#216;}&#207;k&#144;0w[J&#165;&#200;f&#177;&#176;p&#134; &#216;&#186;nQ&#247;k	&#242;&#139;&#220;}&#247;&#221;m!&#139;&#197;&#171;,&#151;&#150;&#217;&#218;
+-#
+\ No newline at end of file
++
++)&#147;$&#146;&#141;&#141;
++&#133;J)&#164;&#148;&#164;&#211;S&lt;&#152;fmm&#173;+&#228;r9&#242;&#249;w&quot;&#134;R)&#194;0&#220;&#223;&#252;&#236;l&#134;0&#220;B&#136;1&#140;&#169;&#225;y&#214;6&#201;&#231;_#&#151;;A6&#155;#&#214;&#240;&#253;&#158;y&#234;I&#182;t&#141;tz&#138;+&#239;_&#166;ak\&#184;&#144;&#231;&#244;&#233;OR&#171;V)^&#189;&#198;&#129;c&#220;&#184;q&#147;c&#229;&#205;&#208;&#186;&#130;&#231;&#141;&#224;&#186;(&#222;gn&#238;c&lt;&#247;&#220;o&#242;&#217;&#207;~&#150;&#167;&#159;&#254;&#149;&#246;&#215;&#190;&#246;b&#228;?d!&#143;?&#254;x;&#147;&#201;P&#209;[&#139;&#151;8&#224;&#185;Xk&#169;&#232;6Q!&#193;&#134;X&#219;$&quot;R&#236;&#134;&#235;X &#151;&#203;P,&#222;&#160;&#162;&#233;&#180;&#199;/&#139;QrY&#151;<A HREF="https://lists.berlios.de/mailman/listinfo/feuerkraft-commit">r9 at 9</A>)&#138;&#197;|&#223;GA&#211;n&#155;DL&#165;'&#216;
++-&#198;X&#230;&#230;N&#226;yc:4&#197;&#234;&#234;
++
+++S&#223;?&#209;&#237;p&#135;j&#184;KS&#196;&#176;&#214;bm&#147;1w!&#250;&#184;YZ&#199;Z&#139;&#227;&#155;(&#149;b&#204;&#234;&#250;&#150;~&#164;&#140;&#130;k&#254;*ZWv&#250;&#249;&#200;&#236;Q&#178;&#217;)&#238;&#205;L&#240;&#199;/&#188;&#196;&#197;KW?\&#144;&#199;&#188;=&#225;R3&#219;SG)&#137;&#235;@J&#208;&#166;&#138;&#214;5~l&#230;8&#150;&#222;&#162;P&#240;&#241;&lt;&#207;%&#151;;&#204;&#177;&#220;}&#139;b&#241;*&#224;`&#173;&#198;BH&#132;hvnc&quot;X[&#197;&#154;(&#202;&#184;&#238;B$&#145;&#162;	B&#128;&#181;G)A&#168;&#235;$D&#132;ag
++{&#166;&#129;&#170;&#186;&#202;&#152;;&#196;_&#227;&#166;E&#197;T&#168;&#139;&#214;5&#148;J&quot;&#165;&#139;&#227;&#244;&#155;&#206;&#222;&#199;&#144;&#211;O63&#201;&#151;~&#239;O&#184;qc9rG&#167;&#250;&#197;/&#254;F;&#214;y&#245;&#213;&#239;&#177;j&#164;L&#224;8.J&#249;X&#219;b&#207;&#212;9&#224;:&#232;&#176;&#194;&#235;&#139;&#239;&#240;&#249;&#179;&#159;A&#138;8&#177;dko&#231;&#215;&#177;&#182;E&#203;*&#226;&#210;%&#157;&#158; %&#163;&#168;&#246;&#254;&#195;&#164;&#140;&#179;&#180;T&#164;\&#174;`&#177;&#232;&#167;c	&#165;&#168;&#132;&#187;&#148;&#202;&#155;&#128;A&#169;$&#216;&#136;&gt;&#172;]&#225;&#160;&#231;&#144;&#148;&#136; &#128;I&#207;%&#155;&#205;&#240;&#248;cP1/&quot;E&#188;#&lt;-&#130;`&#155;Ba&#141;&#152;p&#209;&#186;&#202;&#144;&#234;G&#135;9&#135;H&#202;&#254;&#143;2&#183;s&#133;&#171;&#197;w)&#151;&#215;o&#213;&#255;O&#164;!&#151;&#187;&#135;&#143;&#206;&#239;&#152;&#177;&#184;C&#195;&#161;&#213;2H&#153;&#143;&#181;&#168;V&#218;&#232;p&#157;&#138;&#234;&#195;&#243;&lt;&#132;&#128;|~&#133;bq&#139;&#148;&#146;H[&#163;&#228;&#151;&#177;X&#148;L&#162;T
++lD!&#162;&#163;&#142;EP3&#141;&#174; &#160;T?&#158;7H&#148;Y&#234;`+&#232;&#176;&#138;U-&#176;M&#226;D(&#149;&#214;pT&#132;&#132;l&#226;&#184;&#135;P&#170;&#143;&#162;&#178;\&#222;&quot;&#209;M&#238;(H''h&#241;&#214;[&#231;Y|&#253;5&#190;&#250;&#213;&#191;#_&#184;&#198;&#233;S'(&#149;&#172;i&#176;\^&#231;&#141;&#197;&#139;d&#210;&#250;&#130;-&#178;&#217;]S&#152;&#189;}&#162;M&lt;
++;&#205;&#181;b&#153;=&#187;&#131; &#194;&#142;&#174;&#242;@&#238;&#222;&#238;&#233;&#213;iZAg&#183;&#163;&#177;&#129;5`llS&#209;u&#134;&#156;&#198;&#244;#
++&#203;
++&#204;&#206;J&#172;m!&#186;&#209;B&#202;83&#185;,P&#239;&#132;RG!&#130;!&#226;&#221;d0&#138;1&#245;&#253;&#245;
++J&#165;&#130;M&#254;&#230;&#223;&#197;&#243;&#198;P&#131;&lt;t&#242;&#167;N&#223;/&#234;
++wO&#162;n&#235;Xc&#187;&#197;&#218;
++*H&#153;&#192;u&#198;&#145;j&#132;r&#185;&#227;&#240;u&#128;&#227;3&#211;?&#212;&#135;&#244;&#221;&#190;&#195;]&#206;&gt;&#246;&#147;&#209;&#199;&#128;&#146;&#184;&#206; 
++?&#130;U&#134;&#156;b&quot;&#194;&#240;&#228;&#138;&#254;2&#209;&#248;0&#206;`&#130;&#195;&#153;Qb&#178;cq&#141;FG&#236;&#148;Lp&#230;&#179;?&#135;&#236;&#223;c&#181;&#180;N&#233;&#218;
++N&#162;&#159;&#161;&#209;a&#194;&#181;+&#193;23&#179;g&#240;&#253;&#239;&#147;&#201;&#230;&#210;&#165;Kw&#254;dVV&#214;&quot;_x&#234;s&#237;&#147;'&#239;#&#182;Q*I.;&#133;T&#195;&#164;&#189;$&#214;B&#195;6&#216;3&#254;&#232;&#133;&#151;(&#151;&#158;&lt;&#251;&#255;&#248;&#234;?S&#211;utX!&#151;&#203; e&#130;t&#218;#&#157;ck&#235;&#198;XB&#221;&#192;&#218;&#183;&#130;&#195;&#142;$B&#223;_ .FX&#150;&#177;
++&#151;&#222;&#187;&#206;&#243;&#207;&#255;a&#228;&#174;{&#170;O&lt;&#241;S&#237;r9 &#237;&#141;!UG&#245;&#179;n&#161;u&#141;&#132;&#236;&#199;qBME&#239;&#210;0M&#146;*&#142;&#181;Mxc`&#219;8&#238; &#142;JP&#182;&#144;&#255;*&#227;I*I&#217;&#233;&#194;&#133;&#186;#&#168;Jb&#173;&#229;&#190;l&#142;Aw&#156;&#157;&#205;*&#211;&#211;t&#234;&#214;&#155;Z&#215;&#200;&#229;&#238;'&#145;&#221;y&#142;e'&#188;&#206;=&#233;&#137;&#212;G&#143;u&#214;'b&#203;&#236;5&#242;7&#251;5&#190;&#254;&#213;op&#254;&#252;y\w&#132;&#167;&#158;z&#154;&#165;&#165;%^y&#229;&#149;_&#215;&#253;&#203;_&#254;r&#187;n&#202;&#188;_&#188;L&#201;/&#179;\&#190;&#197;&#169;S&#177;V^eG&#239;2&#225;9&#172;&#187;8&#206; 1&#209;&#230;&#254;&#236;&#225;N&#189;&#196;e&#156;&#186;&#169;#&#228;&#197;B	&#199;=&#128;&#181;}h&#189;&#129;&#214;U&#180;&#190;E&#185;\E&#136;k&#229;M&#142;d&#143;1?&#255;]&#158;{&#238;&#249;&#252;e&#222;\|&#131;{2cx&#222;4J&#165;(&#139;&#251;&#179;&#160;R&#233;&#250;~d&#187;YZ&#219;O&#202;n&#210;g&#199;q9&#156;I&#163;f&#248;&#250;&#215;_dn&#238;&#227;H)y&#233;&#165;&#151;&#254;cc&#136;s&#231;&#190;&#216;&#150;&#178;3(&#234;&#148;&#217;&#146;&#133;&#133;&#239;s&#230;&#204;&#163;&#228;&#243;yJ&#165;&#179;&#179;&#179;,--&#145;&#203;&#199;&#243;F&#162;&#197;&#183;&#191;&#253;&#167;O&#159;&#198;&#218;&amp;&#229;&#242;*&#217;l&#150;r&#185;&#140;1M&gt;&#242;&#145;^|&#241;&#255;&#240;&#236;&#179;&#207;rpr&#146;&#235;7n2?&#255;=N&#157;z&#152;\&#238;~&#222;~{&#137;+W&#138;&#204;&#205;}&#140;&#165;&#165;%&#140;1&#156;&lt;y&#146;B&#161;&#128;&#235;
+\ No newline at end of file
+
+Modified: trunk/src/Makefile.am
+===================================================================
+--- trunk/src/Makefile.am	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/Makefile.am	2005-02-01 20:27:20 UTC (rev 336)
+@@ -17,6 +17,7 @@
+ 
+ feuerkraft_SOURCES = \
+ display/drawing_context.cxx \
++display/scene_context.cxx \
+ alist.hxx \
+ alist.cxx \
+ ai_vehicle.hxx \
+
+Modified: trunk/src/ai_vehicle.cxx
+===================================================================
+--- trunk/src/ai_vehicle.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/ai_vehicle.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -140,12 +140,12 @@
+   if (!destroyed)
+     {
+       sprite.set_angle(Math::rad2deg(orientation + PI));
+-      view.get_dc().draw(sprite, pos.x, pos.y);
++      view.get_sc().color().draw(sprite, pos.x, pos.y);
+     }
+   else
+     {
+       destroyed_sprite.set_angle(Math::rad2deg(orientation + PI));
+-      view.get_dc().draw(destroyed_sprite, pos.x, pos.y);
++      view.get_sc().color().draw(destroyed_sprite, pos.x, pos.y);
+     }
+   //line_segments.draw(view);
+ }
+
+Modified: trunk/src/ambulance.cxx
+===================================================================
+--- trunk/src/ambulance.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/ambulance.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -30,7 +30,7 @@
+ void
+ Ambulance::draw (View&amp; view)
+ {
+-  view.get_dc().draw(sur, 0, 0);
++  view.get_sc().color().draw(sur, 0, 0);
+ }
+ 
+ 
+
+Modified: trunk/src/buildings/ammotent.cxx
+===================================================================
+--- trunk/src/buildings/ammotent.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/buildings/ammotent.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -41,10 +41,10 @@
+ void 
+ Ammotent::draw (View&amp; view)
+ {
+-  view.get_dc().draw(ammotent, pos.x, pos.y);
++  view.get_sc().color().draw(ammotent, pos.x, pos.y);
+   if (reloading)
+     {
+-      view.get_dc().draw_fillrect(pos.x - 32, pos.y + 25,
++      view.get_sc().color().draw_fillrect(pos.x - 32, pos.y + 25,
+                                   pos.x + 31, pos.y + 57,
+                                   CL_Color(CL_Colorf(1.0f, 1.0f, 1.0f, 
+                                                      sin(GameWorld::current()-&gt;get_time () * 10.0f)
+
+Modified: trunk/src/buildings/custom_building.cxx
+===================================================================
+--- trunk/src/buildings/custom_building.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/buildings/custom_building.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -42,7 +42,7 @@
+ void
+ CustomBuilding::draw(View&amp; view)
+ {
+-  view.get_dc().draw(sprite,
++  view.get_sc().color().draw(sprite,
+                      x_pos * 40 + get_map_width()*20, 
+                      y_pos * 40 + get_map_height()*20); // FIXME: Hardcoded tilesize
+ }
+
+Modified: trunk/src/buildings/fuelstation.cxx
+===================================================================
+--- trunk/src/buildings/fuelstation.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/buildings/fuelstation.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -41,10 +41,10 @@
+ void 
+ Fuelstation::draw (View&amp; view)
+ {
+-  view.get_dc().draw(fuelstation, pos.x, pos.y);
++  view.get_sc().color().draw(fuelstation, pos.x, pos.y);
+   if (refueling)
+     {
+-      view.get_dc().draw_fillrect(pos.x - 32, pos.y + 25,
++      view.get_sc().color().draw_fillrect(pos.x - 32, pos.y + 25,
+                                   pos.x + 31, pos.y + 57,
+                                   CL_Color(CL_Colorf(1.0, 1.0, 1.0,
+                                                      sin(GameWorld::current()-&gt;get_time () * 10.0f)
+
+Modified: trunk/src/buildings/headquarter.cxx
+===================================================================
+--- trunk/src/buildings/headquarter.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/buildings/headquarter.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -51,7 +51,7 @@
+ void 
+ Headquarter::draw (View&amp; view)
+ {
+-  view.get_dc().draw(*current_sur, pos.x, pos.y);
++  view.get_sc().color().draw(*current_sur, pos.x, pos.y);
+   energie.draw (view, int(pos.x), int(pos.y - 40));
+ }
+ 
+
+Modified: trunk/src/buildings/tower.cxx
+===================================================================
+--- trunk/src/buildings/tower.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/buildings/tower.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -60,21 +60,21 @@
+ {
+   if (energie &gt; 50)
+     {
+-      view.get_dc().draw(towerbase, pos.x, pos.y);
++      view.get_sc().color().draw(towerbase, pos.x, pos.y);
+     }
+   else if (energie &gt; 0)
+     {
+-      view.get_dc().draw(towerdamaged, pos.x, pos.y);
++      view.get_sc().color().draw(towerdamaged, pos.x, pos.y);
+     }
+   else
+     {
+-      view.get_dc().draw(towerdestroyed, pos.x, pos.y);
++      view.get_sc().color().draw(towerdestroyed, pos.x, pos.y);
+     }
+ 
+   if (energie &gt; 0)
+     {
+       turret.set_angle(orientation);
+-      view.get_dc().draw(turret, pos.x, pos.y);
++      view.get_sc().color().draw(turret, pos.x, pos.y);
+     }
+ }
+   
+
+Modified: trunk/src/buildings/wall.cxx
+===================================================================
+--- trunk/src/buildings/wall.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/buildings/wall.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -42,11 +42,11 @@
+ Wall::draw (View&amp; view)
+ {
+   if (energie &gt; 60)
+-    view.get_dc().draw (wall, pos.x, pos.y);
++    view.get_sc().color().draw (wall, pos.x, pos.y);
+   else if (energie &gt; 0)
+-    view.get_dc().draw (wall_damaged, pos.x, pos.y);
++    view.get_sc().color().draw (wall_damaged, pos.x, pos.y);
+   else
+-    view.get_dc().draw (wall_destroyed, pos.x, pos.y);
++    view.get_sc().color().draw (wall_destroyed, pos.x, pos.y);
+ }
+ 
+ void
+
+Modified: trunk/src/buildings/wall_door.cxx
+===================================================================
+--- trunk/src/buildings/wall_door.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/buildings/wall_door.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -50,7 +50,7 @@
+ WallDoor::draw (View&amp; view)
+ {
+   if (status != S_OPENED)
+-    view.get_dc().draw(sprite, pos.x, pos.y);
++    view.get_sc().color().draw(sprite, pos.x, pos.y);
+ }
+ 
+ void
+
+Modified: trunk/src/collision_manager.cxx
+===================================================================
+--- trunk/src/collision_manager.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/collision_manager.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -127,17 +127,17 @@
+       switch (i-&gt;type)
+         {
+         case SHAPE_CIRCLE:
+-          view.get_dc().draw_circle(i-&gt;circle.x, i-&gt;circle.y, i-&gt;circle.radius,
++          view.get_sc().color().draw_circle(i-&gt;circle.x, i-&gt;circle.y, i-&gt;circle.radius,
+                                     CL_Color(255, 0, 0));
+           break;
+         case SHAPE_RECT:
+           {
+             CL_Color color(255, 0, 0);
+             Math::Quad quad = rect2quad(i-&gt;rect);
+-            view.get_dc().draw_line(quad.a.x, quad.a.y, quad.b.x, quad.b.y, color);
+-            view.get_dc().draw_line(quad.b.x, quad.b.y, quad.c.x, quad.c.y, color);
+-            view.get_dc().draw_line(quad.c.x, quad.c.y, quad.d.x, quad.d.y, color);
+-            view.get_dc().draw_line(quad.d.x, quad.d.y, quad.a.x, quad.a.y, color);
++            view.get_sc().color().draw_line(quad.a.x, quad.a.y, quad.b.x, quad.b.y, color);
++            view.get_sc().color().draw_line(quad.b.x, quad.b.y, quad.c.x, quad.c.y, color);
++            view.get_sc().color().draw_line(quad.c.x, quad.c.y, quad.d.x, quad.d.y, color);
++            view.get_sc().color().draw_line(quad.d.x, quad.d.y, quad.a.x, quad.a.y, color);
+           }
+           break;
+         default:
+
+Modified: trunk/src/energie.cxx
+===================================================================
+--- trunk/src/energie.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/energie.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -59,13 +59,13 @@
+       &amp;&amp; CL_System::get_time () &gt; 2000)
+     {
+       // Black border rectangle
+-      view.get_dc().draw_fillrect(x_pos - 32, y_pos - 5,
++      view.get_sc().color().draw_fillrect(x_pos - 32, y_pos - 5,
+                                   x_pos + 32, y_pos + 5,
+                                   CL_Color(CL_Colorf(0.0f, 0.0f, 0.0f,
+                                                      (1000.0f - float(time_diff))/1000.0f * 0.8f)));
+       
+       // Energie bar
+-      view.get_dc().draw_fillrect(x_pos - 30, y_pos - 3,
++      view.get_sc().color().draw_fillrect(x_pos - 30, y_pos - 3,
+                                   x_pos - 30 + (ratio * 60),
+                                   y_pos + 3,
+                                   CL_Color(CL_Colorf(1.0f - energie/float(max_energie),
+
+Modified: trunk/src/game_session.cxx
+===================================================================
+--- trunk/src/game_session.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/game_session.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -211,7 +211,7 @@
+ 
+   GameWorld::current()-&gt;draw(*view);
+   GameWorld::current()-&gt;draw_energie(*view);
+-  view-&gt;get_dc().render(CL_Display::get_current_window()-&gt;get_gc());
++  view-&gt;get_sc().render();
+ 
+   if (draw_colmap)
+     collision_mgr-&gt;draw(*view);
+@@ -303,7 +303,6 @@
+     }
+ 
+   InputManager::clear();
+-  view-&gt;get_dc().clear();
+ }
+ 
+ void
+
+Modified: trunk/src/groundmap/grid_tile.cxx
+===================================================================
+--- trunk/src/groundmap/grid_tile.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/groundmap/grid_tile.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -32,7 +32,7 @@
+ void
+ GridTile::draw(View&amp; view, float x, float y)
+ {
+-  view.get_dc().draw(sprite, x, y);
++  view.get_sc().color().draw(sprite, x, y);
+ }
+ 
+ /* EOF */
+
+Modified: trunk/src/groundmap/sprite_tile.cxx
+===================================================================
+--- trunk/src/groundmap/sprite_tile.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/groundmap/sprite_tile.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -35,7 +35,7 @@
+ void
+ SpriteTile::draw(View&amp; view, float x, float y)
+ {
+-  view.get_dc().draw(sprite, x, y);
++  view.get_sc().color().draw(sprite, x, y);
+ }
+ 
+ /** FIXME: 'float delta' should be replaced with GameDelta */
+
+Modified: trunk/src/line_segments.cxx
+===================================================================
+--- trunk/src/line_segments.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/line_segments.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -443,7 +443,7 @@
+ 
+           if (i-&gt;radial.turn_right)
+             {
+-              view.get_dc().draw_arc(i-&gt;radial.x, i-&gt;radial.y, i-&gt;radial.radius,
++              view.get_sc().color().draw_arc(i-&gt;radial.x, i-&gt;radial.y, i-&gt;radial.radius,
+                                      i-&gt;radial.start_angle, i-&gt;radial.end_angle, 
+                                      CL_Color(255, 255, 255));
+               /*
+@@ -454,7 +454,7 @@
+             }
+           else
+             {
+-              view.get_dc().draw_arc(i-&gt;radial.x, i-&gt;radial.y, i-&gt;radial.radius,
++              view.get_sc().color().draw_arc(i-&gt;radial.x, i-&gt;radial.y, i-&gt;radial.radius,
+                                      i-&gt;radial.end_angle, i-&gt;radial.start_angle, 
+                                      CL_Color(255, 255, 255));
+               /*
+@@ -482,7 +482,7 @@
+           break;
+ 
+         case STRAIGHT:
+-          view.get_dc().draw_line(i-&gt;straight.x1, i-&gt;straight.y1,
++          view.get_sc().color().draw_line(i-&gt;straight.x1, i-&gt;straight.y1,
+                                   i-&gt;straight.x2, i-&gt;straight.y2, 
+                                   CL_Color(255, 255, 255, 255));
+           break;
+
+Modified: trunk/src/marker.cxx
+===================================================================
+--- trunk/src/marker.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/marker.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -44,7 +44,7 @@
+ void
+ Marker::draw (View&amp; view)
+ {
+-  view.get_dc().draw(sprite, pos.x, pos.y);
++  view.get_sc().color().draw(sprite, pos.x, pos.y);
+ }
+ 
+ void
+
+Modified: trunk/src/mine.cxx
+===================================================================
+--- trunk/src/mine.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/mine.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -88,11 +88,11 @@
+ {
+   if (!is_active ())
+     {
+-      view.get_dc().draw(sur, pos.x, pos.y);
++      view.get_sc().color().draw(sur, pos.x, pos.y);
+     }
+   else if (!detonated)
+     {
+-      view.get_dc().draw(sur_active, pos.x, pos.y);
++      view.get_sc().color().draw(sur_active, pos.x, pos.y);
+     }
+   else
+     {
+
+Modified: trunk/src/particles/explosion_particle.hxx
+===================================================================
+--- trunk/src/particles/explosion_particle.hxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/particles/explosion_particle.hxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -82,7 +82,7 @@
+                           ((1 - life_time/max_life_time)) * size);
+ 
+         sprite.set_angle(Math::rad2deg(angle));
+-	view.get_dc().draw(sprite, pos.x, pos.y);
++	view.get_sc().color().draw(sprite, pos.x, pos.y);
+       }
+   }
+ 
+
+Modified: trunk/src/particles/fire_particle.cxx
+===================================================================
+--- trunk/src/particles/fire_particle.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/particles/fire_particle.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -63,7 +63,7 @@
+ void
+ FireParticle::draw (View&amp; view)
+ {
+-  view.get_dc().draw(sprite, pos.x, pos.y);
++  view.get_sc().color().draw(sprite, pos.x, pos.y);
+ }
+ 
+ /* EOF */
+
+Modified: trunk/src/particles/grass_particle.hxx
+===================================================================
+--- trunk/src/particles/grass_particle.hxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/particles/grass_particle.hxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -59,7 +59,7 @@
+     sprite.set_scale (0.8f + ((1 - life_time/max_life_time)) * 4.0f,
+ 		       0.8f + ((1 - life_time/max_life_time)) * 4.0f);
+     sprite.set_angle(angle);
+-    view.get_dc().draw(sprite, pos.x, pos.y);
++    view.get_sc().color().draw(sprite, pos.x, pos.y);
+   }
+ 
+   float get_z_pos () { return 100; }
+
+Modified: trunk/src/particles/rocket_smoke_particle.cxx
+===================================================================
+--- trunk/src/particles/rocket_smoke_particle.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/particles/rocket_smoke_particle.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -53,7 +53,7 @@
+   sprite.set_scale (0.8f + ((1 - life_time/max_life_time)) * 4.0f,
+                     0.8f + ((1 - life_time/max_life_time)) * 4.0f);
+   sprite.set_angle(angle);
+-  view.get_dc().draw(sprite, pos.x, pos.y);
++  view.get_sc().color().draw(sprite, pos.x, pos.y);
+ }
+ 
+ float
+
+Modified: trunk/src/particles/sand_particle.hxx
+===================================================================
+--- trunk/src/particles/sand_particle.hxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/particles/sand_particle.hxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -62,7 +62,7 @@
+     sprite.set_scale (0.65f + ((1 - life_time/max_life_time)) * 4.0f,
+                       0.65f + ((1 - life_time/max_life_time)) * 4.0f);
+     sprite.set_angle(angle);
+-    view.get_dc().draw(sprite, pos.x, pos.y);
++    view.get_sc().color().draw(sprite, pos.x, pos.y);
+   }
+ 
+   float get_z_pos () { return 100; }
+
+Modified: trunk/src/particles/smoke_particle.hxx
+===================================================================
+--- trunk/src/particles/smoke_particle.hxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/particles/smoke_particle.hxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -62,7 +62,7 @@
+     sprite.set_scale (0.8f + ((1 - life_time/max_life_time)) * 4.0f,
+ 		       0.8f + ((1 - life_time/max_life_time)) * 4.0f);
+     sprite.set_angle(angle);
+-    view.get_dc().draw(sprite, pos.x, pos.y);
++    view.get_sc().color().draw(sprite, pos.x, pos.y);
+   }
+ 
+   float get_z_pos () { return 100; }
+
+Modified: trunk/src/projectile.cxx
+===================================================================
+--- trunk/src/projectile.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/projectile.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -57,7 +57,7 @@
+ {
+   if (lifetime &gt; 0) {
+     sur.set_angle(Math::rad2deg(velocity.get_orientation()));
+-    view.get_dc().draw(sur, pos.x, pos.y);
++    view.get_sc().color().draw(sur, pos.x, pos.y);
+   }
+ 
+   //std::cout &lt;&lt; &quot;Pos: &quot; &lt;&lt; pos.x &lt;&lt; &quot; &quot; &lt;&lt; pos.y &lt;&lt; std::endl;
+
+Modified: trunk/src/robot_tank.cxx
+===================================================================
+--- trunk/src/robot_tank.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/robot_tank.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -124,7 +124,7 @@
+ {
+   // FIXME: Orientation is wrong
+   sprite.set_angle(Math::deg2rad(-orientation - Math::pi_2));
+-  view.get_dc().draw(sprite, pos.x, pos.y);
++  view.get_sc().color().draw(sprite, pos.x, pos.y);
+ }
+ 
+ void
+
+Modified: trunk/src/rocket.cxx
+===================================================================
+--- trunk/src/rocket.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/rocket.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -45,7 +45,7 @@
+ Rocket::draw(View&amp; view)
+ {
+   sprite.set_angle(Math::rad2deg(orientation));
+-  view.get_dc().draw(sprite, pos.x, pos.y);
++  view.get_sc().color().draw(sprite, pos.x, pos.y);
+ }
+ 
+ void
+
+Modified: trunk/src/satchel_charge.cxx
+===================================================================
+--- trunk/src/satchel_charge.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/satchel_charge.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -43,7 +43,7 @@
+ void
+ SatchelCharge::draw(View&amp; view)
+ {
+-  view.get_dc().draw(sprite, pos.x, pos.y);
++  view.get_sc().color().draw(sprite, pos.x, pos.y);
+ }
+ 
+ void
+
+Modified: trunk/src/shockwave.cxx
+===================================================================
+--- trunk/src/shockwave.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/shockwave.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -43,7 +43,7 @@
+ {
+   sprite.set_alpha(1.0f - (progress/10.0f));
+   sprite.set_scale(progress + .5, progress + .5);
+-  view.get_dc().draw(sprite, pos.x, pos.y);
++  view.get_sc().color().draw(sprite, pos.x, pos.y);
+ }
+ 
+ void 
+
+Modified: trunk/src/soldier.cxx
+===================================================================
+--- trunk/src/soldier.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/soldier.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -30,7 +30,8 @@
+ 
+ Soldier::Soldier(const AList&amp; lst) 
+   : ai(0),
+-    sur(resources-&gt;get_sprite(&quot;feuerkraft/soldier&quot;))
++    sur(resources-&gt;get_sprite(&quot;feuerkraft/soldier&quot;)),
++    sur_light(resources-&gt;get_sprite(&quot;feuerkraft/soldier-light&quot;))
+ {
+   pos.x = lst.get_float(&quot;x-pos&quot;);
+   pos.y = lst.get_float(&quot;y-pos&quot;);
+@@ -65,7 +66,8 @@
+     }
+ 
+   sur.set_angle(Math::rad2deg(new_orientation));
+-  view.get_dc().draw(sur, pos.x, pos.y);
++  view.get_sc().color().draw(sur, pos.x, pos.y);
++  view.get_sc().light().draw(sur_light, pos.x, pos.y);
+   orientation = new_orientation;
+ }
+ 
+
+Modified: trunk/src/soldier.hxx
+===================================================================
+--- trunk/src/soldier.hxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/soldier.hxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -32,6 +32,7 @@
+ private:
+   SoldierAI* ai;
+   CL_Sprite sur;
++  CL_Sprite sur_light;
+ 
+   // Controll variables
+   float acceleration;
+
+Modified: trunk/src/tree.cxx
+===================================================================
+--- trunk/src/tree.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/tree.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -68,7 +68,7 @@
+ void 
+ Tree::draw (View&amp; view)
+ {
+-  view.get_dc().draw(sur, pos.x, pos.y);
++  view.get_sc().color().draw(sur, pos.x, pos.y);
+ }
+ 
+ /* EOF */
+
+Modified: trunk/src/vehicles/helicopter.cxx
+===================================================================
+--- trunk/src/vehicles/helicopter.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/vehicles/helicopter.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -101,10 +101,10 @@
+   if (!destroyed)
+     {
+       heli_shadow.set_angle(Math::rad2deg(orientation));
+-      view.get_dc().draw(heli_shadow, pos.x + height/2.0f, pos.y + height);
++      view.get_sc().color().draw(heli_shadow, pos.x + height/2.0f, pos.y + height);
+ 
+       heli.set_angle(Math::rad2deg(orientation));
+-      view.get_dc().draw(heli, pos.x, pos.y);
++      view.get_sc().color().draw(heli, pos.x, pos.y);
+ 
+       for (Rotors::iterator i = rotors.begin(); i != rotors.end(); ++i)
+         {
+@@ -116,7 +116,7 @@
+   else
+     {
+       helidestroyed.set_angle(Math::rad2deg(orientation));
+-      view.get_dc().draw(helidestroyed, pos.x, pos.y);
++      view.get_sc().color().draw(helidestroyed, pos.x, pos.y);
+     }
+ }
+ 
+
+Modified: trunk/src/vehicles/jeep.cxx
+===================================================================
+--- trunk/src/vehicles/jeep.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/vehicles/jeep.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -70,7 +70,7 @@
+   const float circle = 6.2831854f;
+   
+   jeep.set_angle(angle/(circle/2.0)*180);
+-  view.get_dc().draw(jeep, pos.x, pos.y);
++  view.get_sc().color().draw(jeep, pos.x, pos.y);
+   energie.draw (view, int(pos.x), int(pos.y - 30));
+ }
+ 
+
+Modified: trunk/src/vehicles/rotor.cxx
+===================================================================
+--- trunk/src/vehicles/rotor.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/vehicles/rotor.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -48,12 +48,12 @@
+       if (direction == RotorDescription::LEFT)
+         {
+           fast.set_angle(Math::rad2deg(orientation));
+-          view.get_dc().draw(fast, p.x, p.y);
++          view.get_sc().color().draw(fast, p.x, p.y);
+         }
+       else
+         {
+           fast.set_angle(Math::rad2deg(-orientation));
+-          view.get_dc().draw(fast, p.x, p.y);
++          view.get_sc().color().draw(fast, p.x, p.y);
+         }
+     }
+   else
+@@ -61,12 +61,12 @@
+       if (direction == RotorDescription::LEFT)
+         {
+           slow.set_angle(Math::rad2deg(orientation));
+-          view.get_dc().draw(slow, p.x, p.y);
++          view.get_sc().color().draw(slow, p.x, p.y);
+         }
+       else
+         {
+           slow.set_angle(Math::rad2deg(-orientation));
+-          view.get_dc().draw(slow, p.x, p.y);
++          view.get_sc().color().draw(slow, p.x, p.y);
+         }
+     }
+ }
+
+Modified: trunk/src/vehicles/tank.cxx
+===================================================================
+--- trunk/src/vehicles/tank.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/vehicles/tank.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -63,6 +63,9 @@
+   // Load
+   smod   = resources-&gt;get_sprite(def.get_string(&quot;tank&quot;));
+   sur    = resources-&gt;get_sprite(def.get_string(&quot;tank&quot;));
++  sur_light     = resources-&gt;get_sprite(&quot;feuerkraft/tank_light&quot;);
++  sur_highlight = resources-&gt;get_sprite(&quot;feuerkraft/tank_highlight&quot;);
++
+   turret = new Turret(this, 
+                       def.get_int(&quot;reloading_speed&quot;),
+                       def.get_string(&quot;turret&quot;), 
+@@ -106,6 +109,8 @@
+     smod (resources-&gt;get_sprite (tank.c_str ())),
+     sur_destroyed (resources-&gt;get_sprite (&quot;feuerkraft/tank2destroyed&quot;)),
+     sur (resources-&gt;get_sprite (tank.c_str ())),
++    sur_light(resources-&gt;get_sprite(&quot;feuerkraft/tank_light&quot;)),
++    sur_highlight(resources-&gt;get_sprite(&quot;feuerkraft/tank_highlight&quot;)),
+     shadow (resources-&gt;get_sprite (&quot;feuerkraft/tank2_shadow&quot;)),
+     turret (NULL),
+     smod_step (0),
+@@ -159,7 +164,7 @@
+ {
+   if (destroyed)
+     {
+-      view.get_dc().draw(sur_destroyed, pos.x, pos.y);
++      view.get_sc().color().draw(sur_destroyed, pos.x, pos.y);
+     }
+   else
+     {
+@@ -181,8 +186,19 @@
+ #endif /* UGLY_SHADOWS_ENABLED */
+ 
+       // Draw the tank
++      sur_light.set_scale(2.5, 2.5);
++      sur_highlight.set_scale(2.5, 2.5);
+       sur.set_angle(Math::rad2deg(orientation + Math::pi));
+-      view.get_dc().draw(sur, pos.x, pos.y);
++      sur_light.set_angle(Math::rad2deg(orientation + Math::pi));
++      sur_highlight.set_angle(Math::rad2deg(orientation + Math::pi));
++
++      view.get_sc().color().draw(sur, pos.x, pos.y);
++
++      if (sur_light)
++        view.get_sc().light().draw(sur_light, pos.x, pos.y);
++      if (sur_highlight)
++        view.get_sc().highlight().draw(sur_highlight, pos.x, pos.y);
++
+       turret-&gt;draw(view);
+ 
+       // Draw Collision rect
+
+Modified: trunk/src/vehicles/tank.hxx
+===================================================================
+--- trunk/src/vehicles/tank.hxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/vehicles/tank.hxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -62,6 +62,8 @@
+   CL_Sprite sur_destroyed;
+ 
+   CL_Sprite sur;
++  CL_Sprite sur_light;
++  CL_Sprite sur_highlight;
+   CL_Sprite shadow;
+ 
+   Turret* turret;
+
+Modified: trunk/src/vehicles/turret.cxx
+===================================================================
+--- trunk/src/vehicles/turret.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/vehicles/turret.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -38,12 +38,12 @@
+ #endif 
+ 
+   sur.set_angle((absolute_orientation + Math::pi) / Math::pi * 180.0f);
+-  view.get_dc().draw(sur, tank-&gt;get_pos().x, tank-&gt;get_pos().y);
++  view.get_sc().color().draw(sur, tank-&gt;get_pos().x, tank-&gt;get_pos().y);
+ 
+   if (fireing &amp;&amp; reloading == 0 &amp;&amp; tank-&gt;ammo &gt; 0.0)
+     {
+       fire_sur.set_angle(Math::rad2deg(absolute_orientation + Math::pi));
+-      view.get_dc().draw(fire_sur, tank-&gt;get_pos().x, tank-&gt;get_pos().y);
++      view.get_sc().color().draw(fire_sur, tank-&gt;get_pos().x, tank-&gt;get_pos().y);
+       fireing = false;
+       reloading = reloading_speed;
+     }
+
+Modified: trunk/src/view.cxx
+===================================================================
+--- trunk/src/view.cxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/view.cxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -26,7 +26,6 @@
+ #include &quot;color.hxx&quot;
+ #include &quot;math.hxx&quot;
+ #include &quot;view.hxx&quot;
+-#include &quot;display/drawing_context.hxx&quot;
+ 
+ View* View::current_ = 0;
+ 
+@@ -46,7 +45,7 @@
+   state.zoom = 1.0;
+   state.rotation = 0;
+   
+-  drawing_context = new DrawingContext();
++  scene_context = new SceneContext();
+ 
+   current_ = this;
+ }
+@@ -142,7 +141,7 @@
+       FloatVector2d current = next;
+       next = FloatVector2d::make_polar(radius, i * pi/float(steps));
+       
+-      get_dc().draw_line(x_pos + current.x, y_pos + current.y,
++     .get_sc().color().draw_line(x_pos + current.x, y_pos + current.y,
+                          x_pos + next.x,    y_pos + next.y,
+                          color);
+     }
+@@ -169,7 +168,7 @@
+       x = x_pos + radius * cos(angle_start + i*enclosed_angle/steps);
+       y = y_pos + radius * sin(angle_start + i*enclosed_angle/steps);
+ 
+-      get_dc().draw_line(last_x, last_y, x, y, color);
++     .get_sc().color().draw_line(last_x, last_y, x, y, color);
+ 
+       last_x = x;
+       last_y = y;
+@@ -192,8 +191,8 @@
+   if (view_updater)
+     view_updater-&gt;update(delta, state);
+ 
+-  drawing_context-&gt;reset_modelview();
+-  drawing_context-&gt;translate(get_x_offset(), get_y_offset());
++  scene_context-&gt;reset_modelview();
++  scene_context-&gt;translate(get_x_offset(), get_y_offset());
+   //drawing_context.translate(state.x_offset, state.y_offset);
+ }
+ 
+
+Modified: trunk/src/view.hxx
+===================================================================
+--- trunk/src/view.hxx	2005-02-01 19:04:21 UTC (rev 335)
++++ trunk/src/view.hxx	2005-02-01 20:27:20 UTC (rev 336)
+@@ -23,6 +23,7 @@
+ #include &quot;view_properties.hxx&quot;
+ #include &quot;vector2d.hxx&quot;
+ #include &quot;display/drawing_context.hxx&quot;
++#include &quot;display/scene_context.hxx&quot;
+ 
+ class CL_Sprite;
+ class Color;
+@@ -68,7 +69,7 @@
+   ViewState state;
+   ViewUpdater* view_updater;
+   ViewProperty properties;
+-  DrawingContext* drawing_context;
++  SceneContext* scene_context;
+   
+   static View* current_;
+ public:
+@@ -88,7 +89,7 @@
+   void set_updater(ViewUpdater* arg_updater);
+   void update(float delta);
+ 
+-  DrawingContext&amp; get_dc() { return *drawing_context; } 
++  SceneContext&amp; get_sc() { return *scene_context; } 
+ 
+   bool get_property (ViewProperty p);
+   void set_property (ViewProperty p);
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000001.html">[Feuerkraft-commit] r337 - in trunk: . contrib contrib/test contrib/tilegen data data/images data/images/vehicles src src/groundmap src/input src/particles
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#0">[ date ]</a>
+              <a href="thread.html#0">[ thread ]</a>
+              <a href="subject.html#0">[ subject ]</a>
+              <a href="author.html#0">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/feuerkraft-commit">More information about the Feuerkraft-commit
+mailing list</a><br>
+</body></html>

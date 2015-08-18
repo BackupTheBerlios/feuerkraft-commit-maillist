@@ -1,0 +1,2043 @@
+From grumbel at mail.berlios.de  Wed May 12 21:12:19 2010
+From: grumbel at mail.berlios.de (grumbel at BerliOS)
+Date: Wed, 12 May 2010 21:12:19 +0200
+Subject: [Feuerkraft-commit] r392 - trunk/feuerkraft/external/clanlib
+Message-ID: <201005121912.o4CJCJQQ030079@sheep.berlios.de>
+
+Author: grumbel
+Date: 2010-05-12 21:12:18 +0200 (Wed, 12 May 2010)
+New Revision: 392
+
+Removed:
+   trunk/feuerkraft/external/clanlib/GUI/
+   trunk/feuerkraft/external/clanlib/GUIStyleSilver/
+Modified:
+   trunk/feuerkraft/external/clanlib/SConstruct
+Log:
+Removed unused GUI and GUIStyleSilver libraries
+
+Modified: trunk/feuerkraft/external/clanlib/SConstruct
+===================================================================
+--- trunk/feuerkraft/external/clanlib/SConstruct	2010-05-12 19:03:58 UTC (rev 391)
++++ trunk/feuerkraft/external/clanlib/SConstruct	2010-05-12 19:12:18 UTC (rev 392)
+@@ -262,116 +262,6 @@
+     'GL/GLX/input_device_xinput.h'
+     ])
+ 
+-clanGUI = env.StaticLibrary(
+-    target = 'libclanGUI.a',
+-    source = [
+-    'GUI/frame_generic.cpp',
+-    'GUI/treeview_generic.h',
+-    'GUI/component_manager.cpp',
+-    'GUI/frame.cpp',
+-    'GUI/image_generic.h',
+-    'GUI/button_generic.h',
+-    'GUI/listbox_generic.h',
+-    'GUI/radiogroup.cpp',
+-    'GUI/progressbar_generic.cpp',
+-    'GUI/component_manager_generic.h',
+-    'GUI/radiogroup_generic.h',
+-    'GUI/gui_manager.cpp',
+-    'GUI/component_generic.h',
+-    'GUI/stylemanager.cpp',
+-    'GUI/scrollbar_generic.cpp',
+-    'GUI/inputbox_generic.cpp',
+-    'GUI/inputdialog.cpp',
+-    'GUI/inputdialog_generic.cpp',
+-    'GUI/label.cpp',
+-    'GUI/precomp.h',
+-    'GUI/gui_manager_generic.h',
+-    'GUI/scrollbar_generic.h',
+-    'GUI/listbox.cpp',
+-    'GUI/inputbox.cpp',
+-    'GUI/image_generic.cpp',
+-    'GUI/component_resize_handler.cpp',
+-    'GUI/treenode_generic.cpp',
+-    'GUI/filedialog_generic.cpp',
+-    'GUI/inputbox_generic.h',
+-    'GUI/button.cpp',
+-    'GUI/component_manager_generic.cpp',
+-    'GUI/progressbar.cpp',
+-    'GUI/component.cpp',
+-    'GUI/component_type.cpp',
+-    'GUI/component_type_generic.h',
+-    'GUI/layout.cpp',
+-    'GUI/layout_generic.cpp',
+-    'GUI/layout_generic.h',
+-    'GUI/layout_item.cpp',
+-    'GUI/layout_item.h',
+-    'GUI/gui_manager_generic.cpp',
+-    'GUI/treenode_generic.h',
+-    'GUI/image.cpp',
+-    'GUI/button_generic.cpp',
+-    'GUI/default_component_types.h',
+-    'GUI/checkbox.cpp',
+-    'GUI/component_generic.cpp',
+-    'GUI/radiobutton.cpp',
+-    'GUI/messagebox_generic.cpp',
+-    'GUI/treeitem.cpp',
+-    'GUI/label_generic.cpp',
+-    'GUI/listbox_generic.cpp',
+-    'GUI/setupgui.cpp',
+-    'GUI/progressbar_generic.h',
+-    'GUI/messagebox.cpp',
+-    'GUI/scrollbar.cpp',
+-    'GUI/frame_generic.h',
+-    'GUI/radiogroup_generic.cpp',
+-    'GUI/label_generic.h',
+-    'GUI/component_move_handler.cpp',
+-    'GUI/treenode.cpp',
+-    'GUI/window.cpp',
+-    'GUI/window_generic.cpp',
+-    'GUI/treeview.cpp',
+-    'GUI/filedialog_generic.h',
+-    'GUI/treeitem_generic.cpp',
+-    'GUI/messagebox_generic.h',
+-    'GUI/treeitem_generic.h',
+-    'GUI/treeview_generic.cpp',
+-    'GUI/precomp.cpp',
+-    'GUI/filedialog.cpp',
+-    'GUI/window_generic.h',
+-    'GUI/menu_node_generic.h',
+-    'GUI/menu.cpp',
+-    'GUI/menu_node.cpp',
+-    'GUI/menu_node_generic.cpp',
+-    'GUI/menu_generic.h',
+-    'GUI/menu_generic.cpp',
+-    'GUI/menu_item.cpp',
+-    'GUI/menu_item_generic.cpp',
+-    'GUI/deck.cpp',
+-    'GUI/deck_generic.h',
+-    'GUI/deck_generic.cpp'
+-    ])
+-
+-clanGUIStyleSilver = env.StaticLibrary(
+-    target = 'libclanGUIStyleSilver.a',
+-    source = [
+-    'GUIStyleSilver/button_silver.cpp',
+-    'GUIStyleSilver/label_silver.cpp',
+-    'GUIStyleSilver/scrollbar_silver.cpp',
+-    'GUIStyleSilver/checkbox_silver.cpp',
+-    'GUIStyleSilver/listbox_silver.cpp',
+-    'GUIStyleSilver/stylemanager_silver.cpp',
+-    'GUIStyleSilver/frame_silver.cpp',
+-    'GUIStyleSilver/image_silver.cpp',
+-    'GUIStyleSilver/progressbar_silver.cpp',
+-    'GUIStyleSilver/inputbox_silver.cpp',
+-    'GUIStyleSilver/radiobutton_silver.cpp',
+-    'GUIStyleSilver/window_silver.cpp',
+-    'GUIStyleSilver/menu_silver.cpp',
+-    'GUIStyleSilver/menu_node_silver.cpp',
+-    'GUIStyleSilver/menu_item_silver.cpp',
+-    'GUIStyleSilver/treeitem_silver.cpp',
+-    'GUIStyleSilver/treeview_silver.cpp',
+-    ])
+-
+ clanSignals = env.StaticLibrary(
+     target = 'libclanSignals.a',
+     source = [
+
+
+
+From grumbel at mail.berlios.de  Wed May 12 21:25:45 2010
+From: grumbel at mail.berlios.de (grumbel at BerliOS)
+Date: Wed, 12 May 2010 21:25:45 +0200
+Subject: [Feuerkraft-commit] r393 - trunk/feuerkraft/src
+Message-ID: <201005121925.o4CJPjYc031287@sheep.berlios.de>
+
+Author: grumbel
+Date: 2010-05-12 21:25:44 +0200 (Wed, 12 May 2010)
+New Revision: 393
+
+Modified:
+   trunk/feuerkraft/src/command_line_arguments.cpp
+Log:
+Added missing include
+
+Modified: trunk/feuerkraft/src/command_line_arguments.cpp
+===================================================================
+--- trunk/feuerkraft/src/command_line_arguments.cpp	2010-05-12 19:12:18 UTC (rev 392)
++++ trunk/feuerkraft/src/command_line_arguments.cpp	2010-05-12 19:25:44 UTC (rev 393)
+@@ -18,6 +18,7 @@
+ 
+ #include <iostream>
+ #include <stdlib.h>
++#include <stdio.h>
+ #include <ClanLib/Core/System/command_line.h>
+ 
+ #include "command_line_arguments.hpp"
+
+
+
+From grumbel at mail.berlios.de  Wed May 12 21:26:43 2010
+From: grumbel at mail.berlios.de (grumbel at BerliOS)
+Date: Wed, 12 May 2010 21:26:43 +0200
+Subject: [Feuerkraft-commit] r394 - in trunk/feuerkraft: . src
+Message-ID: <201005121926.o4CJQh33031354@sheep.berlios.de>
+
+Author: grumbel
+Date: 2010-05-12 21:26:43 +0200 (Wed, 12 May 2010)
+New Revision: 394
+
+Modified:
+   trunk/feuerkraft/SConstruct
+   trunk/feuerkraft/src/SConscript
+Log:
+Use clanlib from external/
+
+Modified: trunk/feuerkraft/SConstruct
+===================================================================
+--- trunk/feuerkraft/SConstruct	2010-05-12 19:25:44 UTC (rev 393)
++++ trunk/feuerkraft/SConstruct	2010-05-12 19:26:43 UTC (rev 394)
+@@ -1,3 +1,4 @@
++SConscript("external/clanlib/SConstruct")
+ SConscript("src/SConscript")
+ 
+ # EOF #
+
+Modified: trunk/feuerkraft/src/SConscript
+===================================================================
+--- trunk/feuerkraft/src/SConscript	2010-05-12 19:25:44 UTC (rev 393)
++++ trunk/feuerkraft/src/SConscript	2010-05-12 19:26:43 UTC (rev 394)
+@@ -1,19 +1,35 @@
+ import os
+ 
+-env = Environment(ENV = os.environ,
+-                  CXXFLAGS=["-g", "-O2", "-Wall", "-ansi", "-pedantic"],
+-                  CPPPATH=["..", "."],
+-                  LIBS=["guile"])
++if True:
++    env = Environment(CXXFLAGS=["-g", "-O2", "-Wall", "-ansi", "-pedantic"],
++                      CPPPATH=['../external/clanlib/', '..', '.'],
++                      LIBPATH=['/usr/X11R6/lib/',
++                               '../external/clanlib/'],
++                      LIBS=['clanSound',      
++                            'clanGL',
++                            'clanApp',
++                            'clanVorbis',
++                            'clanMikMod',
++                            'clanDisplay',
++                            'clanSignals', 
++                            'clanCore',
++                            'X11', 'Xmu', 'GL', 'GLU', 'png', 'jpeg', 'Xxf86vm', 'Xi',
++                            'guile'])
++else:
++    env = Environment(ENV = os.environ,
++                      CXXFLAGS=["-g", "-O2", "-Wall", "-ansi", "-pedantic"],
++                      CPPPATH=["..", "."],
++                      LIBS=["guile"])
++    
++    env.ParseConfig("pkg-config --cflags --libs " +
++                    "clanCore-0.8 " +
++                    "clanApp-0.8 " +
++                    "clanDisplay-0.8 " +
++                    "clanGL-0.8 " +
++                    "clanSound-0.8 " +
++                    "clanMikMod-0.8 " +
++                    "clanVorbis-0.8")
+ 
+-env.ParseConfig("pkg-config --cflags --libs " +
+-                "clanCore-0.8 " +
+-                "clanApp-0.8 " +
+-                "clanDisplay-0.8 " +
+-                "clanGL-0.8 " +
+-                "clanSound-0.8 " +
+-                "clanMikMod-0.8 " +
+-                "clanVorbis-0.8")
+-
+ env.Command("scripting/feuerkraft_wrap.cpp", "scripting/feuerkraft.i",
+             "swig -guile -c++  -o $TARGET $SOURCE")
+ 
+
+
+
+From grumbel at mail.berlios.de  Wed May 12 21:27:13 2010
+From: grumbel at mail.berlios.de (grumbel at BerliOS)
+Date: Wed, 12 May 2010 21:27:13 +0200
+Subject: [Feuerkraft-commit] r395 - trunk/feuerkraft/src
+Message-ID: <201005121927.o4CJRDFs031392@sheep.berlios.de>
+
+Author: grumbel
+Date: 2010-05-12 21:27:12 +0200 (Wed, 12 May 2010)
+New Revision: 395
+
+Modified:
+   trunk/feuerkraft/src/feuerkraft.cpp
+Log:
+Fixed path handling a bit
+
+Modified: trunk/feuerkraft/src/feuerkraft.cpp
+===================================================================
+--- trunk/feuerkraft/src/feuerkraft.cpp	2010-05-12 19:26:43 UTC (rev 394)
++++ trunk/feuerkraft/src/feuerkraft.cpp	2010-05-12 19:27:12 UTC (rev 395)
+@@ -94,11 +94,13 @@
+     }
+   else
+     {
+-      path_manager.add_path(CL_System::get_exe_path() + "../data");
+-      path_manager.add_path("../data");
+-      path_manager.add_path("data");
+-      path_manager.add_path("share/games/feuerkraft");
+-      path_manager.add_path("../share/games/feuerkraft");
++      std::string exe_path = CL_System::get_exe_path();
++      path_manager.add_path(exe_path + "../data");
++      path_manager.add_path(exe_path + "data");
++      path_manager.add_path(exe_path + "share/feuerkraft");
++      path_manager.add_path(exe_path + "share/games/feuerkraft");
++      path_manager.add_path(exe_path + "../share/feuerkraft");
++      path_manager.add_path(exe_path + "../share/games/feuerkraft");
+       path_manager.find_path("feuerkraft.xml");     
+     }
+ 
+
+
+
+From grumbel at mail.berlios.de  Wed May 12 21:41:30 2010
+From: grumbel at mail.berlios.de (grumbel at BerliOS)
+Date: Wed, 12 May 2010 21:41:30 +0200
+Subject: [Feuerkraft-commit] r396 - trunk/feuerkraft
+Message-ID: <201005121941.o4CJfUvW032460@sheep.berlios.de>
+
+Author: grumbel
+Date: 2010-05-12 21:41:25 +0200 (Wed, 12 May 2010)
+New Revision: 396
+
+Added:
+   trunk/feuerkraft/Makefile
+Log:
+Added Makefile
+
+Added: trunk/feuerkraft/Makefile
+===================================================================
+--- trunk/feuerkraft/Makefile	2010-05-12 19:27:12 UTC (rev 395)
++++ trunk/feuerkraft/Makefile	2010-05-12 19:41:25 UTC (rev 396)
+@@ -0,0 +1,50 @@
++##  Feuerkraft - A tank battle game
++##  Copyright (C) 2010 Ingo Ruhnke <grumbel at gmx.de>
++##
++##  This program is free software: you can redistribute it and/or modify
++##  it under the terms of the GNU General Public License as published by
++##  the Free Software Foundation, either version 3 of the License, or
++##  (at your option) any later version.
++##  
++##  This program is distributed in the hope that it will be useful,
++##  but WITHOUT ANY WARRANTY; without even the implied warranty of
++##  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++##  GNU General Public License for more details.
++##  
++##  You should have received a copy of the GNU General Public License
++##  along with this program.  If not, see <http://www.gnu.org/licenses/>.
++
++DESTDIR = 
++PREFIX  = "/usr/local"
++DATADIR = "${PREFIX}/share/feuerkraft"
++BINDIR  = "${PREFIX}/bin"
++
++build/feuerkraft:
++	scons
++
++clean:
++	scons -c
++	rm -rf .sconf_temp/
++	rm -f .sconsign.dblite
++
++install: install-exec install-data
++
++install-exec: build/feuerkraft
++	install -D feuerkraft "${DESTDIR}${BINDIR}/feuerkraft"
++
++install-data:
++	cd data/; \
++	find -type f \( \
++	-name "*.feu" -o \
++	-name "*.jpg" -o \
++	-name "*.png" -o \
++	-name "*.scm" -o \
++	-name "*.scr" -o \
++	-name "*.tga" -o \
++	-name "*.wav" -o \
++	-name "*.xml" \) \
++	-exec install -D {} ${DESTDIR}${DATADIR}/{} \;
++
++.PHONY : clean install install-exec install-data
++
++# EOF #
+
+
+
+From grumbel at mail.berlios.de  Wed May 12 22:42:13 2010
+From: grumbel at mail.berlios.de (grumbel at BerliOS)
+Date: Wed, 12 May 2010 22:42:13 +0200
+Subject: [Feuerkraft-commit] r397 - trunk/feuerkraft
+Message-ID: <201005122042.o4CKgDfV004897@sheep.berlios.de>
+
+Author: grumbel
+Date: 2010-05-12 22:42:12 +0200 (Wed, 12 May 2010)
+New Revision: 397
+
+Removed:
+   trunk/feuerkraft/external/
+Modified:
+   trunk/feuerkraft/SConstruct
+Log:
+Removed clanlib again from the source tree, turned out unnecesarry
+
+Modified: trunk/feuerkraft/SConstruct
+===================================================================
+--- trunk/feuerkraft/SConstruct	2010-05-12 19:41:25 UTC (rev 396)
++++ trunk/feuerkraft/SConstruct	2010-05-12 20:42:12 UTC (rev 397)
+@@ -1,4 +1,4 @@
+-SConscript("external/clanlib/SConstruct")
++# SConscript("external/clanlib/SConstruct")
+ SConscript("src/SConscript")
+ 
+ # EOF #
+
+
+
+From grumbel at mail.berlios.de  Fri May 14 00:58:18 2010
+From: grumbel at mail.berlios.de (grumbel at BerliOS)
+Date: Fri, 14 May 2010 00:58:18 +0200
+Subject: [Feuerkraft-commit] r398 - in trunk/feuerkraft: . src
+Message-ID: <201005132258.o4DMwIlx019875@sheep.berlios.de>
+
+Author: grumbel
+Date: 2010-05-14 00:58:17 +0200 (Fri, 14 May 2010)
+New Revision: 398
+
+Removed:
+   trunk/feuerkraft/src/SConscript
+Modified:
+   trunk/feuerkraft/SConstruct
+Log:
+Deleted src/SConscript, moved content to main SConstruct file
+
+Modified: trunk/feuerkraft/SConstruct
+===================================================================
+--- trunk/feuerkraft/SConstruct	2010-05-12 20:42:12 UTC (rev 397)
++++ trunk/feuerkraft/SConstruct	2010-05-13 22:58:17 UTC (rev 398)
+@@ -1,4 +1,182 @@
+-# SConscript("external/clanlib/SConstruct")
+-SConscript("src/SConscript")
++# -*- python -*-
+ 
++env = Environment(CXXFLAGS=["-g", "-O2", "-Wall", "-ansi", "-pedantic"],
++                  CPPPATH=["-Isrc/"],
++                  LIBS=["guile"])
++    
++env.ParseConfig("pkg-config --cflags --libs " +
++                "clanCore-1.0 " +
++                "clanApp-1.0 " +
++                "clanDisplay-1.0 " +
++                "clanGL-1.0 " +
++                "clanSound-1.0 " +
++                "clanMikMod-1.0 " +
++                "clanVorbis-1.0 | sed 's/-I/-isystem/'")
++
++env.Command("src/scripting/feuerkraft_wrap.cpp", "src/scripting/feuerkraft.i",
++            "swig -guile -c++  -o $TARGET $SOURCE")
++
++env.Program("feuerkraft", [
++    "src/editor/editor.cpp",
++
++    "src/buildings/ammotent.cpp", 
++    "src/buildings/building.cpp", 
++    "src/buildings/building_manager.cpp", 
++    "src/buildings/building_map.cpp", 
++    "src/buildings/building_map_data.cpp", 
++    "src/buildings/building_type_manager.cpp", 
++    "src/buildings/custom_building.cpp", 
++    "src/buildings/fuelstation.cpp", 
++    "src/buildings/headquarter.cpp", 
++    "src/buildings/tower.cpp", 
++    "src/buildings/tower_ai.cpp", 
++    "src/buildings/wall.cpp", 
++    "src/buildings/wall_door.cpp", 
++    
++    "src/vehicles/tank.cpp",
++    "src/vehicles/helicopter.cpp",
++    "src/vehicles/jeep.cpp",
++    "src/vehicles/turret.cpp",
++    "src/vehicles/rotor.cpp",
++    "src/vehicles/vehicle.cpp",
++    "src/generic/random.cpp",
++    
++    
++    "src/input/axis_button.cpp", 
++    "src/input/axis_factory.cpp", 
++    "src/input/button_axis.cpp", 
++    "src/input/button_factory.cpp", 
++    "src/input/controller.cpp", 
++    "src/input/input_axis_input_device.cpp", 
++    "src/input/input_button_input_device.cpp", 
++    "src/input/input_manager.cpp", 
++    "src/input/input_manager_custom.cpp", 
++    "src/input/input_manager_impl.cpp", 
++    "src/input/input_manager_player.cpp", 
++    "src/input/input_recorder.cpp", 
++    "src/input/multi_button.cpp",
++    "src/particles/fire_particle.cpp",
++    "src/particles/fire_emitter.cpp",
++    "src/particles/rocket_smoke_particle.cpp",
++    "src/particles/smoke_emitter.cpp",
++
++    "src/scripting/ai_commands.cpp",
++    "src/scripting/ai_vehicle_commands.cpp",
++    "src/scripting/building_commands.cpp",
++    "src/scripting/clanlib_commands.cpp",
++    "src/scripting/comm_commands.cpp",
++    "src/scripting/debug_commands.cpp",
++    "src/scripting/display_commands.cpp",
++    "src/scripting/effect_commands.cpp",
++    "src/scripting/feuerkraft_wrap.cpp",
++    "src/scripting/game_commands.cpp",
++    "src/scripting/gameobj_commands.cpp",
++    "src/scripting/input_commands.cpp",
++    "src/scripting/menu_commands.cpp",
++    "src/scripting/object_commands.cpp",
++    "src/scripting/player_commands.cpp",
++    "src/scripting/script_helper.cpp",
++    "src/scripting/sequence_commands.cpp",
++    "src/scripting/sound_commands.cpp",
++    "src/scripting/trigger_commands.cpp",
++    "src/scripting/vehicle_commands.cpp",
++    
++    "src/sound/sound.cpp",
++    "src/sound/sound_dummy.cpp",
++    "src/sound/sound_real.cpp",
++    "src/sound/sound_res_mgr.cpp",
++
++    "src/groundmap/grid_map.cpp", 
++    "src/groundmap/grid_map_data.cpp", 
++    "src/groundmap/grid_tile.cpp", 
++    "src/groundmap/grid_tile_data.cpp", 
++    "src/groundmap/grid_tile_generator.cpp", 
++    "src/groundmap/ground_map_data.cpp", 
++    "src/groundmap/ground_map_data_factory.cpp", 
++    "src/groundmap/ground_type.cpp", 
++    "src/groundmap/multi_ground_map.cpp", 
++    "src/groundmap/multi_ground_map_data.cpp", 
++    "src/groundmap/sprite_tile.cpp", 
++    "src/groundmap/sprite_tile_data.cpp", 
++    "src/groundmap/tile_data_factory.cpp", 
++    "src/groundmap/tile_map.cpp", 
++    "src/groundmap/tile_map_data.cpp", 
++    
++    "src/ai_manager.cpp", 
++    "src/ai_vehicle.cpp", 
++    "src/alist.cpp", 
++    "src/ambulance.cpp", 
++    "src/background.cpp", 
++    "src/collision_manager.cpp", 
++    "src/color.cpp", 
++    "src/command_line_arguments.cpp", 
++    "src/communication_dialog.cpp", 
++    "src/controller_def.cpp", 
++    "src/display/drawing_context.cpp", 
++    "src/display/scene_context.cpp", 
++    "src/display_manager.cpp", 
++    "src/energie.cpp", 
++    "src/explosion.cpp", 
++    "src/feuerkraft.cpp", 
++    "src/fonts.cpp", 
++    "src/game_delta.cpp", 
++    "src/game_mission.cpp", 
++    "src/game_obj.cpp", 
++    "src/game_obj_data_factory.cpp", 
++    "src/game_obj_factory.cpp", 
++    "src/game_obj_manager.cpp", 
++    "src/game_session.cpp", 
++    "src/game_session_manager.cpp", 
++    "src/game_world.cpp", 
++    "src/game_world_builder.cpp", 
++    "src/game_world_data.cpp", 
++    "src/globals.cpp", 
++    "src/goal_manager.cpp", 
++    "src/guile.cpp", 
++    "src/help.cpp", 
++    "src/ipc.cpp", 
++    "src/keyboard_manager.cpp", 
++    "src/keys.cpp", 
++    "src/level_map.cpp", 
++    "src/line_segments.cpp", 
++    "src/marker.cpp", 
++    "src/math.cpp", 
++    "src/menu.cpp", 
++    "src/menu_handle_mgr.cpp", 
++    "src/menu_item.cpp", 
++    "src/message_buffer.cpp", 
++    "src/mine.cpp", 
++    "src/output_world_builder.cpp", 
++    "src/path_manager.cpp", 
++    "src/player.cpp", 
++    "src/player_view.cpp", 
++    "src/projectile.cpp", 
++    "src/property.cpp", 
++    "src/property_set.cpp", 
++    "src/radar.cpp", 
++    "src/resource_manager.cpp", 
++    "src/robot_tank.cpp", 
++    "src/rocket.cpp", 
++    "src/satchel_charge.cpp", 
++    "src/scm_functor.cpp", 
++    "src/scm_sequence_hook.cpp", 
++    "src/screen.cpp", 
++    "src/screenshot.cpp", 
++    "src/sequence_manager.cpp", 
++    "src/sexpr_world_reader.cpp", 
++    "src/shockwave.cpp", 
++    "src/soldier.cpp", 
++    "src/soldier_ai.cpp", 
++    "src/start_screen.cpp", 
++    "src/system.cpp", 
++    "src/tree.cpp", 
++    "src/trigger_manager.cpp", 
++    "src/unit.cpp", 
++    "src/vector2d.cpp", 
++    "src/vehicle_ai.cpp", 
++    "src/vehicle_status.cpp", 
++    "src/vehicle_view.cpp", 
++    "src/view.cpp", 
++    ])
++
+ # EOF #
+
+Deleted: trunk/feuerkraft/src/SConscript
+===================================================================
+--- trunk/feuerkraft/src/SConscript	2010-05-12 20:42:12 UTC (rev 397)
++++ trunk/feuerkraft/src/SConscript	2010-05-13 22:58:17 UTC (rev 398)
+@@ -1,199 +0,0 @@
+-import os
+-
+-if True:
+-    env = Environment(CXXFLAGS=["-g", "-O2", "-Wall", "-ansi", "-pedantic"],
+-                      CPPPATH=['../external/clanlib/', '..', '.'],
+-                      LIBPATH=['/usr/X11R6/lib/',
+-                               '../external/clanlib/'],
+-                      LIBS=['clanSound',      
+-                            'clanGL',
+-                            'clanApp',
+-                            'clanVorbis',
+-                            'clanMikMod',
+-                            'clanDisplay',
+-                            'clanSignals', 
+-                            'clanCore',
+-                            'X11', 'Xmu', 'GL', 'GLU', 'png', 'jpeg', 'Xxf86vm', 'Xi',
+-                            'guile'])
+-else:
+-    env = Environment(ENV = os.environ,
+-                      CXXFLAGS=["-g", "-O2", "-Wall", "-ansi", "-pedantic"],
+-                      CPPPATH=["..", "."],
+-                      LIBS=["guile"])
+-    
+-    env.ParseConfig("pkg-config --cflags --libs " +
+-                    "clanCore-0.8 " +
+-                    "clanApp-0.8 " +
+-                    "clanDisplay-0.8 " +
+-                    "clanGL-0.8 " +
+-                    "clanSound-0.8 " +
+-                    "clanMikMod-0.8 " +
+-                    "clanVorbis-0.8")
+-
+-env.Command("scripting/feuerkraft_wrap.cpp", "scripting/feuerkraft.i",
+-            "swig -guile -c++  -o $TARGET $SOURCE")
+-
+-env.Program("../feuerkraft", [
+-    "editor/editor.cpp",
+-
+-    "buildings/ammotent.cpp", 
+-    "buildings/building.cpp", 
+-    "buildings/building_manager.cpp", 
+-    "buildings/building_map.cpp", 
+-    "buildings/building_map_data.cpp", 
+-    "buildings/building_type_manager.cpp", 
+-    "buildings/custom_building.cpp", 
+-    "buildings/fuelstation.cpp", 
+-    "buildings/headquarter.cpp", 
+-    "buildings/tower.cpp", 
+-    "buildings/tower_ai.cpp", 
+-    "buildings/wall.cpp", 
+-    "buildings/wall_door.cpp", 
+-    
+-    "vehicles/tank.cpp",
+-    "vehicles/helicopter.cpp",
+-    "vehicles/jeep.cpp",
+-    "vehicles/turret.cpp",
+-    "vehicles/rotor.cpp",
+-    "vehicles/vehicle.cpp",
+-    "generic/random.cpp",
+-    
+-    
+-    "input/axis_button.cpp", 
+-    "input/axis_factory.cpp", 
+-    "input/button_axis.cpp", 
+-    "input/button_factory.cpp", 
+-    "input/controller.cpp", 
+-    "input/input_axis_input_device.cpp", 
+-    "input/input_button_input_device.cpp", 
+-    "input/input_manager.cpp", 
+-    "input/input_manager_custom.cpp", 
+-    "input/input_manager_impl.cpp", 
+-    "input/input_manager_player.cpp", 
+-    "input/input_recorder.cpp", 
+-    "input/multi_button.cpp",
+-    "particles/fire_particle.cpp",
+-    "particles/fire_emitter.cpp",
+-    "particles/rocket_smoke_particle.cpp",
+-    "particles/smoke_emitter.cpp",
+-
+-    "scripting/ai_commands.cpp",
+-    "scripting/ai_vehicle_commands.cpp",
+-    "scripting/building_commands.cpp",
+-    "scripting/clanlib_commands.cpp",
+-    "scripting/comm_commands.cpp",
+-    "scripting/debug_commands.cpp",
+-    "scripting/display_commands.cpp",
+-    "scripting/effect_commands.cpp",
+-    "scripting/feuerkraft_wrap.cpp",
+-    "scripting/game_commands.cpp",
+-    "scripting/gameobj_commands.cpp",
+-    "scripting/input_commands.cpp",
+-    "scripting/menu_commands.cpp",
+-    "scripting/object_commands.cpp",
+-    "scripting/player_commands.cpp",
+-    "scripting/script_helper.cpp",
+-    "scripting/sequence_commands.cpp",
+-    "scripting/sound_commands.cpp",
+-    "scripting/trigger_commands.cpp",
+-    "scripting/vehicle_commands.cpp",
+-    
+-    "sound/sound.cpp",
+-    "sound/sound_dummy.cpp",
+-    "sound/sound_real.cpp",
+-    "sound/sound_res_mgr.cpp",
+-
+-    "groundmap/grid_map.cpp", 
+-    "groundmap/grid_map_data.cpp", 
+-    "groundmap/grid_tile.cpp", 
+-    "groundmap/grid_tile_data.cpp", 
+-    "groundmap/grid_tile_generator.cpp", 
+-    "groundmap/ground_map_data.cpp", 
+-    "groundmap/ground_map_data_factory.cpp", 
+-    "groundmap/ground_type.cpp", 
+-    "groundmap/multi_ground_map.cpp", 
+-    "groundmap/multi_ground_map_data.cpp", 
+-    "groundmap/sprite_tile.cpp", 
+-    "groundmap/sprite_tile_data.cpp", 
+-    "groundmap/tile_data_factory.cpp", 
+-    "groundmap/tile_map.cpp", 
+-    "groundmap/tile_map_data.cpp", 
+-    
+-    "ai_manager.cpp", 
+-    "ai_vehicle.cpp", 
+-    "alist.cpp", 
+-    "ambulance.cpp", 
+-    "background.cpp", 
+-    "collision_manager.cpp", 
+-    "color.cpp", 
+-    "command_line_arguments.cpp", 
+-    "communication_dialog.cpp", 
+-    "controller_def.cpp", 
+-    "display/drawing_context.cpp", 
+-    "display/scene_context.cpp", 
+-    "display_manager.cpp", 
+-    "energie.cpp", 
+-    "explosion.cpp", 
+-    "feuerkraft.cpp", 
+-    "fonts.cpp", 
+-    "game_delta.cpp", 
+-    "game_mission.cpp", 
+-    "game_obj.cpp", 
+-    "game_obj_data_factory.cpp", 
+-    "game_obj_factory.cpp", 
+-    "game_obj_manager.cpp", 
+-    "game_session.cpp", 
+-    "game_session_manager.cpp", 
+-    "game_world.cpp", 
+-    "game_world_builder.cpp", 
+-    "game_world_data.cpp", 
+-    "globals.cpp", 
+-    "goal_manager.cpp", 
+-    "guile.cpp", 
+-    "help.cpp", 
+-    "ipc.cpp", 
+-    "keyboard_manager.cpp", 
+-    "keys.cpp", 
+-    "level_map.cpp", 
+-    "line_segments.cpp", 
+-    "marker.cpp", 
+-    "math.cpp", 
+-    "menu.cpp", 
+-    "menu_handle_mgr.cpp", 
+-    "menu_item.cpp", 
+-    "message_buffer.cpp", 
+-    "mine.cpp", 
+-    "output_world_builder.cpp", 
+-    "path_manager.cpp", 
+-    "player.cpp", 
+-    "player_view.cpp", 
+-    "projectile.cpp", 
+-    "property.cpp", 
+-    "property_set.cpp", 
+-    "radar.cpp", 
+-    "resource_manager.cpp", 
+-    "robot_tank.cpp", 
+-    "rocket.cpp", 
+-    "satchel_charge.cpp", 
+-    "scm_functor.cpp", 
+-    "scm_sequence_hook.cpp", 
+-    "screen.cpp", 
+-    "screenshot.cpp", 
+-    "sequence_manager.cpp", 
+-    "sexpr_world_reader.cpp", 
+-    "shockwave.cpp", 
+-    "soldier.cpp", 
+-    "soldier_ai.cpp", 
+-    "start_screen.cpp", 
+-    "system.cpp", 
+-    "tree.cpp", 
+-    "trigger_manager.cpp", 
+-    "unit.cpp", 
+-    "vector2d.cpp", 
+-    "vehicle_ai.cpp", 
+-    "vehicle_status.cpp", 
+-    "vehicle_view.cpp", 
+-    "view.cpp", 
+-    ])
+-
+-# EOF #
+
+
+
+From grumbel at mail.berlios.de  Fri May 14 01:21:08 2010
+From: grumbel at mail.berlios.de (grumbel at BerliOS)
+Date: Fri, 14 May 2010 01:21:08 +0200
+Subject: [Feuerkraft-commit] r399 - trunk/feuerkraft/src
+Message-ID: <201005132321.o4DNL8wh025951@sheep.berlios.de>
+
+Author: grumbel
+Date: 2010-05-14 01:21:07 +0200 (Fri, 14 May 2010)
+New Revision: 399
+
+Modified:
+   trunk/feuerkraft/src/view.hpp
+Log:
+Fixed missing initialisation of ViewState
+
+Modified: trunk/feuerkraft/src/view.hpp
+===================================================================
+--- trunk/feuerkraft/src/view.hpp	2010-05-13 22:58:17 UTC (rev 398)
++++ trunk/feuerkraft/src/view.hpp	2010-05-13 23:21:07 UTC (rev 399)
+@@ -37,11 +37,20 @@
+   float y_offset;
+   float zoom;
+   float rotation;
++
++  ViewState() :
++    x_offset(),
++    y_offset(),
++    zoom(),
++    rotation()
++  {}
+ };
+ 
+ class ViewUpdater
+ {
+ public:
++  virtual ~ViewUpdater() {}
++
+   virtual void update(float delta, ViewState& state) =0;
+ };
+ 
+@@ -95,6 +104,10 @@
+ 
+   FloatVector2d screen_to_world (const FloatVector2d&);
+   FloatVector2d world_to_screen (const FloatVector2d&);
++
++private:
++  View(const View&);
++  View& operator=(const View&);
+ };
+ 
+ typedef View* ViewPtr;
+
+
+
+From grumbel at mail.berlios.de  Fri May 14 01:21:25 2010
+From: grumbel at mail.berlios.de (grumbel at BerliOS)
+Date: Fri, 14 May 2010 01:21:25 +0200
+Subject: [Feuerkraft-commit] r400 - in trunk/feuerkraft/src: . buildings
+	display particles vehicles
+Message-ID: <201005132321.o4DNLPdo026344@sheep.berlios.de>
+
+Author: grumbel
+Date: 2010-05-14 01:21:23 +0200 (Fri, 14 May 2010)
+New Revision: 400
+
+Modified:
+   trunk/feuerkraft/src/buildings/building.cpp
+   trunk/feuerkraft/src/buildings/building.hpp
+   trunk/feuerkraft/src/buildings/building_manager.cpp
+   trunk/feuerkraft/src/buildings/building_map.cpp
+   trunk/feuerkraft/src/buildings/building_map_data.cpp
+   trunk/feuerkraft/src/buildings/building_type_manager.cpp
+   trunk/feuerkraft/src/buildings/building_type_manager.hpp
+   trunk/feuerkraft/src/buildings/custom_building.cpp
+   trunk/feuerkraft/src/buildings/custom_building.hpp
+   trunk/feuerkraft/src/buildings/headquarter.cpp
+   trunk/feuerkraft/src/buildings/headquarter.hpp
+   trunk/feuerkraft/src/buildings/tower.cpp
+   trunk/feuerkraft/src/buildings/tower_ai.cpp
+   trunk/feuerkraft/src/buildings/tower_ai.hpp
+   trunk/feuerkraft/src/buildings/wall.cpp
+   trunk/feuerkraft/src/buildings/wall_door.cpp
+   trunk/feuerkraft/src/display/drawing_request.hpp
+   trunk/feuerkraft/src/energie.hpp
+   trunk/feuerkraft/src/game_obj.hpp
+   trunk/feuerkraft/src/game_obj_data.hpp
+   trunk/feuerkraft/src/game_world.hpp
+   trunk/feuerkraft/src/game_world_data.hpp
+   trunk/feuerkraft/src/particles/grass_particle.hpp
+   trunk/feuerkraft/src/particles/particle.hpp
+   trunk/feuerkraft/src/particles/sand_particle.hpp
+   trunk/feuerkraft/src/particles/smoke_particle.hpp
+   trunk/feuerkraft/src/projectile.hpp
+   trunk/feuerkraft/src/radar.hpp
+   trunk/feuerkraft/src/resource_manager.hpp
+   trunk/feuerkraft/src/sequence_manager.hpp
+   trunk/feuerkraft/src/soldier.hpp
+   trunk/feuerkraft/src/soldier_ai.hpp
+   trunk/feuerkraft/src/unit.cpp
+   trunk/feuerkraft/src/vehicle_ai.hpp
+   trunk/feuerkraft/src/vehicle_view.cpp
+   trunk/feuerkraft/src/vehicle_view.hpp
+   trunk/feuerkraft/src/vehicles/helicopter.hpp
+   trunk/feuerkraft/src/vehicles/tank.hpp
+   trunk/feuerkraft/src/vehicles/turret.hpp
+   trunk/feuerkraft/src/view.cpp
+Log:
+Some -Weffc++ cleanup
+
+Modified: trunk/feuerkraft/src/buildings/building.cpp
+===================================================================
+--- trunk/feuerkraft/src/buildings/building.cpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/buildings/building.cpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -20,9 +20,11 @@
+ #include "../radar.hpp"
+ #include "building.hpp"
+ 
+-Building::Building (const AList& lst)
+-  : x_pos (lst.get_int("x-pos")),
+-    y_pos (lst.get_int("y-pos"))
++Building::Building (const AList& lst) :
++  id(),
++  properties(),
++  x_pos (lst.get_int("x-pos")),
++  y_pos (lst.get_int("y-pos"))
+ {
+   register_properties();
+ }
+
+Modified: trunk/feuerkraft/src/buildings/building.hpp
+===================================================================
+--- trunk/feuerkraft/src/buildings/building.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/buildings/building.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -89,6 +89,10 @@
+       false the building will 'disapear' from the collision map
+    */
+   virtual bool alive () { return true; }
++
++private:
++  Building(const Building&);
++  Building& operator=(const Building&);
+ };
+ 
+ #endif
+
+Modified: trunk/feuerkraft/src/buildings/building_manager.cpp
+===================================================================
+--- trunk/feuerkraft/src/buildings/building_manager.cpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/buildings/building_manager.cpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -24,7 +24,8 @@
+ BuildingManager* BuildingManager::current_ = 0;
+ int BuildingManager::next_id = 1;
+ 
+-BuildingManager::BuildingManager()
++BuildingManager::BuildingManager() :
++  buildings()
+ {
+   current_ = this;
+ }
+
+Modified: trunk/feuerkraft/src/buildings/building_map.cpp
+===================================================================
+--- trunk/feuerkraft/src/buildings/building_map.cpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/buildings/building_map.cpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -28,8 +28,11 @@
+ #include "wall.hpp"
+ #include "wall_door.hpp"
+ 
+-BuildingMap::BuildingMap(const BuildingMapData& data)
+-  : BuildingMapData (data)
++BuildingMap::BuildingMap(const BuildingMapData& data) :
++  BuildingMapData (data),
++  buildings(),
++  building_map()
++
+ {
+   for (std::vector<BuildingData>::iterator i = buildings_data.begin ();
+        i != buildings_data.end ();
+
+Modified: trunk/feuerkraft/src/buildings/building_map_data.cpp
+===================================================================
+--- trunk/feuerkraft/src/buildings/building_map_data.cpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/buildings/building_map_data.cpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -21,7 +21,10 @@
+ #include "building_map.hpp"
+ #include "../guile.hpp"
+ 
+-BuildingMapData::BuildingMapData (SCM desc)
++BuildingMapData::BuildingMapData (SCM desc) :
++  buildings_data(),
++  width(),
++  height()
+ {
+   //std::cout << "BuildingMapData: parsing: start" << std::endl;
+ 
+
+Modified: trunk/feuerkraft/src/buildings/building_type_manager.cpp
+===================================================================
+--- trunk/feuerkraft/src/buildings/building_type_manager.cpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/buildings/building_type_manager.cpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -28,7 +28,9 @@
+ 
+ BuildingTypeManager* BuildingTypeManager::current_ = 0;
+ 
+-BuildingTypeManager::BuildingTypeManager()
++BuildingTypeManager::BuildingTypeManager() :
++  next_id(),
++  factories()
+ {
+   next_id = 2;
+   current_ = this;
+
+Modified: trunk/feuerkraft/src/buildings/building_type_manager.hpp
+===================================================================
+--- trunk/feuerkraft/src/buildings/building_type_manager.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/buildings/building_type_manager.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -35,7 +35,7 @@
+       portability. */
+   std::string name;
+ 
+-  BuildingFactory() {}
++  BuildingFactory() : id(), name() {}
+   virtual ~BuildingFactory() {}
+ 
+   virtual Building* create(const AList& lst) =0;
+
+Modified: trunk/feuerkraft/src/buildings/custom_building.cpp
+===================================================================
+--- trunk/feuerkraft/src/buildings/custom_building.cpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/buildings/custom_building.cpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -20,8 +20,12 @@
+ #include "../resource_manager.hpp"
+ #include "custom_building.hpp"
+ 
+-CustomBuilding::CustomBuilding(const AList& type, const AList& lst)
+-  : Building(lst)
++CustomBuilding::CustomBuilding(const AList& type, const AList& lst) :
++  Building(lst),
++  sprite(),
++  energie(),
++  width(),
++  height()
+ {
+   std::string sprite_str = "feuerkraft/nobuilding";
+   int         i_energie = 100;
+
+Modified: trunk/feuerkraft/src/buildings/custom_building.hpp
+===================================================================
+--- trunk/feuerkraft/src/buildings/custom_building.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/buildings/custom_building.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -38,6 +38,7 @@
+ 
+   int width;
+   int height;
++
+ public:
+   CustomBuilding(const AList& type, const AList& lst);
+   virtual ~CustomBuilding() {}
+
+Modified: trunk/feuerkraft/src/buildings/headquarter.cpp
+===================================================================
+--- trunk/feuerkraft/src/buildings/headquarter.cpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/buildings/headquarter.cpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -27,6 +27,7 @@
+     headquarter (resources->get_sprite("feuerkraft/headquarter")),
+     headquarter_damaged (resources->get_sprite("feuerkraft/headquarterdamaged")),
+     headquarter_destroyed (resources->get_sprite("feuerkraft/headquarterdestroyed")),
++    current_sur(),
+     energie (100),
+     destroyed (false)
+ {
+
+Modified: trunk/feuerkraft/src/buildings/headquarter.hpp
+===================================================================
+--- trunk/feuerkraft/src/buildings/headquarter.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/buildings/headquarter.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -50,6 +50,10 @@
+   int get_map_height () { return 2; }
+ 
+   bool alive ();
++
++private:
++  Headquarter(const Headquarter&);
++  Headquarter& operator=(const Headquarter&);
+ };
+ 
+ #endif
+
+Modified: trunk/feuerkraft/src/buildings/tower.cpp
+===================================================================
+--- trunk/feuerkraft/src/buildings/tower.cpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/buildings/tower.cpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -25,14 +25,17 @@
+ #include "../explosion.hpp"
+ #include "tower.hpp"
+ 
+-Tower::Tower(const AList& lst)
+-  : Building(lst),
+-    towerbase(resources->get_sprite("feuerkraft/tower/base")),
+-    towerdamaged (resources->get_sprite("feuerkraft/tower/damaged")),
+-    towerdestroyed (resources->get_sprite("feuerkraft/tower/destroyed")),
+-    turret (resources->get_sprite("feuerkraft/tower/turret")),
+-    energie (lst.get_int("start-energie", 100)),
+-    destroyed (false)
++Tower::Tower(const AList& lst) :
++  Building(lst),
++  towerbase(resources->get_sprite("feuerkraft/tower/base")),
++  towerdamaged (resources->get_sprite("feuerkraft/tower/damaged")),
++  towerdestroyed (resources->get_sprite("feuerkraft/tower/destroyed")),
++  turret (resources->get_sprite("feuerkraft/tower/turret")),
++  steering(),
++  orientation(),
++  energie (lst.get_int("start-energie", 100)),
++  destroyed (false),
++  pos()
+ {  
+   //int energie;
+   //std::cout << lst.retrieve_int("start-energie", energie) << std::endl;
+
+Modified: trunk/feuerkraft/src/buildings/tower_ai.cpp
+===================================================================
+--- trunk/feuerkraft/src/buildings/tower_ai.cpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/buildings/tower_ai.cpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -26,6 +26,7 @@
+ 
+ TowerAI::TowerAI(Tower* arg_tower)
+   : tower(arg_tower),
++    controller(),
+     ai_count(0)
+ {
+ }
+
+Modified: trunk/feuerkraft/src/buildings/tower_ai.hpp
+===================================================================
+--- trunk/feuerkraft/src/buildings/tower_ai.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/buildings/tower_ai.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -30,10 +30,15 @@
+   Tower* tower;
+   Controller controller;
+   float ai_count;
++
+ public:
+   TowerAI(Tower* arg_tower);
+   GameObj* get_object();
+   void update(float delta);
++
++private:
++  TowerAI(const TowerAI&);
++  TowerAI& operator=(const TowerAI&);
+ };
+ 
+ #endif
+
+Modified: trunk/feuerkraft/src/buildings/wall.cpp
+===================================================================
+--- trunk/feuerkraft/src/buildings/wall.cpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/buildings/wall.cpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -27,7 +27,8 @@
+     pos (x_pos * 40 + 20, y_pos * 40 + 20),
+     wall (resources->get_sprite("feuerkraft/wall")),
+     wall_damaged (resources->get_sprite ("feuerkraft/wall_damaged")),
+-    wall_destroyed (resources->get_sprite ("feuerkraft/wall_destroyed"))
++    wall_destroyed (resources->get_sprite ("feuerkraft/wall_destroyed")),
++    energie()
+ {
+   energie = lst.get_int("energie", 100);
+   properties->register_int("energie", &energie);
+
+Modified: trunk/feuerkraft/src/buildings/wall_door.cpp
+===================================================================
+--- trunk/feuerkraft/src/buildings/wall_door.cpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/buildings/wall_door.cpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -22,8 +22,13 @@
+ #include "../resource_manager.hpp"
+ #include "wall_door.hpp"
+ 
+-WallDoor::WallDoor(const AList& lst)
+-  : Building(lst)
++WallDoor::WallDoor(const AList& lst) :
++  Building(lst),
++  sprite(),
++  map_width(),
++  map_height(),
++  status(),
++  pos()
+ {
+   if (lst.get_string("orientation") == "vertical")
+     {
+
+Modified: trunk/feuerkraft/src/display/drawing_request.hpp
+===================================================================
+--- trunk/feuerkraft/src/display/drawing_request.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/display/drawing_request.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -31,6 +31,7 @@
+   CL_Vector pos;
+ public:
+   DrawingRequest(const CL_Vector& pos_) : pos(pos_) {}
++  virtual ~DrawingRequest() {}
+   
+   virtual void draw(CL_GraphicContext* gc) = 0;
+   
+
+Modified: trunk/feuerkraft/src/energie.hpp
+===================================================================
+--- trunk/feuerkraft/src/energie.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/energie.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -39,14 +39,16 @@
+   void draw (View& view, int x_pos, int y_pos);
+   operator int () { return int(energie); }
+ 
+-  void operator--() { 
++  Energie& operator--() { 
+     --energie; 
+     last_change = CL_System::get_time ();
++    return *this;
+   }
+ 
+-  void operator++() {
++  Energie& operator++() {
+     ++energie; 
+     last_change = CL_System::get_time ();
++    return *this;
+   }
+ 
+   void operator+=(int i) { 
+
+Modified: trunk/feuerkraft/src/game_obj.hpp
+===================================================================
+--- trunk/feuerkraft/src/game_obj.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/game_obj.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -109,6 +109,10 @@
+      on */
+   virtual float get_physical_mass () { return 1.0; }
+   virtual float get_physical_size () { return 1.0; }
++
++private:
++  GameObj(const GameObj&);
++  GameObj& operator=(const GameObj&);
+ };
+ 
+ typedef GameObj* GameObjPtr;
+
+Modified: trunk/feuerkraft/src/game_obj_data.hpp
+===================================================================
+--- trunk/feuerkraft/src/game_obj_data.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/game_obj_data.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -27,6 +27,8 @@
+ private:
+ 
+ public:
++  virtual ~GameObjData() {}
++
+   /** Create the correct GameObj out of an GameObjData object. This is
+       something like a virtual constructor. */
+   virtual GameObj* create() =0;
+
+Modified: trunk/feuerkraft/src/game_world.hpp
+===================================================================
+--- trunk/feuerkraft/src/game_world.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/game_world.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -54,7 +54,7 @@
+ 
+ public:
+   GameWorld (SCM scm);
+-  ~GameWorld ();
++  virtual ~GameWorld ();
+ 
+   float get_time() { return current_time; }
+   
+@@ -78,6 +78,10 @@
+   static GameWorld* current_world;
+ public:
+   static GameWorld* current() { return current_world; }
++
++private:
++  GameWorld(const GameWorld&);
++  GameWorld& operator=(const GameWorld&);
+ };
+ 
+ #endif
+
+Modified: trunk/feuerkraft/src/game_world_data.hpp
+===================================================================
+--- trunk/feuerkraft/src/game_world_data.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/game_world_data.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -39,7 +39,7 @@
+   
+ public:
+   explicit GameWorldData (SCM desc);
+-  ~GameWorldData ();
++  virtual ~GameWorldData ();
+  
+   /** Convert the data from a given data object into an SCM which can
+       be written to a save game file or similar things */
+@@ -48,6 +48,10 @@
+ private:
+   void parse_objects(SCM desc);
+   void parse_scripts(SCM desc);
++
++private:
++  GameWorldData(const GameWorldData&);
++  GameWorldData& operator=(const GameWorldData&);
+ };
+ 
+ #endif
+
+Modified: trunk/feuerkraft/src/particles/grass_particle.hpp
+===================================================================
+--- trunk/feuerkraft/src/particles/grass_particle.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/particles/grass_particle.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -31,7 +31,11 @@
+   float max_life_time;
+   
+ public:
+-  GrassParticle(const FloatVector2d& arg_pos)
++  GrassParticle(const FloatVector2d& arg_pos) :
++    sprite(),
++    size(),
++    angle(),
++    max_life_time()
+   {
+     pos = arg_pos;
+     size = 1;
+
+Modified: trunk/feuerkraft/src/particles/particle.hpp
+===================================================================
+--- trunk/feuerkraft/src/particles/particle.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/particles/particle.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -33,7 +33,12 @@
+   float life_time;
+ 
+ public:
+-  Particle () {}
++  Particle () :
++    pos(),
++    velocity(),
++    acceleration(),
++    life_time()
++  {}
+   virtual ~Particle () {}
+ 
+   virtual void update (float delta) {
+
+Modified: trunk/feuerkraft/src/particles/sand_particle.hpp
+===================================================================
+--- trunk/feuerkraft/src/particles/sand_particle.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/particles/sand_particle.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -31,7 +31,11 @@
+   float angle;
+   float max_life_time;
+ public:
+-  SandParticle(const FloatVector2d& arg_pos)
++  SandParticle(const FloatVector2d& arg_pos) :
++    sprite(),
++    size(),
++    angle(),
++    max_life_time()
+   {
+     pos = arg_pos;
+     size = 1;
+
+Modified: trunk/feuerkraft/src/particles/smoke_particle.hpp
+===================================================================
+--- trunk/feuerkraft/src/particles/smoke_particle.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/particles/smoke_particle.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -31,7 +31,11 @@
+   float angle;
+   float max_life_time;
+ public:
+-  SmokeParticle(const FloatVector2d& arg_pos)
++  SmokeParticle(const FloatVector2d& arg_pos) :
++    sprite(),
++    size(),
++    angle(),
++    max_life_time()
+   {
+     pos = arg_pos;
+     size = 1;
+
+Modified: trunk/feuerkraft/src/projectile.hpp
+===================================================================
+--- trunk/feuerkraft/src/projectile.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/projectile.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -55,6 +55,10 @@
+ 
+   void detonate ();
+   bool is_colliding(FloatVector2d) { return false;}
++
++private:
++  Projectile(const Projectile&);
++  Projectile& operator=(const Projectile&);
+ };
+ 
+ #endif
+
+Modified: trunk/feuerkraft/src/radar.hpp
+===================================================================
+--- trunk/feuerkraft/src/radar.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/radar.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -53,6 +53,10 @@
+       3: large vehicle, 4: building) */
+   void draw_blip(const FloatVector2d& pos, int size, 
+ 		  float red = 1.0f, float green = 0.0f, float blue = 0.0f);
++
++private:
++  Radar(const Radar&);
++  Radar& operator=(const Radar&);
+ };
+ 
+ typedef Radar* RadarPtr;
+
+Modified: trunk/feuerkraft/src/resource_manager.hpp
+===================================================================
+--- trunk/feuerkraft/src/resource_manager.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/resource_manager.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -41,6 +41,10 @@
+   CL_Surface get_surface(const std::string& location);
+   CL_Sprite  get_sprite(const std::string& location);
+   CL_Font    get_font(const std::string& location);
++
++private:
++  ResourceManager(const ResourceManager&);
++  ResourceManager& operator=(const ResourceManager&);
+ };
+ 
+ //extern CL_SpriteProviderStorage* storage;
+
+Modified: trunk/feuerkraft/src/sequence_manager.hpp
+===================================================================
+--- trunk/feuerkraft/src/sequence_manager.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/sequence_manager.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -27,7 +27,8 @@
+   int id;
+ public:
+   SequenceHook();
+-  
++  virtual ~SequenceHook() {}
++
+   int  get_id() const { return id; }
+   void set_id(int arg_id) { id = arg_id; }
+ 
+
+Modified: trunk/feuerkraft/src/soldier.hpp
+===================================================================
+--- trunk/feuerkraft/src/soldier.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/soldier.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -54,6 +54,10 @@
+   void attach_ai();
+ 
+   void deattach_ai();
++
++private:
++  Soldier(const Soldier&);
++  Soldier& operator=(const Soldier&);
+ };
+ 
+ #endif
+
+Modified: trunk/feuerkraft/src/soldier_ai.hpp
+===================================================================
+--- trunk/feuerkraft/src/soldier_ai.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/soldier_ai.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -43,6 +43,10 @@
+ 
+   void goto_to(const FloatVector2d& target_pos);
+   void stop();
++
++private:
++  SoldierAI(const SoldierAI&);
++  SoldierAI& operator=(const SoldierAI&);
+ };
+ 
+ #endif
+
+Modified: trunk/feuerkraft/src/unit.cpp
+===================================================================
+--- trunk/feuerkraft/src/unit.cpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/unit.cpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -23,7 +23,9 @@
+ 
+ extern Player* player;
+ 
+-Unit::Unit()
++Unit::Unit() :
++  pos(),
++  orientation()
+ {
+   pos = FloatVector2d(0,0);
+   orientation = 0;
+
+Modified: trunk/feuerkraft/src/vehicle_ai.hpp
+===================================================================
+--- trunk/feuerkraft/src/vehicle_ai.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/vehicle_ai.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -33,6 +33,10 @@
+   VehicleAI(Vehicle* vehicle);
+   virtual ~VehicleAI() {};
+   GameObj* get_object() { return vehicle; }
++
++private:
++  VehicleAI(const VehicleAI&);
++  VehicleAI& operator=(const VehicleAI&);
+ };
+ 
+ /** class for robot like ai which controlls a vehicle with physic
+@@ -59,6 +63,10 @@
+   
+   void drive_to(const FloatVector2d& pos);
+   void update(float delta);
++
++private:
++  VehiclePathAI(const VehiclePathAI&);
++  VehiclePathAI& operator=(const VehiclePathAI&);
+ };
+ 
+ #endif
+
+Modified: trunk/feuerkraft/src/vehicle_view.cpp
+===================================================================
+--- trunk/feuerkraft/src/vehicle_view.cpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/vehicle_view.cpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -19,8 +19,11 @@
+ #include <math.h>
+ #include "vehicle_view.hpp"
+ 
+-VehicleViewUpdater::VehicleViewUpdater (Unit* arg_unit)
+-  : unit(arg_unit)
++VehicleViewUpdater::VehicleViewUpdater (Unit* arg_unit) :
++  unit(arg_unit),
++  pos(),
++  speed(),
++  zoom_follower()
+ {
+   pos = unit->get_pos();
+   speed = 0.1f;
+
+Modified: trunk/feuerkraft/src/vehicle_view.hpp
+===================================================================
+--- trunk/feuerkraft/src/vehicle_view.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/vehicle_view.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -31,12 +31,17 @@
+ 
+   float speed;
+   float zoom_follower;
++
+ public:
+   VehicleViewUpdater (Unit* arg_unit);
+   virtual ~VehicleViewUpdater ();
+ 
+   virtual void update(float delta, ViewState& state);
+   void set_unit(Unit* arg_unit);
++
++private:
++  VehicleViewUpdater(const VehicleViewUpdater&);
++  VehicleViewUpdater& operator=(const VehicleViewUpdater&);
+ };
+ 
+ #endif
+
+Modified: trunk/feuerkraft/src/vehicles/helicopter.hpp
+===================================================================
+--- trunk/feuerkraft/src/vehicles/helicopter.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/vehicles/helicopter.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -69,6 +69,10 @@
+ 
+   void attach_ai();
+   void dettach_ai();
++
++private:
++  Helicopter(const Helicopter&);
++  Helicopter& operator=(const Helicopter&);
+ };
+ 
+ #endif
+
+Modified: trunk/feuerkraft/src/vehicles/tank.hpp
+===================================================================
+--- trunk/feuerkraft/src/vehicles/tank.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/vehicles/tank.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -127,6 +127,9 @@
+   void attach_ai();
+   void dettach_ai();
+ 
++private:
++  Tank(const Tank&);
++  Tank& operator=(const Tank&);
+ };
+ 
+ #endif // TANK_HH
+
+Modified: trunk/feuerkraft/src/vehicles/turret.hpp
+===================================================================
+--- trunk/feuerkraft/src/vehicles/turret.hpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/vehicles/turret.hpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -51,6 +51,10 @@
+   
+   void set_absolute_orientation (float orientation);
+   void set_relative_orientation (float orientation);
++
++private:
++  Turret(const Turret&);
++  Turret& operator=(const Turret&);
+ };
+ 
+ #endif // TURRET_HH
+
+Modified: trunk/feuerkraft/src/view.cpp
+===================================================================
+--- trunk/feuerkraft/src/view.cpp	2010-05-13 23:21:07 UTC (rev 399)
++++ trunk/feuerkraft/src/view.cpp	2010-05-13 23:21:23 UTC (rev 400)
+@@ -30,10 +30,13 @@
+ 
+ View::View (int arg_x1, int arg_y1, 
+ 	    int arg_x2, int arg_y2,
+-	    ViewUpdater* arg_updater)
+-  : x1 (arg_x1), y1 (arg_y1),
+-    x2 (arg_x2), y2 (arg_y2),
+-    view_updater(arg_updater)
++	    ViewUpdater* arg_updater) :
++  x1 (arg_x1), y1 (arg_y1),
++  x2 (arg_x2), y2 (arg_y2),
++  state(),
++  view_updater(arg_updater),
++  properties(),
++  scene_context()
+ {
+   //std::cout << "View: " << x1 << " " << y1 << " " << x2 << " " << y2 
+     //<< " " << state.x_offset << " " << state.y_offset << std::endl;
+
+
+
+From grumbel at mail.berlios.de  Fri May 14 01:43:34 2010
+From: grumbel at mail.berlios.de (grumbel at BerliOS)
+Date: Fri, 14 May 2010 01:43:34 +0200
+Subject: [Feuerkraft-commit] r401 - trunk/feuerkraft/src
+Message-ID: <201005132343.o4DNhYWE004256@sheep.berlios.de>
+
+Author: grumbel
+Date: 2010-05-14 01:43:34 +0200 (Fri, 14 May 2010)
+New Revision: 401
+
+Modified:
+   trunk/feuerkraft/src/soldier.cpp
+Log:
+Fixed missing initialisation
+
+Modified: trunk/feuerkraft/src/soldier.cpp
+===================================================================
+--- trunk/feuerkraft/src/soldier.cpp	2010-05-13 23:21:23 UTC (rev 400)
++++ trunk/feuerkraft/src/soldier.cpp	2010-05-13 23:43:34 UTC (rev 401)
+@@ -27,10 +27,12 @@
+ #include "ai_manager.hpp"
+ #include "soldier.hpp"
+ 
+-Soldier::Soldier(const AList& lst) 
+-  : ai(0),
+-    sur(resources->get_sprite("feuerkraft/soldier")),
+-    sur_light(resources->get_sprite("feuerkraft/soldier-light"))
++Soldier::Soldier(const AList& lst) :
++  ai(0),
++  sur(resources->get_sprite("feuerkraft/soldier")),
++  sur_light(resources->get_sprite("feuerkraft/soldier-light")),
++  acceleration(),
++  steering()
+ {
+   pos.x = lst.get_float("x-pos");
+   pos.y = lst.get_float("y-pos");
+
+
+
+From grumbel at mail.berlios.de  Fri May 14 01:43:46 2010
+From: grumbel at mail.berlios.de (grumbel at BerliOS)
+Date: Fri, 14 May 2010 01:43:46 +0200
+Subject: [Feuerkraft-commit] r402 - in trunk/feuerkraft/src: . particles
+	sound vehicles
+Message-ID: <201005132343.o4DNhk3L004291@sheep.berlios.de>
+
+Author: grumbel
+Date: 2010-05-14 01:43:45 +0200 (Fri, 14 May 2010)
+New Revision: 402
+
+Modified:
+   trunk/feuerkraft/src/feuerkraft.cpp
+   trunk/feuerkraft/src/feuerkraft.hpp
+   trunk/feuerkraft/src/game_obj_factory.cpp
+   trunk/feuerkraft/src/game_obj_factory.hpp
+   trunk/feuerkraft/src/game_session.cpp
+   trunk/feuerkraft/src/keyboard_manager.cpp
+   trunk/feuerkraft/src/keyboard_manager.hpp
+   trunk/feuerkraft/src/particles/explosion_particle.hpp
+   trunk/feuerkraft/src/player_view.cpp
+   trunk/feuerkraft/src/player_view.hpp
+   trunk/feuerkraft/src/sound/sound.hpp
+   trunk/feuerkraft/src/sound/sound_real.cpp
+   trunk/feuerkraft/src/unit.cpp
+   trunk/feuerkraft/src/vehicle_view.cpp
+   trunk/feuerkraft/src/vehicles/tank.cpp
+   trunk/feuerkraft/src/view.cpp
+Log:
+Some -Weffc++ cleanup
+
+Modified: trunk/feuerkraft/src/feuerkraft.cpp
+===================================================================
+--- trunk/feuerkraft/src/feuerkraft.cpp	2010-05-13 23:43:34 UTC (rev 401)
++++ trunk/feuerkraft/src/feuerkraft.cpp	2010-05-13 23:43:45 UTC (rev 402)
+@@ -54,7 +54,8 @@
+ Feuerkraft feuerkraft;
+ CommandLineArguments* args;
+ 
+-Feuerkraft::Feuerkraft()
++Feuerkraft::Feuerkraft() :
++  window()
+ {
+   args = 0;
+ }
+
+Modified: trunk/feuerkraft/src/feuerkraft.hpp
+===================================================================
+--- trunk/feuerkraft/src/feuerkraft.hpp	2010-05-13 23:43:34 UTC (rev 401)
++++ trunk/feuerkraft/src/feuerkraft.hpp	2010-05-13 23:43:45 UTC (rev 402)
+@@ -100,6 +100,10 @@
+ 
+ private:
+   void key_down(const CL_InputEvent& event);
++
++private:
++  Feuerkraft(const Feuerkraft&);
++  Feuerkraft& operator=(const Feuerkraft&);
+ };
+ 
+ #endif
+
+Modified: trunk/feuerkraft/src/game_obj_factory.cpp
+===================================================================
+--- trunk/feuerkraft/src/game_obj_factory.cpp	2010-05-13 23:43:34 UTC (rev 401)
++++ trunk/feuerkraft/src/game_obj_factory.cpp	2010-05-13 23:43:45 UTC (rev 402)
+@@ -33,7 +33,8 @@
+ 
+ GameObjFactory* GameObjFactory::instance_ = 0;
+ 
+-GameObjFactory::GameObjFactory()
++GameObjFactory::GameObjFactory() :
++  factories()
+ {
+   // If anything is changed here, make sure to update
+   // data/feuerkraft.scm
+
+Modified: trunk/feuerkraft/src/game_obj_factory.hpp
+===================================================================
+--- trunk/feuerkraft/src/game_obj_factory.hpp	2010-05-13 23:43:34 UTC (rev 401)
++++ trunk/feuerkraft/src/game_obj_factory.hpp	2010-05-13 23:43:45 UTC (rev 402)
+@@ -27,6 +27,8 @@
+ class GameObjAbstractFactory
+ {
+ public:
++  virtual ~GameObjAbstractFactory() {}
++
+   virtual GameObj* create(const AList& lst) =0;
+ };
+ 
+
+Modified: trunk/feuerkraft/src/game_session.cpp
+===================================================================
+--- trunk/feuerkraft/src/game_session.cpp	2010-05-13 23:43:34 UTC (rev 401)
++++ trunk/feuerkraft/src/game_session.cpp	2010-05-13 23:43:45 UTC (rev 402)
+@@ -63,11 +63,19 @@
+ // FIXME: Replace this with a PlayerManager class or something similar
+ Player*  player;
+ 
+-GameSession::GameSession(const std::string& arg_filename)
+-  : control_state(UNIT_CONTROL),
+-    filename(arg_filename),
+-    do_quit(false),
+-    do_pause(false)
++GameSession::GameSession(const std::string& arg_filename) :
++  control_state(UNIT_CONTROL),
++  filename(arg_filename),
++  do_quit(false),
++  do_pause(false),
++  deltas(),
++  loops(),
++  frames(),
++  start_time(),
++  buildingtypemanager(),
++  collision_mgr(),
++  world(),
++  view()
+ {  
+ }
+ 
+
+Modified: trunk/feuerkraft/src/keyboard_manager.cpp
+===================================================================
+--- trunk/feuerkraft/src/keyboard_manager.cpp	2010-05-13 23:43:34 UTC (rev 401)
++++ trunk/feuerkraft/src/keyboard_manager.cpp	2010-05-13 23:43:45 UTC (rev 402)
+@@ -25,7 +25,9 @@
+ 
+ KeyboardManager* KeyboardManager::instance_ = 0;
+ 
+-KeyboardManager::KeyboardManager()
++KeyboardManager::KeyboardManager() :
++  slots(),
++  callbacks()
+ {
+   slots.push_back(CL_Keyboard::sig_key_down().connect(this, &KeyboardManager::button_down));
+   slots.push_back(CL_Keyboard::sig_key_up().connect(this, &KeyboardManager::button_up));
+
+Modified: trunk/feuerkraft/src/keyboard_manager.hpp
+===================================================================
+--- trunk/feuerkraft/src/keyboard_manager.hpp	2010-05-13 23:43:34 UTC (rev 401)
++++ trunk/feuerkraft/src/keyboard_manager.hpp	2010-05-13 23:43:45 UTC (rev 402)
+@@ -46,6 +46,8 @@
+       : key_id(id)
+     {}
+ 
++    virtual ~Callback() {}
++
+     virtual void run() =0;
+   };
+   
+
+Modified: trunk/feuerkraft/src/particles/explosion_particle.hpp
+===================================================================
+--- trunk/feuerkraft/src/particles/explosion_particle.hpp	2010-05-13 23:43:34 UTC (rev 401)
++++ trunk/feuerkraft/src/particles/explosion_particle.hpp	2010-05-13 23:43:45 UTC (rev 402)
+@@ -35,7 +35,13 @@
+   bool direction;
+   float angle;
+ public:
+-  ExplosionParticle(const FloatVector2d& arg_pos, const FloatVector2d& arg_vel, float arg_size)
++  ExplosionParticle(const FloatVector2d& arg_pos, const FloatVector2d& arg_vel, float arg_size) :
++    size(),
++    sprite(),
++    sprite_light(),
++    max_life_time(),
++    direction(),
++    angle()
+   {
+     velocity = arg_vel;
+     pos = arg_pos;
+
+Modified: trunk/feuerkraft/src/player_view.cpp
+===================================================================
+--- trunk/feuerkraft/src/player_view.cpp	2010-05-13 23:43:34 UTC (rev 401)
++++ trunk/feuerkraft/src/player_view.cpp	2010-05-13 23:43:45 UTC (rev 402)
+@@ -19,9 +19,9 @@
+ #include "player.hpp"
+ #include "player_view.hpp"
+ 
+-PlayerViewUpdater::PlayerViewUpdater(Player* arg_player)
+-  : VehicleViewUpdater(arg_player->get_current_unit()),
+-    player(arg_player)
++PlayerViewUpdater::PlayerViewUpdater(Player* arg_player) :
++  VehicleViewUpdater(arg_player->get_current_unit()),
++  player(arg_player)
+ {
+ }
+ 
+
+Modified: trunk/feuerkraft/src/player_view.hpp
+===================================================================
+--- trunk/feuerkraft/src/player_view.hpp	2010-05-13 23:43:34 UTC (rev 401)
++++ trunk/feuerkraft/src/player_view.hpp	2010-05-13 23:43:45 UTC (rev 402)
+@@ -28,10 +28,12 @@
+ {
+ private:
+   Player* player;
++
+ public:
+   PlayerViewUpdater(Player* arg_player);
+ 
+   void update(float delta, ViewState& state);
++
+ private:
+   PlayerViewUpdater (const PlayerViewUpdater&);
+   PlayerViewUpdater& operator= (const PlayerViewUpdater&);
+
+Modified: trunk/feuerkraft/src/sound/sound.hpp
+===================================================================
+--- trunk/feuerkraft/src/sound/sound.hpp	2010-05-13 23:43:34 UTC (rev 401)
++++ trunk/feuerkraft/src/sound/sound.hpp	2010-05-13 23:43:45 UTC (rev 402)
+@@ -30,6 +30,7 @@
+ 
+ protected:
+   PingusSound () { }
++  virtual ~PingusSound () { }
+ 
+   virtual void real_play_sound(const std::string & name, float volume, float panning) =0;
+   virtual void real_play_music(const std::string & name, float volume) =0;
+
+Modified: trunk/feuerkraft/src/sound/sound_real.cpp
+===================================================================
+--- trunk/feuerkraft/src/sound/sound_real.cpp	2010-05-13 23:43:34 UTC (rev 401)
++++ trunk/feuerkraft/src/sound/sound_real.cpp	2010-05-13 23:43:45 UTC (rev 402)
+@@ -38,7 +38,7 @@
+ namespace Sound {
+ 
+ PingusSoundReal::PingusSoundReal ()
+-  : music_sample (0), music_session(0)
++  : output(), music_sample (0), music_session(0)
+ {
+   std::cout << "Initializing ClanLib-Sound" << std::endl;
+ 
+
+Modified: trunk/feuerkraft/src/unit.cpp
+===================================================================
+--- trunk/feuerkraft/src/unit.cpp	2010-05-13 23:43:34 UTC (rev 401)
++++ trunk/feuerkraft/src/unit.cpp	2010-05-13 23:43:45 UTC (rev 402)
+@@ -32,6 +32,7 @@
+ 
+   properties->register_float("x-pos", &pos.x);
+   properties->register_float("y-pos", &pos.y);
++
+   properties->register_float("orientation", &orientation);
+ }
+ 
+
+Modified: trunk/feuerkraft/src/vehicle_view.cpp
+===================================================================
+--- trunk/feuerkraft/src/vehicle_view.cpp	2010-05-13 23:43:34 UTC (rev 401)
++++ trunk/feuerkraft/src/vehicle_view.cpp	2010-05-13 23:43:45 UTC (rev 402)
+@@ -57,7 +57,7 @@
+   
+   state.x_offset = int(pos.x);
+   state.y_offset = int(pos.y);
+-
++  
+   float my_rotation = -(unit->get_orientation()/3.1415927*180.0) + 90;
+ 
+   if (state.rotation > my_rotation) 
+
+Modified: trunk/feuerkraft/src/vehicles/tank.cpp
+===================================================================
+--- trunk/feuerkraft/src/vehicles/tank.cpp	2010-05-13 23:43:34 UTC (rev 401)
++++ trunk/feuerkraft/src/vehicles/tank.cpp	2010-05-13 23:43:45 UTC (rev 402)
+@@ -42,8 +42,29 @@
+ 
+ const float circle = 6.2831854f;
+ 
+-Tank::Tank(const AList& lst)
+-  : energie(100)
++Tank::Tank(const AList& lst) :
++  tmp_pos(),
++  speed(),
++  increment(),
++  frame(),
++  burning(),
++  smod(),
++  sur_destroyed(),
++  sur(),
++  sur_light(),
++  sur_highlight(),
++  shadow(),
++  turret(),
++  smodpos(),
++  tmp_angle(),
++  smod_step(),
++  mine_reload_time(),
++  energie(100),
++  destroyed(),
++  particle_release(),
++  destroy_time(),
++  smoke_emitter(),
++  ai()
+ {
+   // FIME: This needs cleanup
+   AList def;
+@@ -101,21 +122,22 @@
+ }
+ 
+ Tank::Tank (const FloatVector2d &arg_pos,
+-	    int reloading_speed, std::string tank, std::string str_turret, std::string fire) 
+-  : speed (0.0f),
+-    increment (2.0f),
+-    burning(false),
+-    smod (resources->get_sprite (tank.c_str ())),
+-    sur_destroyed (resources->get_sprite ("feuerkraft/tank2destroyed")),
+-    sur (resources->get_sprite (tank.c_str ())),
+-    sur_light(resources->get_sprite("feuerkraft/tank_light")),
+-    sur_highlight(resources->get_sprite("feuerkraft/tank_highlight")),
+-    shadow (resources->get_sprite ("feuerkraft/tank2_shadow")),
+-    turret (NULL),
+-    smod_step (0),
+-    mine_reload_time (0),
+-    energie (100),
+-    destroyed (false)
++	    int reloading_speed, std::string tank, std::string str_turret, std::string fire) :
++  tmp_pos(),
++  speed (0.0f),
++  increment (2.0f),
++  burning(false),
++  smod (resources->get_sprite (tank.c_str ())),
++  sur_destroyed (resources->get_sprite ("feuerkraft/tank2destroyed")),
++  sur (resources->get_sprite (tank.c_str ())),
++  sur_light(resources->get_sprite("feuerkraft/tank_light")),
++  sur_highlight(resources->get_sprite("feuerkraft/tank_highlight")),
++  shadow (resources->get_sprite ("feuerkraft/tank2_shadow")),
++  turret (NULL),
++  smod_step (0),
++  mine_reload_time (0),
++  energie (100),
++  destroyed (false)
+ {
+   ai = 0;
+   velocity = 0.0f;
+
+Modified: trunk/feuerkraft/src/view.cpp
+===================================================================
+--- trunk/feuerkraft/src/view.cpp	2010-05-13 23:43:34 UTC (rev 401)
++++ trunk/feuerkraft/src/view.cpp	2010-05-13 23:43:45 UTC (rev 402)
+@@ -16,7 +16,6 @@
+ //  You should have received a copy of the GNU General Public License
+ //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ 
+-#include <iostream>
+ #include <ClanLib/Display/display.h>
+ #include <ClanLib/Display/sprite.h>
+ #include <ClanLib/Display/surface.h>
+@@ -38,9 +37,6 @@
+   properties(),
+   scene_context()
+ {
+-  //std::cout << "View: " << x1 << " " << y1 << " " << x2 << " " << y2 
+-    //<< " " << state.x_offset << " " << state.y_offset << std::endl;
+-  
+   state.x_offset = -x1;
+   state.y_offset = -y1;
+ 
+
+
+

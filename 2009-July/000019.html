@@ -1,0 +1,300 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Feuerkraft-commit] r355 - trunk/media/images/tilemasks
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/feuerkraft-commit/2009-July/index.html" >
+   <LINK REL="made" HREF="mailto:feuerkraft-commit%40lists.berlios.de?Subject=Re%3A%20%5BFeuerkraft-commit%5D%20r355%20-%20trunk/media/images/tilemasks&In-Reply-To=%3C200907251659.n6PGxc6F005195%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000018.html">
+   <LINK REL="Next"  HREF="000020.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Feuerkraft-commit] r355 - trunk/media/images/tilemasks</H1>
+    <B>grumbel at BerliOS</B> 
+    <A HREF="mailto:feuerkraft-commit%40lists.berlios.de?Subject=Re%3A%20%5BFeuerkraft-commit%5D%20r355%20-%20trunk/media/images/tilemasks&In-Reply-To=%3C200907251659.n6PGxc6F005195%40sheep.berlios.de%3E"
+       TITLE="[Feuerkraft-commit] r355 - trunk/media/images/tilemasks">grumbel at mail.berlios.de
+       </A><BR>
+    <I>Sat Jul 25 18:59:38 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000018.html">[Feuerkraft-commit] r354 - trunk/media/images/tilemasks
+</A></li>
+        <LI>Next message: <A HREF="000020.html">[Feuerkraft-commit] r356 - trunk/media/images/tilemasks
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#19">[ date ]</a>
+              <a href="thread.html#19">[ thread ]</a>
+              <a href="subject.html#19">[ subject ]</a>
+              <a href="author.html#19">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: grumbel
+Date: 2009-07-25 18:59:34 +0200 (Sat, 25 Jul 2009)
+New Revision: 355
+
+Added:
+   trunk/media/images/tilemasks/apply_alpha.py
+   trunk/media/images/tilemasks/build_masks.sh
+   trunk/media/images/tilemasks/build_tiles.sh
+   trunk/media/images/tilemasks/darksand.png
+   trunk/media/images/tilemasks/grass.png
+   trunk/media/images/tilemasks/mud.png
+   trunk/media/images/tilemasks/sand.png
+   trunk/media/images/tilemasks/snow.png
+   trunk/media/images/tilemasks/water.png
+Modified:
+   trunk/media/images/tilemasks/bbwb1.png
+   trunk/media/images/tilemasks/bbwb2.png
+   trunk/media/images/tilemasks/bbwb3.png
+   trunk/media/images/tilemasks/bbww1.png
+   trunk/media/images/tilemasks/bbww2.png
+   trunk/media/images/tilemasks/bbww3.png
+   trunk/media/images/tilemasks/bwbw1.png
+   trunk/media/images/tilemasks/bwww1.png
+   trunk/media/images/tilemasks/bwww2.png
+   trunk/media/images/tilemasks/bwww3.png
+   trunk/media/images/tilemasks/bwww4.png
+Log:
+Added build scripts, converted masks to grayscale
+
+Added: trunk/media/images/tilemasks/apply_alpha.py
+===================================================================
+--- trunk/media/images/tilemasks/apply_alpha.py	2009-07-25 16:09:46 UTC (rev 354)
++++ trunk/media/images/tilemasks/apply_alpha.py	2009-07-25 16:59:34 UTC (rev 355)
+@@ -0,0 +1,18 @@
++#!/usr/bin/env python
++
++from PIL import Image
++import sys
++
++def main(args):
++    if len(args) != 3:
++        print &quot;Usage: apply_alpah.py IN MASK OUT&quot;
++    else:
++        img  = Image.open(args[0])
++        mask = Image.open(args[1])
++        img.putalpha(mask)
++        img.save(args[2])
++
++if __name__ == &quot;__main__&quot;:
++    main(sys.argv[1:])
++
++# EOF #
+
+
+Property changes on: trunk/media/images/tilemasks/apply_alpha.py
+___________________________________________________________________
+Name: svn:executable
+   + *
+
+Modified: trunk/media/images/tilemasks/bbwb1.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/media/images/tilemasks/bbwb2.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/media/images/tilemasks/bbwb3.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/media/images/tilemasks/bbww1.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/media/images/tilemasks/bbww2.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/media/images/tilemasks/bbww3.png
+===================================================================
+(Binary files differ)
+
+Added: trunk/media/images/tilemasks/build_masks.sh
+===================================================================
+--- trunk/media/images/tilemasks/build_masks.sh	2009-07-25 16:09:46 UTC (rev 354)
++++ trunk/media/images/tilemasks/build_masks.sh	2009-07-25 16:59:34 UTC (rev 355)
+@@ -0,0 +1,35 @@
++#!/bin/sh
++
++BUILDDIR=&quot;masks&quot;
++
++# flop == &quot;horizontal flip&quot;
++
++for i in bbwb*.png; do
++    cp &quot;$i&quot; &quot;${BUILDDIR}/$i&quot;
++    convert -flop &quot;$i&quot; &quot;${BUILDDIR}/bbbw${i##bbwb}&quot;
++    convert -flip &quot;$i&quot; &quot;${BUILDDIR}/bwbb${i##bbwb}&quot;
++    convert -flip -flop &quot;$i&quot; &quot;${BUILDDIR}/wbbb${i##bbwb}&quot;
++done
++
++for i in bwbw*.png; do
++    cp &quot;$i&quot; &quot;${BUILDDIR}/$i&quot;
++    convert -flip &quot;$i&quot; &quot;${BUILDDIR}/wbwb${i##bwbw}&quot;
++done
++
++for i in bbww*.png; do
++    cp &quot;$i&quot; &quot;${BUILDDIR}/$i&quot;
++    convert -flip &quot;$i&quot; &quot;${BUILDDIR}/wwbb${i##bbww}&quot;
++    convert -transpose  &quot;$i&quot; &quot;${BUILDDIR}/bwwb${i##bbww}&quot;
++    convert -transverse &quot;$i&quot; &quot;${BUILDDIR}/wbbw${i##bbww}&quot;
++done
++
++
++for i in bwww*.png; do
++    cp &quot;$i&quot; &quot;${BUILDDIR}/$i&quot;
++    convert -flip &quot;$i&quot; &quot;${BUILDDIR}/wwwb${i##bwww}&quot;
++    convert -flop &quot;$i&quot; &quot;${BUILDDIR}/wbww${i##bwww}&quot;
++    convert -transverse &quot;$i&quot; &quot;${BUILDDIR}/wwbw${i##bwww}&quot;
++done
++
++# EOF #
++
+
+
+Property changes on: trunk/media/images/tilemasks/build_masks.sh
+___________________________________________________________________
+Name: svn:executable
+   + *
+
+Added: trunk/media/images/tilemasks/build_tiles.sh
+===================================================================
+--- trunk/media/images/tilemasks/build_tiles.sh	2009-07-25 16:09:46 UTC (rev 354)
++++ trunk/media/images/tilemasks/build_tiles.sh	2009-07-25 16:59:34 UTC (rev 355)
+@@ -0,0 +1,14 @@
++#!/bin/sh
++
++mkdir -p tiles
++
++for i in masks/*.png; do
++    echo $i
++    NAME=$(basename $i)
++    ./apply_alpha.py grass.png &quot;$i&quot; &quot;tiles/grass_${NAME}&quot;
++    ./apply_alpha.py mud.png   &quot;$i&quot; &quot;tiles/mud_${NAME}&quot;
++    ./apply_alpha.py darksand.png &quot;$i&quot; &quot;tiles/darksand_${NAME}&quot;
++    # ./apply_alpha.py sand.png  &quot;$i&quot; &quot;tiles/sand_${NAME}&quot;
++done
++
++# EOF #
+\ No newline at end of file
+
+
+Property changes on: trunk/media/images/tilemasks/build_tiles.sh
+___________________________________________________________________
+Name: svn:executable
+   + *
+
+Modified: trunk/media/images/tilemasks/bwbw1.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/media/images/tilemasks/bwww1.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/media/images/tilemasks/bwww2.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/media/images/tilemasks/bwww3.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/media/images/tilemasks/bwww4.png
+===================================================================
+(Binary files differ)
+
+Added: trunk/media/images/tilemasks/darksand.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/media/images/tilemasks/darksand.png
+___________________________________________________________________
+Name: svn:mime-type
+   + image/png
+
+Copied: trunk/media/images/tilemasks/grass.png (from rev 349, trunk/media/images/grass.png)
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/media/images/tilemasks/grass.png
+___________________________________________________________________
+Name: svn:mime-type
+   + image/png
+Name: svn:mergeinfo
+   + 
+
+Added: trunk/media/images/tilemasks/mud.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/media/images/tilemasks/mud.png
+___________________________________________________________________
+Name: svn:mime-type
+   + image/png
+
+Added: trunk/media/images/tilemasks/sand.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/media/images/tilemasks/sand.png
+___________________________________________________________________
+Name: svn:mime-type
+   + image/png
+
+Copied: trunk/media/images/tilemasks/snow.png (from rev 349, trunk/media/images/snow2.png)
+
+
+Property changes on: trunk/media/images/tilemasks/snow.png
+___________________________________________________________________
+Name: svn:mime-type
+   + image/png
+Name: svn:mergeinfo
+   + 
+
+Added: trunk/media/images/tilemasks/water.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/media/images/tilemasks/water.png
+___________________________________________________________________
+Name: svn:mime-type
+   + image/png
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000018.html">[Feuerkraft-commit] r354 - trunk/media/images/tilemasks
+</A></li>
+	<LI>Next message: <A HREF="000020.html">[Feuerkraft-commit] r356 - trunk/media/images/tilemasks
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#19">[ date ]</a>
+              <a href="thread.html#19">[ thread ]</a>
+              <a href="subject.html#19">[ subject ]</a>
+              <a href="author.html#19">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/feuerkraft-commit">More information about the Feuerkraft-commit
+mailing list</a><br>
+</body></html>

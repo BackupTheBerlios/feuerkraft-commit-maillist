@@ -1,0 +1,1227 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Feuerkraft-commit] r337 - in trunk: . contrib contrib/test contrib/tilegen data data/images data/images/vehicles src src/groundmap src/input src/particles
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/feuerkraft-commit/2005-February/index.html" >
+   <LINK REL="made" HREF="mailto:feuerkraft-commit%40lists.berlios.de?Subject=Re%3A%20%5BFeuerkraft-commit%5D%20r337%20-%20in%20trunk%3A%20.%20contrib%20contrib/test%20contrib/tilegen%20data%20data/images%20data/images/vehicles%20src%20src/groundmap%20src/input%20src/particles&In-Reply-To=%3C200502111548.j1BFmoDu023605%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000000.html">
+   <LINK REL="Next"  HREF="000002.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Feuerkraft-commit] r337 - in trunk: . contrib contrib/test contrib/tilegen data data/images data/images/vehicles src src/groundmap src/input src/particles</H1>
+    <B>Ingo Ruhnke at BerliOS</B> 
+    <A HREF="mailto:feuerkraft-commit%40lists.berlios.de?Subject=Re%3A%20%5BFeuerkraft-commit%5D%20r337%20-%20in%20trunk%3A%20.%20contrib%20contrib/test%20contrib/tilegen%20data%20data/images%20data/images/vehicles%20src%20src/groundmap%20src/input%20src/particles&In-Reply-To=%3C200502111548.j1BFmoDu023605%40sheep.berlios.de%3E"
+       TITLE="[Feuerkraft-commit] r337 - in trunk: . contrib contrib/test contrib/tilegen data data/images data/images/vehicles src src/groundmap src/input src/particles">grumbel at sheep.berlios.de
+       </A><BR>
+    <I>Fri Feb 11 16:48:50 CET 2005</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000000.html">[Feuerkraft-commit] r336 - in trunk: data data/images data/images/vehicles src src/buildings src/groundmap src/particles src/vehicles
+</A></li>
+        <LI>Next message: <A HREF="000002.html">[Feuerkraft-commit] r338 - trunk/src
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1">[ date ]</a>
+              <a href="thread.html#1">[ thread ]</a>
+              <a href="subject.html#1">[ subject ]</a>
+              <a href="author.html#1">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: grumbel
+Date: 2005-02-11 16:48:49 +0100 (Fri, 11 Feb 2005)
+New Revision: 337
+
+Added:
+   trunk/contrib/
+   trunk/contrib/test/
+   trunk/contrib/test/Makefile
+   trunk/contrib/test/quad.cxx
+   trunk/contrib/test/triangle.cxx
+   trunk/contrib/tilegen/
+   trunk/contrib/tilegen/Makefile
+   trunk/contrib/tilegen/asphalt.png
+   trunk/contrib/tilegen/grass.png
+   trunk/contrib/tilegen/mask.png
+   trunk/contrib/tilegen/mud.png
+   trunk/contrib/tilegen/sand.png
+   trunk/contrib/tilegen/tilegen.cc
+   trunk/data/images/explosion-light.png
+   trunk/data/images/projectile-light.png
+   trunk/data/images/rocket-highlight.png
+   trunk/data/images/rocket_light.png
+Modified:
+   trunk/data/feuerkraft.xml
+   trunk/data/images/soldier-light.png
+   trunk/data/images/vehicles/tank2-light.png
+   trunk/src/Makefile.am
+   trunk/src/alist.cxx
+   trunk/src/game_session.cxx
+   trunk/src/groundmap/grid_map.cxx
+   trunk/src/groundmap/grid_map_data.cxx
+   trunk/src/groundmap/grid_map_data.hxx
+   trunk/src/input/button_factory.cxx
+   trunk/src/particles/explosion_particle.hxx
+   trunk/src/projectile.cxx
+   trunk/src/projectile.hxx
+   trunk/src/property.cxx
+   trunk/src/rocket.cxx
+   trunk/src/rocket.hxx
+   trunk/src/screenshot.cxx
+   trunk/src/screenshot.hxx
+   trunk/src/system.cxx
+Log:
+- adopted to newest ClanLib
+- some more light
+
+Added: trunk/contrib/test/Makefile
+===================================================================
+--- trunk/contrib/test/Makefile	2005-02-01 20:27:20 UTC (rev 336)
++++ trunk/contrib/test/Makefile	2005-02-11 15:48:49 UTC (rev 337)
+@@ -0,0 +1,10 @@
++CXXFLAGS=-I/home/ingo/projects/gquickdraw/cvs/ -I../../src/
++LDFLAGS=-L/home/ingo/projects/gquickdraw/cvs/ -lgquickdraw -L/usr/X11R6/lib/ -lX11
++
++triangle : triangle.cxx
++	$(CXX) $(CXXFLAGS) $&lt; -o $@ $(LDFLAGS)
++
++quad : quad.cxx
++	$(CXX) $(CXXFLAGS) ../../src/math.cxx $&lt; -o $@ $(LDFLAGS)
++
++# EOF #
+\ No newline at end of file
+
+Added: trunk/contrib/test/quad.cxx
+===================================================================
+--- trunk/contrib/test/quad.cxx	2005-02-01 20:27:20 UTC (rev 336)
++++ trunk/contrib/test/quad.cxx	2005-02-11 15:48:49 UTC (rev 337)
+@@ -0,0 +1,73 @@
++#include &lt;unistd.h&gt;
++#include &lt;gquickdraw.h&gt;
++#include &quot;math.hxx&quot;
++
++void draw_quad(const Math::Quad&amp; quad)
++{
++  gd_draw_line((int)quad.a.x, (int)quad.a.y, 
++               (int)quad.b.x, (int)quad.b.y);
++
++  gd_draw_line((int)quad.b.x, (int)quad.b.y, 
++               (int)quad.c.x, (int)quad.c.y);
++
++  gd_draw_line((int)quad.c.x, (int)quad.c.y, 
++               (int)quad.d.x, (int)quad.d.y);
++
++  gd_draw_line((int)quad.a.x, (int)quad.a.y, 
++               (int)quad.d.x, (int)quad.d.y);
++}
++
++int main()
++{
++  srand(time(NULL));
++
++  Math::Quad a;
++  Math::Quad b;
++  
++  gd_init_screen(640, 480, true);
++
++  while (1)
++    {
++      gd_clear_screen();
++
++      a.a.x = rand()%640;
++      a.a.y = rand()%480;
++
++      a.b.x = rand()%640;
++      a.b.y = rand()%480;
++
++      a.c.x = rand()%640;
++      a.c.y = rand()%480;
++
++      a.d.x = rand()%640;
++      a.d.y = rand()%480;
++
++      b.a.x = rand()%640;
++      b.a.y = rand()%480;
++
++      b.b.x = rand()%640;
++      b.b.y = rand()%480;
++
++      b.c.x = rand()%640;
++      b.c.y = rand()%480;
++
++      b.d.x = rand()%640;
++      b.d.y = rand()%480;
++  
++      if (Math::quad_collide(a, b))
++        gd_draw_rect(0, 0, 50, 50, true);
++  
++      draw_quad(a);
++      draw_quad(b);
++
++      gd_flip_screen();
++      
++      do{
++          gd_process_events();
++          usleep(1000);
++        }
++      while(gd_get_mouse_button(1) == false);
++    }
++}
++
++/* EOF */
+
+Added: trunk/contrib/test/triangle.cxx
+===================================================================
+--- trunk/contrib/test/triangle.cxx	2005-02-01 20:27:20 UTC (rev 336)
++++ trunk/contrib/test/triangle.cxx	2005-02-11 15:48:49 UTC (rev 337)
+@@ -0,0 +1,48 @@
++#include &lt;unistd.h&gt;
++#include &lt;gquickdraw.h&gt;
++#include &quot;math.hxx&quot;
++
++int main()
++{
++  srand(time(NULL));
++
++  float x1 = rand()%640;
++  float y1 = rand()%480;
++
++  float x2 = rand()%640;
++  float y2 = rand()%480;
++
++  float x3 = rand()%640;
++  float y3 = rand()%480;
++
++  gd_init_screen(640, 480, true);
++
++  while (1)
++    {
++      gd_clear_screen();
++      if (Math::point_inside_triangle(gd_get_mouse_x(), gd_get_mouse_y(), 
++                                      x1, y1, x2, y2, x3, y3))
++        gd_draw_rect(0, 0, 50, 50, true);
++      
++      if (Math::lines_intersect(x2, y2, x3, y3,
++                                0, 0, gd_get_mouse_x(), gd_get_mouse_y()))
++        gd_draw_rect(590, 0, 50, 50, true);
++      
++      gd_draw_line(0, 0, gd_get_mouse_x(), gd_get_mouse_y());
++
++      gd_set_fg_color(0xFFFFFF);
++      gd_draw_line((int)x1, (int)y1, (int)x2, (int)y2);
++      gd_set_fg_color(0xFF00F);
++      gd_draw_line((int)x2, (int)y2, (int)x3, (int)y3);
++      gd_set_fg_color(0xFFFFFF);
++      gd_draw_line((int)x3, (int)y3, (int)x1, (int)y1);
++
++      gd_flip_screen();
++
++      gd_process_events();
++      usleep(1000);
++    }
++}
++
++/* EOF */
++
+
+Added: trunk/contrib/tilegen/Makefile
+===================================================================
+--- trunk/contrib/tilegen/Makefile	2005-02-01 20:27:20 UTC (rev 336)
++++ trunk/contrib/tilegen/Makefile	2005-02-11 15:48:49 UTC (rev 337)
+@@ -0,0 +1,10 @@
++tilegen : tilegen.cc
++	$(CXX) -Wall -O0 -g -o $@ $&lt; -lpng
++
++tiles:
++	./tilegen ./tilegen 40x40/wwbw.png \
++           40x40/sand1.png  \
++           40x40/darksand1.png \
++           --output 40x40-output/wwsw1.png
++
++# EOF #
+\ No newline at end of file
+
+Added: trunk/contrib/tilegen/asphalt.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/contrib/tilegen/asphalt.png
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: trunk/contrib/tilegen/grass.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/contrib/tilegen/grass.png
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: trunk/contrib/tilegen/mask.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/contrib/tilegen/mask.png
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: trunk/contrib/tilegen/mud.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/contrib/tilegen/mud.png
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: trunk/contrib/tilegen/sand.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/contrib/tilegen/sand.png
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: trunk/contrib/tilegen/tilegen.cc
+===================================================================
+--- trunk/contrib/tilegen/tilegen.cc	2005-02-01 20:27:20 UTC (rev 336)
++++ trunk/contrib/tilegen/tilegen.cc	2005-02-11 15:48:49 UTC (rev 337)
+@@ -0,0 +1,389 @@
++//  Copyright (C) 2002 Ingo Ruhnke &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/feuerkraft-commit">grumbel at gmx.de</A>&gt;
++//
++//  This program is free software; you can redistribute it and/or
++//  modify it under the terms of the GNU General Public License
++//  as published by the Free Software Foundation; either version 2
++//  of the License, or (at your option) any later version.
++//
++//  This program is distributed in the hope that it will be useful,
++//  but WITHOUT ANY WARRANTY; without even the implied warranty of
++//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++//  GNU General Public License for more details.
++//
++//  You should have received a copy of the GNU General Public License
++//  along with this program; if not, write to the Free Software
++//  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
++
++#include &lt;argp.h&gt;
++#include &lt;string&gt;
++#include &lt;vector&gt;
++#include &lt;iostream&gt;
++#include &lt;stdio.h&gt;
++#include &lt;stdlib.h&gt;
++#include &lt;png.h&gt;
++
++const char *argp_program_version = &quot;Feuerkraft TileGen Version 0.0.0&quot;;
++const char *argp_program_bug_address = &quot;&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/feuerkraft-commit">grumbel at gmx.de</A>&gt;&quot;;
++
++static char doc[] = &quot;Feuerkraft TileGen&quot;;
++     
++static struct argp_option options[] = {
++  {&quot;verbose&quot;,  'v', 0,      0,  &quot;Produce verbose output&quot; },
++  {&quot;quiet&quot;,    'q', 0,      0,  &quot;Don't produce any output&quot; },
++  {&quot;output&quot;,   'o', &quot;FILE&quot;, 0,  &quot;Output to FILE instead of standard output&quot; },
++  {&quot;rot90&quot;,    'r', 0,      0,  &quot;Rotate mask by 90 degrees&quot; },
++  {&quot;rot180&quot;,   'u', 0,      0,  &quot;Rotate mask by 180 degrees&quot; },
++  {&quot;rot270&quot;,   'l', 0,      0,  &quot;Rotate mask by 270 degrees&quot; },
++  {&quot;flip&quot;,     'f', 0,      0,  &quot;Flip image&quot; },
++  { 0 }
++};
++
++struct arguments {
++  bool flip;
++  enum { ROT0, ROT90, ROT180, ROT270 } rotate;
++  char* mask_file;
++  char* layer1_file;
++  char* layer2_file;
++  char* output_file;
++};
++
++error_t
++parse_option(int key, char *arg, struct argp_state *state)
++{
++  struct arguments* args = static_cast&lt;arguments*&gt;(state-&gt;input);
++
++  switch (key)
++    {
++    case ARGP_KEY_ARG:
++      if (state-&gt;arg_num == 0)
++        args-&gt;mask_file = arg;
++      else if (state-&gt;arg_num == 1)
++        args-&gt;layer1_file = arg;
++      else if (state-&gt;arg_num == 2)
++        args-&gt;layer2_file = arg;
++      else
++        return ARGP_ERR_UNKNOWN;
++      break;
++
++    case ARGP_KEY_ARGS:
++      //std::cout &lt;&lt; &quot;Arguments: &quot; &lt;&lt; key &lt;&lt; &quot; &quot; &lt;&lt; (int)arg  &lt;&lt; std::endl;
++      break;
++
++    case ARGP_KEY_NO_ARGS:
++      //std::cout &lt;&lt; &quot;no arguments&quot; &lt;&lt; std::endl;
++      break;
++
++    case ARGP_KEY_END:
++      if (args-&gt;mask_file == 0
++          || args-&gt;layer1_file == 0
++          || args-&gt;layer2_file == 0)
++        argp_usage(state);
++      break;
++      
++    case ARGP_KEY_INIT:
++      //std::cout &lt;&lt; &quot;Init&quot; &lt;&lt; std::endl;
++      break;
++
++    case ARGP_KEY_FINI:
++      //std::cout &lt;&lt; &quot;Fini&quot; &lt;&lt; std::endl;
++      break;
++
++    case ARGP_KEY_SUCCESS:
++      //std::cout &lt;&lt; &quot;Success&quot; &lt;&lt; std::endl;
++      break;
++
++    case ARGP_KEY_ERROR:
++      std::cout &lt;&lt; &quot;ERROR&quot; &lt;&lt; std::endl;
++      break;
++
++    case 'f':
++      args-&gt;flip = true;
++      break;
++
++    case 'r':
++      args-&gt;rotate = arguments::ROT90;
++      break;
++
++    case 'u':
++      args-&gt;rotate = arguments::ROT180;
++      break;
++
++    case 'l':
++      args-&gt;rotate = arguments::ROT270;
++      break;
++
++    case 'o':
++      args-&gt;output_file = arg;
++      break;
++
++    default:
++      std::cout &lt;&lt; &quot;Unknown Key: &quot; &lt;&lt; (char)key &lt;&lt; &quot; Arg: &quot; &lt;&lt; (int)arg &lt;&lt; &quot; State: &quot; &lt;&lt; state &lt;&lt; std::endl;
++      break;
++    }
++  return 0;
++}
++
++static struct argp argp = { options, parse_option, &quot;MASK LAYER1 LAYER2&quot;, doc, 0, 0 };
++
++class Color
++{
++public:
++  int red;
++  int green;
++  int blue;
++
++  Color ()
++    : red (0), green (255), blue (0)
++  {
++  }
++
++  Color (int r, int g, int b) 
++    : red (r), green (g), blue (b)
++  {    
++  }
++};
++
++class Image
++{
++private:
++  int m_width;
++  int m_height;
++  int row_bytes;
++
++  std::vector&lt;unsigned char&gt; m_image;
++  
++public:
++  Image (const Image&amp; image)
++    : m_width(image.m_width),
++      m_height(image.m_height),
++      row_bytes(image.row_bytes),
++      m_image(image.m_image)
++  {
++  }
++
++  /** Load an image from a given png source */
++  Image (const std::string&amp; filename) 
++  {
++    FILE* fp;
++    png_structp png_ptr;
++    png_infop info_ptr;
++    png_uint_32 pwidth, pheight;
++    int bit_depth, color_type, interlace_type, compression_type, filter_type;
++
++    if ((fp = fopen(filename.c_str (), &quot;rb&quot;)) == NULL)
++      {
++	perror (filename.c_str ());
++	exit (EXIT_FAILURE);
++      }
++
++    png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING,
++				     NULL, NULL, NULL);
++    info_ptr = png_create_info_struct(png_ptr);
++    png_init_io(png_ptr, fp);
++    png_read_info(png_ptr, info_ptr);
++    png_get_IHDR(png_ptr, info_ptr, &amp;pwidth, &amp;pheight,
++		 &amp;bit_depth, &amp;color_type, &amp;interlace_type,
++		 &amp;compression_type, &amp;filter_type);
++    row_bytes = png_get_rowbytes(png_ptr, info_ptr);
++
++    std::cout &lt;&lt; &quot;BitDepth:    &quot; &lt;&lt; bit_depth &lt;&lt; &quot;\n&quot;
++              &lt;&lt; &quot;Colortype:   &quot; &lt;&lt; color_type &lt;&lt; &quot;\n&quot;
++              &lt;&lt; &quot;Interlace:   &quot; &lt;&lt; interlace_type &lt;&lt; &quot;\n&quot;
++              &lt;&lt; &quot;Filter Type: &quot; &lt;&lt; filter_type &lt;&lt; &quot;\n&quot;
++              &lt;&lt; &quot;Row Bytes:   &quot; &lt;&lt; row_bytes &lt;&lt; &quot;\n&quot;
++              &lt;&lt; &quot;Width:       &quot; &lt;&lt; pwidth &lt;&lt; &quot;\n&quot;
++              &lt;&lt; &quot;Height:      &quot; &lt;&lt; pheight &lt;&lt; &quot;\n&quot;
++              &lt;&lt; std::endl;
++
++    // Create the 'data' array
++    png_bytep row_pointers[pheight];
++    for (unsigned int i = 0; i &lt; pheight; ++i)
++      row_pointers[i] = new png_byte[row_bytes];
++
++    png_read_image(png_ptr, row_pointers);
++    
++    if (color_type != PNG_COLOR_TYPE_RGB)
++      {
++        std::cout &lt;&lt; &quot;Unsupported color type&quot; &lt;&lt; std::endl;
++        exit (EXIT_FAILURE);
++      }
++
++    m_width  = pwidth;
++    m_height = pheight;
++
++    m_image.resize (m_height * row_bytes);
++
++    // Convert the png into our internal data structure
++    for (int y = 0; y &lt; m_height; ++y)
++      for (int i = 0; i &lt; row_bytes; ++i)
++        {
++          m_image[i + (row_bytes * y)] = row_pointers[y][i];
++        }
++	  
++    png_destroy_read_struct(&amp;png_ptr, &amp;info_ptr, (png_infopp)NULL);
++    fclose (fp);
++  }
++  
++  ~Image () 
++  {
++  }
++
++  void write_pnm(std::string filename)
++  {
++    FILE* fp;
++    fp = fopen(filename.c_str (), &quot;wb&quot;);
++    if (fp == NULL)
++      assert (false);
++
++    fprintf(fp, &quot;P3\n# CREATOR\n&quot;);
++    fprintf(fp, &quot;%d %d\n&quot;, m_width, m_height);
++    fprintf(fp, &quot;255\n&quot;);
++
++    for (unsigned int i = 0; i &lt; m_image.size (); ++i)
++      fprintf(fp, &quot;%d\n&quot;, m_image[i]);
++
++    fclose(fp);
++  }
++
++  void write_png_file(std::string filename)
++  {
++    FILE* fp;
++    fp = fopen(filename.c_str (), &quot;wb&quot;);
++    if (fp == NULL)
++      assert (false);
++
++    write_png(fp);
++
++    fclose(fp);
++  }
++
++  void write_png (FILE* fp)
++  {
++    png_structp png_ptr;
++    png_infop info_ptr;
++
++    png_ptr  = png_create_write_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
++    info_ptr = png_create_info_struct(png_ptr);
++
++    png_init_io(png_ptr, fp);
++
++    png_set_IHDR(png_ptr, info_ptr, 
++                 m_width, m_height, 8 /* bitdepth */,
++                 PNG_COLOR_TYPE_RGB,
++                 PNG_INTERLACE_NONE, 
++                 PNG_COMPRESSION_TYPE_BASE, 
++                 PNG_FILTER_TYPE_BASE);
++
++    png_write_info(png_ptr, info_ptr);
++
++    png_uint_32 height = m_height;
++
++    png_byte image[height * row_bytes];
++    png_bytep row_pointers[height];
++   
++    // fill the image with data
++    for (unsigned int i = 0; i &lt; m_image.size (); ++i)
++      image[i] = m_image[i];
++    
++    // generate row pointers
++    for (unsigned int k = 0; k &lt; height; k++)
++      row_pointers[k] = image + (k * row_bytes);
++
++    png_write_image(png_ptr, row_pointers);
++
++    png_write_end(png_ptr, info_ptr);
++  }
++
++  void add_overlay(Image&amp; mask, Image&amp; image)
++  {
++    for (int y = 0; y &lt; m_height; ++y)
++      for (int x = 0; x &lt; row_bytes; ++x)
++        {
++          int i = (y * row_bytes) + x;
++          float alpha = (mask.m_image[i]/255.0);
++          int new_color = int((m_image[i] * (1.0f - alpha)) + (image.m_image[i] * alpha));
++          m_image[i] = new_color &gt; 255 ? 255 : new_color;
++        }
++  }
++
++  void rotate_90()
++  {
++    Image image(*this);
++    
++    for (int y = 0; y &lt; m_height; ++y)
++      for (int x = 0; x &lt; m_width; ++x)
++        {
++          m_image[(y * row_bytes) + 3*x + 0] = image.m_image[((m_height - x - 1) * row_bytes) + 3*y + 0];
++          m_image[(y * row_bytes) + 3*x + 1] = image.m_image[((m_height - x - 1) * row_bytes) + 3*y + 1];
++          m_image[(y * row_bytes) + 3*x + 2] = image.m_image[((m_height - x - 1) * row_bytes) + 3*y + 2];
++        }
++  }
++
++  void flip()
++  {
++    Image image(*this);
++    
++    for (int y = 0; y &lt; m_height; ++y)
++      for (int x = 0; x &lt; m_width; ++x)
++        {
++          m_image[(y * row_bytes) + 3*x + 0] = image.m_image[((m_height - y - 1) * row_bytes) + 3*x + 0];
++          m_image[(y * row_bytes) + 3*x + 1] = image.m_image[((m_height - y - 1) * row_bytes) + 3*x + 1];
++          m_image[(y * row_bytes) + 3*x + 2] = image.m_image[((m_height - y - 1) * row_bytes) + 3*x + 2];
++        }
++  }
++};
++
++int main (int argc, char* argv[])
++{
++  struct arguments args;
++
++  args.flip   = false;
++  args.rotate = arguments::ROT0;
++  args.mask_file = 0;
++  args.layer1_file = 0;
++  args.layer2_file = 0;
++  args.output_file = 0;
++
++  argp_parse (&amp;argp, argc, argv, 0, 0, &amp;args);
++
++  std::cout &lt;&lt; &quot;Loading...&quot; &lt;&lt; std::endl;
++  Image mask  (args.mask_file);
++  Image layer1(args.layer1_file);
++  Image layer2(args.layer2_file);
++  std::cout &lt;&lt; &quot;Loading... done&quot; &lt;&lt; std::endl;
++  std::cout &lt;&lt; &quot;writing png&quot; &lt;&lt; std::endl;
++
++  if (args.flip)
++    mask.flip();
++
++  switch (args.rotate)
++    {
++    case arguments::ROT0:
++      break;
++
++    case arguments::ROT90:
++      mask.rotate_90();
++      break;
++
++    case arguments::ROT180:
++      mask.rotate_90();
++      mask.rotate_90();
++      break;
++      
++    case arguments::ROT270:
++      mask.rotate_90();
++      mask.rotate_90();
++      mask.rotate_90();
++      break;
++    }
++
++  layer1.add_overlay(mask, layer2);
++
++  if (args.output_file)
++    layer1.write_png_file(args.output_file);
++  else
++    layer1.write_png(stdout);
++}
++
++
++// EOF //
+
+Modified: trunk/data/feuerkraft.xml
+===================================================================
+--- trunk/data/feuerkraft.xml	2005-02-01 20:27:20 UTC (rev 336)
++++ trunk/data/feuerkraft.xml	2005-02-11 15:48:49 UTC (rev 337)
+@@ -23,6 +23,14 @@
+       &lt;image file=&quot;images/rocket_smoke.png&quot; /&gt;
+     &lt;/sprite&gt;
+ 
++    &lt;sprite name=&quot;rocket-light&quot;&gt;
++      &lt;image file=&quot;images/rocket_light.png&quot; /&gt;
++    &lt;/sprite&gt;
++
++    &lt;sprite name=&quot;rocket-highlight&quot;&gt;
++      &lt;image file=&quot;images/rocket-highlight.png&quot; /&gt;
++    &lt;/sprite&gt;
++
+     &lt;sprite name=&quot;rocket&quot;&gt;
+       &lt;image file=&quot;images/rocket.png&quot; /&gt;
+       &lt;image file=&quot;images/rocket1.png&quot; /&gt;
+@@ -189,6 +197,10 @@
+     &lt;sprite name=&quot;jeep&quot;&gt;
+       &lt;image file=&quot;images/jeep.png&quot; /&gt;
+     &lt;/sprite&gt;
++
++    &lt;sprite name=&quot;projectile-light&quot;&gt;
++      &lt;image file=&quot;images/projectile-light.png&quot; /&gt;
++    &lt;/sprite&gt;
+     
+     &lt;sprite name=&quot;projectile&quot;&gt;
+       &lt;image file=&quot;images/projectile1.png&quot; delay=&quot;10&quot; /&gt;
+@@ -210,6 +222,10 @@
+         /&gt;
+     &lt;/sprite&gt;
+ 
++    &lt;sprite name=&quot;explosion-light&quot;&gt;
++      &lt;image file=&quot;images/explosion-light.png&quot; /&gt;
++    &lt;/sprite&gt;
++
+     &lt;sprite name=&quot;explosion&quot;&gt;
+       &lt;image 
+         file=&quot;images/explosion.png&quot;
+
+Added: trunk/data/images/explosion-light.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/data/images/explosion-light.png
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: trunk/data/images/projectile-light.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/data/images/projectile-light.png
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: trunk/data/images/rocket-highlight.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/data/images/rocket-highlight.png
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Added: trunk/data/images/rocket_light.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/data/images/rocket_light.png
+___________________________________________________________________
+Name: svn:mime-type
+   + application/octet-stream
+
+Modified: trunk/data/images/soldier-light.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/data/images/vehicles/tank2-light.png
+===================================================================
+(Binary files differ)
+
+Modified: trunk/src/Makefile.am
+===================================================================
+--- trunk/src/Makefile.am	2005-02-01 20:27:20 UTC (rev 336)
++++ trunk/src/Makefile.am	2005-02-11 15:48:49 UTC (rev 337)
+@@ -152,8 +152,6 @@
+ start_screen.hxx \
+ globals.hxx \
+ globals.cxx \
+-string_converter.cxx \
+-string_converter.hxx \
+ system.cxx \
+ system.hxx \
+ trigger_manager.hxx \
+
+Modified: trunk/src/alist.cxx
+===================================================================
+--- trunk/src/alist.cxx	2005-02-01 20:27:20 UTC (rev 336)
++++ trunk/src/alist.cxx	2005-02-11 15:48:49 UTC (rev 337)
+@@ -18,7 +18,6 @@
+ //  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ 
+ #include &lt;iostream&gt;
+-#include &quot;string_converter.hxx&quot;
+ #include &quot;alist.hxx&quot;
+ 
+ AList::AList()
+
+Modified: trunk/src/game_session.cxx
+===================================================================
+--- trunk/src/game_session.cxx	2005-02-01 20:27:20 UTC (rev 336)
++++ trunk/src/game_session.cxx	2005-02-11 15:48:49 UTC (rev 337)
+@@ -23,6 +23,7 @@
+ #include &lt;ClanLib/Display/mouse.h&gt;
+ #include &lt;ClanLib/Display/keyboard.h&gt;
+ #include &lt;ClanLib/Display/keys.h&gt;
++#include &lt;sstream&gt;
+ #include &lt;iostream&gt;
+ #include &lt;assert.h&gt;
+ 
+@@ -57,7 +58,6 @@
+ #include &quot;player.hxx&quot;
+ #include &quot;path_manager.hxx&quot;
+ #include &quot;command_line_arguments.hxx&quot;
+-#include &quot;string_converter.hxx&quot;
+ #include &quot;screenshot.hxx&quot;
+ #include &quot;game_session.hxx&quot;
+ 
+@@ -212,6 +212,7 @@
+   GameWorld::current()-&gt;draw(*view);
+   GameWorld::current()-&gt;draw_energie(*view);
+   view-&gt;get_sc().render();
++  view-&gt;get_sc().light().fill_screen(CL_Color(50, 50, 100));
+ 
+   if (draw_colmap)
+     collision_mgr-&gt;draw(*view);
+
+Modified: trunk/src/groundmap/grid_map.cxx
+===================================================================
+--- trunk/src/groundmap/grid_map.cxx	2005-02-01 20:27:20 UTC (rev 336)
++++ trunk/src/groundmap/grid_map.cxx	2005-02-11 15:48:49 UTC (rev 337)
+@@ -24,7 +24,7 @@
+ GridMap::GridMap (const GridMapData&amp; data)
+   : GridMapData (data),
+     tiles (path_manager.complete(&quot;tiles.scm&quot;)),
+-    surface (provider)
++    surface(provider)
+ {
+   std::vector&lt;GridTileData&gt; tile_data;
+   
+
+Modified: trunk/src/groundmap/grid_map_data.cxx
+===================================================================
+--- trunk/src/groundmap/grid_map_data.cxx	2005-02-01 20:27:20 UTC (rev 336)
++++ trunk/src/groundmap/grid_map_data.cxx	2005-02-11 15:48:49 UTC (rev 337)
+@@ -25,7 +25,6 @@
+ #include &quot;grid_map_data.hxx&quot;
+ 
+ GridMapData::GridMapData (SCM desc)
+-  : provider (0)
+ {
+   grid_width  = -1;
+   grid_height = -1;
+@@ -70,26 +69,26 @@
+   free (str);
+ #endif
+ 
+-  provider = new CL_PNGProvider (path_manager.complete(&quot;missions/&quot; + filename));
++  provider = CL_PNGProvider (path_manager.complete(&quot;missions/&quot; + filename));
+ 
+-  provider-&gt;lock ();
+-  //FIXME:Display2 assert (provider-&gt;is_indexed ());
++  provider.lock ();
++  //FIXME:Display2 assert (provider.is_indexed ());
+ 
+-  grid_width  = provider-&gt;get_width () + 2;
+-  grid_height = provider-&gt;get_height () + 2;
++  grid_width  = provider.get_width () + 2;
++  grid_height = provider.get_height () + 2;
+ 
+   grid_data.resize (grid_width * grid_height);
+   
+   for (int i = 0; i &lt; grid_height * grid_width; ++i)
+     grid_data[i] = GT_SAND; // FIXME: should be variable not hardcoded!
+ 
+-  unsigned char* buffer = static_cast&lt;unsigned char*&gt;(provider-&gt;get_data ());
+-  for (int y = 0; y &lt; provider-&gt;get_height (); ++y)
+-    for (int x = 0; x &lt; provider-&gt;get_width (); ++x)
++  unsigned char* buffer = static_cast&lt;unsigned char*&gt;(provider.get_data ());
++  for (int y = 0; y &lt; provider.get_height (); ++y)
++    for (int x = 0; x &lt; provider.get_width (); ++x)
+       grid_data[(x + 1) + ((y+1) * grid_width)] 
+-	= static_cast&lt;GroundType&gt;(buffer[x + (provider-&gt;get_width () * y)]);
++	= static_cast&lt;GroundType&gt;(buffer[x + (provider.get_width () * y)]);
+ 
+-  provider-&gt;unlock (); 
++  provider.unlock (); 
+ }
+ 
+ GroundMap*
+
+Modified: trunk/src/groundmap/grid_map_data.hxx
+===================================================================
+--- trunk/src/groundmap/grid_map_data.hxx	2005-02-01 20:27:20 UTC (rev 336)
++++ trunk/src/groundmap/grid_map_data.hxx	2005-02-11 15:48:49 UTC (rev 337)
+@@ -23,6 +23,7 @@
+ #include &lt;vector&gt;
+ 
+ #include &lt;guile/gh.h&gt;
++#include &lt;ClanLib/Display/pixel_buffer.h&gt;
+ #include &quot;ground_type.hxx&quot;
+ #include &quot;ground_map_data.hxx&quot;
+ 
+@@ -39,7 +40,7 @@
+   /** The data of the grid */
+   std::vector&lt;GroundType&gt; grid_data;
+   
+-  CL_PixelBuffer* provider;
++  CL_PixelBuffer provider;
+   
+ public:
+   GridMapData (SCM desc);
+
+Modified: trunk/src/input/button_factory.cxx
+===================================================================
+--- trunk/src/input/button_factory.cxx	2005-02-01 20:27:20 UTC (rev 336)
++++ trunk/src/input/button_factory.cxx	2005-02-11 15:48:49 UTC (rev 337)
+@@ -19,8 +19,8 @@
+ 
+ #include &lt;ClanLib/Display/joystick.h&gt;
+ #include &lt;ClanLib/Display/keyboard.h&gt;
++#include &lt;ClanLib/Core/System/clanstring.h&gt;
+ #include &quot;../guile.hxx&quot;
+-#include &quot;../string_converter.hxx&quot;
+ #include &quot;../feuerkraft_error.hxx&quot;
+ #include &quot;input_button.hxx&quot;
+ #include &quot;input_axis.hxx&quot;
+@@ -80,7 +80,7 @@
+   else
+     {
+       throw FeuerkraftError(&quot;Error: ButtonFactory::create_joystick_button: device out of range&quot;
+-                            + to_string(device_num) + &quot; &quot; + Guile::scm2string(lst));
++                            + CL_String::to(device_num) + &quot; &quot; + Guile::scm2string(lst));
+     }
+ }
+ 
+
+Modified: trunk/src/particles/explosion_particle.hxx
+===================================================================
+--- trunk/src/particles/explosion_particle.hxx	2005-02-01 20:27:20 UTC (rev 336)
++++ trunk/src/particles/explosion_particle.hxx	2005-02-11 15:48:49 UTC (rev 337)
+@@ -31,6 +31,7 @@
+ private:
+   float size;
+   CL_Sprite sprite;
++  CL_Sprite sprite_light;
+   float max_life_time;
+   bool direction;
+   float angle;
+@@ -51,6 +52,7 @@
+ 
+     // FIXME: memory leak
+     sprite = resources-&gt;get_sprite(&quot;feuerkraft/explosion&quot;);
++    sprite_light = resources-&gt;get_sprite(&quot;feuerkraft/explosion-light&quot;);
+     sprite.rotate (angle);
+     sprite.set_blend_func(blend_src_alpha, blend_one);
+   
+@@ -81,8 +83,12 @@
+ 	sprite.set_scale (((1 - life_time/max_life_time)) * size,
+                           ((1 - life_time/max_life_time)) * size);
+ 
++	sprite_light.set_scale (((1 - life_time/max_life_time)) * size * 2.0f,
++                                ((1 - life_time/max_life_time)) * size * 2.0f);
++
+         sprite.set_angle(Math::rad2deg(angle));
+ 	view.get_sc().color().draw(sprite, pos.x, pos.y);
++	view.get_sc().light().draw(sprite_light, pos.x, pos.y);
+       }
+   }
+ 
+
+Modified: trunk/src/projectile.cxx
+===================================================================
+--- trunk/src/projectile.cxx	2005-02-01 20:27:20 UTC (rev 336)
++++ trunk/src/projectile.cxx	2005-02-11 15:48:49 UTC (rev 337)
+@@ -32,6 +32,7 @@
+ Projectile::Projectile (GameObj* p,
+ 			const FloatVector2d&amp; arg_pos, const FloatVector2d&amp; arg_velocity)
+   : sur (resources-&gt;get_sprite(&quot;feuerkraft/projectile&quot;)),
++    sur_light (resources-&gt;get_sprite(&quot;feuerkraft/projectile-light&quot;)),
+     tmp_pos (arg_pos),
+     velocity (arg_velocity),
+     lifetime (45 + rand () % 5 ),
+@@ -57,7 +58,9 @@
+ {
+   if (lifetime &gt; 0) {
+     sur.set_angle(Math::rad2deg(velocity.get_orientation()));
++    sur_light.set_angle(Math::rad2deg(velocity.get_orientation()));
+     view.get_sc().color().draw(sur, pos.x, pos.y);
++    view.get_sc().light().draw(sur_light, pos.x, pos.y);
+   }
+ 
+   //std::cout &lt;&lt; &quot;Pos: &quot; &lt;&lt; pos.x &lt;&lt; &quot; &quot; &lt;&lt; pos.y &lt;&lt; std::endl;
+
+Modified: trunk/src/projectile.hxx
+===================================================================
+--- trunk/src/projectile.hxx	2005-02-01 20:27:20 UTC (rev 336)
++++ trunk/src/projectile.hxx	2005-02-11 15:48:49 UTC (rev 337)
+@@ -29,6 +29,7 @@
+ private:
+   FloatVector2d pos;
+   CL_Sprite sur;
++  CL_Sprite sur_light;
+   FloatVector2d tmp_pos;
+   FloatVector2d velocity;
+   float lifetime;
+
+Modified: trunk/src/property.cxx
+===================================================================
+--- trunk/src/property.cxx	2005-02-01 20:27:20 UTC (rev 336)
++++ trunk/src/property.cxx	2005-02-11 15:48:49 UTC (rev 337)
+@@ -19,7 +19,7 @@
+ 
+ #include &lt;iostream&gt;
+ #include &lt;assert.h&gt;
+-#include &quot;string_converter.hxx&quot;
++#include &lt;ClanLib/Core/System/clanstring.h&gt;
+ #include &quot;property.hxx&quot;
+ 
+ Property::Property(const std::string&amp; arg_name)
+@@ -118,13 +118,13 @@
+   switch (type)
+     {
+     case Property::T_BOOL:
+-      return ::to_string(get_bool());
++      return CL_String::to(get_bool());
+ 
+     case Property::T_FLOAT:
+-      return ::to_string(get_float());
++      return CL_String::to(get_float());
+       
+     case Property::T_INT:
+-      return ::to_string(get_int());
++      return CL_String::to(get_int());
+ 
+     case Property::T_STRING:
+       return get_string();
+
+Modified: trunk/src/rocket.cxx
+===================================================================
+--- trunk/src/rocket.cxx	2005-02-01 20:27:20 UTC (rev 336)
++++ trunk/src/rocket.cxx	2005-02-11 15:48:49 UTC (rev 337)
+@@ -34,6 +34,10 @@
+ {
+   release_count = 0;
+   sprite = resources-&gt;get_sprite(&quot;feuerkraft/rocket&quot;);
++
++  sprite_light     = resources-&gt;get_sprite(&quot;feuerkraft/rocket-light&quot;);
++  sprite_highlight = resources-&gt;get_sprite(&quot;feuerkraft/rocket-highlight&quot;);
++
+   smoke  = resources-&gt;get_sprite(&quot;feuerkraft/rocket_smoke&quot;);
+ }
+ 
+@@ -45,7 +49,16 @@
+ Rocket::draw(View&amp; view)
+ {
+   sprite.set_angle(Math::rad2deg(orientation));
++  sprite_light.set_angle(Math::rad2deg(orientation));
++  sprite_highlight.set_angle(Math::rad2deg(orientation));
++
++  // Light flicker
++  sprite_light.set_alpha(Math::frand()*0.5f + 0.5f);
++  sprite_highlight.set_alpha(Math::frand()*0.5f + 0.5f);
++
+   view.get_sc().color().draw(sprite, pos.x, pos.y);
++  view.get_sc().light().draw(sprite_light, pos.x, pos.y);
++  view.get_sc().highlight().draw(sprite_highlight, pos.x, pos.y);
+ }
+ 
+ void
+
+Modified: trunk/src/rocket.hxx
+===================================================================
+--- trunk/src/rocket.hxx	2005-02-01 20:27:20 UTC (rev 336)
++++ trunk/src/rocket.hxx	2005-02-11 15:48:49 UTC (rev 337)
+@@ -28,6 +28,8 @@
+ {
+ private:
+   CL_Sprite sprite;
++  CL_Sprite sprite_light;
++  CL_Sprite sprite_highlight;
+   CL_Sprite smoke;
+   FloatVector2d pos;
+   float orientation;
+
+Modified: trunk/src/screenshot.cxx
+===================================================================
+--- trunk/src/screenshot.cxx	2005-02-01 20:27:20 UTC (rev 336)
++++ trunk/src/screenshot.cxx	2005-02-11 15:48:49 UTC (rev 337)
+@@ -28,7 +28,7 @@
+ void
+ Screenshot::write_screenshot_pnm(const std::string&amp; filename)
+ {
+-  CL_PixelBuffer* buf = take_screen_shot();
++  CL_PixelBuffer buf = take_screen_shot();
+ 
+   FILE* out = fopen(filename.c_str(), &quot;wb&quot;);
+   
+@@ -39,10 +39,10 @@
+       return;
+     }
+ 
+-  buf-&gt;lock();
+-  int width  = buf-&gt;get_width();
+-  int pitch  = buf-&gt;get_width()*3;
+-  int height = buf-&gt;get_height();
++  buf.lock();
++  int width  = buf.get_width();
++  int pitch  = buf.get_width()*3;
++  int height = buf.get_height();
+ 
+   fprintf(out,
+ 	  &quot;P6\n&quot;
+@@ -52,7 +52,7 @@
+ 	  width,
+ 	  height);
+ 
+-  unsigned char* data = static_cast&lt;unsigned char*&gt;(buf-&gt;get_data());
++  unsigned char* data = static_cast&lt;unsigned char*&gt;(buf.get_data());
+   
+   for(int i = height-1; i &gt;= 0; --i)
+     {
+@@ -62,13 +62,11 @@
+              out);
+     }
+ 
+-  buf-&gt;unlock();
++  buf.unlock();
+   fclose(out);
+-  
+-  delete buf;
+ }
+ 
+-CL_PixelBuffer*
++CL_PixelBuffer
+ Screenshot::take_screen_shot()
+ {
+   CL_PixelBuffer back_buffer = CL_Display::get_current_window()-&gt;get_back_buffer();
+@@ -76,7 +74,7 @@
+   unsigned short width = back_buffer.get_width();
+   unsigned short height = back_buffer.get_height();
+ 		
+-  CL_PixelBuffer *pbuf = new CL_PixelBuffer(width, height, width*3, CL_PixelFormat::bgr888);
++  CL_PixelBuffer pbuf(width, height, width*3, CL_PixelFormat::bgr888);
+   back_buffer.convert(pbuf);
+   
+   return pbuf;
+
+Modified: trunk/src/screenshot.hxx
+===================================================================
+--- trunk/src/screenshot.hxx	2005-02-01 20:27:20 UTC (rev 336)
++++ trunk/src/screenshot.hxx	2005-02-11 15:48:49 UTC (rev 337)
+@@ -29,7 +29,7 @@
+ {
+ private:
+ public:
+-  static CL_PixelBuffer* take_screen_shot();
++  static CL_PixelBuffer take_screen_shot();
+   static void write_screenshot_pnm(const std::string&amp; filename);
+ private:
+   Screenshot (const Screenshot&amp;);
+
+Modified: trunk/src/system.cxx
+===================================================================
+--- trunk/src/system.cxx	2005-02-01 20:27:20 UTC (rev 336)
++++ trunk/src/system.cxx	2005-02-11 15:48:49 UTC (rev 337)
+@@ -34,11 +34,10 @@
+ 
+ #include &lt;cstdio&gt;
+ #include &lt;iostream&gt;
+-
++#include &lt;ClanLib/Core/System/clanstring.h&gt;
+ #include &quot;gettext.h&quot;
+ 
+ //#include &quot;PingusError.hxx&quot; 
+-#include &quot;string_converter.hxx&quot;
+ #include &quot;system.hxx&quot;
+ 
+ int System::verbose;
+@@ -344,7 +343,7 @@
+ 
+   fclose (in);
+ 
+-  return to_string(checksum);
++  return CL_String::to(checksum);
+ }
+ 
+ /* EOF */
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000000.html">[Feuerkraft-commit] r336 - in trunk: data data/images data/images/vehicles src src/buildings src/groundmap src/particles src/vehicles
+</A></li>
+	<LI>Next message: <A HREF="000002.html">[Feuerkraft-commit] r338 - trunk/src
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1">[ date ]</a>
+              <a href="thread.html#1">[ thread ]</a>
+              <a href="subject.html#1">[ subject ]</a>
+              <a href="author.html#1">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/feuerkraft-commit">More information about the Feuerkraft-commit
+mailing list</a><br>
+</body></html>

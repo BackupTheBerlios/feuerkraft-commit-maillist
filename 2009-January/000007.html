@@ -1,0 +1,400 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Feuerkraft-commit] r345 - in trunk/src: buildings editor generic	groundmap input particles sound vehicles
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/feuerkraft-commit/2009-January/index.html" >
+   <LINK REL="made" HREF="mailto:feuerkraft-commit%40lists.berlios.de?Subject=Re%3A%20%5BFeuerkraft-commit%5D%20r345%20-%20in%20trunk/src%3A%20buildings%20editor%20generic%0A%09groundmap%20input%20particles%20sound%20vehicles&In-Reply-To=%3C200901271119.n0RBJLw8005465%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000010.html">
+   <LINK REL="Next"  HREF="000011.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Feuerkraft-commit] r345 - in trunk/src: buildings editor generic	groundmap input particles sound vehicles</H1>
+    <B>grumbel at BerliOS</B> 
+    <A HREF="mailto:feuerkraft-commit%40lists.berlios.de?Subject=Re%3A%20%5BFeuerkraft-commit%5D%20r345%20-%20in%20trunk/src%3A%20buildings%20editor%20generic%0A%09groundmap%20input%20particles%20sound%20vehicles&In-Reply-To=%3C200901271119.n0RBJLw8005465%40sheep.berlios.de%3E"
+       TITLE="[Feuerkraft-commit] r345 - in trunk/src: buildings editor generic	groundmap input particles sound vehicles">grumbel at mail.berlios.de
+       </A><BR>
+    <I>Tue Jan 27 12:19:21 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000010.html">[Feuerkraft-commit] r344 - in trunk/src: . buildings display editor	generic groundmap input particles scripting sound vehicles
+</A></li>
+        <LI>Next message: <A HREF="000011.html">[Feuerkraft-commit] r346 - in trunk: . src src/buildings	src/display src/editor src/generic src/groundmap src/input	src/particles src/scripting src/sound src/vehicles
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7">[ date ]</a>
+              <a href="thread.html#7">[ thread ]</a>
+              <a href="subject.html#7">[ subject ]</a>
+              <a href="author.html#7">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: grumbel
+Date: 2009-01-27 12:19:20 +0100 (Tue, 27 Jan 2009)
+New Revision: 345
+
+Modified:
+   trunk/src/buildings/Makefile.am
+   trunk/src/editor/Makefile.am
+   trunk/src/generic/Makefile.am
+   trunk/src/groundmap/Makefile.am
+   trunk/src/input/Makefile.am
+   trunk/src/particles/Makefile.am
+   trunk/src/sound/Makefile.am
+   trunk/src/vehicles/Makefile.am
+Log:
+Changed Makefile.am's - rename for *.?xx to *.?pp
+
+Modified: trunk/src/buildings/Makefile.am
+===================================================================
+--- trunk/src/buildings/Makefile.am	2009-01-27 11:16:10 UTC (rev 344)
++++ trunk/src/buildings/Makefile.am	2009-01-27 11:19:20 UTC (rev 345)
+@@ -1,31 +1,31 @@
+ noinst_LIBRARIES = libfeuerkraft_buildings.a
+ 
+ libfeuerkraft_buildings_a_SOURCES = \
+-ammotent.cxx \
+-ammotent.hxx \
+-building.hxx \
+-building.cxx \
+-building_map.cxx \
+-building_map.hxx \
+-building_manager.cxx \
+-building_manager.hxx \
+-building_map_data.cxx \
+-building_map_data.hxx \
+-building_type_manager.hxx \
+-building_type_manager.cxx \
+-fuelstation.cxx \
+-fuelstation.hxx \
+-custom_building.hxx \
+-custom_building.cxx \
+-headquarter.cxx \
+-headquarter.hxx \
+-tower_ai.cxx \
+-tower_ai.hxx \
+-tower.cxx \
+-tower.hxx \
+-wall.cxx \
+-wall.hxx \
+-wall_door.cxx \
+-wall_door.hxx
++ammotent.cpp \
++ammotent.hpp \
++building.hpp \
++building.cpp \
++building_map.cpp \
++building_map.hpp \
++building_manager.cpp \
++building_manager.hpp \
++building_map_data.cpp \
++building_map_data.hpp \
++building_type_manager.hpp \
++building_type_manager.cpp \
++fuelstation.cpp \
++fuelstation.hpp \
++custom_building.hpp \
++custom_building.cpp \
++headquarter.cpp \
++headquarter.hpp \
++tower_ai.cpp \
++tower_ai.hpp \
++tower.cpp \
++tower.hpp \
++wall.cpp \
++wall.hpp \
++wall_door.cpp \
++wall_door.hpp
+ 
+ # EOF #
+\ No newline at end of file
+
+Modified: trunk/src/editor/Makefile.am
+===================================================================
+--- trunk/src/editor/Makefile.am	2009-01-27 11:16:10 UTC (rev 344)
++++ trunk/src/editor/Makefile.am	2009-01-27 11:19:20 UTC (rev 345)
+@@ -19,6 +19,6 @@
+ noinst_LIBRARIES = libfeuerkraft_editor.a
+ 
+ libfeuerkraft_editor_a_SOURCES = \
+-  editor.hxx editor.cxx
++  editor.hpp editor.cpp
+ 
+ # EOF #
+\ No newline at end of file
+
+Modified: trunk/src/generic/Makefile.am
+===================================================================
+--- trunk/src/generic/Makefile.am	2009-01-27 11:16:10 UTC (rev 344)
++++ trunk/src/generic/Makefile.am	2009-01-27 11:19:20 UTC (rev 345)
+@@ -1,7 +1,7 @@
+ noinst_LIBRARIES = libfeuerkraft_generic.a
+ 
+ libfeuerkraft_generic_a_SOURCES = \
+-  random.hxx \
+-  random.cxx
++  random.hpp \
++  random.cpp
+ 
+ # EOF #
+
+Modified: trunk/src/groundmap/Makefile.am
+===================================================================
+--- trunk/src/groundmap/Makefile.am	2009-01-27 11:16:10 UTC (rev 344)
++++ trunk/src/groundmap/Makefile.am	2009-01-27 11:19:20 UTC (rev 345)
+@@ -1,39 +1,39 @@
+ noinst_LIBRARIES = libfeuerkraft_groundmap.a
+ 
+ libfeuerkraft_groundmap_a_SOURCES = \
+-grid_map.cxx \
+-grid_map.hxx \
+-grid_map_data.cxx \
+-grid_map_data.hxx \
+-grid_tile.cxx \
+-grid_tile.hxx \
+-grid_tile_data.cxx \
+-grid_tile_data.hxx \
+-grid_tile_generator.cxx \
+-grid_tile_generator.hxx \
+-ground_map.hxx \
+-ground_map_data.cxx \
+-ground_map_data.hxx \
+-ground_map_data_factory.cxx \
+-ground_map_data_factory.hxx \
+-ground_type.hxx \
+-ground_type.cxx \
+-multi_ground_map.cxx \
+-multi_ground_map.hxx \
+-multi_ground_map_data.cxx \
+-multi_ground_map_data.hxx \
+-sprite_tile.cxx \
+-sprite_tile.hxx \
+-sprite_tile_data.cxx \
+-sprite_tile_data.hxx \
+-tile.hxx \
+-tile_data.hxx \
+-tile_data_factory.cxx \
+-tile_data_factory.hxx \
+-tile_map.cxx \
+-tile_map.hxx \
+-tile_map_data.cxx \
+-tile_map_data.hxx
++grid_map.cpp \
++grid_map.hpp \
++grid_map_data.cpp \
++grid_map_data.hpp \
++grid_tile.cpp \
++grid_tile.hpp \
++grid_tile_data.cpp \
++grid_tile_data.hpp \
++grid_tile_generator.cpp \
++grid_tile_generator.hpp \
++ground_map.hpp \
++ground_map_data.cpp \
++ground_map_data.hpp \
++ground_map_data_factory.cpp \
++ground_map_data_factory.hpp \
++ground_type.hpp \
++ground_type.cpp \
++multi_ground_map.cpp \
++multi_ground_map.hpp \
++multi_ground_map_data.cpp \
++multi_ground_map_data.hpp \
++sprite_tile.cpp \
++sprite_tile.hpp \
++sprite_tile_data.cpp \
++sprite_tile_data.hpp \
++tile.hpp \
++tile_data.hpp \
++tile_data_factory.cpp \
++tile_data_factory.hpp \
++tile_map.cpp \
++tile_map.hpp \
++tile_map_data.cpp \
++tile_map_data.hpp
+ 
+ 
+ # EOF #
+\ No newline at end of file
+
+Modified: trunk/src/input/Makefile.am
+===================================================================
+--- trunk/src/input/Makefile.am	2009-01-27 11:16:10 UTC (rev 344)
++++ trunk/src/input/Makefile.am	2009-01-27 11:19:20 UTC (rev 345)
+@@ -4,34 +4,34 @@
+ noinst_LIBRARIES = libfeuerkraft_input.a
+ 
+ libfeuerkraft_input_a_SOURCES = \
+-  controller.hxx \
+-  controller.cxx \
+-  input_event.hxx \
+-  input_manager.hxx \
+-  input_manager.cxx \
+-  input_manager_impl.hxx \
+-  input_manager_impl.cxx \
+-  input_manager_custom.hxx \
+-  input_manager_custom.cxx \
+-  input_manager_player.hxx \
+-  input_manager_player.cxx \
+-  input_button.hxx \
+-  input_axis.hxx \
+-  input_button_input_device.hxx \
+-  input_button_input_device.cxx \
+-  input_axis_input_device.hxx \
+-  input_axis_input_device.cxx \
+-  axis_button.hxx \
+-  axis_button.cxx \
+-  button_axis.hxx \
+-  button_axis.cxx \
+-  button_factory.hxx \
+-  button_factory.cxx \
+-  axis_factory.hxx \
+-  axis_factory.cxx \
+-  input_recorder.hxx \
+-  input_recorder.cxx \
+-  multi_button.hxx \
+-  multi_button.cxx
++  controller.hpp \
++  controller.cpp \
++  input_event.hpp \
++  input_manager.hpp \
++  input_manager.cpp \
++  input_manager_impl.hpp \
++  input_manager_impl.cpp \
++  input_manager_custom.hpp \
++  input_manager_custom.cpp \
++  input_manager_player.hpp \
++  input_manager_player.cpp \
++  input_button.hpp \
++  input_axis.hpp \
++  input_button_input_device.hpp \
++  input_button_input_device.cpp \
++  input_axis_input_device.hpp \
++  input_axis_input_device.cpp \
++  axis_button.hpp \
++  axis_button.cpp \
++  button_axis.hpp \
++  button_axis.cpp \
++  button_factory.hpp \
++  button_factory.cpp \
++  axis_factory.hpp \
++  axis_factory.cpp \
++  input_recorder.hpp \
++  input_recorder.cpp \
++  multi_button.hpp \
++  multi_button.cpp
+ 
+ # EOF #
+
+Modified: trunk/src/particles/Makefile.am
+===================================================================
+--- trunk/src/particles/Makefile.am	2009-01-27 11:16:10 UTC (rev 344)
++++ trunk/src/particles/Makefile.am	2009-01-27 11:19:20 UTC (rev 345)
+@@ -1,19 +1,19 @@
+ noinst_LIBRARIES = libfeuerkraft_particles.a
+ 
+ libfeuerkraft_particles_a_SOURCES = \
+- explosion_particle.hxx \
+- particle.hxx           \
+- particle_system.hxx    \
+- smoke_particle.hxx     \
+- sand_particle.hxx      \
+- grass_particle.hxx     \
+- fire_particle.hxx     \
+- fire_particle.cxx     \
+- fire_emitter.hxx      \
+- fire_emitter.cxx      \
+- rocket_smoke_particle.hxx     \
+- rocket_smoke_particle.cxx     \
+- smoke_emitter.hxx     \
+- smoke_emitter.cxx     
++ explosion_particle.hpp \
++ particle.hpp           \
++ particle_system.hpp    \
++ smoke_particle.hpp     \
++ sand_particle.hpp      \
++ grass_particle.hpp     \
++ fire_particle.hpp     \
++ fire_particle.cpp     \
++ fire_emitter.hpp      \
++ fire_emitter.cpp      \
++ rocket_smoke_particle.hpp     \
++ rocket_smoke_particle.cpp     \
++ smoke_emitter.hpp     \
++ smoke_emitter.cpp     
+ 
+ # EOF #
+\ No newline at end of file
+
+Modified: trunk/src/sound/Makefile.am
+===================================================================
+--- trunk/src/sound/Makefile.am	2009-01-27 11:16:10 UTC (rev 344)
++++ trunk/src/sound/Makefile.am	2009-01-27 11:19:20 UTC (rev 345)
+@@ -19,8 +19,8 @@
+ noinst_LIBRARIES = libpingus_sound.a
+ 
+ libpingus_sound_a_SOURCES = \
+-	sound.cxx  sound_dummy.cxx  sound_real.cxx \
+-	sound.hxx  sound_dummy.hxx  sound_real.hxx \
+-        sounds.hxx sound_res_mgr.hxx sound_res_mgr.cxx
++	sound.cpp  sound_dummy.cpp  sound_real.cpp \
++	sound.hpp  sound_dummy.hpp  sound_real.hpp \
++        sounds.hpp sound_res_mgr.hpp sound_res_mgr.cpp
+ 
+ # EOF #
+
+Modified: trunk/src/vehicles/Makefile.am
+===================================================================
+--- trunk/src/vehicles/Makefile.am	2009-01-27 11:16:10 UTC (rev 344)
++++ trunk/src/vehicles/Makefile.am	2009-01-27 11:19:20 UTC (rev 345)
+@@ -1,12 +1,12 @@
+ noinst_LIBRARIES = libfeuerkraft_vehicles.a
+ 
+ libfeuerkraft_vehicles_a_SOURCES = \
+-  tank.cxx tank.hxx \
+-  helicopter.cxx helicopter.hxx \
+-  jeep.cxx   jeep.hxx \
+-  turret.cxx turret.hxx \
+-  rotor.cxx  rotor.hxx \
+-  vehicle.cxx \
+-  vehicle.hxx
++  tank.cpp tank.hpp \
++  helicopter.cpp helicopter.hpp \
++  jeep.cpp   jeep.hpp \
++  turret.cpp turret.hpp \
++  rotor.cpp  rotor.hpp \
++  vehicle.cpp \
++  vehicle.hpp
+ 
+ # EOF #
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000010.html">[Feuerkraft-commit] r344 - in trunk/src: . buildings display editor	generic groundmap input particles scripting sound vehicles
+</A></li>
+	<LI>Next message: <A HREF="000011.html">[Feuerkraft-commit] r346 - in trunk: . src src/buildings	src/display src/editor src/generic src/groundmap src/input	src/particles src/scripting src/sound src/vehicles
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7">[ date ]</a>
+              <a href="thread.html#7">[ thread ]</a>
+              <a href="subject.html#7">[ subject ]</a>
+              <a href="author.html#7">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/feuerkraft-commit">More information about the Feuerkraft-commit
+mailing list</a><br>
+</body></html>

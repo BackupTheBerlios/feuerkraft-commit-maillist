@@ -1,0 +1,411 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Feuerkraft-commit] r402 - in trunk/feuerkraft/src: . particles	sound vehicles
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/feuerkraft-commit/2010-May/index.html" >
+   <LINK REL="made" HREF="mailto:feuerkraft-commit%40lists.berlios.de?Subject=Re%3A%20%5BFeuerkraft-commit%5D%20r402%20-%20in%20trunk/feuerkraft/src%3A%20.%20particles%0A%09sound%20vehicles&In-Reply-To=%3C201005132343.o4DNhk3L004291%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000062.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Feuerkraft-commit] r402 - in trunk/feuerkraft/src: . particles	sound vehicles</H1>
+    <B>grumbel at BerliOS</B> 
+    <A HREF="mailto:feuerkraft-commit%40lists.berlios.de?Subject=Re%3A%20%5BFeuerkraft-commit%5D%20r402%20-%20in%20trunk/feuerkraft/src%3A%20.%20particles%0A%09sound%20vehicles&In-Reply-To=%3C201005132343.o4DNhk3L004291%40sheep.berlios.de%3E"
+       TITLE="[Feuerkraft-commit] r402 - in trunk/feuerkraft/src: . particles	sound vehicles">grumbel at mail.berlios.de
+       </A><BR>
+    <I>Fri May 14 01:43:46 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000062.html">[Feuerkraft-commit] r401 - trunk/feuerkraft/src
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#63">[ date ]</a>
+              <a href="thread.html#63">[ thread ]</a>
+              <a href="subject.html#63">[ subject ]</a>
+              <a href="author.html#63">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: grumbel
+Date: 2010-05-14 01:43:45 +0200 (Fri, 14 May 2010)
+New Revision: 402
+
+Modified:
+   trunk/feuerkraft/src/feuerkraft.cpp
+   trunk/feuerkraft/src/feuerkraft.hpp
+   trunk/feuerkraft/src/game_obj_factory.cpp
+   trunk/feuerkraft/src/game_obj_factory.hpp
+   trunk/feuerkraft/src/game_session.cpp
+   trunk/feuerkraft/src/keyboard_manager.cpp
+   trunk/feuerkraft/src/keyboard_manager.hpp
+   trunk/feuerkraft/src/particles/explosion_particle.hpp
+   trunk/feuerkraft/src/player_view.cpp
+   trunk/feuerkraft/src/player_view.hpp
+   trunk/feuerkraft/src/sound/sound.hpp
+   trunk/feuerkraft/src/sound/sound_real.cpp
+   trunk/feuerkraft/src/unit.cpp
+   trunk/feuerkraft/src/vehicle_view.cpp
+   trunk/feuerkraft/src/vehicles/tank.cpp
+   trunk/feuerkraft/src/view.cpp
+Log:
+Some -Weffc++ cleanup
+
+Modified: trunk/feuerkraft/src/feuerkraft.cpp
+===================================================================
+--- trunk/feuerkraft/src/feuerkraft.cpp	2010-05-13 23:43:34 UTC (rev 401)
++++ trunk/feuerkraft/src/feuerkraft.cpp	2010-05-13 23:43:45 UTC (rev 402)
+@@ -54,7 +54,8 @@
+ Feuerkraft feuerkraft;
+ CommandLineArguments* args;
+ 
+-Feuerkraft::Feuerkraft()
++Feuerkraft::Feuerkraft() :
++  window()
+ {
+   args = 0;
+ }
+
+Modified: trunk/feuerkraft/src/feuerkraft.hpp
+===================================================================
+--- trunk/feuerkraft/src/feuerkraft.hpp	2010-05-13 23:43:34 UTC (rev 401)
++++ trunk/feuerkraft/src/feuerkraft.hpp	2010-05-13 23:43:45 UTC (rev 402)
+@@ -100,6 +100,10 @@
+ 
+ private:
+   void key_down(const CL_InputEvent&amp; event);
++
++private:
++  Feuerkraft(const Feuerkraft&amp;);
++  Feuerkraft&amp; operator=(const Feuerkraft&amp;);
+ };
+ 
+ #endif
+
+Modified: trunk/feuerkraft/src/game_obj_factory.cpp
+===================================================================
+--- trunk/feuerkraft/src/game_obj_factory.cpp	2010-05-13 23:43:34 UTC (rev 401)
++++ trunk/feuerkraft/src/game_obj_factory.cpp	2010-05-13 23:43:45 UTC (rev 402)
+@@ -33,7 +33,8 @@
+ 
+ GameObjFactory* GameObjFactory::instance_ = 0;
+ 
+-GameObjFactory::GameObjFactory()
++GameObjFactory::GameObjFactory() :
++  factories()
+ {
+   // If anything is changed here, make sure to update
+   // data/feuerkraft.scm
+
+Modified: trunk/feuerkraft/src/game_obj_factory.hpp
+===================================================================
+--- trunk/feuerkraft/src/game_obj_factory.hpp	2010-05-13 23:43:34 UTC (rev 401)
++++ trunk/feuerkraft/src/game_obj_factory.hpp	2010-05-13 23:43:45 UTC (rev 402)
+@@ -27,6 +27,8 @@
+ class GameObjAbstractFactory
+ {
+ public:
++  virtual ~GameObjAbstractFactory() {}
++
+   virtual GameObj* create(const AList&amp; lst) =0;
+ };
+ 
+
+Modified: trunk/feuerkraft/src/game_session.cpp
+===================================================================
+--- trunk/feuerkraft/src/game_session.cpp	2010-05-13 23:43:34 UTC (rev 401)
++++ trunk/feuerkraft/src/game_session.cpp	2010-05-13 23:43:45 UTC (rev 402)
+@@ -63,11 +63,19 @@
+ // FIXME: Replace this with a PlayerManager class or something similar
+ Player*  player;
+ 
+-GameSession::GameSession(const std::string&amp; arg_filename)
+-  : control_state(UNIT_CONTROL),
+-    filename(arg_filename),
+-    do_quit(false),
+-    do_pause(false)
++GameSession::GameSession(const std::string&amp; arg_filename) :
++  control_state(UNIT_CONTROL),
++  filename(arg_filename),
++  do_quit(false),
++  do_pause(false),
++  deltas(),
++  loops(),
++  frames(),
++  start_time(),
++  buildingtypemanager(),
++  collision_mgr(),
++  world(),
++  view()
+ {  
+ }
+ 
+
+Modified: trunk/feuerkraft/src/keyboard_manager.cpp
+===================================================================
+--- trunk/feuerkraft/src/keyboard_manager.cpp	2010-05-13 23:43:34 UTC (rev 401)
++++ trunk/feuerkraft/src/keyboard_manager.cpp	2010-05-13 23:43:45 UTC (rev 402)
+@@ -25,7 +25,9 @@
+ 
+ KeyboardManager* KeyboardManager::instance_ = 0;
+ 
+-KeyboardManager::KeyboardManager()
++KeyboardManager::KeyboardManager() :
++  slots(),
++  callbacks()
+ {
+   slots.push_back(CL_Keyboard::sig_key_down().connect(this, &amp;KeyboardManager::button_down));
+   slots.push_back(CL_Keyboard::sig_key_up().connect(this, &amp;KeyboardManager::button_up));
+
+Modified: trunk/feuerkraft/src/keyboard_manager.hpp
+===================================================================
+--- trunk/feuerkraft/src/keyboard_manager.hpp	2010-05-13 23:43:34 UTC (rev 401)
++++ trunk/feuerkraft/src/keyboard_manager.hpp	2010-05-13 23:43:45 UTC (rev 402)
+@@ -46,6 +46,8 @@
+       : key_id(id)
+     {}
+ 
++    virtual ~Callback() {}
++
+     virtual void run() =0;
+   };
+   
+
+Modified: trunk/feuerkraft/src/particles/explosion_particle.hpp
+===================================================================
+--- trunk/feuerkraft/src/particles/explosion_particle.hpp	2010-05-13 23:43:34 UTC (rev 401)
++++ trunk/feuerkraft/src/particles/explosion_particle.hpp	2010-05-13 23:43:45 UTC (rev 402)
+@@ -35,7 +35,13 @@
+   bool direction;
+   float angle;
+ public:
+-  ExplosionParticle(const FloatVector2d&amp; arg_pos, const FloatVector2d&amp; arg_vel, float arg_size)
++  ExplosionParticle(const FloatVector2d&amp; arg_pos, const FloatVector2d&amp; arg_vel, float arg_size) :
++    size(),
++    sprite(),
++    sprite_light(),
++    max_life_time(),
++    direction(),
++    angle()
+   {
+     velocity = arg_vel;
+     pos = arg_pos;
+
+Modified: trunk/feuerkraft/src/player_view.cpp
+===================================================================
+--- trunk/feuerkraft/src/player_view.cpp	2010-05-13 23:43:34 UTC (rev 401)
++++ trunk/feuerkraft/src/player_view.cpp	2010-05-13 23:43:45 UTC (rev 402)
+@@ -19,9 +19,9 @@
+ #include &quot;player.hpp&quot;
+ #include &quot;player_view.hpp&quot;
+ 
+-PlayerViewUpdater::PlayerViewUpdater(Player* arg_player)
+-  : VehicleViewUpdater(arg_player-&gt;get_current_unit()),
+-    player(arg_player)
++PlayerViewUpdater::PlayerViewUpdater(Player* arg_player) :
++  VehicleViewUpdater(arg_player-&gt;get_current_unit()),
++  player(arg_player)
+ {
+ }
+ 
+
+Modified: trunk/feuerkraft/src/player_view.hpp
+===================================================================
+--- trunk/feuerkraft/src/player_view.hpp	2010-05-13 23:43:34 UTC (rev 401)
++++ trunk/feuerkraft/src/player_view.hpp	2010-05-13 23:43:45 UTC (rev 402)
+@@ -28,10 +28,12 @@
+ {
+ private:
+   Player* player;
++
+ public:
+   PlayerViewUpdater(Player* arg_player);
+ 
+   void update(float delta, ViewState&amp; state);
++
+ private:
+   PlayerViewUpdater (const PlayerViewUpdater&amp;);
+   PlayerViewUpdater&amp; operator= (const PlayerViewUpdater&amp;);
+
+Modified: trunk/feuerkraft/src/sound/sound.hpp
+===================================================================
+--- trunk/feuerkraft/src/sound/sound.hpp	2010-05-13 23:43:34 UTC (rev 401)
++++ trunk/feuerkraft/src/sound/sound.hpp	2010-05-13 23:43:45 UTC (rev 402)
+@@ -30,6 +30,7 @@
+ 
+ protected:
+   PingusSound () { }
++  virtual ~PingusSound () { }
+ 
+   virtual void real_play_sound(const std::string &amp; name, float volume, float panning) =0;
+   virtual void real_play_music(const std::string &amp; name, float volume) =0;
+
+Modified: trunk/feuerkraft/src/sound/sound_real.cpp
+===================================================================
+--- trunk/feuerkraft/src/sound/sound_real.cpp	2010-05-13 23:43:34 UTC (rev 401)
++++ trunk/feuerkraft/src/sound/sound_real.cpp	2010-05-13 23:43:45 UTC (rev 402)
+@@ -38,7 +38,7 @@
+ namespace Sound {
+ 
+ PingusSoundReal::PingusSoundReal ()
+-  : music_sample (0), music_session(0)
++  : output(), music_sample (0), music_session(0)
+ {
+   std::cout &lt;&lt; &quot;Initializing ClanLib-Sound&quot; &lt;&lt; std::endl;
+ 
+
+Modified: trunk/feuerkraft/src/unit.cpp
+===================================================================
+--- trunk/feuerkraft/src/unit.cpp	2010-05-13 23:43:34 UTC (rev 401)
++++ trunk/feuerkraft/src/unit.cpp	2010-05-13 23:43:45 UTC (rev 402)
+@@ -32,6 +32,7 @@
+ 
+   properties-&gt;register_float(&quot;x-pos&quot;, &amp;pos.x);
+   properties-&gt;register_float(&quot;y-pos&quot;, &amp;pos.y);
++
+   properties-&gt;register_float(&quot;orientation&quot;, &amp;orientation);
+ }
+ 
+
+Modified: trunk/feuerkraft/src/vehicle_view.cpp
+===================================================================
+--- trunk/feuerkraft/src/vehicle_view.cpp	2010-05-13 23:43:34 UTC (rev 401)
++++ trunk/feuerkraft/src/vehicle_view.cpp	2010-05-13 23:43:45 UTC (rev 402)
+@@ -57,7 +57,7 @@
+   
+   state.x_offset = int(pos.x);
+   state.y_offset = int(pos.y);
+-
++  
+   float my_rotation = -(unit-&gt;get_orientation()/3.1415927*180.0) + 90;
+ 
+   if (state.rotation &gt; my_rotation) 
+
+Modified: trunk/feuerkraft/src/vehicles/tank.cpp
+===================================================================
+--- trunk/feuerkraft/src/vehicles/tank.cpp	2010-05-13 23:43:34 UTC (rev 401)
++++ trunk/feuerkraft/src/vehicles/tank.cpp	2010-05-13 23:43:45 UTC (rev 402)
+@@ -42,8 +42,29 @@
+ 
+ const float circle = 6.2831854f;
+ 
+-Tank::Tank(const AList&amp; lst)
+-  : energie(100)
++Tank::Tank(const AList&amp; lst) :
++  tmp_pos(),
++  speed(),
++  increment(),
++  frame(),
++  burning(),
++  smod(),
++  sur_destroyed(),
++  sur(),
++  sur_light(),
++  sur_highlight(),
++  shadow(),
++  turret(),
++  smodpos(),
++  tmp_angle(),
++  smod_step(),
++  mine_reload_time(),
++  energie(100),
++  destroyed(),
++  particle_release(),
++  destroy_time(),
++  smoke_emitter(),
++  ai()
+ {
+   // FIME: This needs cleanup
+   AList def;
+@@ -101,21 +122,22 @@
+ }
+ 
+ Tank::Tank (const FloatVector2d &amp;arg_pos,
+-	    int reloading_speed, std::string tank, std::string str_turret, std::string fire) 
+-  : speed (0.0f),
+-    increment (2.0f),
+-    burning(false),
+-    smod (resources-&gt;get_sprite (tank.c_str ())),
+-    sur_destroyed (resources-&gt;get_sprite (&quot;feuerkraft/tank2destroyed&quot;)),
+-    sur (resources-&gt;get_sprite (tank.c_str ())),
+-    sur_light(resources-&gt;get_sprite(&quot;feuerkraft/tank_light&quot;)),
+-    sur_highlight(resources-&gt;get_sprite(&quot;feuerkraft/tank_highlight&quot;)),
+-    shadow (resources-&gt;get_sprite (&quot;feuerkraft/tank2_shadow&quot;)),
+-    turret (NULL),
+-    smod_step (0),
+-    mine_reload_time (0),
+-    energie (100),
+-    destroyed (false)
++	    int reloading_speed, std::string tank, std::string str_turret, std::string fire) :
++  tmp_pos(),
++  speed (0.0f),
++  increment (2.0f),
++  burning(false),
++  smod (resources-&gt;get_sprite (tank.c_str ())),
++  sur_destroyed (resources-&gt;get_sprite (&quot;feuerkraft/tank2destroyed&quot;)),
++  sur (resources-&gt;get_sprite (tank.c_str ())),
++  sur_light(resources-&gt;get_sprite(&quot;feuerkraft/tank_light&quot;)),
++  sur_highlight(resources-&gt;get_sprite(&quot;feuerkraft/tank_highlight&quot;)),
++  shadow (resources-&gt;get_sprite (&quot;feuerkraft/tank2_shadow&quot;)),
++  turret (NULL),
++  smod_step (0),
++  mine_reload_time (0),
++  energie (100),
++  destroyed (false)
+ {
+   ai = 0;
+   velocity = 0.0f;
+
+Modified: trunk/feuerkraft/src/view.cpp
+===================================================================
+--- trunk/feuerkraft/src/view.cpp	2010-05-13 23:43:34 UTC (rev 401)
++++ trunk/feuerkraft/src/view.cpp	2010-05-13 23:43:45 UTC (rev 402)
+@@ -16,7 +16,6 @@
+ //  You should have received a copy of the GNU General Public License
+ //  along with this program.  If not, see &lt;<A HREF="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</A>&gt;.
+ 
+-#include &lt;iostream&gt;
+ #include &lt;ClanLib/Display/display.h&gt;
+ #include &lt;ClanLib/Display/sprite.h&gt;
+ #include &lt;ClanLib/Display/surface.h&gt;
+@@ -38,9 +37,6 @@
+   properties(),
+   scene_context()
+ {
+-  //std::cout &lt;&lt; &quot;View: &quot; &lt;&lt; x1 &lt;&lt; &quot; &quot; &lt;&lt; y1 &lt;&lt; &quot; &quot; &lt;&lt; x2 &lt;&lt; &quot; &quot; &lt;&lt; y2 
+-    //&lt;&lt; &quot; &quot; &lt;&lt; state.x_offset &lt;&lt; &quot; &quot; &lt;&lt; state.y_offset &lt;&lt; std::endl;
+-  
+   state.x_offset = -x1;
+   state.y_offset = -y1;
+ 
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000062.html">[Feuerkraft-commit] r401 - trunk/feuerkraft/src
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#63">[ date ]</a>
+              <a href="thread.html#63">[ thread ]</a>
+              <a href="subject.html#63">[ subject ]</a>
+              <a href="author.html#63">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/feuerkraft-commit">More information about the Feuerkraft-commit
+mailing list</a><br>
+</body></html>

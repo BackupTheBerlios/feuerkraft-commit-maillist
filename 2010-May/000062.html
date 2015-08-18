@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Feuerkraft-commit] r401 - trunk/feuerkraft/src
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/feuerkraft-commit/2010-May/index.html" >
+   <LINK REL="made" HREF="mailto:feuerkraft-commit%40lists.berlios.de?Subject=Re%3A%20%5BFeuerkraft-commit%5D%20r401%20-%20trunk/feuerkraft/src&In-Reply-To=%3C201005132343.o4DNhYWE004256%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000061.html">
+   <LINK REL="Next"  HREF="000063.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Feuerkraft-commit] r401 - trunk/feuerkraft/src</H1>
+    <B>grumbel at BerliOS</B> 
+    <A HREF="mailto:feuerkraft-commit%40lists.berlios.de?Subject=Re%3A%20%5BFeuerkraft-commit%5D%20r401%20-%20trunk/feuerkraft/src&In-Reply-To=%3C201005132343.o4DNhYWE004256%40sheep.berlios.de%3E"
+       TITLE="[Feuerkraft-commit] r401 - trunk/feuerkraft/src">grumbel at mail.berlios.de
+       </A><BR>
+    <I>Fri May 14 01:43:34 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000061.html">[Feuerkraft-commit] r400 - in trunk/feuerkraft/src: . buildings	display particles vehicles
+</A></li>
+        <LI>Next message: <A HREF="000063.html">[Feuerkraft-commit] r402 - in trunk/feuerkraft/src: . particles	sound vehicles
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#62">[ date ]</a>
+              <a href="thread.html#62">[ thread ]</a>
+              <a href="subject.html#62">[ subject ]</a>
+              <a href="author.html#62">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: grumbel
+Date: 2010-05-14 01:43:34 +0200 (Fri, 14 May 2010)
+New Revision: 401
+
+Modified:
+   trunk/feuerkraft/src/soldier.cpp
+Log:
+Fixed missing initialisation
+
+Modified: trunk/feuerkraft/src/soldier.cpp
+===================================================================
+--- trunk/feuerkraft/src/soldier.cpp	2010-05-13 23:21:23 UTC (rev 400)
++++ trunk/feuerkraft/src/soldier.cpp	2010-05-13 23:43:34 UTC (rev 401)
+@@ -27,10 +27,12 @@
+ #include &quot;ai_manager.hpp&quot;
+ #include &quot;soldier.hpp&quot;
+ 
+-Soldier::Soldier(const AList&amp; lst) 
+-  : ai(0),
+-    sur(resources-&gt;get_sprite(&quot;feuerkraft/soldier&quot;)),
+-    sur_light(resources-&gt;get_sprite(&quot;feuerkraft/soldier-light&quot;))
++Soldier::Soldier(const AList&amp; lst) :
++  ai(0),
++  sur(resources-&gt;get_sprite(&quot;feuerkraft/soldier&quot;)),
++  sur_light(resources-&gt;get_sprite(&quot;feuerkraft/soldier-light&quot;)),
++  acceleration(),
++  steering()
+ {
+   pos.x = lst.get_float(&quot;x-pos&quot;);
+   pos.y = lst.get_float(&quot;y-pos&quot;);
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000061.html">[Feuerkraft-commit] r400 - in trunk/feuerkraft/src: . buildings	display particles vehicles
+</A></li>
+	<LI>Next message: <A HREF="000063.html">[Feuerkraft-commit] r402 - in trunk/feuerkraft/src: . particles	sound vehicles
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#62">[ date ]</a>
+              <a href="thread.html#62">[ thread ]</a>
+              <a href="subject.html#62">[ subject ]</a>
+              <a href="author.html#62">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/feuerkraft-commit">More information about the Feuerkraft-commit
+mailing list</a><br>
+</body></html>

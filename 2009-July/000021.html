@@ -1,0 +1,178 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Feuerkraft-commit] r357 - trunk/media/images/tilemasks
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/feuerkraft-commit/2009-July/index.html" >
+   <LINK REL="made" HREF="mailto:feuerkraft-commit%40lists.berlios.de?Subject=Re%3A%20%5BFeuerkraft-commit%5D%20r357%20-%20trunk/media/images/tilemasks&In-Reply-To=%3C200907251828.n6PISuFp007102%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000020.html">
+   <LINK REL="Next"  HREF="000022.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Feuerkraft-commit] r357 - trunk/media/images/tilemasks</H1>
+    <B>grumbel at BerliOS</B> 
+    <A HREF="mailto:feuerkraft-commit%40lists.berlios.de?Subject=Re%3A%20%5BFeuerkraft-commit%5D%20r357%20-%20trunk/media/images/tilemasks&In-Reply-To=%3C200907251828.n6PISuFp007102%40sheep.berlios.de%3E"
+       TITLE="[Feuerkraft-commit] r357 - trunk/media/images/tilemasks">grumbel at mail.berlios.de
+       </A><BR>
+    <I>Sat Jul 25 20:28:56 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000020.html">[Feuerkraft-commit] r356 - trunk/media/images/tilemasks
+</A></li>
+        <LI>Next message: <A HREF="000022.html">[Feuerkraft-commit] r358 - trunk/media/images/tilemasks
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#21">[ date ]</a>
+              <a href="thread.html#21">[ thread ]</a>
+              <a href="subject.html#21">[ subject ]</a>
+              <a href="author.html#21">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: grumbel
+Date: 2009-07-25 20:28:55 +0200 (Sat, 25 Jul 2009)
+New Revision: 357
+
+Modified:
+   trunk/media/images/tilemasks/
+   trunk/media/images/tilemasks/build_masks.sh
+   trunk/media/images/tilemasks/build_tiles.sh
+Log:
+Updated build scripts
+
+
+Property changes on: trunk/media/images/tilemasks
+___________________________________________________________________
+Name: svn:ignore
+   + masks
+tiles
+
+
+Modified: trunk/media/images/tilemasks/build_masks.sh
+===================================================================
+--- trunk/media/images/tilemasks/build_masks.sh	2009-07-25 17:59:25 UTC (rev 356)
++++ trunk/media/images/tilemasks/build_masks.sh	2009-07-25 18:28:55 UTC (rev 357)
+@@ -2,33 +2,44 @@
+ 
+ BUILDDIR=&quot;masks&quot;
+ 
++mkdir -p &quot;${BUILDDIR}&quot;
++
+ # flop == &quot;horizontal flip&quot;
+ 
+-for i in bbwb*.png; do
+-    convert -negate &quot;$i&quot; &quot;${BUILDDIR}/$i&quot;
+-#    convert -flop &quot;$i&quot; &quot;${BUILDDIR}/bbbw${i##bbwb}&quot;
+-#    convert -flip &quot;$i&quot; &quot;${BUILDDIR}/bwbb${i##bbwb}&quot;
+-#    convert -flip -flop &quot;$i&quot; &quot;${BUILDDIR}/wbbb${i##bbwb}&quot;
+-done
++# upper/left
++for i in 1000-*.png; do
++    echo $i
++    EXT=&quot;${i##1000-}&quot;
+ 
+-for i in bwbw*.png; do
+-    convert -negate &quot;$i&quot; &quot;${BUILDDIR}/$i&quot;
+-#    convert -flip &quot;$i&quot; &quot;${BUILDDIR}/wbwb${i##bwbw}&quot;
++    # single spot
++    convert -negate &quot;$i&quot; &quot;${BUILDDIR}/1000-${EXT}&quot;
++    convert -flop &quot;$i&quot; &quot;${BUILDDIR}/0100-${EXT}&quot;
++    convert -flip &quot;$i&quot; &quot;${BUILDDIR}/0001-${EXT}&quot;
++    convert -flip -flop &quot;$i&quot; &quot;${BUILDDIR}/0010-${EXT}&quot;
++
++    # three spot
++    convert -negate &quot;$i&quot; &quot;${BUILDDIR}/0111-${EXT}&quot;
++    convert -negate -flop &quot;$i&quot; &quot;${BUILDDIR}/1011-${EXT}&quot;
++    convert -negate -flip &quot;$i&quot; &quot;${BUILDDIR}/1110-${EXT}&quot;
++    convert -negate -flip -flop &quot;$i&quot; &quot;${BUILDDIR}/1101-${EXT}&quot;
+ done
+ 
+-for i in bbww*.png; do
+-    convert -negate &quot;$i&quot; &quot;${BUILDDIR}/$i&quot;
+-#    convert -flip &quot;$i&quot; &quot;${BUILDDIR}/wwbb${i##bbww}&quot;
+-#    convert -transpose  &quot;$i&quot; &quot;${BUILDDIR}/bwwb${i##bbww}&quot;
+-#    convert -transverse &quot;$i&quot; &quot;${BUILDDIR}/wbbw${i##bbww}&quot;
++# diagonal
++for i in 1010-*.png; do
++    echo $i
++    EXT=&quot;${i##1010-}&quot;
++    convert         &quot;$i&quot; &quot;${BUILDDIR}/1010-${EXT}&quot;
++    convert -negate &quot;$i&quot; &quot;${BUILDDIR}/0101-${EXT}&quot;
+ done
+ 
+-
+-for i in bwww*.png; do
+-    convert -negate &quot;$i&quot; &quot;${BUILDDIR}/$i&quot;
+-#    convert -flip &quot;$i&quot; &quot;${BUILDDIR}/wwwb${i##bwww}&quot;
+-#    convert -flop &quot;$i&quot; &quot;${BUILDDIR}/wbww${i##bwww}&quot;
+-#    convert -transverse &quot;$i&quot; &quot;${BUILDDIR}/wwbw${i##bwww}&quot;
++# one side
++for i in 1100-*.png; do
++    echo $i
++    EXT=&quot;${i##1100-}&quot;
++    convert             &quot;$i&quot; &quot;${BUILDDIR}/1010-${EXT}&quot;
++    convert -flip       &quot;$i&quot; &quot;${BUILDDIR}/0011-${EXT}&quot;
++    convert -transpose  &quot;$i&quot; &quot;${BUILDDIR}/1010-${EXT}&quot;
++    convert -transverse &quot;$i&quot; &quot;${BUILDDIR}/0101-${EXT}&quot;
+ done
+ 
+ # EOF #
+
+Modified: trunk/media/images/tilemasks/build_tiles.sh
+===================================================================
+--- trunk/media/images/tilemasks/build_tiles.sh	2009-07-25 17:59:25 UTC (rev 356)
++++ trunk/media/images/tilemasks/build_tiles.sh	2009-07-25 18:28:55 UTC (rev 357)
+@@ -1,14 +1,15 @@
+-#!/bin/sh
++#!/bin/bash
+ 
+ mkdir -p tiles
+ 
+ for i in masks/*.png; do
+     echo $i
+     NAME=$(basename $i)
+-    NAME=${NAME%%.png}
+-    ./apply_alpha.py grass.png    &quot;$i&quot; &quot;tiles/$(echo &quot;$NAME&quot; | tr [bw] [g_]).png&quot;
+-    ./apply_alpha.py mud.png      &quot;$i&quot; &quot;tiles/$(echo &quot;$NAME&quot; | tr [bw] [m_]).png&quot;
+-    ./apply_alpha.py darksand.png &quot;$i&quot; &quot;tiles/$(echo &quot;$NAME&quot; | tr [bw] [d_]).png&quot;
++    NUM=&quot;${NAME:5:1}&quot;
++    NAME=&quot;${NAME:0:4}&quot;
++    ./apply_alpha.py grass.png    &quot;$i&quot; &quot;tiles/$(echo &quot;$NAME&quot; | tr [10] [g_])-${NUM}.png&quot;
++    ./apply_alpha.py mud.png      &quot;$i&quot; &quot;tiles/$(echo &quot;$NAME&quot; | tr [10] [m_])-${NUM}.png&quot;
++    ./apply_alpha.py darksand.png &quot;$i&quot; &quot;tiles/$(echo &quot;$NAME&quot; | tr [10] [d_])-${NUM}.png&quot;
+ done
+ 
+-# EOF #
+\ No newline at end of file
++# EOF #
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000020.html">[Feuerkraft-commit] r356 - trunk/media/images/tilemasks
+</A></li>
+	<LI>Next message: <A HREF="000022.html">[Feuerkraft-commit] r358 - trunk/media/images/tilemasks
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#21">[ date ]</a>
+              <a href="thread.html#21">[ thread ]</a>
+              <a href="subject.html#21">[ subject ]</a>
+              <a href="author.html#21">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/feuerkraft-commit">More information about the Feuerkraft-commit
+mailing list</a><br>
+</body></html>

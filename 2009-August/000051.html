@@ -1,0 +1,167 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Feuerkraft-commit] r389 - trunk/feuerkraft/src
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/feuerkraft-commit/2009-August/index.html" >
+   <LINK REL="made" HREF="mailto:feuerkraft-commit%40lists.berlios.de?Subject=Re%3A%20%5BFeuerkraft-commit%5D%20r389%20-%20trunk/feuerkraft/src&In-Reply-To=%3C200908011742.n71HgIaN003007%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000052.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Feuerkraft-commit] r389 - trunk/feuerkraft/src</H1>
+    <B>grumbel at BerliOS</B> 
+    <A HREF="mailto:feuerkraft-commit%40lists.berlios.de?Subject=Re%3A%20%5BFeuerkraft-commit%5D%20r389%20-%20trunk/feuerkraft/src&In-Reply-To=%3C200908011742.n71HgIaN003007%40sheep.berlios.de%3E"
+       TITLE="[Feuerkraft-commit] r389 - trunk/feuerkraft/src">grumbel at mail.berlios.de
+       </A><BR>
+    <I>Sat Aug  1 19:42:18 CEST 2009</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000052.html">[Feuerkraft-commit] r390 - trunk/feuerkraft/src
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#51">[ date ]</a>
+              <a href="thread.html#51">[ thread ]</a>
+              <a href="subject.html#51">[ subject ]</a>
+              <a href="author.html#51">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: grumbel
+Date: 2009-08-01 19:42:18 +0200 (Sat, 01 Aug 2009)
+New Revision: 389
+
+Modified:
+   trunk/feuerkraft/src/radar.cpp
+   trunk/feuerkraft/src/radar.hpp
+   trunk/feuerkraft/src/system.hpp
+Log:
+Upgraded to GPLv3+
+
+Modified: trunk/feuerkraft/src/radar.cpp
+===================================================================
+--- trunk/feuerkraft/src/radar.cpp	2009-08-01 17:38:16 UTC (rev 388)
++++ trunk/feuerkraft/src/radar.cpp	2009-08-01 17:42:18 UTC (rev 389)
+@@ -3,19 +3,18 @@
+ //  Feuerkraft - A Tank Battle Game
+ //  Copyright(C) 2000 Ingo Ruhnke &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/feuerkraft-commit">grumbel at gmx.de</A>&gt;
+ //
+-//  This program is free software; you can redistribute it and/or
+-//  modify it under the terms of the GNU General Public License
+-//  as published by the Free Software Foundation; either version 2
+-//  of the License, or(at your option) any later version.
+-//
++//  This program is free software: you can redistribute it and/or modify
++//  it under the terms of the GNU General Public License as published by
++//  the Free Software Foundation, either version 3 of the License, or
++//  (at your option) any later version.
++//  
+ //  This program is distributed in the hope that it will be useful,
+ //  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ //  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ //  GNU General Public License for more details.
+-//
++//  
+ //  You should have received a copy of the GNU General Public License
+-//  along with this program; if not, write to the Free Software
+-//  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
++//  along with this program.  If not, see &lt;<A HREF="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</A>&gt;.
+ 
+ #include &lt;ClanLib/Display/display.h&gt;
+ #include &quot;buildings/building_map.hpp&quot;
+
+Modified: trunk/feuerkraft/src/radar.hpp
+===================================================================
+--- trunk/feuerkraft/src/radar.hpp	2009-08-01 17:38:16 UTC (rev 388)
++++ trunk/feuerkraft/src/radar.hpp	2009-08-01 17:42:18 UTC (rev 389)
+@@ -3,19 +3,18 @@
+ //  Feuerkraft - A Tank Battle Game
+ //  Copyright(C) 2000 Ingo Ruhnke &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/feuerkraft-commit">grumbel at gmx.de</A>&gt;
+ //
+-//  This program is free software; you can redistribute it and/or
+-//  modify it under the terms of the GNU General Public License
+-//  as published by the Free Software Foundation; either version 2
+-//  of the License, or(at your option) any later version.
+-//
++//  This program is free software: you can redistribute it and/or modify
++//  it under the terms of the GNU General Public License as published by
++//  the Free Software Foundation, either version 3 of the License, or
++//  (at your option) any later version.
++//  
+ //  This program is distributed in the hope that it will be useful,
+ //  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ //  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ //  GNU General Public License for more details.
+-// 
++//  
+ //  You should have received a copy of the GNU General Public License
+-//  along with this program; if not, write to the Free Software
+-//  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
++//  along with this program.  If not, see &lt;<A HREF="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</A>&gt;.
+ 
+ #ifndef RADAR_HH
+ #define RADAR_HH
+
+Modified: trunk/feuerkraft/src/system.hpp
+===================================================================
+--- trunk/feuerkraft/src/system.hpp	2009-08-01 17:38:16 UTC (rev 388)
++++ trunk/feuerkraft/src/system.hpp	2009-08-01 17:42:18 UTC (rev 389)
+@@ -3,20 +3,18 @@
+ //  Feuerkraft - A Tank Battle Game
+ //  Copyright (C) 1999 Ingo Ruhnke &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/feuerkraft-commit">grumbel at gmx.de</A>&gt;
+ //
+-//  This program is free software; you can redistribute it and/or
+-//  modify it under the terms of the GNU General Public License
+-//  as published by the Free Software Foundation; either version 2
+-//  of the License, or (at your option) any later version.
+-//
++//  This program is free software: you can redistribute it and/or modify
++//  it under the terms of the GNU General Public License as published by
++//  the Free Software Foundation, either version 3 of the License, or
++//  (at your option) any later version.
++//  
+ //  This program is distributed in the hope that it will be useful,
+ //  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ //  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ //  GNU General Public License for more details.
+-// 
++//  
+ //  You should have received a copy of the GNU General Public License
+-//  along with this program; if not, write to the Free Software
+-//  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
+-//  02111-1307, USA. 
++//  along with this program.  If not, see &lt;<A HREF="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</A>&gt;.
+ 
+ #ifndef SYSTEM_HH
+ #define SYSTEM_HH
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000052.html">[Feuerkraft-commit] r390 - trunk/feuerkraft/src
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#51">[ date ]</a>
+              <a href="thread.html#51">[ thread ]</a>
+              <a href="subject.html#51">[ subject ]</a>
+              <a href="author.html#51">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/feuerkraft-commit">More information about the Feuerkraft-commit
+mailing list</a><br>
+</body></html>

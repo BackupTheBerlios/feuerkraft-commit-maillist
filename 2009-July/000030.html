@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Feuerkraft-commit] r366 - trunk/media/images/tilemasks
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/feuerkraft-commit/2009-July/index.html" >
+   <LINK REL="made" HREF="mailto:feuerkraft-commit%40lists.berlios.de?Subject=Re%3A%20%5BFeuerkraft-commit%5D%20r366%20-%20trunk/media/images/tilemasks&In-Reply-To=%3C200907251918.n6PJIVVt012414%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000029.html">
+   <LINK REL="Next"  HREF="000031.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Feuerkraft-commit] r366 - trunk/media/images/tilemasks</H1>
+    <B>grumbel at BerliOS</B> 
+    <A HREF="mailto:feuerkraft-commit%40lists.berlios.de?Subject=Re%3A%20%5BFeuerkraft-commit%5D%20r366%20-%20trunk/media/images/tilemasks&In-Reply-To=%3C200907251918.n6PJIVVt012414%40sheep.berlios.de%3E"
+       TITLE="[Feuerkraft-commit] r366 - trunk/media/images/tilemasks">grumbel at mail.berlios.de
+       </A><BR>
+    <I>Sat Jul 25 21:18:31 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000029.html">[Feuerkraft-commit] r365 - trunk/media/images/tilemasks
+</A></li>
+        <LI>Next message: <A HREF="000031.html">[Feuerkraft-commit] r367 - trunk/media/images/tilemasks
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#30">[ date ]</a>
+              <a href="thread.html#30">[ thread ]</a>
+              <a href="subject.html#30">[ subject ]</a>
+              <a href="author.html#30">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: grumbel
+Date: 2009-07-25 21:18:31 +0200 (Sat, 25 Jul 2009)
+New Revision: 366
+
+Added:
+   trunk/media/images/tilemasks/asphalt.png
+Modified:
+   trunk/media/images/tilemasks/build_tiles.sh
+Log:
+Added asphalt
+
+Added: trunk/media/images/tilemasks/asphalt.png
+===================================================================
+(Binary files differ)
+
+
+Property changes on: trunk/media/images/tilemasks/asphalt.png
+___________________________________________________________________
+Name: svn:mime-type
+   + image/png
+
+Modified: trunk/media/images/tilemasks/build_tiles.sh
+===================================================================
+--- trunk/media/images/tilemasks/build_tiles.sh	2009-07-25 19:12:06 UTC (rev 365)
++++ trunk/media/images/tilemasks/build_tiles.sh	2009-07-25 19:18:31 UTC (rev 366)
+@@ -21,6 +21,7 @@
+     ./apply_alpha.py darksand.png   &quot;$i&quot; &quot;tiles/$(echo &quot;$NAME&quot; | tr [10] [w_])-${NUM}.png&quot;
+     ./apply_alpha.py water.png      &quot;$i&quot; &quot;tiles/$(echo &quot;$NAME&quot; | tr [10] [f_])-${NUM}.png&quot;
+     ./apply_alpha.py darkwater.png  &quot;$i&quot; &quot;tiles/$(echo &quot;$NAME&quot; | tr [10] [d_])-${NUM}.png&quot;
++    ./apply_alpha.py asphalt.png    &quot;$i&quot; &quot;tiles/$(echo &quot;$NAME&quot; | tr [10] [a_])-${NUM}.png&quot;
+ done
+ 
+ # EOF #
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000029.html">[Feuerkraft-commit] r365 - trunk/media/images/tilemasks
+</A></li>
+	<LI>Next message: <A HREF="000031.html">[Feuerkraft-commit] r367 - trunk/media/images/tilemasks
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#30">[ date ]</a>
+              <a href="thread.html#30">[ thread ]</a>
+              <a href="subject.html#30">[ subject ]</a>
+              <a href="author.html#30">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/feuerkraft-commit">More information about the Feuerkraft-commit
+mailing list</a><br>
+</body></html>
